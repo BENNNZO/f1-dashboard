@@ -31,6 +31,16 @@ interface DriverData {
     team_name: string;
 }
 
+interface LocationData {
+    date: string;
+    driver_number: number;
+    meeting_key: number;
+    session_key: number;
+    x: number;
+    y: number;
+    z: number;
+}
+
 export default function Home() {
     const [fahrenheit, setFahrenheit] = useState<boolean>(false)
     const [delay, setDelay] = useState<number>(0)
@@ -48,6 +58,10 @@ export default function Home() {
 
         axios.get(`https://api.openf1.org/v1/drivers?session_key=latest`)
         .then(res => setDrivers(res.data))
+        .catch(err => console.log(err))
+
+        axios.get(`https://api.openf1.org/v1/location?session_key=latest&date>=${"2025-03-16T06:00:00.000Z"}&date<=${"2025-03-16T06:00:02.000Z"}`)
+        .then(res => console.log(res.data))
         .catch(err => console.log(err))
     }, [])
 	if (!weather || !drivers) return <div className="w-screen h-screen grid place-items-center text-2xl font-semibold bg-black text-white">loading...</div>
