@@ -33,11 +33,8 @@ export default function Drivers() {
 
     return (
         <div className="flex flex-row gap-2">
-            {drivers?.map((driver: IDriver, i: number) => (
-                <div key={i} className="flex flex-row gap-2">
-                    {/* <img src={driver.headshot_url} alt="headshot" style={{ background: `#${driver.team_colour}` }} className="rounded-full h-16" /> */}
-                    <p className={`whitespace-nowrap font-semibold font-mono px-3 py-1 rounded-full`} style={{ background: `#${driver.team_colour}` }}>{driver.name_acronym}</p>
-                </div>
+            {drivers?.map((driver: IDriver) => (
+                <p key={driver.name_acronym} className={`whitespace-nowrap font-semibold font-mono px-3 py-1 rounded-full`} style={{ background: `#${driver.team_colour}` }}>{driver.name_acronym}</p>
             ))}
         </div>
     )
