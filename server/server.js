@@ -10,12 +10,15 @@ const wss = new WebSocket.Server({ server });
 // F1 WebSocket connection settings
 const CLIENT_PROTOCOL = 1.5;
 const CONNECTION_DATA = encodeURIComponent(JSON.stringify([{ name: "Streaming" }]));
-const URL = "https://livetiming.formula1.com/signalr";
+const BASE_URL = "livetiming.formula1.com/signalr";
+
+// Store the current state to send to new clients
+const currentState = {}
 
 // Negotiate to get connection token and cookie
 async function negotiation() {
     try {
-        const res = await axios.get(`${URL}/negotiate?clientProtocol=${CLIENT_PROTOCOL}&connectionData=${CONNECTION_DATA}`);
+        const res = await axios.get(`https://${BASE_URL}/negotiate?clientProtocol=${CLIENT_PROTOCOL}&connectionData=${CONNECTION_DATA}`);
 
         return {
             encodedToken: encodeURIComponent(res.data["ConnectionToken"]),
@@ -30,7 +33,7 @@ async function negotiation() {
 // Connect to the F1 SignalR WebSocket
 async function connectF1WS(encodedToken, cookie) {
     return new Promise((res, rej) => {
-        const socketURL = `${URL}/connect?transport=webSockets&clientProtocol=${CLIENT_PROTOCOL}&connectionToken=${encodedToken}&connectionData=${CONNECTION_DATA}`;
+        const socketURL = `wss://${BASE_URL}/connect?transport=webSockets&clientProtocol=${CLIENT_PROTOCOL}&connectionToken=${encodedToken}&connectionData=${CONNECTION_DATA}`;
         const headers = {
             'User-Agent': 'BestHTTP',
             'Accept-Encoding': 'gzip,identity',
@@ -46,17 +49,13 @@ async function connectF1WS(encodedToken, cookie) {
             const message = JSON.stringify({
                 "H": "Streaming",
                 "M": "Subscribe",
-                "A": [["Heartbeat", "LapCount"]],
+                "A": [["LapCount"]],
                 "I": 1
             });
 
             f1Socket.send(message);
 
             res(f1Socket);
-        });
-
-        f1Socket.on("message", (message) => {
-            console.log("[F1 WebSocket] Message received");
         });
 
         f1Socket.on("error", (error) => {
@@ -76,6 +75,14 @@ async function startF1Connection() {
         f1Socket.on("message", (data) => {
             console.log("[F1] Broadcasting data to clients: " + data);
 
+            const message = JSON.parse(data.toString());
+
+            if (message.R) {
+                for (let key in message.R) {
+                    currentState[key] = message.R[key];
+                }
+            }
+
             wss.clients.forEach(client => {
                 if (client.readyState === WebSocket.OPEN) {
                     client.send(data.toString('utf-8'));
@@ -93,7 +100,10 @@ startF1Connection();
 // Custom server WebSocket side
 wss.on('connection', (client) => {
     console.log('Client connected to custom server.');
-    
+
+    // send current state for data that doesnt really change like driver data
+    client.send(JSON.stringify(currentState));
+
     client.on('close', () => {
         console.log('Client disconnected from custom server.');
     });
