@@ -22,10 +22,7 @@ export default function Weather() {
 
     useEffect(() => {
         axios.get(`https://api.openf1.org/v1/weather?session_key=latest&date>=${"2025-03-16T06:00:00.000Z"}`)
-            .then(res => {
-                console.log("Weather Data:")
-                setWeather(res.data[0])
-            })
+            .then(res => setWeather(res.data[0]))
             .catch(err => console.log(err))
     }, [])
 

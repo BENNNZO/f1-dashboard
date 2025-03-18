@@ -23,11 +23,7 @@ export default function Drivers() {
 
     useEffect(() => {
         axios.get(`https://api.openf1.org/v1/drivers?session_key=latest`)
-        .then(res => {
-			console.log("Driver Data:")
-			setDrivers(res.data)
-			console.log(res.data)
-		})
+        .then(res => setDrivers(res.data))
         .catch(err => console.log(err))
     }, [])
 
