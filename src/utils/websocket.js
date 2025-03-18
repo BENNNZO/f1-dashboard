@@ -54,7 +54,7 @@ async function connectWSS(encodedToken, cookie) {
                 const message = JSON.stringify({
                     "H": "Streaming",
                     "M": "Subscribe",
-                    "A": [["Heartbeat", "CarData.z", "Position.z", "ExtrapolatedClock", "TopThree", "RcmSeries", "TimingStats", "TimingAppData", "WeatherData", "TrackStatus", "DriverList", "RaceControlMessages","SessionInfo", "SessionData", "LapCount", "TimingData"]],
+                    "A": [["Heartbeat", "LapCount"]],
                     "I": 1
                 })
 
@@ -83,6 +83,8 @@ async function connectWSS(encodedToken, cookie) {
 async function main() {
     const { encodedToken, cookie } = await negotiation()
     const socket = await connectWSS(encodedToken, cookie)
+
+    return socket
 }
 
 main()
