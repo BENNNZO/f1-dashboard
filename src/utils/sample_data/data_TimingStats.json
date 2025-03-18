@@ -1,0 +1,805 @@
+{
+    "Withheld": false,
+    "Lines": {
+        "1": {
+            "Line": 1,
+            "RacingNumber": "1",
+            "PersonalBestLapTime": {
+                "Value": "1:23.081",
+                "Lap": 43,
+                "Position": 3
+            },
+            "BestSectors": [
+                {
+                    "Value": "28.766",
+                    "Position": 3
+                },
+                {
+                    "Value": "18.154",
+                    "Position": 4
+                },
+                {
+                    "Value": "35.634",
+                    "Position": 2
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "282",
+                    "Position": 1
+                },
+                "I2": {
+                    "Value": "321",
+                    "Position": 9
+                },
+                "FL": {
+                    "Value": "300",
+                    "Position": 7
+                },
+                "ST": {
+                    "Value": "298",
+                    "Position": 9
+                }
+            }
+        },
+        "4": {
+            "Line": 2,
+            "RacingNumber": "4",
+            "PersonalBestLapTime": {
+                "Value": "1:22.167",
+                "Lap": 43,
+                "Position": 1
+            },
+            "BestSectors": [
+                {
+                    "Value": "28.553",
+                    "Position": 1
+                },
+                {
+                    "Value": "18.537",
+                    "Position": 10
+                },
+                {
+                    "Value": "34.890",
+                    "Position": 1
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "274",
+                    "Position": 8
+                },
+                "I2": {
+                    "Value": "318",
+                    "Position": 11
+                },
+                "FL": {
+                    "Value": "299",
+                    "Position": 8
+                },
+                "ST": {
+                    "Value": "305",
+                    "Position": 2
+                }
+            }
+        },
+        "5": {
+            "Line": 3,
+            "RacingNumber": "5",
+            "PersonalBestLapTime": {
+                "Value": "1:24.192",
+                "Lap": 43,
+                "Position": 5
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.066",
+                    "Position": 5
+                },
+                {
+                    "Value": "18.627",
+                    "Position": 14
+                },
+                {
+                    "Value": "35.918",
+                    "Position": 5
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "266",
+                    "Position": 16
+                },
+                "I2": {
+                    "Value": "304",
+                    "Position": 14
+                },
+                "FL": {
+                    "Value": "289",
+                    "Position": 16
+                },
+                "ST": {
+                    "Value": "295",
+                    "Position": 14
+                }
+            }
+        },
+        "6": {
+            "Line": 4,
+            "RacingNumber": "6",
+            "PersonalBestLapTime": {
+                "Value": ""
+            },
+            "BestSectors": [
+                {
+                    "Value": ""
+                },
+                {
+                    "Value": ""
+                },
+                {
+                    "Value": ""
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": ""
+                },
+                "I2": {
+                    "Value": ""
+                },
+                "FL": {
+                    "Value": ""
+                },
+                "ST": {
+                    "Value": ""
+                }
+            }
+        },
+        "7": {
+            "Line": 5,
+            "RacingNumber": "7",
+            "PersonalBestLapTime": {
+                "Value": ""
+            },
+            "BestSectors": [
+                {
+                    "Value": ""
+                },
+                {
+                    "Value": ""
+                },
+                {
+                    "Value": ""
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": ""
+                },
+                "I2": {
+                    "Value": ""
+                },
+                "FL": {
+                    "Value": ""
+                },
+                "ST": {
+                    "Value": "191",
+                    "Position": 19
+                }
+            }
+        },
+        "10": {
+            "Line": 6,
+            "RacingNumber": "10",
+            "PersonalBestLapTime": {
+                "Value": "1:25.020",
+                "Lap": 43,
+                "Position": 10
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.467",
+                    "Position": 7
+                },
+                {
+                    "Value": "18.594",
+                    "Position": 12
+                },
+                {
+                    "Value": "36.606",
+                    "Position": 9
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "267",
+                    "Position": 14
+                },
+                "I2": {
+                    "Value": "306",
+                    "Position": 13
+                },
+                "FL": {
+                    "Value": "292",
+                    "Position": 14
+                },
+                "ST": {
+                    "Value": "296",
+                    "Position": 10
+                }
+            }
+        },
+        "12": {
+            "Line": 7,
+            "RacingNumber": "12",
+            "PersonalBestLapTime": {
+                "Value": "1:24.901",
+                "Lap": 43,
+                "Position": 9
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.606",
+                    "Position": 13
+                },
+                {
+                    "Value": "18.341",
+                    "Position": 8
+                },
+                {
+                    "Value": "36.834",
+                    "Position": 11
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "275",
+                    "Position": 7
+                },
+                "I2": {
+                    "Value": "327",
+                    "Position": 2
+                },
+                "FL": {
+                    "Value": "306",
+                    "Position": 4
+                },
+                "ST": {
+                    "Value": "299",
+                    "Position": 8
+                }
+            }
+        },
+        "14": {
+            "Line": 8,
+            "RacingNumber": "14",
+            "PersonalBestLapTime": {
+                "Value": "1:28.819",
+                "Lap": 32,
+                "Position": 17
+            },
+            "BestSectors": [
+                {
+                    "Value": "31.156",
+                    "Position": 17
+                },
+                {
+                    "Value": "18.616",
+                    "Position": 13
+                },
+                {
+                    "Value": "38.574",
+                    "Position": 17
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "265",
+                    "Position": 17
+                },
+                "I2": {
+                    "Value": "323",
+                    "Position": 6
+                },
+                "FL": {
+                    "Value": "293",
+                    "Position": 13
+                },
+                "ST": {
+                    "Value": "296",
+                    "Position": 12
+                }
+            }
+        },
+        "16": {
+            "Line": 9,
+            "RacingNumber": "16",
+            "PersonalBestLapTime": {
+                "Value": "1:25.271",
+                "Lap": 43,
+                "Position": 13
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.433",
+                    "Position": 6
+                },
+                {
+                    "Value": "17.831",
+                    "Position": 1
+                },
+                {
+                    "Value": "36.912",
+                    "Position": 13
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "274",
+                    "Position": 9
+                },
+                "I2": {
+                    "Value": "331",
+                    "Position": 1
+                },
+                "FL": {
+                    "Value": "307",
+                    "Position": 3
+                },
+                "ST": {
+                    "Value": "295",
+                    "Position": 13
+                }
+            }
+        },
+        "18": {
+            "Line": 10,
+            "RacingNumber": "18",
+            "PersonalBestLapTime": {
+                "Value": "1:25.538",
+                "Lap": 43,
+                "Position": 14
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.501",
+                    "Position": 9
+                },
+                {
+                    "Value": "18.324",
+                    "Position": 7
+                },
+                {
+                    "Value": "37.313",
+                    "Position": 14
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "274",
+                    "Position": 10
+                },
+                "I2": {
+                    "Value": "320",
+                    "Position": 10
+                },
+                "FL": {
+                    "Value": "294",
+                    "Position": 11
+                },
+                "ST": {
+                    "Value": "301",
+                    "Position": 7
+                }
+            }
+        },
+        "22": {
+            "Line": 11,
+            "RacingNumber": "22",
+            "PersonalBestLapTime": {
+                "Value": "1:24.194",
+                "Lap": 43,
+                "Position": 6
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.553",
+                    "Position": 12
+                },
+                {
+                    "Value": "18.100",
+                    "Position": 2
+                },
+                {
+                    "Value": "36.541",
+                    "Position": 8
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "276",
+                    "Position": 4
+                },
+                "I2": {
+                    "Value": "324",
+                    "Position": 5
+                },
+                "FL": {
+                    "Value": "294",
+                    "Position": 10
+                },
+                "ST": {
+                    "Value": "304",
+                    "Position": 6
+                }
+            }
+        },
+        "23": {
+            "Line": 12,
+            "RacingNumber": "23",
+            "PersonalBestLapTime": {
+                "Value": "1:24.597",
+                "Lap": 43,
+                "Position": 8
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.496",
+                    "Position": 8
+                },
+                {
+                    "Value": "18.171",
+                    "Position": 5
+                },
+                {
+                    "Value": "36.901",
+                    "Position": 12
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "278",
+                    "Position": 2
+                },
+                "I2": {
+                    "Value": "322",
+                    "Position": 8
+                },
+                "FL": {
+                    "Value": "310",
+                    "Position": 1
+                },
+                "ST": {
+                    "Value": "291",
+                    "Position": 16
+                }
+            }
+        },
+        "27": {
+            "Line": 13,
+            "RacingNumber": "27",
+            "PersonalBestLapTime": {
+                "Value": "1:25.243",
+                "Lap": 43,
+                "Position": 12
+            },
+            "BestSectors": [
+                {
+                    "Value": "30.039",
+                    "Position": 15
+                },
+                {
+                    "Value": "18.732",
+                    "Position": 15
+                },
+                {
+                    "Value": "36.472",
+                    "Position": 7
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "269",
+                    "Position": 13
+                },
+                "I2": {
+                    "Value": "310",
+                    "Position": 12
+                },
+                "FL": {
+                    "Value": "294",
+                    "Position": 9
+                },
+                "ST": {
+                    "Value": "296",
+                    "Position": 11
+                }
+            }
+        },
+        "30": {
+            "Line": 14,
+            "RacingNumber": "30",
+            "PersonalBestLapTime": {
+                "Value": "1:22.970",
+                "Lap": 43,
+                "Position": 2
+            },
+            "BestSectors": [
+                {
+                    "Value": "28.698",
+                    "Position": 2
+                },
+                {
+                    "Value": "18.234",
+                    "Position": 6
+                },
+                {
+                    "Value": "35.810",
+                    "Position": 4
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "277",
+                    "Position": 3
+                },
+                "I2": {
+                    "Value": "322",
+                    "Position": 7
+                },
+                "FL": {
+                    "Value": "304",
+                    "Position": 5
+                },
+                "ST": {
+                    "Value": "305",
+                    "Position": 3
+                }
+            }
+        },
+        "31": {
+            "Line": 15,
+            "RacingNumber": "31",
+            "PersonalBestLapTime": {
+                "Value": "1:26.764",
+                "Lap": 42,
+                "Position": 15
+            },
+            "BestSectors": [
+                {
+                    "Value": "30.003",
+                    "Position": 14
+                },
+                {
+                    "Value": "18.823",
+                    "Position": 16
+                },
+                {
+                    "Value": "37.359",
+                    "Position": 15
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "266",
+                    "Position": 15
+                },
+                "I2": {
+                    "Value": "298",
+                    "Position": 17
+                },
+                "FL": {
+                    "Value": "289",
+                    "Position": 15
+                },
+                "ST": {
+                    "Value": "292",
+                    "Position": 15
+                }
+            }
+        },
+        "44": {
+            "Line": 16,
+            "RacingNumber": "44",
+            "PersonalBestLapTime": {
+                "Value": "1:24.218",
+                "Lap": 43,
+                "Position": 7
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.552",
+                    "Position": 11
+                },
+                {
+                    "Value": "18.440",
+                    "Position": 9
+                },
+                {
+                    "Value": "36.191",
+                    "Position": 6
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "272",
+                    "Position": 11
+                },
+                "I2": {
+                    "Value": "324",
+                    "Position": 4
+                },
+                "FL": {
+                    "Value": "310",
+                    "Position": 2
+                },
+                "ST": {
+                    "Value": "312",
+                    "Position": 1
+                }
+            }
+        },
+        "55": {
+            "Line": 17,
+            "RacingNumber": "55",
+            "PersonalBestLapTime": {
+                "Value": ""
+            },
+            "BestSectors": [
+                {
+                    "Value": ""
+                },
+                {
+                    "Value": "21.762",
+                    "Position": 18
+                },
+                {
+                    "Value": ""
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "217",
+                    "Position": 18
+                },
+                "I2": {
+                    "Value": "283",
+                    "Position": 18
+                },
+                "FL": {
+                    "Value": ""
+                },
+                "ST": {
+                    "Value": "194",
+                    "Position": 18
+                }
+            }
+        },
+        "63": {
+            "Line": 18,
+            "RacingNumber": "63",
+            "PersonalBestLapTime": {
+                "Value": "1:25.065",
+                "Lap": 43,
+                "Position": 11
+            },
+            "BestSectors": [
+                {
+                    "Value": "29.511",
+                    "Position": 10
+                },
+                {
+                    "Value": "18.585",
+                    "Position": 11
+                },
+                {
+                    "Value": "36.796",
+                    "Position": 10
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "275",
+                    "Position": 6
+                },
+                "I2": {
+                    "Value": "303",
+                    "Position": 15
+                },
+                "FL": {
+                    "Value": "293",
+                    "Position": 12
+                },
+                "ST": {
+                    "Value": "304",
+                    "Position": 4
+                }
+            }
+        },
+        "81": {
+            "Line": 19,
+            "RacingNumber": "81",
+            "PersonalBestLapTime": {
+                "Value": "1:23.242",
+                "Lap": 43,
+                "Position": 4
+            },
+            "BestSectors": [
+                {
+                    "Value": "28.917",
+                    "Position": 4
+                },
+                {
+                    "Value": "18.119",
+                    "Position": 3
+                },
+                {
+                    "Value": "35.663",
+                    "Position": 3
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "276",
+                    "Position": 5
+                },
+                "I2": {
+                    "Value": "325",
+                    "Position": 3
+                },
+                "FL": {
+                    "Value": "302",
+                    "Position": 6
+                },
+                "ST": {
+                    "Value": "304",
+                    "Position": 5
+                }
+            }
+        },
+        "87": {
+            "Line": 20,
+            "RacingNumber": "87",
+            "PersonalBestLapTime": {
+                "Value": "1:27.603",
+                "Lap": 42,
+                "Position": 16
+            },
+            "BestSectors": [
+                {
+                    "Value": "30.290",
+                    "Position": 16
+                },
+                {
+                    "Value": "19.124",
+                    "Position": 17
+                },
+                {
+                    "Value": "37.819",
+                    "Position": 16
+                }
+            ],
+            "BestSpeeds": {
+                "I1": {
+                    "Value": "269",
+                    "Position": 12
+                },
+                "I2": {
+                    "Value": "302",
+                    "Position": 16
+                },
+                "FL": {
+                    "Value": "286",
+                    "Position": 17
+                },
+                "ST": {
+                    "Value": "290",
+                    "Position": 17
+                }
+            }
+        }
+    },
+    "SessionType": "Race",
+    "_kf": true
+}
