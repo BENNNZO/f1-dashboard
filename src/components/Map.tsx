@@ -26,7 +26,7 @@ export default function Map2() {
 
     /* -------------------------------- FUNCTIONS ------------------------------- */
     function chunkArray(array: ILocation[], chunkSize: number) {
-        let chunkedArray = []
+        const chunkedArray = []
 
         for (let i = 0; i < array.length; i += chunkSize) {
             chunkedArray.push(array.slice(i, i + chunkSize))
