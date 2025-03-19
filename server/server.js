@@ -45,11 +45,18 @@ async function connectF1WS(encodedToken, cookie) {
         f1Socket.on("open", () => {
             console.log("[F1 WebSocket] Connected");
 
-            // Subscribe to channels by sending a message to F1's service
+            // H: The hub to invoke the method on
+            // M: The method to invoke
+            // A: The arguments to pass to the method
+            // I: Client side id for the request/response
+
+            // ARGUMENTS: "Heartbeat", "CarData.z", "Position.z", "ExtrapolatedClock", "TopThree", "RcmSeries", "TimingStats", "TimingAppData", "WeatherData", "TrackStatus", "DriverList", "RaceControlMessages", "SessionInfo", "SessionData", "LapCount", "TimingData"
+
             const message = JSON.stringify({
                 "H": "Streaming",
                 "M": "Subscribe",
-                "A": [["LapCount"]],
+                // "A": [["LapCount"]],
+                "A": [["Heartbeat", "CarData.z", "Position.z", "ExtrapolatedClock", "TopThree", "RcmSeries", "TimingStats", "TimingAppData", "WeatherData", "TrackStatus", "DriverList", "RaceControlMessages", "SessionInfo", "SessionData", "LapCount", "TimingData"]],
                 "I": 1
             });
 
