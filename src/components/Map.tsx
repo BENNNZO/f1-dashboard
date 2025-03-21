@@ -19,7 +19,7 @@ interface ILocation {
 /* ------------------------------------ - ----------------------------------- */
 /* ------------------------------------ - ----------------------------------- */
 
-export default function Map2() {
+export default function Map() {
     /* -------------------------------- VARIABLES ------------------------------- */
     const [locationSets, setLocationSets] = useState<ILocation[][]>([])
     const [currentLocationSet, setCurrentLocationSet] = useState<ILocation[] | null>(null)
@@ -104,7 +104,7 @@ export default function Map2() {
                     if (location.x === 0 && location.y === 0 && location.z === 0) return
 
                     return (
-                        <div key={location.driver_number} className="bg-black w-4 h-4 rounded-full absolute top-1/2 left-1/2 duration-1000 ease-linear" style={{ transform: `translate(calc(-50% - ${location.x / 50}px), calc(-50% - ${location.y / 50}px))` }}></div>
+                        <div key={location.driver_number} className="bg-white w-4 h-4 rounded-full absolute top-1/2 left-1/2 duration-1000 ease-linear" style={{ transform: `translate(calc(-50% - ${location.x / 50}px), calc(-50% - ${location.y / 50}px))` }}></div>
                     )
                 })}
             </div>

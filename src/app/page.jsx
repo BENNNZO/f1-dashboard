@@ -7,6 +7,9 @@ import initState from "@/utils/sample_data"
 import decodeZippedBase64 from "@/utils/decodeZlib"
 
 import Weather from "@/components/Weather";
+import LapCount from "@/components/LapCount";
+import TrackStatus from "@/components/TrackStatus";
+import Drivers from "@/components/Drivers";
 
 export default function Home() {
 	const [data, setData] = useState(null)
@@ -23,13 +26,10 @@ export default function Home() {
 		// return () => socket.close()
 
 		console.log(initState)
-		// console.log(Object.values(initState.DriverList).slice(0,-1))
-		// console.log(Object.entries(JSON.parse(decodeZippedBase64(initState["CarData.z"])).Entries.slice(-1)[0].Cars))
-		// console.log(JSON.parse(decodeZippedBase64(initState["Position.z"])))
 
 		setTimeout(() => {
 			setData(initState)
-		}, 1000)
+		}, 100)
 
 		axios.get(`https://api.multiviewer.app/api/v1/circuits/${initState.SessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`)
 		.then(res => console.log(res.data))
@@ -40,10 +40,19 @@ export default function Home() {
 
 	return (
 		<div className="">
-			<Weather data={initState.WeatherData} fahrenheit={false} />
 			{/* {Object.entries(initState.DriverList).slice(0,-1).map((e) => (
 				<div key={e[1].RacingNumber}>{e[1].RacingNumber}</div>
 			))} */}
+
+
+			<div className="flex flex-row justify-between border-b border-b-white/20 p-2">
+				<Weather data={initState.WeatherData} fahrenheit={false} />
+				<div className="flex flex-row gap-2">
+					<LapCount data={initState.LapCount} />
+					<TrackStatus data={initState.TrackStatus} />
+				</div>
+			</div>
+			<Drivers data={initState.DriverList} timingData={initState.TimingData.Lines} timingStats={initState.TimingStats.Lines} />
 		</div>
 	);
 }
