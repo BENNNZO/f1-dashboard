@@ -32,10 +32,6 @@ export default async function f1WebSocketServer(): Promise<ws> {
             res(socket)
         })
 
-        socket.on("message", message => {
-            console.log(`[F1 WebSocket] Message: ${message}`)
-        })
-
         socket.on("error", err => {
             rej(new Error(`[F1 WebSocket] Error: ${(err as Error).message}`))
         })
