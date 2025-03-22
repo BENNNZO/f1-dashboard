@@ -5,7 +5,7 @@ import { F1_CONSTANTS } from "../config/constants";
 import negotiate from "../utils/f1Negotiate";
 
 export default async function f1WebSocketServer(): Promise<ws> {
-    const { BASE_URL, CONNECTION_DATA } = F1_CONSTANTS
+    const { BASE_URL, CONNECTION_DATA, SUBSCRIPTION_TOPICS } = F1_CONSTANTS
     const { encodedToken, cookie } = await negotiate()
 
     const socketURL = `wss://${BASE_URL}/connect?transport=webSockets&clientProtocol=1.5&connectionToken=${encodedToken}&connectionData=${CONNECTION_DATA}`
@@ -25,7 +25,7 @@ export default async function f1WebSocketServer(): Promise<ws> {
             socket.send(JSON.stringify({
                 "H": "Streaming",
                 "M": "Subscribe",
-                "A": [["Heartbeat", "LapCount"]],
+                "A": [SUBSCRIPTION_TOPICS],
                 "I": 1
             }))
 
