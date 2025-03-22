@@ -8,14 +8,14 @@ import { SERVER_CONSTANTS } from '../config/constants';
 if (!process.argv[2]) throw new Error("Missing log file name argument (npm run simulate *log file name*)")
 if (!fs.existsSync(`${__dirname}/logs/${process.argv[2]}.txt`)) throw new Error(`Log file ${process.argv[2]}.txt does not exist`)
 
-async function startSimulation() {
+async function startReplay() {
     try {
         const wss = new WebSocketServer({ port: SERVER_CONSTANTS.PORT })
 
-        console.log(`[SIMULATE] Server Started on PORT: ${SERVER_CONSTANTS.PORT}`)
+        console.log(`[REPLAY] Server Started on PORT: ${SERVER_CONSTANTS.PORT}`)
 
         wss.on("connection", async () => {
-            console.log("[SIMULATE] Client Connected")
+            console.log("[REPLAY] Client Connected")
 
             const fileStream = fs.createReadStream(`${__dirname}/logs/${process.argv[2]}.txt`)
             const rl = readline.createInterface({ input: fileStream, crlfDelay: Infinity })
@@ -31,22 +31,22 @@ async function startSimulation() {
                     if (client.readyState === WebSocket.OPEN) {
                         client.send(JSON.stringify(message))
                     } else {
-                        console.error("[SIMULATE] Client not ready", client.url)
+                        console.error("[REPLAY] Client not ready", client.url)
                     }
                 })
 
                 previousTimestamp = timestamp
             }
 
-            console.log("[SIMULATE] Replay Finished")
+            console.log("[REPLAY] Replay Finished")
         })
 
         wss.on("close", () => {
-            console.log("[SIMULATE] Client Disconnected")
+            console.log("[REPLAY] Client Disconnected")
         })
     } catch (err) {
         throw new Error(`Failed to initialize the server: ${(err as Error).message}`)
     }
 }
 
-startSimulation()
+startReplay()
