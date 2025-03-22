@@ -1,10 +1,5 @@
-import { WebSocketServer} from 'ws';
-
-import { SERVER_CONSTANTS } from '../config/constants';
-import f1WebSocketServer from '../services/f1WebSocketServer';
-import broadcastData from '../utils/broadcastData';
-
 import fs from "fs"
+import f1WebSocketServer from '../services/f1WebSocketServer';
 
 const logFilePath = `${__dirname}/logs/`
 const logFileName = `${new Date().toISOString().replaceAll(":", "-")}.txt`

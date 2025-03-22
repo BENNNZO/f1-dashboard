@@ -2,9 +2,7 @@ import { WebSocketServer } from 'ws';
 import fs from "fs"
 import readline from "readline"
 
-
 import { SERVER_CONSTANTS } from '../config/constants';
-import broadcastData from '../utils/broadcastData';
 
 // test for arguments and if the file exists
 if (!process.argv[2]) throw new Error("Missing log file name argument (npm run simulate *log file name*)")
@@ -31,7 +29,6 @@ async function startSimulation() {
 
                 wss.clients.forEach(client => {
                     if (client.readyState === WebSocket.OPEN) {
-                        // console.log(client.url)
                         client.send(JSON.stringify(message))
                     } else {
                         console.error("[SIMULATE] Client not ready", client.url)
@@ -40,6 +37,8 @@ async function startSimulation() {
 
                 previousTimestamp = timestamp
             }
+
+            console.log("[SIMULATE] Replay Finished")
         })
 
         wss.on("close", () => {
