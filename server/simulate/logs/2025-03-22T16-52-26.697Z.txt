@@ -1,0 +1,4 @@
+{"timestamp": 1742662347705, "message": {"C":"d-35ECBF8B-B,0|j:8,0|j:9,1","S":1,"M":[]}}
+{"timestamp": 1742662347849, "message": {"C":"d-35ECBF8B-B,0|j:8,0|j:9,2|G,322","G":"ahisAFZP3n8iHpXzaqOa0IJ3UHAmRutgNOgs8RqvvriMQrg+0icVS6e1klAAHPcjFkt07NFhKpo5hQtsdnlOtYsyzmAGv16+5rAcYQeAbCIzduoq1WdyxUElJdJvW4GP5hECEajU/lfzaJ+rp1uUCQ==","M":[]}}
+{"timestamp": 1742662347850, "message": {"C":"d-35ECBF8B-B,0|j:8,0|j:9,3|G,322|S,13","G":"DG9SZd+qDjSxLTmFJo93wCuSC4c1UOmR+6lSdiNv089Y3vM9vLajqGsdsgT6/d2IkTr2+Z2azHkkcat9j6yMFp69s9VNTn9e92s8WM+/aWxdCC3K4Tqad6aqrbeCUHJCxcfxsmmqo02yvcVHYVwMR7Fr26b3zkcXVfnMJICn6tQ=","M":[]}}
+{"timestamp": 1742662347850, "message": {"R":{"Heartbeat":{"Utc":"2025-03-22T08:23:40.3376217Z","_kf":true}},"I":"1"}}

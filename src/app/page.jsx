@@ -15,25 +15,31 @@ export default function Home() {
 	const [data, setData] = useState(null)
 
 	useEffect(() => {
-		// const socket = new WebSocket("ws://localhost:3001")
+		const socket = new WebSocket("ws://localhost:3001")
 
-		// console.log("Connected To Custom Websocket Server")
+		socket.onopen = () => {
+			console.log("Connecting To Custom Websocket Server...")
+		}
 
-		// socket.onmessage = (message) => {
-			// console.log((JSON.parse(message.data)))
-		// }
+		socket.onerror = err => {
+			console.log("Error Connecting To Custom Websocket Server", err)
+		}
 
-		// return () => socket.close()
+		socket.onmessage = (message) => {
+			console.log(JSON.parse(message.data))
+		}
 
-		console.log(initState)
+		return () => socket.close()
 
-		setTimeout(() => {
-			setData(initState)
-		}, 100)
+		// console.log(initState)
 
-		axios.get(`https://api.multiviewer.app/api/v1/circuits/${initState.SessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`)
-		.then(res => console.log(res.data))
-		.catch(err => console.log(err))
+		// setTimeout(() => {
+		// 	setData(initState)
+		// }, 100)
+
+		// axios.get(`https://api.multiviewer.app/api/v1/circuits/${initState.SessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`)
+		// .then(res => console.log(res.data))
+		// .catch(err => console.log(err))
 	}, [])
 
 	if (data === null) return <div className="h-screen w-screen grid place-items-center">Loading...</div>
@@ -45,14 +51,14 @@ export default function Home() {
 			))} */}
 
 
-			<div className="flex flex-row justify-between border-b border-b-white/20 p-2">
+			{/* <div className="flex flex-row justify-between border-b border-b-white/20 p-2">
 				<Weather data={initState.WeatherData} fahrenheit={false} />
 				<div className="flex flex-row gap-2">
 					<LapCount data={initState.LapCount} />
 					<TrackStatus data={initState.TrackStatus} />
 				</div>
 			</div>
-			<Drivers data={initState.DriverList} timingData={initState.TimingData.Lines} timingStats={initState.TimingStats.Lines} />
+			<Drivers data={initState.DriverList} timingData={initState.TimingData.Lines} timingStats={initState.TimingStats.Lines} /> */}
 		</div>
 	);
 }
