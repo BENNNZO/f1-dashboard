@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "ts-node --project tsconfig.server.json server/services/myWebSocketServer.ts"
+    "server": "ts-node --project tsconfig.server.json server/services/myWebSocketServer.ts",
+    "record": "ts-node --project tsconfig.server.json server/simulate/record.ts",
+    "simulate": "ts-node --project tsconfig.server.json server/simulate/simulate.ts"
   },
   "dependencies": {
     "axios": "^1.8.3",
