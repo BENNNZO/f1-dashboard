@@ -3,6 +3,8 @@ interface point {
     y: number
 }
 
+// apply rotation transform
+// it uses the standard 2D rotation matrix transformation
 export function rotatePoints(points: point[], center: point, deg: number): point[] {
     return points.map(point => {
         const angleRad = deg * (Math.PI / 180)
@@ -23,6 +25,7 @@ export function rotatePoints(points: point[], center: point, deg: number): point
     })
 }
 
+// simply add padding to points
 export function paddPoints(points: point[], padding: number): point[] {
     return points.map(point => ({ x: point.x + padding, y: point.y + padding }))
 }
