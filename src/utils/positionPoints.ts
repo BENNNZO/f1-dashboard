@@ -3,8 +3,16 @@ interface point {
     y: number
 }
 
-// apply rotation transform
-// it uses the standard 2D rotation matrix transformation
+interface ITransformedPointsData { 
+    transformedPoints: point[], 
+    minX: number, 
+    minY: number, 
+    width: number, 
+    height: number, 
+    centerX: number, 
+    centerY: number 
+}
+
 export function rotatePoints(points: point[], center: point, deg: number): point[] {
     return points.map(point => {
         const angleRad = deg * (Math.PI / 180)
@@ -25,7 +33,30 @@ export function rotatePoints(points: point[], center: point, deg: number): point
     })
 }
 
-// simply add padding to points
 export function paddPoints(points: point[], padding: number): point[] {
     return points.map(point => ({ x: point.x + padding, y: point.y + padding }))
+}
+
+export function transformPoints(points: point[], rotation: number, padding: number): ITransformedPointsData {
+    // ALL of this has a specific order so that the values are positioned correctly
+    // ant other order will result in wrongly positioned points
+    // pget center > rotate points > get min max width and height > add padding
+    
+    // get the center of all points
+    const centerX = (Math.max(...points.map(p => p.x)) - Math.min(...points.map(p => p.x))) / 2 + Math.min(...points.map(p => p.x))
+    const centerY = (Math.max(...points.map(p => p.y)) - Math.min(...points.map(p => p.y))) / 2 + Math.min(...points.map(p => p.y))
+    
+    // apply rotation transform
+    points = rotatePoints(points, { x: centerX, y: centerY }, rotation)
+    
+    // get min max width and height
+    const minX = Math.min(...points.map(point => point.x))
+    const minY = Math.min(...points.map(point => point.y))
+    
+    // max + |min| + (padding * 2) === width or height
+    const width = Math.max(...points.map(point => point.x)) + Math.abs(Math.min(...points.map(point => point.x))) + (padding * 2)
+    const height = Math.max(...points.map(point => point.y)) + Math.abs(Math.min(...points.map(point => point.y))) + (padding * 2)
+    
+    // finally apply padding transform and return
+    return { transformedPoints: paddPoints(points, padding), minX, minY, width, height, centerX, centerY }
 }
