@@ -26,7 +26,3 @@ export function rotatePoints(points: point[], center: point, deg: number): point
 export function paddPoints(points: point[], padding: number): point[] {
     return points.map(point => ({ x: point.x + padding, y: point.y + padding }))
 }
-
-function rad(number: number): number {
-    return number * (Math.PI / 180)
-}
