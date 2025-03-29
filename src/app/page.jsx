@@ -4,15 +4,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import initState from "@/utils/sample_data"
-import decodeZippedBase64 from "@/utils/decodeZlib"
 
 import Weather from "@/components/Weather";
 import LapCount from "@/components/LapCount";
 import TrackStatus from "@/components/TrackStatus";
 import Drivers from "@/components/Drivers";
+import Circuit from "@/components/Circuit";
 
 export default function Home() {
-	const [data, setData] = useState(null)
+	const [data, setData] = useState(undefined)
+	const [circuitData, setCircuitData] = useState(null)
 
 	useEffect(() => {
 		const socket = new WebSocket("ws://localhost:3001")
@@ -29,6 +30,13 @@ export default function Home() {
 			console.log(JSON.parse(message.data))
 		}
 
+		axios.get(`https://api.multiviewer.app/api/v1/circuits/10/${new Date().getFullYear()}`)
+		.then(res => {
+			console.log(res.data)
+			setCircuitData(res.data)
+		})
+		.catch(err => console.log(err))
+
 		return () => socket.close()
 
 		// console.log(initState)
@@ -37,15 +45,13 @@ export default function Home() {
 		// 	setData(initState)
 		// }, 100)
 
-		// axios.get(`https://api.multiviewer.app/api/v1/circuits/${initState.SessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`)
-		// .then(res => console.log(res.data))
-		// .catch(err => console.log(err))
 	}, [])
 
-	if (data === null) return <div className="h-screen w-screen grid place-items-center">Loading...</div>
+	if (circuitData === null) return <div className="h-screen w-screen grid place-items-center">Loading...</div>
 
 	return (
 		<div className="">
+			<Circuit circuitData={circuitData} />
 			{/* {Object.entries(initState.DriverList).slice(0,-1).map((e) => (
 				<div key={e[1].RacingNumber}>{e[1].RacingNumber}</div>
 			))} */}
