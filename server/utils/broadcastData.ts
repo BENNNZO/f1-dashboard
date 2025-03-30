@@ -1,14 +1,17 @@
 import { WebSocketServer } from "ws"
 
 export default function broadcastData(wss: WebSocketServer, data: any) {
-    console.log(`[DASH] Broadcasting data to clients: ${data}`)
+    console.log(`[BROADCAST] Broadcasting data to clients...`)
     
     wss.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
-            console.log(client.url)
-            client.send(JSON.parse(data.toString()))
+            try {
+                client.send(JSON.parse(data))
+            } catch (err) {
+                client.send(JSON.stringify(data))
+            }
         } else {
-            console.error("[DASH] Client not ready", client.url)
+            console.error("[BROADCAST] Client not ready", client.url)
         }
     })
 }

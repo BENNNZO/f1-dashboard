@@ -3,6 +3,18 @@ import fs from "fs"
 import readline from "readline"
 
 import { SERVER_CONSTANTS } from '../config/constants';
+import { updateDataStore } from '../utils/updateDataStore';
+import broadcastData from '../utils/broadcastData';
+
+interface IMessageItem {
+    H: string,
+    M: string,
+    A: [
+        string,
+        object,
+        string
+    ]
+}
 
 // test for arguments and if the file exists
 if (!process.argv[2]) throw new Error("Missing log file name argument (npm run simulate *log file name*)")
@@ -25,15 +37,34 @@ async function startReplay() {
             for await (const line of rl) {
                 const { timestamp, message } = JSON.parse(line)
 
+                // delay between this and previous message
                 if (previousTimestamp > 0) await new Promise(res => setTimeout(res, timestamp - previousTimestamp))
 
-                wss.clients.forEach(client => {
-                    if (client.readyState === WebSocket.OPEN) {
-                        client.send(JSON.stringify(message))
-                    } else {
-                        console.error("[REPLAY] Client not ready", client.url)
-                    }
+                console.log(message["M"])
+
+                if (message["R"]) {
+                    updateDataStore(message["R"])
+                }
+
+                message["M"]?.forEach((item: IMessageItem) => {
+                    const type = item["A"][0]
+                    const data = item["A"][1]
+
+                    console.log(type)
+                    
+                    updateDataStore({ [type]: data })
+                    console.log({ [type]: data })
+                    broadcastData(wss, { [type]: data })
                 })
+
+                
+                // wss.clients.forEach(client => {
+                //     if (client.readyState === WebSocket.OPEN) {
+                //         // client.send(JSON.stringify(message))
+                //     } else {
+                //         console.error("[REPLAY] Client not ready", client.url)
+                //     }
+                // })
 
                 previousTimestamp = timestamp
             }
