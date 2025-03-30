@@ -4,10 +4,6 @@ export let currentData = {
 
 export function updateDataStore(data: any) {
     currentData = deepMerge(currentData, data)
-    console.log("\n\nDATA:")
-    console.log(data)
-    // console.log("\n\nMERGED:")
-    // console.log(currentData)
 }
 // This function was made by AI lol way to indepth for my brain atm.
 function deepMerge(target: any, source: any) {

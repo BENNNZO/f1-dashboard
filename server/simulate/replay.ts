@@ -53,6 +53,7 @@ async function startReplay() {
                     console.log(type)
                     
                     updateDataStore({ [type]: data })
+                    
                     console.log({ [type]: data })
                     broadcastData(wss, { [type]: data })
                 })
