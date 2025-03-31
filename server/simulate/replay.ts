@@ -42,6 +42,7 @@ async function startReplay() {
 
                 if (message["R"]) {
                     updateDataStore(message["R"])
+                    broadcastData(wss, message["R"])
                 }
 
                 message["M"]?.forEach((item: IMessageItem) => {
