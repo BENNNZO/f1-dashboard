@@ -49,23 +49,12 @@ async function startReplay() {
                 message["M"]?.forEach((item: IMessageItem) => {
                     const type = item["A"][0]
                     const data = item["A"][1]
-
-                    console.log(type)
-                    
-                    updateDataStore({ [type]: data })
                     
                     console.log({ [type]: data })
+
+                    updateDataStore({ [type]: data })
                     broadcastData(wss, { [type]: data })
                 })
-
-                
-                // wss.clients.forEach(client => {
-                //     if (client.readyState === WebSocket.OPEN) {
-                //         // client.send(JSON.stringify(message))
-                //     } else {
-                //         console.error("[REPLAY] Client not ready", client.url)
-                //     }
-                // })
 
                 previousTimestamp = timestamp
             }
