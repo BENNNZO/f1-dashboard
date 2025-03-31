@@ -5,6 +5,8 @@ import axios from "axios";
 
 import initState from "@/utils/sample_data"
 
+import deepMerge from "@/utils/deepMarge";
+
 import Weather from "@/components/Weather";
 import LapCount from "@/components/LapCount";
 import TrackStatus from "@/components/TrackStatus";
@@ -12,7 +14,7 @@ import Drivers from "@/components/Drivers";
 import Circuit from "@/components/Circuit";
 
 export default function Home() {
-	const [data, setData] = useState(undefined)
+	const [data, setData] = useState({})
 	const [circuitData, setCircuitData] = useState(null)
 
 	useEffect(() => {
@@ -27,7 +29,7 @@ export default function Home() {
 		}
 
 		socket.onmessage = (message) => {
-			console.log(JSON.parse(message.data))
+			setData(prev => deepMerge(JSON.parse(message.data), prev))
 		}
 
 		axios.get(`https://api.multiviewer.app/api/v1/circuits/10/${new Date().getFullYear()}`)
@@ -51,7 +53,12 @@ export default function Home() {
 
 	return (
 		<div className="">
+			{/* <pre>{JSON.stringify(data.TimingData?.Lines["1"], null, 4)}</pre> */}
+			{/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
+			
 			<Circuit circuitData={circuitData} />
+
+
 			{/* {Object.entries(initState.DriverList).slice(0,-1).map((e) => (
 				<div key={e[1].RacingNumber}>{e[1].RacingNumber}</div>
 			))} */}
