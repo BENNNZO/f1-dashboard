@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import initState from "@/utils/sample_data"
-
 import deepMerge from "@/utils/deepMerge";
 
 import Weather from "@/components/Weather";
@@ -29,8 +27,10 @@ export default function Home() {
 		}
 
 		socket.onmessage = (message) => {
-			console.log(data?.TimingData?.Lines?.["1"] || {})
-			setData(prev => deepMerge(JSON.parse(message.data), prev))
+			const data = JSON.parse(message.data)
+
+			if (data?.TimingData?.Lines?.["1"]) console.log(data.TimingData.Lines["1"])
+			setData(prev => deepMerge(prev, data))
 		}
 
 		axios.get(`https://api.multiviewer.app/api/v1/circuits/10/${new Date().getFullYear()}`)
@@ -41,38 +41,14 @@ export default function Home() {
 		.catch(err => console.log(err))
 
 		return () => socket.close()
-
-		// console.log(initState)
-
-		// setTimeout(() => {
-		// 	setData(initState)
-		// }, 100)
-
 	}, [])
 
 	if (circuitData === null) return <div className="h-screen w-screen grid place-items-center">Loading...</div>
 
 	return (
 		<div className="">
-			{/* <pre>{JSON.stringify(data.TimingData?.Lines["1"], null, 4)}</pre> */}
-			<pre>{JSON.stringify(data?.TimingData?.Lines?.["1"] || {}, null, 4)}</pre>
-			
 			<Circuit circuitData={circuitData} />
-
-
-			{/* {Object.entries(initState.DriverList).slice(0,-1).map((e) => (
-				<div key={e[1].RacingNumber}>{e[1].RacingNumber}</div>
-			))} */}
-
-
-			{/* <div className="flex flex-row justify-between border-b border-b-white/20 p-2">
-				<Weather data={initState.WeatherData} fahrenheit={false} />
-				<div className="flex flex-row gap-2">
-					<LapCount data={initState.LapCount} />
-					<TrackStatus data={initState.TrackStatus} />
-				</div>
-			</div>
-			<Drivers data={initState.DriverList} timingData={initState.TimingData.Lines} timingStats={initState.TimingStats.Lines} /> */}
+			<pre>{JSON.stringify(data?.TimingData?.Lines?.["1"] || {}, null, 4)}</pre>
 		</div>
 	);
 }

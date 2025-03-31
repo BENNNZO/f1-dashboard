@@ -40,8 +40,6 @@ async function startReplay() {
                 // delay between this and previous message
                 if (previousTimestamp > 0) await new Promise(res => setTimeout(res, timestamp - previousTimestamp))
 
-                console.log(message["M"])
-
                 if (message["R"]) {
                     updateDataStore(message["R"])
                 }
@@ -50,8 +48,6 @@ async function startReplay() {
                     const type = item["A"][0]
                     const data = item["A"][1]
                     
-                    console.log({ [type]: data })
-
                     updateDataStore({ [type]: data })
                     broadcastData(wss, { [type]: data })
                 })
