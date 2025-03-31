@@ -5,7 +5,7 @@ import axios from "axios";
 
 import initState from "@/utils/sample_data"
 
-import deepMerge from "@/utils/deepMarge";
+import deepMerge from "@/utils/deepMerge";
 
 import Weather from "@/components/Weather";
 import LapCount from "@/components/LapCount";
@@ -29,6 +29,7 @@ export default function Home() {
 		}
 
 		socket.onmessage = (message) => {
+			console.log(data?.TimingData?.Lines?.["1"] || {})
 			setData(prev => deepMerge(JSON.parse(message.data), prev))
 		}
 
@@ -54,7 +55,7 @@ export default function Home() {
 	return (
 		<div className="">
 			{/* <pre>{JSON.stringify(data.TimingData?.Lines["1"], null, 4)}</pre> */}
-			{/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
+			<pre>{JSON.stringify(data?.TimingData?.Lines?.["1"] || {}, null, 4)}</pre>
 			
 			<Circuit circuitData={circuitData} />
 
