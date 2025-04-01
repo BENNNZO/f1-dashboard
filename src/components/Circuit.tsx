@@ -55,7 +55,14 @@ interface ICircuitData {
     year: number;
 }
 
+
 export default function Circuit({ circuitData }: { circuitData: ICircuitData }) {
+    // const positionData = useStore((state: any) => state.data["Position.z"])
+
+    // if (positionData !== undefined) console.log(positionData)
+    // if (positionData !== undefined) console.log(decodeZippedBase64(positionData))
+    // const positions = decodeZippedBase64(positionData)
+
     const PADDING = 1000
     
     const points = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))

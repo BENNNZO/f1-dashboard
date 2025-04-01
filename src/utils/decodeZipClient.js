@@ -1,20 +1,16 @@
 import pako from 'pako';
 
-export default function decodeZippedBase64(data) {
-    // Decode Base64 to a binary string and convert it to a Uint8Array
-    const binaryString = atob(data);
-    const len = binaryString.length;
-    const buffer = new Uint8Array(len);
-
-    for (let i = 0; i < len; i++) {
-        buffer[i] = binaryString.charCodeAt(i);
+export default function decodeZippedBase64(base64String) {
+    // Convert Base64 to binary data
+    const binaryString = atob(base64String);
+    const binaryArray = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        binaryArray[i] = binaryString.charCodeAt(i);
     }
-
-    // Decompress synchronously using pako's inflateRaw
-    const decompressed = pako.inflateRaw(buffer);
-
-    // Convert the decompressed Uint8Array to a string
-    const decodedString = new TextDecoder().decode(decompressed);
-
-    return decodedString;
+    
+    // Decompress using pako (ensure pako is included in your project)
+    const decompressed = pako.inflate(binaryArray);
+    
+    // Convert Uint8Array to string
+    return new TextDecoder("utf-8").decode(decompressed);
 }
