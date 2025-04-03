@@ -50,7 +50,7 @@ async function startReplay() {
                     const data = item["A"][1]
                     
                     updateDataStore({ [type]: data })
-                    broadcastData(wss, { [type]: data })
+                    broadcastData(wss, { type, data })
                 })
 
                 previousTimestamp = timestamp
