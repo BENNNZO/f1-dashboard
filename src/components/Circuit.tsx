@@ -1,5 +1,5 @@
 import { useWebSocketStore } from "@/store/webSocketStore";
-import { transformPoints } from "@/utils/positionPoints";
+import { transformPoints, rotatePoints, paddPoints } from "@/utils/positionPoints";
 
 interface ICircuitData {
     corners: Array<{
@@ -56,14 +56,28 @@ interface ICircuitData {
     year: number;
 }
 
+interface IPositionPoint {
+    Status: string,
+    X: number,
+    Y: number,
+    Z: number
+}
+
 export default function Circuit() {
     const circuitData: ICircuitData = useWebSocketStore(state => state.circuitData)
-    if (!circuitData) return null
+    const positionData: any = useWebSocketStore(state => state.positionData)
 
-    const PADDING = 1000
+    console.log(positionData?.Position?.[0]?.Entries || {})
+    console.log(Object.entries(positionData?.Position?.[0]?.Entries || {}))
+    
+    if (!circuitData || !positionData) return null
+    
+    const circuitPoints = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))
+    const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(circuitPoints, circuitData.rotation + 180, 1000)
 
-    const points = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))
-    const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(points, circuitData.rotation + 180, PADDING)
+    let positionPoints = Object.entries(positionData?.Position?.[0]?.Entries || {}).map((item: any) => ({ x: item[1].X, y: item[1].Y }))
+    const rotatedPositionPoints = rotatePoints(positionPoints, { x: centerX, y: centerY }, circuitData.rotation + 180)
+    const paddingRotatedPositionPoints = paddPoints(rotatedPositionPoints, 1000)
 
     return (
         <div className="">
@@ -73,8 +87,12 @@ export default function Circuit() {
 
                 {/* CENTER POINT */}
                 <circle cx={`${centerX}`} cy={`${centerY}`} r="250" fill="lime" />
+
+                {paddingRotatedPositionPoints.map((point, index) => (
+                    <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="250" fill="red" className="duration-500 ease-in-out" />
+                ))}
             </svg>
-            <pre>{JSON.stringify(circuitData, null, 4)}</pre>
+            {/* <pre>{JSON.stringify(circuitData, null, 4)}</pre> */}
         </div>
     )
 }

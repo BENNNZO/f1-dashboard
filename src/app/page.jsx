@@ -89,7 +89,7 @@ export default function Home() {
 
 		}
 
-		axios.get(`https://api.multiviewer.app/api/v1/circuits/10/${new Date().getFullYear()}`)
+		axios.get(`https://api.multiviewer.app/api/v1/circuits/49/${new Date().getFullYear()}`)
  		.then(res => {
 			console.log("got pai data")
 			console.log(res.data)
