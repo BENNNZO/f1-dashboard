@@ -1,54 +1,85 @@
 "use client"
 
 import { useEffect } from "react";
+import { useWebSocketStore } from "@/store/webSocketStore";
+import decodeZippedBase64 from "@/utils/decodeZipClient";
+
+import CarData from "@/components/CarData";
 
 export default function Home() {
+	const updateCarData = useWebSocketStore(state => state.updateCarData)
+	const updatePositionData = useWebSocketStore(state => state.updatePositionData)
+	const updateTopThree = useWebSocketStore(state => state.updateTopThree)
+	const updateTimingStats = useWebSocketStore(state => state.updateTimingStats)
+	const updateTimingAppData = useWebSocketStore(state => state.updateTimingAppData)
+	const updateWeatherData = useWebSocketStore(state => state.updateWeatherData)
+	const updateTrackStatus = useWebSocketStore(state => state.updateTrackStatus)
+	const updateDriverList = useWebSocketStore(state => state.updateDriverList)
+	const updateRaceControlMessages = useWebSocketStore(state => state.updateRaceControlMessages)
+	const updateSessionInfo = useWebSocketStore(state => state.updateSessionInfo)
+	const updateSessionData = useWebSocketStore(state => state.updateSessionData)
+	const updateLapCount = useWebSocketStore(state => state.updateLapCount)
+	const updateTimingData = useWebSocketStore(state => state.updateTimingData)
+
 	useEffect(() => {
 		const ws = new WebSocket("ws://localhost:3001")
 
-		ws.onmessage = (message) => {
+		ws.onmessage = async (message) => {
 			const { type, data } = JSON.parse(message.data)
 
 			switch (type) {
 				case "CarData.z":
 					console.log("CarData.z received");
-					break;
+					updateCarData(JSON.parse(await decodeZippedBase64(data)))
+					break
 				case "Position.z":
-					console.log("Position.z received");
-					break;
+					console.log("Position.z received")
+					updatePositionData(JSON.parse(await decodeZippedBase64(data)))
+					break
 				case "TopThree":
-					console.log("TopThree received");
-					break;
+					console.log("TopThree received")
+					updateTopThree(data)
+					break
 				case "TimingStats":
-					console.log("TimingStats received");
-					break;
+					console.log("TimingStats received")
+					updateTimingStats(data)
+					break
 				case "TimingAppData":
-					console.log("TimingAppData received");
-					break;
+					console.log("TimingAppData received")
+					updateTimingAppData(data)
+					break
 				case "WeatherData":
-					console.log("WeatherData received");
-					break;
+					console.log("WeatherData received")
+					updateWeatherData(data)
+					break
 				case "TrackStatus":
-					console.log("TrackStatus received");
-					break;
+					console.log("TrackStatus received")
+					updateTrackStatus(data)
+					break
 				case "DriverList":
-					console.log("DriverList received");
-					break;
+					console.log("DriverList received")
+					updateDriverList(data)
+					break
 				case "RaceControlMessages":
-					console.log("RaceControlMessages received");
-					break;
+					console.log("RaceControlMessages received")
+					updateRaceControlMessages(data)
+					break
 				case "SessionInfo":
-					console.log("SessionInfo received");
-					break;
+					console.log("SessionInfo received")
+					updateSessionInfo(data)
+					break
 				case "SessionData":
-					console.log("SessionData received");
-					break;
+					console.log("SessionData received")
+					updateSessionData(data)
+					break
 				case "LapCount":
-					console.log("LapCount received");
-					break;
+					console.log("LapCount received")
+					updateLapCount(data)
+					break
 				case "TimingData":
-					console.log("TimingData received");
-					break;
+					console.log("TimingData received")
+					updateTimingData(data)
+					break
 				default:
 					console.log(`Unused type: ${type}`)
 			}
@@ -61,6 +92,7 @@ export default function Home() {
 	return (
 		<div>
 			Hello, World!
+			<CarData />
 		</div>
 	);
 }
