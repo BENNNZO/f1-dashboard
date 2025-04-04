@@ -74,9 +74,11 @@ export default function Circuit() {
     const positionData: any = useWebSocketStore(state => state.positionData)
     const driverList: any = useWebSocketStore(state => state.driverList)
     
+    // states for timing logic
     const [currentPosition, setCurrentPosition] = useState<{ Entries: Record<string, IPositionPoint> } | null>(null)
     const [prevPosition, setPrevPosition] = useState<{ Timestamp: string } | null>(null)
     
+    // handles timing logic
     useEffect(() => {
         if (!positionData) return
 
@@ -118,6 +120,13 @@ export default function Circuit() {
                 {/* CENTER POINT */}
                 {/* <circle cx={`${centerX}`} cy={`${centerY}`} r="250" fill="lime" /> */}
 
+                {/* CORNER NUMBER NEED OFFSETTING WIP */}
+                {/* {circuitData.corners.map(corner => {
+                    const { x, y } = paddPoint(rotatePoint(corner.trackPosition, center, circuitData.rotation + 180), 1000)
+
+                    return <text key={corner.number} x={x} y={y} className="text-[500px] fill-white font-mono">{corner.number}</text>
+                })} */}
+
                 {Object.entries(currentPosition.Entries).map((entry, index: number) => {
                     const driverNumber = entry[0]
                     const { X, Y } = entry[1] as IPositionPoint
@@ -125,11 +134,11 @@ export default function Circuit() {
                     const point = paddPoint(rotatePoint({ x: X, y: Y }, center, circuitData.rotation + 180), 1000)
 
                     return (
-                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="150" fill={`#${driverList[driverNumber].TeamColour}`} className="duration-500 ease-linear shadow-md" />
+                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="150" fill={`#${driverList[driverNumber].TeamColour}`} className="duration-500 ease-linear" />
                     )
                 })}
             </svg>
-            {/* <pre>{JSON.stringify(circuitData, null, 4)}</pre> */}
+            <pre>{JSON.stringify(circuitData, null, 4)}</pre>
         </div>
     )
 }
