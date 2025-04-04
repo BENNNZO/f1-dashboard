@@ -72,6 +72,7 @@ export default function Circuit() {
     // get data from store
     const circuitData: ICircuitData = useWebSocketStore(state => state.circuitData)
     const positionData: any = useWebSocketStore(state => state.positionData)
+    const driverList: any = useWebSocketStore(state => state.driverList)
     
     const [currentPosition, setCurrentPosition] = useState<{ Entries: Record<string, IPositionPoint> } | null>(null)
     const [prevPosition, setPrevPosition] = useState<{ Timestamp: string } | null>(null)
@@ -114,7 +115,7 @@ export default function Circuit() {
                 <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="white" strokeWidth="200" fill="none" />
 
                 {/* CENTER POINT */}
-                <circle cx={`${centerX}`} cy={`${centerY}`} r="250" fill="lime" />
+                {/* <circle cx={`${centerX}`} cy={`${centerY}`} r="250" fill="lime" /> */}
 
                 {Object.entries(currentPosition.Entries).map((entry, index: number) => {
                     const driverNumber = entry[0]
@@ -123,7 +124,7 @@ export default function Circuit() {
                     const point = paddPoint(rotatePoint({ x: X, y: Y }, center, circuitData.rotation + 180), 1000)
 
                     return (
-                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="250" fill="red" className="duration-500 ease-linear" />
+                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="250" fill={`#${driverList[driverNumber].TeamColour}`} className="duration-500 ease-linear" />
                     )
                 })}
             </svg>
