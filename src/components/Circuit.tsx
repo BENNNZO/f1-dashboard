@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 import { useWebSocketStore } from "@/store/webSocketStore";
 import { transformPoints, rotatePoint, paddPoint } from "@/utils/positionPoints";
-import { start } from "repl";
 
 interface ICircuitData {
     corners: Array<{
@@ -127,6 +126,7 @@ export default function Circuit() {
                     return <text key={corner.number} x={x} y={y} className="text-[500px] fill-white font-mono">{corner.number}</text>
                 })} */}
 
+                {/* DRIVER ANIMATED POINTS */}
                 {Object.entries(currentPosition.Entries).map((entry, index: number) => {
                     const driverNumber = entry[0]
                     const { X, Y } = entry[1] as IPositionPoint
@@ -138,7 +138,6 @@ export default function Circuit() {
                     )
                 })}
             </svg>
-            <pre>{JSON.stringify(circuitData, null, 4)}</pre>
         </div>
     )
 }
