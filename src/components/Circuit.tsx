@@ -67,9 +67,6 @@ export default function Circuit() {
     const circuitData: ICircuitData = useWebSocketStore(state => state.circuitData)
     const positionData: any = useWebSocketStore(state => state.positionData)
 
-    console.log(positionData?.Position?.[0]?.Entries || {})
-    console.log(Object.entries(positionData?.Position?.[0]?.Entries || {}))
-    
     if (!circuitData || !positionData) return null
     
     const circuitPoints = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))
