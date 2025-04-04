@@ -8,7 +8,7 @@ interface ILapCount {
 export default function LapCount() {
     const lapCount: ILapCount = useWebSocketStore(state => state.lapCount)
 
-    return (
+    if (lapCount) return (
         <div>
             <p>{lapCount.CurrentLap} / {lapCount.TotalLaps}</p>
         </div>

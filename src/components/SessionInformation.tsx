@@ -33,8 +33,6 @@ interface ISessionInfo {
 export default function SessionInformation() {
     const sessionInfo: ISessionInfo = useWebSocketStore(state => state.sessionInfo)
 
-    console.log(sessionInfo)
-
     if (sessionInfo) return (
         <div className="flex gap-2">
             {/* <Image src={`/flags/chn.svg`} width={10} height={40} alt="country-flag" className="h-8 w-10 object-cover rounded-full"/> */}

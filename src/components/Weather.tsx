@@ -14,9 +14,7 @@ interface IWeather {
 export default function Weather() {
     const weatherData: IWeather = useWebSocketStore(state => state.weatherData)
 
-    console.log(weatherData)
-
-    return (
+    if (weatherData) return (
         <div className="flex gap-2">
             <p className="font-mono bg-zinc-900 px-4 py-1 rounded-full">{CtoF(Number(weatherData.AirTemp)).toFixed(1)}° F</p>
             <p className="font-mono bg-zinc-900 px-4 py-1 rounded-full">{CtoF(Number(weatherData.TrackTemp)).toFixed(1)}° F</p>

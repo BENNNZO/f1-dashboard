@@ -106,7 +106,7 @@ export default function Circuit() {
     const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(circuitPoints, circuitData.rotation + 180, 1000)
     const center = { x: centerX, y: centerY }
 
-    return (
+    if (circuitData && positionData && driverList) return (
         <div className="">
             <svg width="100%" height="100%" viewBox={`${minX} ${minY} ${width} ${height}`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                 {/* TRACK LINE */}
@@ -130,11 +130,11 @@ export default function Circuit() {
 
                     const point = paddPoint(rotatePoint({ x: X, y: Y }, center, circuitData.rotation + 180), 1000)
 
-                    const teamColor = driverList[driverNumber].TeamColour
+                    const teamColor = driverList[driverNumber]?.TeamColour ?? "FFFFFF"
 
                     return (
                         <g className="duration-500 ease-linear" style={{ transform: `translate(${point.x}px, ${point.y}px)` }}>
-                            <text className={`text-[360px] font-mono opacity-50 font-bold absolute`} style={{ transform: `translate(175px, 100px)` }} fill={`#${teamColor}`}>{driverList[driverNumber].Tla}</text>
+                            <text className={`text-[360px] font-mono opacity-50 font-bold absolute`} style={{ transform: `translate(175px, 100px)` }} fill={`#${teamColor}`}>{driverList[driverNumber]?.Tla ?? ""}</text>
                             <circle key={index} cx={`0`} cy={`0`} r="150" fill={`#${teamColor}`} />
                         </g>
                     )
