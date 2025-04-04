@@ -112,7 +112,8 @@ export default function Circuit() {
         <div className="">
             <svg width="100%" height="100%" viewBox={`${minX} ${minY} ${width} ${height}`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                 {/* TRACK LINE */}
-                <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="white" strokeWidth="200" fill="none" />
+                <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="grey" strokeWidth="300" fill="none" />
+                <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="white" strokeWidth="150" fill="none" />
 
                 {/* CENTER POINT */}
                 {/* <circle cx={`${centerX}`} cy={`${centerY}`} r="250" fill="lime" /> */}
@@ -124,7 +125,7 @@ export default function Circuit() {
                     const point = paddPoint(rotatePoint({ x: X, y: Y }, center, circuitData.rotation + 180), 1000)
 
                     return (
-                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="250" fill={`#${driverList[driverNumber].TeamColour}`} className="duration-500 ease-linear" />
+                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="150" fill={`#${driverList[driverNumber].TeamColour}`} className="duration-500 ease-linear shadow-md" />
                     )
                 })}
             </svg>
