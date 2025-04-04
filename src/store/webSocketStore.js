@@ -2,8 +2,8 @@ import { create } from "zustand";
 import deepMerge from "../utils/deepMerge"
 
 export const useWebSocketStore = create(set => ({
-    carData: "",
-    positionData: "",
+    carData: null,
+    positionData: null,
     topThree: {},
     timingStats: {},
     timingAppData: {},
@@ -17,7 +17,7 @@ export const useWebSocketStore = create(set => ({
     timingData: {},
     circuitData: null,
     updateCarData: (newData) => set(() => ({ carData: newData })),
-    updatePositionData: (newData) => set(() => ({ positionData: newData })),
+    updatePositionData: (newData) => set(() => ({ positionData: newData.Position })),
     updateTopThree: (newData) => set(state => ({ topThree: deepMerge(state.topThree, newData) })),
     updateTimingStats: (newData) => set(state => ({ timingStats: deepMerge(state.timingStats, newData) })),
     updateTimingAppData: (newData) => set(state => ({ timingAppData: deepMerge(state.timingAppData, newData) })),

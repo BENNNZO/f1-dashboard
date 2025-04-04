@@ -1,5 +1,5 @@
 import { useWebSocketStore } from "@/store/webSocketStore";
-import { transformPoints, rotatePoints, paddPoints } from "@/utils/positionPoints";
+import { transformPoints, rotatePoint, paddPoint } from "@/utils/positionPoints";
 
 interface ICircuitData {
     corners: Array<{
@@ -72,9 +72,11 @@ export default function Circuit() {
     const circuitPoints = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))
     const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(circuitPoints, circuitData.rotation + 180, 1000)
 
-    let positionPoints = Object.entries(positionData?.Position?.[0]?.Entries || {}).map((item: any) => ({ x: item[1].X, y: item[1].Y }))
-    const rotatedPositionPoints = rotatePoints(positionPoints, { x: centerX, y: centerY }, circuitData.rotation + 180)
-    const paddingRotatedPositionPoints = paddPoints(rotatedPositionPoints, 1000)
+    const center = { x: centerX, y: centerY }
+
+    // let positionPoints = Object.entries(positionData?.Position?.[0]?.Entries || {}).map((item: any) => ({ x: item[1].X, y: item[1].Y }))
+    // const rotatedPositionPoints = rotatePoints(positionPoints, { x: centerX, y: centerY }, circuitData.rotation + 180)
+    // const paddingRotatedPositionPoints = paddPoints(rotatedPositionPoints, 1000)
 
     return (
         <div className="">
@@ -85,9 +87,16 @@ export default function Circuit() {
                 {/* CENTER POINT */}
                 <circle cx={`${centerX}`} cy={`${centerY}`} r="250" fill="lime" />
 
-                {paddingRotatedPositionPoints.map((point, index) => (
-                    <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="250" fill="red" className="duration-500 ease-in-out" />
-                ))}
+                {Object.entries(positionData[0].Entries).map((entry: any, index) => {
+                    const driverNumber = entry[0]
+                    const { X, Y } = entry[1] // Status and Z are in here
+
+                    const point = paddPoint(rotatePoint({ x: X, y: Y }, center, circuitData.rotation + 180), 1000)
+
+                    return (
+                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="250" fill="red" className="duration-500 ease-in-out" />
+                    )
+                })}
             </svg>
             {/* <pre>{JSON.stringify(circuitData, null, 4)}</pre> */}
         </div>

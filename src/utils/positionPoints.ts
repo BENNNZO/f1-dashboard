@@ -13,28 +13,26 @@ interface ITransformedPointsData {
     centerY: number 
 }
 
-export function rotatePoints(points: point[], center: point, deg: number): point[] {
-    return points.map(point => {
-        const angleRad = deg * (Math.PI / 180)
+export function rotatePoint(point: point, center: point, deg: number): point {
+    const angleRad = deg * (Math.PI / 180)
 
-        // subtract the center point so the center is now the origin (0, 0)
-        const x1 = point.x - center.x
-        const y1 = point.y - center.y
+    // subtract the center point so the center is now the origin (0, 0)
+    const x1 = point.x - center.x
+    const y1 = point.y - center.y
 
-        // apply rotation transformation
-        const x2 = (x1 * Math.cos(angleRad)) - (y1 * Math.sin(angleRad))
-        const y2 = (x1 * Math.sin(angleRad)) + (y1 * Math.cos(angleRad))
-        
-        // add back the center point
-        const rotatedX = x2 + center.x
-        const rotatedY = y2 + center.y
+    // apply rotation transformation
+    const x2 = (x1 * Math.cos(angleRad)) - (y1 * Math.sin(angleRad))
+    const y2 = (x1 * Math.sin(angleRad)) + (y1 * Math.cos(angleRad))
+    
+    // add back the center point
+    const rotatedX = x2 + center.x
+    const rotatedY = y2 + center.y
 
-        return { x: rotatedX, y: rotatedY }
-    })
+    return { x: rotatedX, y: rotatedY }
 }
 
-export function paddPoints(points: point[], padding: number): point[] {
-    return points.map(point => ({ x: point.x + padding, y: point.y + padding }))
+export function paddPoint(point: point, padding: number): point {
+    return { x: point.x + padding, y: point.y + padding }
 }
 
 export function transformPoints(points: point[], rotation: number, padding: number): ITransformedPointsData {
@@ -47,7 +45,7 @@ export function transformPoints(points: point[], rotation: number, padding: numb
     const centerY = (Math.max(...points.map(p => p.y)) - Math.min(...points.map(p => p.y))) / 2 + Math.min(...points.map(p => p.y))
     
     // apply rotation transform
-    points = rotatePoints(points, { x: centerX, y: centerY }, rotation)
+    points = points.map(point => rotatePoint(point, { x: centerX, y: centerY }, rotation))
     
     // get min max width and height
     const minX = Math.min(...points.map(point => point.x))
@@ -58,5 +56,5 @@ export function transformPoints(points: point[], rotation: number, padding: numb
     const height = Math.max(...points.map(point => point.y)) + Math.abs(Math.min(...points.map(point => point.y))) + (padding * 2)
     
     // finally apply padding transform and return
-    return { transformedPoints: paddPoints(points, padding), minX, minY, width, height, centerX, centerY }
+    return { transformedPoints: points.map(point => paddPoint(point, padding)), minX, minY, width, height, centerX, centerY }
 }
