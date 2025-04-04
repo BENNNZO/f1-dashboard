@@ -92,10 +92,7 @@ export default function Circuit() {
                 delayTime = new Date(position.Timestamp).getTime() - new Date(startTime).getTime()
             }
 
-            setTimeout(() => {
-                console.log(position.Timestamp)
-                setCurrentPosition(position)
-            }, delayTime)
+            setTimeout(() => setCurrentPosition(position), delayTime)
         });
 
         setPrevPosition(positionData.slice(-1)[0])
@@ -129,12 +126,17 @@ export default function Circuit() {
                 {/* DRIVER ANIMATED POINTS */}
                 {Object.entries(currentPosition.Entries).map((entry, index: number) => {
                     const driverNumber = entry[0]
-                    const { X, Y } = entry[1] as IPositionPoint
+                    const { Status, X, Y } = entry[1] as IPositionPoint
 
                     const point = paddPoint(rotatePoint({ x: X, y: Y }, center, circuitData.rotation + 180), 1000)
 
+                    const teamColor = driverList[driverNumber].TeamColour
+
                     return (
-                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="150" fill={`#${driverList[driverNumber].TeamColour}`} className="duration-500 ease-linear" />
+                        <g className="duration-500 ease-linear" style={{ transform: `translate(${point.x}px, ${point.y}px)` }}>
+                            <text className={`text-[360px] font-mono opacity-50 font-bold absolute`} style={{ transform: `translate(175px, 100px)` }} fill={`#${teamColor}`}>{driverList[driverNumber].Tla}</text>
+                            <circle key={index} cx={`0`} cy={`0`} r="150" fill={`#${teamColor}`} />
+                        </g>
                     )
                 })}
             </svg>
