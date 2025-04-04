@@ -15,6 +15,7 @@ export const useWebSocketStore = create(set => ({
     sessionData: {},
     lapCount: {},
     timingData: {},
+    circuitData: null,
     updateCarData: (newData) => set(() => ({ carData: newData })),
     updatePositionData: (newData) => set(() => ({ positionData: newData })),
     updateTopThree: (newData) => set(state => ({ topThree: deepMerge(state.topThree, newData) })),
@@ -27,5 +28,6 @@ export const useWebSocketStore = create(set => ({
     updateSessionInfo: (newData) => set(state => ({ sessionInfo: deepMerge(state.sessionInfo, newData) })),
     updateSessionData: (newData) => set(state => ({ sessionData: deepMerge(state.sessionData, newData) })),
     updateLapCount: (newData) => set(state => ({ lapCount: deepMerge(state.lapCount, newData) })),
-    updateTimingData: (newData) => set(state => ({ timingData: deepMerge(state.timingData, newData) }))
+    updateTimingData: (newData) => set(state => ({ timingData: deepMerge(state.timingData, newData) })),
+    updateCircuitData: (newData) => set(() => ({ circuitData: newData }))
 }))

@@ -1,3 +1,4 @@
+import { useWebSocketStore } from "@/store/webSocketStore";
 import { transformPoints } from "@/utils/positionPoints";
 
 interface ICircuitData {
@@ -55,18 +56,13 @@ interface ICircuitData {
     year: number;
 }
 
-
-export default function Circuit({ circuitData }: { circuitData: ICircuitData }) {
-    // const positionData = useStore((state: any) => state.data["Position.z"])
-
-    // if (positionData !== undefined) console.log(positionData)
-    // if (positionData !== undefined) console.log(decodeZippedBase64(positionData))
-    // const positions = decodeZippedBase64(positionData)
+export default function Circuit() {
+    const circuitData: ICircuitData = useWebSocketStore(state => state.circuitData)
+    if (!circuitData) return null
 
     const PADDING = 1000
-    
-    const points = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))
 
+    const points = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))
     const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(points, circuitData.rotation + 180, PADDING)
 
     return (
@@ -78,6 +74,7 @@ export default function Circuit({ circuitData }: { circuitData: ICircuitData }) 
                 {/* CENTER POINT */}
                 <circle cx={`${centerX}`} cy={`${centerY}`} r="250" fill="lime" />
             </svg>
+            <pre>{JSON.stringify(circuitData, null, 4)}</pre>
         </div>
     )
 }

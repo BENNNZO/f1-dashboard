@@ -2,9 +2,11 @@
 
 import { useEffect } from "react";
 import { useWebSocketStore } from "@/store/webSocketStore";
+
+import axios from "axios";
 import decodeZippedBase64 from "@/utils/decodeZipClient";
 
-import CarData from "@/components/CarData";
+import Circuit from "@/components/Circuit";
 
 export default function Home() {
 	const updateCarData = useWebSocketStore(state => state.updateCarData)
@@ -20,6 +22,7 @@ export default function Home() {
 	const updateSessionData = useWebSocketStore(state => state.updateSessionData)
 	const updateLapCount = useWebSocketStore(state => state.updateLapCount)
 	const updateTimingData = useWebSocketStore(state => state.updateTimingData)
+	const updateCircuitData = useWebSocketStore(state => state.updateCircuitData)
 
 	useEffect(() => {
 		const ws = new WebSocket("ws://localhost:3001")
@@ -86,13 +89,21 @@ export default function Home() {
 
 		}
 
+		axios.get(`https://api.multiviewer.app/api/v1/circuits/10/${new Date().getFullYear()}`)
+ 		.then(res => {
+			console.log("got pai data")
+			console.log(res.data)
+			updateCircuitData(res.data)
+		})
+ 		.catch(err => console.log(err))
+
 		return () => ws.close()
 	}, [])
 
 	return (
 		<div>
 			Hello, World!
-			<CarData />
+			<Circuit />
 		</div>
 	);
 }
