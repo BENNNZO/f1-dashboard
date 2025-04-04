@@ -7,6 +7,7 @@ import axios from "axios";
 import decodeZippedBase64 from "@/utils/decodeZipClient";
 
 import Circuit from "@/components/Circuit";
+import LapCount from "@/components/LapCount";
 
 export default function Home() {
 	const updateCarData = useWebSocketStore(state => state.updateCarData)
@@ -103,6 +104,7 @@ export default function Home() {
 	return (
 		<div>
 			Hello, World!
+			<LapCount />
 			<Circuit />
 		</div>
 	);
