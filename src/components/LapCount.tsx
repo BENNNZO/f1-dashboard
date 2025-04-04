@@ -10,8 +10,7 @@ export default function LapCount() {
 
     return (
         <div>
-            <p>{lapCount.CurrentLap}</p>
-            <p>{lapCount.TotalLaps}</p>
+            <p>{lapCount.CurrentLap} / {lapCount.TotalLaps}</p>
         </div>
     )
 }
