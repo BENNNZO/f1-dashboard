@@ -1,5 +1,10 @@
+"use client"
+
+import { useState, useEffect } from "react";
+
 import { useWebSocketStore } from "@/store/webSocketStore";
 import { transformPoints, rotatePoint, paddPoint } from "@/utils/positionPoints";
+import { start } from "repl";
 
 interface ICircuitData {
     corners: Array<{
@@ -64,19 +69,43 @@ interface IPositionPoint {
 }
 
 export default function Circuit() {
+    // get data from store
     const circuitData: ICircuitData = useWebSocketStore(state => state.circuitData)
     const positionData: any = useWebSocketStore(state => state.positionData)
-
-    if (!circuitData || !positionData) return null
     
+    const [currentPosition, setCurrentPosition] = useState<{ Entries: Record<string, IPositionPoint> } | null>(null)
+    const [prevPosition, setPrevPosition] = useState<{ Timestamp: string } | null>(null)
+    
+    useEffect(() => {
+        if (!positionData) return
+
+        const startTime = positionData[0].Timestamp
+
+        positionData.forEach((position: any, index: number) => {
+            let delayTime = 0
+
+            if (index === 0) {
+                delayTime = new Date(position.Timestamp).getTime() - new Date(prevPosition?.Timestamp ?? 0).getTime()
+            } else {
+                delayTime = new Date(position.Timestamp).getTime() - new Date(startTime).getTime()
+            }
+
+            setTimeout(() => {
+                console.log(position.Timestamp)
+                setCurrentPosition(position)
+            }, delayTime)
+        });
+
+        setPrevPosition(positionData.slice(-1)[0])
+    }, [positionData])
+
+    // retrun null if data is not ready yet
+    if (!circuitData || !positionData || !currentPosition) return null
+    
+    // formatt and transform circuit path coords
     const circuitPoints = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))
     const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(circuitPoints, circuitData.rotation + 180, 1000)
-
     const center = { x: centerX, y: centerY }
-
-    // let positionPoints = Object.entries(positionData?.Position?.[0]?.Entries || {}).map((item: any) => ({ x: item[1].X, y: item[1].Y }))
-    // const rotatedPositionPoints = rotatePoints(positionPoints, { x: centerX, y: centerY }, circuitData.rotation + 180)
-    // const paddingRotatedPositionPoints = paddPoints(rotatedPositionPoints, 1000)
 
     return (
         <div className="">
@@ -87,14 +116,14 @@ export default function Circuit() {
                 {/* CENTER POINT */}
                 <circle cx={`${centerX}`} cy={`${centerY}`} r="250" fill="lime" />
 
-                {Object.entries(positionData[0].Entries).map((entry: any, index) => {
+                {Object.entries(currentPosition.Entries).map((entry, index: number) => {
                     const driverNumber = entry[0]
-                    const { X, Y } = entry[1] // Status and Z are in here
+                    const { X, Y } = entry[1] as IPositionPoint
 
                     const point = paddPoint(rotatePoint({ x: X, y: Y }, center, circuitData.rotation + 180), 1000)
 
                     return (
-                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="250" fill="red" className="duration-500 ease-in-out" />
+                        <circle key={index} cx={`${point.x}`} cy={`${point.y}`} r="250" fill="red" className="duration-500 ease-linear" />
                     )
                 })}
             </svg>

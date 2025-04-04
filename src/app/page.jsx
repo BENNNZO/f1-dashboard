@@ -26,7 +26,7 @@ export default function Home() {
 	const updateCircuitData = useWebSocketStore(state => state.updateCircuitData)
 
 	async function updateData(type, data) {
-		console.log(`${type} data received`)
+		// console.log(`${type} data received`)
 
 		switch (type) {
 			case "CarData.z":
@@ -91,8 +91,8 @@ export default function Home() {
 
 		axios.get(`https://api.multiviewer.app/api/v1/circuits/49/${new Date().getFullYear()}`)
  		.then(res => {
-			console.log("got pai data")
-			console.log(res.data)
+			// console.log("got pai data")
+			// console.log(res.data)
 			updateCircuitData(res.data)
 		})
  		.catch(err => console.log(err))
