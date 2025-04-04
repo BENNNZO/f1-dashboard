@@ -8,6 +8,7 @@ import decodeZippedBase64 from "@/utils/decodeZipClient";
 
 import Circuit from "@/components/Circuit";
 import LapCount from "@/components/LapCount";
+import Weather from "@/components/Weather";
 
 export default function Home() {
 	const updateCarData = useWebSocketStore(state => state.updateCarData)
@@ -102,6 +103,7 @@ export default function Home() {
 		<div>
 			<LapCount />
 			<Circuit />
+			<Weather />
 		</div>
 	);
 }
