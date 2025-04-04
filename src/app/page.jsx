@@ -91,8 +91,6 @@ export default function Home() {
 
 		axios.get(`https://api.multiviewer.app/api/v1/circuits/49/${new Date().getFullYear()}`)
  		.then(res => {
-			// console.log("got pai data")
-			// console.log(res.data)
 			updateCircuitData(res.data)
 		})
  		.catch(err => console.log(err))
@@ -102,7 +100,6 @@ export default function Home() {
 
 	return (
 		<div>
-			Hello, World!
 			<LapCount />
 			<Circuit />
 		</div>
