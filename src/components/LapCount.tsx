@@ -9,8 +9,6 @@ export default function LapCount() {
     const lapCount: ILapCount = useWebSocketStore(state => state.lapCount)
 
     if (lapCount) return (
-        <div>
-            <p>{lapCount.CurrentLap} / {lapCount.TotalLaps}</p>
-        </div>
+        <p className="px-4 py-1 h-8 rounded-full bg-zinc-900">{lapCount.CurrentLap} / {lapCount.TotalLaps}</p>
     )
 }
