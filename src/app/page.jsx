@@ -7,7 +7,8 @@ import axios from "axios";
 import decodeZippedBase64 from "@/utils/decodeZipClient";
 
 import Circuit from "@/components/Circuit";
-import StatusBar from "@/components/StatusBar"
+import StatusBar from "@/components/StatusBar";
+import ControlMessages from "@/components/ControlMessages";
 
 export default function Home() {
 	const updateCarData = useWebSocketStore(state => state.updateCarData)
@@ -101,6 +102,7 @@ export default function Home() {
 	return (
 		<div>
 			<StatusBar />
+			<ControlMessages />
 			<Circuit />
 		</div>
 	);
