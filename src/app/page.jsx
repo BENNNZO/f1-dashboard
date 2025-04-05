@@ -9,6 +9,7 @@ import decodeZippedBase64 from "@/utils/decodeZipClient";
 import Circuit from "@/components/Circuit";
 import StatusBar from "@/components/StatusBar";
 import ControlMessages from "@/components/ControlMessages";
+import DriverList from "@/components/DriverList"
 
 export default function Home() {
 	const updateCarData = useWebSocketStore(state => state.updateCarData)
@@ -102,6 +103,7 @@ export default function Home() {
 	return (
 		<div>
 			<StatusBar />
+			<DriverList />
 			<ControlMessages />
 			<Circuit />
 		</div>
