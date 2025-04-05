@@ -18,20 +18,24 @@ export default function DriverList() {
     // console.log("\n\n\n\n\n\n")
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-1/2 p-2">
             {sortedTimingData.map(data => {
                 const driverNumber: string = data[0]
                 const stats: any = data[1]
 
                 return (
-                    <div key={driverNumber} className="flex gap-2 p-1 rounded-lg" style={{ background: `#${driverList[driverNumber].TeamColour}`}}>
-                        <div className="flex gap-2 items-center px-2 bg-white rounded-md" style={{ color: `#${driverList[driverNumber].TeamColour}`}}>
-                            <p className="font-mono leading-4 text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
-                            <p className="font-mono leading-4 text-2xl font-bold">{driverList[driverNumber].Tla}</p>
+                    <div key={driverNumber} className="flex gap-3 p-1 rounded-lg" style={{ background: `#${driverList[driverNumber].TeamColour}`}}>
+                        <div className="flex gap-2 items-center px-2 bg-white rounded-md h-8" style={{ color: `#${driverList[driverNumber].TeamColour}`}}>
+                            <p className="font-mono text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
+                            <p className="font-mono text-2xl font-bold">{driverList[driverNumber].Tla}</p>
                         </div>
-                        <div className="flex flex-col">
-                            <p className="font-mono leading-4">{stats.GapToLeader}</p>
-                            <p className="font-mono leading-4 text-sm text-white/50">{stats.IntervalToPositionAhead.Value}</p>
+                        <div className="flex flex-col w-16">
+                            <p className="font-mono leading-4">{stats.GapToLeader === "" ? "---.---" : stats.GapToLeader}</p>
+                            <p className="font-mono leading-4 text-sm text-white/50">{stats.IntervalToPositionAhead.Value === "" ? "---.---" : stats.IntervalToPositionAhead.Value}</p>
+                        </div>
+                        <div className="flex flex-col w-16">
+                            <p className="font-mono leading-4">{stats.BestLapTime.Value === "" ? "-:--.---" : stats.BestLapTime.Value}</p>
+                            <p className="font-mono leading-4 text-sm text-white/50">{stats.LastLapTime.Value === "" ? "-:--.---": stats.LastLapTime.Value}</p>
                         </div>
                     </div>
                 )
