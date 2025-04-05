@@ -103,9 +103,11 @@ export default function Home() {
 	return (
 		<div>
 			<StatusBar />
-			<DriverList />
+			<div className="flex">
+				<DriverList />
+				<Circuit />
+			</div>
 			<ControlMessages />
-			<Circuit />
 		</div>
 	);
 }

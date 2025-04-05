@@ -107,7 +107,7 @@ export default function Circuit() {
     const center = { x: centerX, y: centerY }
 
     if (circuitData && positionData && driverList) return (
-        <div className="">
+        <div className="w-full">
             <svg width="100%" height="100%" viewBox={`${minX} ${minY} ${width} ${height}`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                 {/* TRACK LINE */}
                 <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="grey" strokeWidth="300" fill="none" />
