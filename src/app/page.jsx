@@ -101,7 +101,7 @@ export default function Home() {
 	}, [])
 
 	return (
-		<div>
+		<div className="max-h-screen">
 			<StatusBar />
 			<div className="flex">
 				<DriverList />
