@@ -105,9 +105,11 @@ export default function Home() {
 			<StatusBar />
 			<div className="flex">
 				<DriverList />
-				<Circuit />
+				<div className="flex flex-col gap-2">
+					<Circuit />
+					<ControlMessages />
+				</div>
 			</div>
-			<ControlMessages />
 		</div>
 	);
 }

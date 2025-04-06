@@ -1,4 +1,26 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
+import Image from "next/image"
+
+const STATUS_COLORS = {
+    "0": "grey",
+    "2048": "yellow",
+    "2049": "lime",
+    "2051": "purple"
+}
+
+interface ISector {
+    Stopped: boolean,
+    Value: string,
+    Status: number,
+    OverallFastest: boolean,
+    PersonalFastest: boolean,
+    Segments: Record<string, ISegment>,
+    PreviousValue: string
+}
+
+interface ISegment {
+    Status: number
+}
 
 export default function DriverList() {
     const timingAppData = useWebSocketStore(state => state.timingAppData)
@@ -9,33 +31,36 @@ export default function DriverList() {
 
     const sortedTimingData = Object.entries(timingData.Lines).sort((a: any, b: any) => a[1].Position - b[1].Position)
 
-    // console.log("\n\n\n\n\n\n timing data")
-    // console.log(timingAppData)
-    // console.log("driver list")
-    // console.log(driverList)
-    // console.log("timing data")
-    // console.log(timingData)
-    // console.log("\n\n\n\n\n\n")
 
     return (
-        <div className="flex flex-col gap-2 w-1/2 p-2">
+        <div className="flex flex-col gap-2 p-2">
             {sortedTimingData.map(data => {
                 const driverNumber: string = data[0]
                 const stats: any = data[1]
 
                 return (
-                    <div key={driverNumber} className="flex gap-3 p-1 rounded-lg" style={{ background: `#${driverList[driverNumber].TeamColour}`}}>
-                        <div className="flex gap-2 items-center px-2 bg-white rounded-md h-8" style={{ color: `#${driverList[driverNumber].TeamColour}`}}>
+                    <div key={driverNumber} className="flex gap-3 rounded-lg p-1" style={{ background: `#${driverList[driverNumber].TeamColour}60` }}>
+                        <div className="flex gap-2 items-center px-2 rounded-md h-8" style={{ background: `#${driverList[driverNumber].TeamColour}ff` }}>
                             <p className="font-mono text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
                             <p className="font-mono text-2xl font-bold">{driverList[driverNumber].Tla}</p>
                         </div>
-                        <div className="flex flex-col w-16">
+                        <Image src={`icons/tires/${timingAppData.Lines[driverNumber].Stints[0].Compound.toLowerCase()}.svg`} width={30} height={30} alt="tire-picture" />
+                        <div className="flex flex-col w-20">
                             <p className="font-mono leading-4">{stats.GapToLeader === "" ? "---.---" : stats.GapToLeader}</p>
                             <p className="font-mono leading-4 text-sm text-white/50">{stats.IntervalToPositionAhead.Value === "" ? "---.---" : stats.IntervalToPositionAhead.Value}</p>
                         </div>
-                        <div className="flex flex-col w-16">
-                            <p className="font-mono leading-4">{stats.BestLapTime.Value === "" ? "-:--.---" : stats.BestLapTime.Value}</p>
-                            <p className="font-mono leading-4 text-sm text-white/50">{stats.LastLapTime.Value === "" ? "-:--.---": stats.LastLapTime.Value}</p>
+                        <div className="flex flex-col w-20">
+                            <p className="font-mono leading-4">{stats.LastLapTime.Value === "" ? "-:--.---" : stats.LastLapTime.Value}</p>
+                            <p className="font-mono leading-4 text-sm text-white/50">{stats.BestLapTime.Value === "" ? "-:--.---" : stats.BestLapTime.Value}</p>
+                        </div>
+                        <div className="flex gap-2">
+                            {Object.entries(stats.Sectors as Record<string, ISector>).map(([sectorNumber, sector]) => (
+                                <div key={sectorNumber} className="flex gap-0.5">
+                                    {Object.entries(sector.Segments as Record<string, ISegment>).map(([segmentNumber, segment]) => (
+                                        <div key={segmentNumber} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-4 h-2 rounded-full"></div>
+                                    ))}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 )
