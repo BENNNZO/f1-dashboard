@@ -12,7 +12,7 @@ export default function ControlMessages() {
     const raceControlMessages = useWebSocketStore(state => state.raceControlMessages)
 
     if (raceControlMessages) return (
-        <div className="flex flex-col gap-2 p-2 h-full overflow-y-scroll overflow-x-hidden border-t border-white/10">
+        <div className="flex flex-col gap-2 p-2 h-full overflow-y-scroll overflow-x-hidden">
             {Object.entries(raceControlMessages.Messages).reverse().map((message: any, index: number) => {
                 const { Message, Category, Utc } = message[1]
 

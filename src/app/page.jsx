@@ -109,7 +109,7 @@ export default function Home() {
 				<DriverList />
 				<div className="grid grid-rows-2 gap-2 h-[calc(100vh-49px)]">
 					<Circuit />
-					<div className="grid grid-cols-2">
+					<div className="grid grid-cols-2 border-t border-white/10">
 						<ControlMessages />
 						<TeamRadio />
 					</div>
