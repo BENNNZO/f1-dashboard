@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 import { useWebSocketStore } from "@/store/webSocketStore";
 import { transformPoints, rotatePoint, paddPoint } from "@/utils/positionPoints";
@@ -118,7 +119,8 @@ export default function Circuit() {
         const center = { x: centerX, y: centerY }
 
         if (circuitData && positionData && driverList) return (
-            <div className="w-full">
+            <div className="w-full relative">
+                <Image src={`/flags/chn.svg`} width={80} height={80} alt="country-flag" className="w-24 rounded-xl object-cover absolute top-2 left-2 shadow-md"/>
                 <svg width="100%" height="100%" viewBox={`${minX} ${minY} ${width} ${height}`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                     {/* TRACK LINE */}
                     <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="#ffffff40" strokeWidth="300" fill="none" />
