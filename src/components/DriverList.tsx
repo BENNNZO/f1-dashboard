@@ -2,10 +2,10 @@ import { useWebSocketStore } from "@/store/webSocketStore"
 import Image from "next/image"
 
 const STATUS_COLORS = {
-    "0": "grey",
-    "2048": "yellow",
-    "2049": "lime",
-    "2051": "purple"
+    "0": "#ffffff40",    // grey
+    "2048": "#fcf41b", // yellow
+    "2049": "#67ea67", // green
+    "2051": "#9567ea"  // purple
 }
 
 interface ISector {
@@ -57,7 +57,7 @@ export default function DriverList() {
                             {Object.entries(stats.Sectors as Record<string, ISector>).map(([sectorNumber, sector]) => (
                                 <div key={sectorNumber} className="flex gap-0.5">
                                     {Object.entries(sector.Segments as Record<string, ISegment>).map(([segmentNumber, segment]) => (
-                                        <div key={segmentNumber} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-4 h-2 rounded-full"></div>
+                                        <div key={segmentNumber} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-4 h-2 rounded-full duration-150"></div>
                                     ))}
                                 </div>
                             ))}
