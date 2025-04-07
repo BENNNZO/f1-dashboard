@@ -18,7 +18,10 @@ export const F1_CONSTANTS = {
         "SessionInfo",
         "SessionData",
         "LapCount",
-        "TimingData"
+        "TimingData",
+        "TeamRadio",
+        "PitLaneTimeCollection",
+        "ChampionshipPrediction"
     ]
 }
 
