@@ -36,8 +36,8 @@ export default function SessionInformation() {
     if (sessionInfo) return (
         <div className="flex gap-2">
             {/* <Image src={`/flags/chn.svg`} width={10} height={40} alt="country-flag" className="h-8 w-10 object-cover rounded-full"/> */}
-            <p className="font-mono px-4 py-1 bg-zinc-900 rounded-full h-8">{sessionInfo?.Name ?? ""}</p>
-            <p className="font-mono px-4 py-1 bg-zinc-900 rounded-full h-8">{sessionInfo?.Meeting?.Name ?? ""}</p>
+            <p className="px-4 py-1 bg-zinc-900 rounded-full h-8">{sessionInfo?.Name ?? ""}</p>
+            <p className="px-4 py-1 bg-zinc-900 rounded-full h-8">{sessionInfo?.Meeting?.Name ?? ""}</p>
         </div>
     )
 }

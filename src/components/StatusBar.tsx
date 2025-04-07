@@ -4,7 +4,7 @@ import LapCount from "./LapCount"
 
 export default function StatusBar() {
     return (
-        <div className="flex justify-between border-b border-white/10 p-2">
+        <div className={`flex justify-between border-b border-white/10 p-2`}>
             <div className="flex gap-2">
                 <Weather />
                 <div className="w-px bg-white/10 my-1"></div>
