@@ -9,6 +9,7 @@ import Circuit from "@/components/Circuit";
 import StatusBar from "@/components/StatusBar";
 import ControlMessages from "@/components/ControlMessages";
 import DriverList from "@/components/DriverList"
+import TeamRadio from "@/components/TeamRadio";
 
 export default function Home() {
 	const updateCarData = useWebSocketStore(state => state.updateCarData)
@@ -108,7 +109,8 @@ export default function Home() {
 				<DriverList />
 				<div className="grid grid-rows-2 gap-2 h-[calc(100vh-49px)]">
 					<Circuit />
-					<ControlMessages />
+					<TeamRadio />
+					{/* <ControlMessages /> */}
 				</div>
 			</div>
 		</div>
