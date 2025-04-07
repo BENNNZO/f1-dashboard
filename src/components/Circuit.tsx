@@ -119,8 +119,8 @@ export default function Circuit() {
     // retrun null if data is not ready yet
     if (circuitData && positionData && currentPosition) {
         // formatt and transform circuit path coords
-        const circuitPoints = circuitData.x.map((x, index) => ({ x, y: circuitData.y[index] }))
-        const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(circuitPoints, circuitData.rotation + 180, 1000)
+        const circuitPoints = circuitData.x.map((x, index) => ({ x: -x, y: circuitData.y[index] }))
+        const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(circuitPoints, -circuitData.rotation + 180, 1000)
         const center = { x: centerX, y: centerY }
 
         if (circuitData && positionData && driverList) return (
@@ -145,14 +145,14 @@ export default function Circuit() {
                         const driverNumber = entry[0]
                         const { X, Y } = entry[1] as IPositionPoint
 
-                        const point = paddPoint(rotatePoint({ x: X, y: Y }, center, circuitData.rotation + 180), 1000)
+                        const point = paddPoint(rotatePoint({ x: -X, y: Y }, center, -circuitData.rotation + 180), 1000)
 
                         const teamColor = driverList[driverNumber]?.TeamColour ?? "FFFFFF"
 
                         return (
                             <g key={driverNumber} className="duration-500 ease-linear" style={{ transform: `translate(${point.x}px, ${point.y}px)` }}>
                                 <text className={`text-[300px] opacity-50 font-bold absolute`} style={{ transform: `translate(175px, 100px)` }} fill={`#${teamColor}`}>{driverList[driverNumber]?.Tla ?? ""}</text>
-                                <circle key={index} cx={`0`} cy={`0`} r="150" fill={`#${teamColor}`} stroke="#00000040" strokeWidth={100} />
+                                <circle r="150" fill={`#${teamColor}`} stroke="#00000040" strokeWidth={100} />
                             </g>
                         )
                     })}
