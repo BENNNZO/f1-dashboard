@@ -38,7 +38,7 @@ async function startReplay() {
                 const { timestamp, message } = JSON.parse(line)
 
                 // delay between this and previous message
-                if (previousTimestamp > 0) await new Promise(res => setTimeout(res, timestamp - previousTimestamp))
+                if (previousTimestamp > 0) await new Promise(res => setTimeout(res, (timestamp - previousTimestamp) / 4))
 
                 if (message["R"]) {
                     updateDataStore(message["R"])
