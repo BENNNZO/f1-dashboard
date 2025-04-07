@@ -19,7 +19,7 @@ export default function TeamRadio() {
     console.log(teamRadio)
 
     if (teamRadio) return (
-        <div className="flex flex-col gap-2 overflow-y-scroll overflow-x-hidden p-2 border-t border-white/10">
+        <div className="flex flex-col gap-2 overflow-y-scroll overflow-x-hidden p-2 border-t border-l border-white/10">
             {teamRadio.Captures.reverse().map((capture: ICapture, index: number) => (
                 <AudioPlayer key={index} title={"test"} playing={playing} setPlaying={setPlaying} src={`https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}`} />
             ))}
