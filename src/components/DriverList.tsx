@@ -2,10 +2,11 @@ import { useWebSocketStore } from "@/store/webSocketStore"
 import Image from "next/image"
 
 const STATUS_COLORS = {
-    "0": "#ffffff40",    // grey
-    "2048": "#fcf41b", // yellow
-    "2049": "#67ea67", // green
-    "2051": "#9567ea"  // purple
+    "0": "#ffffff40",   // grey
+    "2048": "#fcf41b",  // yellow
+    "2049": "#67ea67",  // green
+    "2051": "#9567ea",  // purple
+    "2064": "red"       // idk what this number is for
 }
 
 interface ISector {
@@ -33,13 +34,13 @@ export default function DriverList() {
 
 
     return (
-        <div className="flex flex-col border-r border-white/20">
+        <div className="flex flex-col border-r border-white/10">
             {sortedTimingData.map(data => {
                 const driverNumber: string = data[0]
                 const stats: any = data[1]
 
                 return (
-                    <div key={driverNumber} className="flex gap-3 border-b border-white/20 p-2" style={{ background: `#${driverList[driverNumber].TeamColour}00` }}>
+                    <div key={driverNumber} className="flex gap-3 border-b border-white/10 p-2" style={{ background: `#${driverList[driverNumber].TeamColour}00` }}>
                         <div className="flex gap-2 items-center px-2 rounded-md h-8" style={{ background: `#${driverList[driverNumber].TeamColour}ff` }}>
                             <p className="text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
                             <p className="text-2xl font-bold">{driverList[driverNumber].Tla}</p>
