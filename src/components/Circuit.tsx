@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import { useWebSocketStore } from "@/store/webSocketStore";
 import { transformPoints, rotatePoint, paddPoint } from "@/utils/positionPoints";
@@ -69,6 +70,7 @@ interface IPositionPoint {
 
 export default function Circuit() {
     // get data from store
+    const updateCircuitData = useWebSocketStore(state => state.updateCircuitData)
     const circuitData: ICircuitData = useWebSocketStore(state => state.circuitData)
     const positionData: any = useWebSocketStore(state => state.positionData)
     const driverList: any = useWebSocketStore(state => state.driverList)
@@ -76,7 +78,17 @@ export default function Circuit() {
     // states for timing logic
     const [currentPosition, setCurrentPosition] = useState<{ Entries: Record<string, IPositionPoint> } | null>(null)
     const [prevPosition, setPrevPosition] = useState<{ Timestamp: string } | null>(null)
-    
+
+    // get circuit data
+    useEffect(() => {
+        console.log("circuit reload")
+		axios.get(`https://api.multiviewer.app/api/v1/circuits/49/${new Date().getFullYear()}`)
+        .then(res => {
+           updateCircuitData(res.data)
+       })
+        .catch(err => console.log(err))
+    }, [])
+
     // handles timing logic
     useEffect(() => {
         if (!positionData) return
