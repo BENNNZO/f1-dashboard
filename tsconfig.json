@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/utils/websocket.js", "src/utils/WebSocketProvider.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/utils/websocket.js", "src/utils/WebSocketProvider.js", "src/components/AudioPlayer.jsx"],
   "exclude": ["node_modules"]
 }
