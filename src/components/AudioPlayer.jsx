@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 
-export default function AudioPlayer({ title, src, playing, setPlaying }) {
+export default function AudioPlayer({ driver, src, playing, setPlaying }) {
     const [isPlaying, setIsPlaying] = useState(false)
     const [duration, setDuration] = useState(null)
     const [currentTime, setCurrentTime] = useState(0)
@@ -12,7 +12,7 @@ export default function AudioPlayer({ title, src, playing, setPlaying }) {
     const animationRef = useRef()
 
     useEffect(() => {
-        if (playing !== title) {
+        if (playing !== src) {
             audioRef.current.pause()
             cancelAnimationFrame(animationRef.current)
             setIsPlaying(false)
@@ -20,7 +20,7 @@ export default function AudioPlayer({ title, src, playing, setPlaying }) {
     }, [playing])
 
     useEffect(() => {
-        if (isPlaying) setPlaying(title)
+        if (isPlaying) setPlaying(src)
     }, [isPlaying])
 
     function updateData() {
@@ -62,11 +62,12 @@ export default function AudioPlayer({ title, src, playing, setPlaying }) {
     }
 
     return (
-        <div className="flex flex-row gap-1 rounded-md p-2 pr-6 bg-zinc-900 border border-white/10">
+        <div className={`flex flex-row gap-1 p-2 pr-6 ${isPlaying ? "bg-zinc-800" : "bg-zinc-900"} duration-300 border border-white/5 rounded-xl`}>
             <audio ref={audioRef} src={src} preload="metadata" onLoadedMetadata={() => updateData()} onEnded={() => resetData()}></audio>
 
+            <p className="px-1 rounded-md mr-2" style={{ background: `#${driver.TeamColour}` }}>{driver.Tla}</p>
+
             <div className="flex flex-row pr-2 items-center justify-center">
-                {/* Play / Pause Button */}
                 <button onClick={() => togglePlayState()} className="cursor-pointer">
                     {isPlaying ? (
                         <Image src="icons/audio_player/pause.svg" width={25} height={25} alt="pause button" className="invert w-6 h-6" />
@@ -76,18 +77,14 @@ export default function AudioPlayer({ title, src, playing, setPlaying }) {
                 </button>
             </div>
 
-            <div className="flex flex-col gap-1 w-full">
-                {/* Duration/Time + Progress Bar */}
-                <div className="flex flex-row items-center gap-4">
-                    <p>{formatTime(currentTime)}</p>
+            <div className="flex flex-row items-center gap-4 w-full">
+                <p>{formatTime(currentTime)}</p>
 
-                    <div className="relative w-full bg-zinc-800 rounded-full overflow-hidden">
-                        {/* <input ref={progressBar} type="range" min={0} max={Math.floor(duration)} defaultValue={0} onChange={(e) => changeTime(e.target.value)} className="audio-progress-bar" /> */}
-                        <div className="h-2 bg-white pointer-events-none" style={{ width: `${0.35 + (currentTime / duration * 100)}%` }}></div>
-                    </div>
-
-                    <p>{formatTime(duration)}</p>
+                <div className="relative w-full bg-zinc-800 rounded-full overflow-hidden">
+                    <div className="h-2 bg-white pointer-events-none" style={{ width: `${0.35 + (currentTime / duration * 100)}%` }}></div>
                 </div>
+
+                <p>{formatTime(duration)}</p>
             </div>
         </div>
     )
