@@ -29,6 +29,9 @@ export default function Home() {
 
 	async function updateData(type, data) {
 		// console.log(`${type} data received`)
+		if (type === "test") {
+			console.log(data)
+		}
 
 		switch (type) {
 			case "CarData.z":

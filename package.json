@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "ts-node --project tsconfig.server.json server/services/myWebSocketServer.ts",
+    "server": "ts-node --project tsconfig.server.json server/serverHandler.ts",
     "record": "ts-node --project tsconfig.server.json server/simulate/record.ts",
     "replay": "ts-node --project tsconfig.server.json server/simulate/replay.ts"
   },
