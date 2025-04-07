@@ -34,13 +34,13 @@ export default function DriverList() {
 
 
     return (
-        <div className="flex flex-col border-r border-white/10">
+        <div className="flex flex-col gap-2 p-2 border-r border-white/10">
             {sortedTimingData.map(data => {
                 const driverNumber: string = data[0]
                 const stats: any = data[1]
 
                 return (
-                    <div key={driverNumber} className={`flex gap-3 border-b border-white/10 p-2 duration-500 ${stats.InPit && !stats.Retired ? "scale-x-95" : "scale-100"}`} style={{ background: `${stats.InPit ? `#${driverList[driverNumber].TeamColour}00` : ``}`, opacity: `${stats.Retired ? "0.1" : stats.InPit ? "0.5" : "1"}` }}>
+                    <div key={driverNumber} className={`flex gap-3 border border-white/5 bg-zinc-900 rounded-xl p-2 duration-500 ${stats.InPit && !stats.Retired ? "scale-x-95" : "scale-100"}`} style={{ background: `${stats.InPit ? `#${driverList[driverNumber].TeamColour}00` : ``}`, opacity: `${stats.Retired ? "0.1" : stats.InPit ? "0.5" : "1"}` }}>
                         <div className="flex gap-2 items-center px-2 rounded-md h-8" style={{ background: `#${driverList[driverNumber].TeamColour}ff` }}>
                             <p className="text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
                             <p className="text-2xl font-bold">{driverList[driverNumber].Tla}</p>
