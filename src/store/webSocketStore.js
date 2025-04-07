@@ -4,6 +4,7 @@ import deepMerge from "../utils/deepMerge"
 export const useWebSocketStore = create(set => ({
     carData: null,
     positionData: null,
+    circuitData: null,
     topThree: null,
     timingStats: null,
     timingAppData: null,
@@ -15,9 +16,10 @@ export const useWebSocketStore = create(set => ({
     sessionData: null,
     lapCount: null,
     timingData: null,
-    circuitData: null,
+    teamRadio: null,
     updateCarData: (newData) => set(() => ({ carData: newData })),
     updatePositionData: (newData) => set(() => ({ positionData: newData.Position })),
+    updateCircuitData: (newData) => set(() => ({ circuitData: newData })),
     updateTopThree: (newData) => set(state => ({ topThree: deepMerge(state.topThree, newData) })),
     updateTimingStats: (newData) => set(state => ({ timingStats: deepMerge(state.timingStats, newData) })),
     updateTimingAppData: (newData) => set(state => ({ timingAppData: deepMerge(state.timingAppData, newData) })),
@@ -29,5 +31,5 @@ export const useWebSocketStore = create(set => ({
     updateSessionData: (newData) => set(state => ({ sessionData: deepMerge(state.sessionData, newData) })),
     updateLapCount: (newData) => set(state => ({ lapCount: deepMerge(state.lapCount, newData) })),
     updateTimingData: (newData) => set(state => ({ timingData: deepMerge(state.timingData, newData) })),
-    updateCircuitData: (newData) => set(() => ({ circuitData: newData }))
+    updateTeamRadio: (newData) => set(state => ({ teamRadio: deepMerge(state.teamRadio, newData) }))
 }))

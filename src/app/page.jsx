@@ -24,15 +24,16 @@ export default function Home() {
 	const updateSessionData = useWebSocketStore(state => state.updateSessionData)
 	const updateLapCount = useWebSocketStore(state => state.updateLapCount)
 	const updateTimingData = useWebSocketStore(state => state.updateTimingData)
+	const updateTeamRadio = useWebSocketStore(state => state.updateTeamRadio)
 
 	async function updateData(type, data) {
-		// const newTypes = ["TeamRadio", "PitLaneTimeCollection", "ChampionshipPrediction"]
+		const newTypes = ["TeamRadio", "PitLaneTimeCollection", "ChampionshipPrediction"]
 
-		// if (newTypes.includes(type)) {
-		// 	console.log(type)
-		// 	console.log(data)
-		// }
-        
+		if (newTypes.includes(type)) {
+			console.log(type)
+			console.log(data)
+		}
+
 
 		switch (type) {
 			case "CarData.z":
@@ -73,6 +74,9 @@ export default function Home() {
 				break
 			case "TimingData":
 				updateTimingData(data)
+				break
+			case "TeamRadio":
+				updateTeamRadio(data)
 				break
 			default:
 				console.log(`Unused type found: ${type}`)
