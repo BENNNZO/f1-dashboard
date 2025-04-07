@@ -33,25 +33,25 @@ export default function DriverList() {
 
 
     return (
-        <div className="flex flex-col gap-2 p-2">
+        <div className="flex flex-col border-r border-white/20">
             {sortedTimingData.map(data => {
                 const driverNumber: string = data[0]
                 const stats: any = data[1]
 
                 return (
-                    <div key={driverNumber} className="flex gap-3 rounded-lg p-1" style={{ background: `#${driverList[driverNumber].TeamColour}60` }}>
+                    <div key={driverNumber} className="flex gap-3 border-b border-white/20 p-2" style={{ background: `#${driverList[driverNumber].TeamColour}00` }}>
                         <div className="flex gap-2 items-center px-2 rounded-md h-8" style={{ background: `#${driverList[driverNumber].TeamColour}ff` }}>
-                            <p className="font-mono text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
-                            <p className="font-mono text-2xl font-bold">{driverList[driverNumber].Tla}</p>
+                            <p className="text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
+                            <p className="text-2xl font-bold">{driverList[driverNumber].Tla}</p>
                         </div>
-                        <Image src={`icons/tires/${timingAppData.Lines[driverNumber].Stints[0].Compound.toLowerCase()}.svg`} width={30} height={30} alt="tire-picture" />
-                        <div className="flex flex-col w-20">
-                            <p className="font-mono leading-4">{stats.GapToLeader === "" ? "---.---" : stats.GapToLeader}</p>
-                            <p className="font-mono leading-4 text-sm text-white/50">{stats.IntervalToPositionAhead.Value === "" ? "---.---" : stats.IntervalToPositionAhead.Value}</p>
+                        <Image className="outline-2 outline-white/20 rounded-full" src={`icons/tires/${timingAppData.Lines[driverNumber].Stints[0].Compound.toLowerCase()}.svg`} width={32} height={32} alt="tire-picture" />
+                        <div className="flex flex-col w-24">
+                            <p className="font-semibold leading-none">{stats.GapToLeader === "" ? "---.---" : stats.GapToLeader}</p>
+                            <p className="font-semibold leading-none text-sm text-white/50">{stats.IntervalToPositionAhead.Value === "" ? "---.---" : stats.IntervalToPositionAhead.Value}</p>
                         </div>
-                        <div className="flex flex-col w-20">
-                            <p className="font-mono leading-4">{stats.LastLapTime.Value === "" ? "-:--.---" : stats.LastLapTime.Value}</p>
-                            <p className="font-mono leading-4 text-sm text-white/50">{stats.BestLapTime.Value === "" ? "-:--.---" : stats.BestLapTime.Value}</p>
+                        <div className="flex flex-col w-26">
+                            <p className="font-semibold leading-none">{stats.LastLapTime.Value === "" ? "-:--.---" : stats.LastLapTime.Value}</p>
+                            <p className="font-semibold leading-none text-sm text-white/50">{stats.BestLapTime.Value === "" ? "-:--.---" : stats.BestLapTime.Value}</p>
                         </div>
                         <div className="flex gap-2">
                             {Object.entries(stats.Sectors as Record<string, ISector>).map(([sectorNumber, sector]) => (

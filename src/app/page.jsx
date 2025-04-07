@@ -98,11 +98,11 @@ export default function Home() {
 	}, [])
 
 	return (
-		<div className="max-h-screen">
+		<div className="max-h-screen overflow-hidden">
 			<StatusBar />
-			<div className="flex">
+			<div className="flex h-full">
 				<DriverList />
-				<div className="flex flex-col gap-2">
+				<div className="grid grid-rows-2 gap-2 h-[calc(100vh-49px)]">
 					<Circuit />
 					<ControlMessages />
 				</div>

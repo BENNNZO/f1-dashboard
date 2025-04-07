@@ -124,7 +124,7 @@ export default function Circuit() {
         const center = { x: centerX, y: centerY }
 
         if (circuitData && positionData && driverList) return (
-            <div className="w-full h-[50vh]">
+            <div className="w-full">
                 <svg width="100%" height="100%" viewBox={`${minX} ${minY} ${width} ${height}`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                     {/* TRACK LINE */}
                     <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="#ffffff40" strokeWidth="300" fill="none" />
@@ -162,12 +162,12 @@ export default function Circuit() {
     } else {
         return (
             <div className="flex flex-row gap-2">
-                <pre className="w-40 overflow-x-scroll bg-red-400">CIRCUIT DATA: {JSON.stringify(circuitData, null, 4)}</pre>
+                {/* <pre className="w-40 overflow-x-scroll bg-red-400">CIRCUIT DATA: {JSON.stringify(circuitData, null, 4)}</pre>
                 <pre className="w-40 overflow-x-scroll bg-orange-400">POSITION DATA: {JSON.stringify(positionData, null, 4)}</pre>
                 <pre className="w-40 overflow-x-scroll bg-yellow-400">CURRENT POSITION: {JSON.stringify(currentPosition, null, 4)}</pre>
                 <pre className="w-40 overflow-x-scroll bg-green-400">PREV POSITION: {JSON.stringify(prevPosition, null, 4)}</pre>
                 <pre className="w-40 overflow-x-scroll bg-blue-400">DRIVER LIST: {JSON.stringify(driverList, null, 4)}</pre>
-                <pre className="w-40 overflow-x-scroll bg-purple-400">SESSION INFO: {JSON.stringify(sessionInfo, null, 4)}</pre>
+                <pre className="w-40 overflow-x-scroll bg-purple-400">SESSION INFO: {JSON.stringify(sessionInfo, null, 4)}</pre> */}
             </div>
         )
     }
