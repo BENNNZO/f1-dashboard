@@ -84,13 +84,8 @@ export default function Circuit() {
     useEffect(() => {
         if (!sessionInfo) return
 
-        console.log("circuit reload")
         axios.get(`https://api.multiviewer.app/api/v1/circuits/${sessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`)
-            .then(res => {
-                console.log("GOT CIRCUIT DATA")
-                console.log(res.data)
-                updateCircuitData(res.data)
-            })
+            .then(res => updateCircuitData(res.data))
             .catch(err => console.log(err))
     }, [sessionInfo])
 
@@ -101,7 +96,6 @@ export default function Circuit() {
         const startTime = positionData[0].Timestamp
 
         positionData.forEach((position: any, index: number) => {
-            console.log("position data")
             let delayTime = 0
 
             if (index === 0) {

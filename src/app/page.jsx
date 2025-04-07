@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { useWebSocketStore } from "@/store/webSocketStore";
 
-import axios from "axios";
 import decodeZippedBase64 from "@/utils/decodeZipClient";
 
 import Circuit from "@/components/Circuit";
@@ -25,13 +24,15 @@ export default function Home() {
 	const updateSessionData = useWebSocketStore(state => state.updateSessionData)
 	const updateLapCount = useWebSocketStore(state => state.updateLapCount)
 	const updateTimingData = useWebSocketStore(state => state.updateTimingData)
-	const updateCircuitData = useWebSocketStore(state => state.updateCircuitData)
 
 	async function updateData(type, data) {
-		// console.log(`${type} data received`)
-		if (type === "test") {
-			console.log(data)
-		}
+		// const newTypes = ["TeamRadio", "PitLaneTimeCollection", "ChampionshipPrediction"]
+
+		// if (newTypes.includes(type)) {
+		// 	console.log(type)
+		// 	console.log(data)
+		// }
+        
 
 		switch (type) {
 			case "CarData.z":
@@ -85,7 +86,6 @@ export default function Home() {
 			const { type, data } = JSON.parse(message.data)
 
 			if (type === "init") {
-				console.log("INIT")
 				Object.keys(data).forEach(key => {
 					updateData(key, data[key])
 				})

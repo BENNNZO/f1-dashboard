@@ -14,8 +14,6 @@ export default function ControlMessages() {
     if (raceControlMessages) return (
         <div className="flex flex-col gap-2 p-2 h-full overflow-y-scroll overflow-x-hidden border-t border-white/10">
             {Object.entries(raceControlMessages.Messages).reverse().map((message: any, index: number) => {
-                console.log(message)
-
                 const { Message, Category, Utc } = message[1]
 
                 const hour = new Date(Utc).getHours() < 10 ? `0${new Date(Utc).getHours()}` : new Date(Utc).getHours()
