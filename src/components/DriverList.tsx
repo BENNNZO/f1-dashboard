@@ -60,8 +60,8 @@ export default function DriverList() {
                         </div>
                         <div className="flex gap-2">
                             {Object.entries(stats.Sectors as Record<string, ISector>).map(([sectorNumber, sector]) => (
-                                <div className="flex flex-col justify-between">
-                                    <div key={sectorNumber} className="flex gap-0.5">
+                                <div key={sectorNumber} className="flex flex-col justify-between">
+                                    <div className="flex gap-0.5">
                                         {Object.entries(sector.Segments as Record<string, ISegment>).map(([segmentNumber, segment]) => (
                                             <div key={segmentNumber} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-4 h-1.5 rounded-full duration-150"></div>
                                         ))}
