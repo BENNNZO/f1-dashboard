@@ -1,18 +1,10 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
 import { CtoF } from "@/utils/convertTemp";
 
-interface IWeather {
-    AirTemp: string;
-    Humidity: string;
-    Pressure: string;
-    Rainfall: string;
-    TrackTemp: string;
-    WindDirection: string;
-    WindSpeed: string;
-}
+import { IWeatherData } from "@/types/IWeatherData.type";
 
 export default function Weather() {
-    const weatherData: IWeather = useWebSocketStore(state => state.weatherData)
+    const weatherData: IWeatherData | null = useWebSocketStore(state => state.weatherData)
 
     if (weatherData) return (
         <div className="flex gap-2">
