@@ -12,7 +12,7 @@ async function startServer() {
         const f1Socket = await f1WebSocketServer()
         const wss = await myWebSocketServer(Number(PORT))
 
-        f1Socket.on("message", (data: any) => {
+        f1Socket.on("message", (data: string) => {
             const message = JSON.parse(data)
 
             if (message["R"]) {
