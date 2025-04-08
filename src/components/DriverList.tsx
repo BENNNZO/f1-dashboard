@@ -32,16 +32,26 @@ export default function DriverList() {
 
     const sortedTimingData = Object.entries(timingData.Lines).sort((a: any, b: any) => a[1].Position - b[1].Position)
 
+    sortedTimingData.unshift(sortedTimingData[0])
 
     return (
-        <div className="flex flex-col gap-2 p-2 border-r border-white/10">
-            {sortedTimingData.map(data => {
+        <div className="p-2 top-2 shrink-0 relative">
+            {sortedTimingData.map((data, index) => {
                 const driverNumber: string = data[0]
                 const stats: any = data[1]
 
                 return (
-                    <div key={driverNumber} className={`flex gap-3 border border-white/5 bg-zinc-900 rounded-xl p-2 duration-500 ${stats.InPit && !stats.Retired ? "scale-x-95" : "scale-100"}`} style={{ background: `${stats.InPit ? `#${driverList[driverNumber].TeamColour}00` : ``}`, opacity: `${stats.Retired ? "0.1" : stats.InPit ? "0.5" : "1"}` }}>
-                        <div className="flex gap-2 items-center px-2 rounded-md h-8" style={{ background: `#${driverList[driverNumber].TeamColour}ff` }}>
+                    <div
+                        key={`${index === 0 ? "index" : driverNumber}`}
+                        className={`flex gap-3 border border-white/5 bg-zinc-900 rounded-xl p-2 duration-500 ${stats.InPit && !stats.Retired ? "scale-x-95" : "scale-100"}`}
+                        style={{
+                            opacity: `${index === 0 ? "0" : stats.Retired ? "0.1" : stats.InPit ? "0.5" : "1"}`,
+                            transform: `translateY(${(index - 2) * 58}px)`,
+                            transition: "transform 0.5s ease-out, opacity 0.5s ease-out",
+                            position: `${index === 0 ? "static" : "absolute"}`
+                        }}
+                    >
+                        <div className="flex gap-2 items-center px-2 rounded-md h-8 border-2 border-black/30" style={{ background: `#${driverList[driverNumber].TeamColour}ff` }}>
                             <p className="text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
                             <p className="text-2xl font-bold">{driverList[driverNumber].Tla}</p>
                         </div>
