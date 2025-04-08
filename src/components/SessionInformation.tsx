@@ -1,34 +1,5 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-import Image from "next/image";
-
-interface ISessionInfo {
-    Meeting: {
-        Key: number;
-        Name: string;
-        OfficialName: string;
-        Location: string;
-        Number: number;
-        Country: {
-            Key: number;
-            Code: string;
-            Name: string;
-        };
-        Circuit: {
-            Key: number;
-            ShortName: string;
-        };
-    };
-    ArchiveStatus: {
-        Status: string;
-    };
-    Key: number;
-    Type: string;
-    Name: string;
-    StartDate: string;
-    EndDate: string;
-    GmtOffset: string;
-    Path: string;
-}
+import { ISessionInfo } from "@/types/ISessionInfo.type";
 
 export default function SessionInformation() {
     const sessionInfo: ISessionInfo = useWebSocketStore(state => state.sessionInfo)
