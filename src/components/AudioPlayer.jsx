@@ -10,6 +10,7 @@ export default function AudioPlayer({ src, playing, setPlaying }) {
 
     const audioRef = useRef()
     const animationRef = useRef()
+    const sliderRef = useRef()
 
     useEffect(() => {
         if (playing !== src) {
@@ -61,6 +62,20 @@ export default function AudioPlayer({ src, playing, setPlaying }) {
         return `${returnedMinutes}:${returnedSeconds}`
     }
 
+    function sliderClickHandler(e) {
+        e.preventDefault()
+
+        const minX = sliderRef.current.offsetLeft
+        const maxX = minX + sliderRef.current.offsetWidth
+        const clickX = e.pageX
+
+        const percentage = (clickX - minX) / (maxX - minX)
+        const time = duration * percentage
+
+        audioRef.current.currentTime = time
+        setCurrentTime(time)
+    }
+
     return (
         <div className="flex flex-row gap-1 w-full">
             <audio ref={audioRef} src={src} preload="metadata" onLoadedMetadata={() => updateData()} onEnded={() => resetData()}></audio>
@@ -76,8 +91,8 @@ export default function AudioPlayer({ src, playing, setPlaying }) {
             </div>
             <div className="flex flex-row items-center gap-4 w-full">
                 <p>{formatTime(currentTime)}</p>
-                <div className="relative w-full bg-zinc-800 rounded-full overflow-hidden">
-                    <div className="h-2 bg-white pointer-events-none" style={{ width: `${0.35 + (currentTime / duration * 100)}%` }}></div>
+                <div ref={sliderRef} onClick={(e) => sliderClickHandler(e)} className="relative w-full bg-zinc-800 rounded-full overflow-hidden group cursor-pointer">
+                    <div className="h-2 group-hover:h-4 bg-white pointer-events-none" style={{ width: `${currentTime / duration * 100}%`, transition: "height 0.25s ease-out" }}></div>
                 </div>
                 <p>{formatTime(duration)}</p>
             </div>
