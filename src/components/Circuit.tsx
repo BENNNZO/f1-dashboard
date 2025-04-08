@@ -67,7 +67,7 @@ export default function Circuit() {
 
         return (
             <div className="w-full relative">
-                <Image src={`/flags/${sessionInfo?.Meeting.Country.Code ?? "unknown"}.svg`} width={80} height={80} alt="country-flag" className="w-24 rounded-xl object-cover absolute top-2 left-2 shadow-md" />
+                <Image src={`/flags/${sessionInfo?.Meeting.Country.Code.toLowerCase() ?? "unknown"}.svg`} width={80} height={80} alt="country-flag" className="w-24 rounded-xl object-cover absolute top-2 left-2 shadow-md" />
                 <svg width="100%" height="100%" viewBox={`${minX} ${minY} ${width} ${height}`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                     <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="#ffffff40" strokeWidth="300" fill="none" />
                     <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="#ffffff" strokeWidth="100" fill="none" />
