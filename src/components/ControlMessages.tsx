@@ -11,7 +11,7 @@ const flagTypes = {
 }
 
 export default function ControlMessages() {
-    const raceControlMessages: IRaceControlMessages = useWebSocketStore(state => state.raceControlMessages)
+    const raceControlMessages: IRaceControlMessages | null = useWebSocketStore(state => state.raceControlMessages)
 
     if (raceControlMessages) return (
         <div className="flex flex-col gap-2 p-2 h-full overflow-y-scroll overflow-x-hidden">

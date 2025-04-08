@@ -2,7 +2,7 @@ import { useWebSocketStore } from "@/store/webSocketStore"
 import { ISessionInfo } from "@/types/ISessionInfo.type";
 
 export default function SessionInformation() {
-    const sessionInfo: ISessionInfo = useWebSocketStore(state => state.sessionInfo)
+    const sessionInfo: ISessionInfo | null = useWebSocketStore(state => state.sessionInfo)
 
     if (sessionInfo) return (
         <div className="flex gap-2">

@@ -9,7 +9,7 @@ import { ISessionInfo } from "@/types/ISessionInfo.type"
 import { IDriverList } from "@/types/IDriverList.type"
 
 export default function TeamRadio() {
-    const [playing, setPlaying] = useState(null)
+    const [playing, setPlaying] = useState<string | null>(null)
 
     const teamRadio: ITeamRadio | null = useWebSocketStore(state => state.teamRadio)
     const sessionInfo: ISessionInfo | null = useWebSocketStore(state => state.sessionInfo)
