@@ -1,5 +1,6 @@
 export type ITimingData = {
-    Lines: Record<string, ITimingDataLine>
+    Lines: Record<string, ITimingDataLine>,
+    Withheld: boolean
 }
 
 export type ITimingDataLine = {
