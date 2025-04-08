@@ -10,6 +10,7 @@ import { transformPoints, rotatePoint, paddPoint } from "@/utils/positionPoints"
 import { ICircuitData } from "@/types/ICircuitData.type";
 import { ISessionInfo } from "@/types/ISessionInfo.type";
 import { IPositionData, IPositionDataObject, IPositionEntry } from "@/types/IPositionData.type";
+import { IDriverList } from "@/types/IDriverList.type";
 
 interface IPoint {
     x: number,
@@ -22,7 +23,7 @@ export default function Circuit() {
     const sessionInfo: ISessionInfo | null = useWebSocketStore(state => state.sessionInfo)
     const circuitData: ICircuitData | null = useWebSocketStore(state => state.circuitData)
     const positionData: IPositionData | null = useWebSocketStore(state => state.positionData)
-    const driverList: any | null = useWebSocketStore(state => state.driverList)
+    const driverList: IDriverList | null = useWebSocketStore(state => state.driverList)
 
     // states for timing logic
     const [currentPosition, setCurrentPosition] = useState<{ Entries: Record<string, IPositionEntry> } | null>(null)
@@ -57,8 +58,6 @@ export default function Circuit() {
 
         setPrevPosition(positionData.slice(-1)[0])
     }, [positionData, circuitData])
-
-    console.log(driverList)
 
     if (circuitData && positionData && currentPosition && driverList) {
         // formatt and transform circuit path coords
