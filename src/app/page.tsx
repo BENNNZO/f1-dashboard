@@ -27,15 +27,7 @@ export default function Home() {
 	const updateTimingData = useWebSocketStore(state => state.updateTimingData)
 	const updateTeamRadio = useWebSocketStore(state => state.updateTeamRadio)
 
-	async function updateData(type, data) {
-		const newTypes = ["TeamRadio", "PitLaneTimeCollection", "ChampionshipPrediction"]
-
-		if (newTypes.includes(type)) {
-			console.log(type)
-			console.log(data)
-		}
-
-
+	async function updateData(type: string, data: any) {
 		switch (type) {
 			case "CarData.z":
 				updateCarData(JSON.parse(await decodeZippedBase64(data)))
@@ -85,10 +77,10 @@ export default function Home() {
 	}
 
 	useEffect(() => {
-		const ws = new WebSocket(process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001")
+		const ws: WebSocket = new WebSocket(process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001")
 
 		ws.onmessage = async (message) => {
-			const { type, data } = JSON.parse(message.data)
+			const { type, data }: { type: string, data: any } = JSON.parse(message.data)
 
 			if (type === "init") {
 				Object.keys(data).forEach(key => {
