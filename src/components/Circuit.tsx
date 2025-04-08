@@ -36,7 +36,7 @@ export default function Circuit() {
         axios.get(`https://api.multiviewer.app/api/v1/circuits/${sessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`)
             .then(res => updateCircuitData(res.data))
             .catch(err => console.log(err))
-    }, [sessionInfo])
+    }, [sessionInfo, updateCircuitData])
 
     // handles timing logic
     useEffect(() => {
@@ -57,7 +57,7 @@ export default function Circuit() {
         });
 
         setPrevPosition(positionData.slice(-1)[0])
-    }, [positionData, circuitData])
+    }, [positionData, circuitData, prevPosition?.Timestamp])
 
     if (circuitData && positionData && currentPosition && driverList) {
         // formatt and transform circuit path coords
@@ -73,8 +73,8 @@ export default function Circuit() {
                     <polyline points={transformedPoints.map(item => `${item.x},${item.y}`).join(" ") + ` ${transformedPoints[0].x},${transformedPoints[0].y}`} stroke="#ffffff" strokeWidth="100" fill="none" />
 
                     {Object.entries(currentPosition.Entries).map((entry: [string, IPositionEntry]) => {
-                        const driverNumber = entry[0]
-                        const { X, Y } = entry[1]
+                        const driverNumber: string = entry[0]
+                        const { X, Y }: { X: number, Y: number } = entry[1]
 
                         const point: IPoint = paddPoint(rotatePoint({ x: -X, y: Y }, center, -circuitData.rotation + 180), 1000)
                         const teamColor: string = driverList[driverNumber]?.TeamColour ?? "FFFFFF"

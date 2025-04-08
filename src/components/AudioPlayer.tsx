@@ -18,11 +18,11 @@ export default function AudioPlayer({ src, playing, setPlaying }: { src: string,
             cancelAnimationFrame(animationRef.current)
             setIsPlaying(false)
         }
-    }, [playing])
+    }, [playing, src])
 
     useEffect(() => {
         if (isPlaying) setPlaying(src)
-    }, [isPlaying])
+    }, [isPlaying, src, setPlaying])
 
     function updateData() {
         setDuration(audioRef.current?.duration ?? null);

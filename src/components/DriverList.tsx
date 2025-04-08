@@ -21,7 +21,7 @@ export default function DriverList() {
 
     if (!timingAppData || !driverList || !timingData) return null
 
-    const sortedTimingData: [string, ITimingDataLine][] = Object.entries(timingData.Lines).sort((a: any, b: any) => a[1].Position - b[1].Position)
+    const sortedTimingData: [string, ITimingDataLine][] = Object.entries(timingData.Lines).sort((a, b) => Number(a[1].Position) - Number(b[1].Position))
     sortedTimingData.unshift(sortedTimingData[0])
 
     return (

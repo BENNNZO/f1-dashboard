@@ -14,62 +14,50 @@ import TeamRadio from "@/components/TeamRadio";
 export default function Home() {
 	const updateCarData = useWebSocketStore(state => state.updateCarData)
 	const updatePositionData = useWebSocketStore(state => state.updatePositionData)
-	const updateTopThree = useWebSocketStore(state => state.updateTopThree)
-	const updateTimingStats = useWebSocketStore(state => state.updateTimingStats)
 	const updateTimingAppData = useWebSocketStore(state => state.updateTimingAppData)
 	const updateWeatherData = useWebSocketStore(state => state.updateWeatherData)
 	const updateTrackStatus = useWebSocketStore(state => state.updateTrackStatus)
 	const updateDriverList = useWebSocketStore(state => state.updateDriverList)
 	const updateRaceControlMessages = useWebSocketStore(state => state.updateRaceControlMessages)
 	const updateSessionInfo = useWebSocketStore(state => state.updateSessionInfo)
-	const updateSessionData = useWebSocketStore(state => state.updateSessionData)
 	const updateLapCount = useWebSocketStore(state => state.updateLapCount)
 	const updateTimingData = useWebSocketStore(state => state.updateTimingData)
 	const updateTeamRadio = useWebSocketStore(state => state.updateTeamRadio)
 
-	async function updateData(type: string, data: any) {
+	async function updateData(type: string, data: unknown) {
 		switch (type) {
 			case "CarData.z":
-				updateCarData(JSON.parse(await decodeZippedBase64(data)))
+				updateCarData(JSON.parse(await decodeZippedBase64(data as string)))
 				break
 			case "Position.z":
-				updatePositionData(JSON.parse(await decodeZippedBase64(data)))
-				break
-			case "TopThree":
-				updateTopThree(data)
-				break
-			case "TimingStats":
-				updateTimingStats(data)
+				updatePositionData(JSON.parse(await decodeZippedBase64(data as string)))
 				break
 			case "TimingAppData":
-				updateTimingAppData(data)
+				updateTimingAppData(data as Record<string, unknown>)
 				break
 			case "WeatherData":
-				updateWeatherData(data)
+				updateWeatherData(data as Record<string, unknown>)
 				break
 			case "TrackStatus":
-				updateTrackStatus(data)
+				updateTrackStatus(data as Record<string, unknown>)
 				break
 			case "DriverList":
-				updateDriverList(data)
+				updateDriverList(data as Record<string, unknown>)
 				break
 			case "RaceControlMessages":
-				updateRaceControlMessages(data)
+				updateRaceControlMessages(data as Record<string, unknown>)
 				break
 			case "SessionInfo":
-				updateSessionInfo(data)
-				break
-			case "SessionData":
-				updateSessionData(data)
+				updateSessionInfo(data as Record<string, unknown>)
 				break
 			case "LapCount":
-				updateLapCount(data)
+				updateLapCount(data as Record<string, unknown>)
 				break
 			case "TimingData":
-				updateTimingData(data)
+				updateTimingData(data as Record<string, unknown>)
 				break
 			case "TeamRadio":
-				updateTeamRadio(data)
+				updateTeamRadio(data as Record<string, unknown>)
 				break
 			default:
 				console.log(`Unused type found: ${type}`)
@@ -80,7 +68,7 @@ export default function Home() {
 		const ws: WebSocket = new WebSocket(process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001")
 
 		ws.onmessage = async (message) => {
-			const { type, data }: { type: string, data: any } = JSON.parse(message.data)
+			const { type, data }: { type: string, data: Record<string, unknown> } = JSON.parse(message.data)
 
 			if (type === "init") {
 				Object.keys(data).forEach(key => {
@@ -92,7 +80,7 @@ export default function Home() {
 		}
 
 		return () => ws.close()
-	}, [])
+	}, [updateData])
 
 	return (
 		<div className="max-h-screen overflow-hidden">
