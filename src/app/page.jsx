@@ -107,7 +107,7 @@ export default function Home() {
 			<StatusBar />
 			<div className="flex h-full">
 				<DriverList />
-				<div className="grid grid-rows-2 gap-2 h-[calc(100vh-49px)] border-l border-white/10">
+				<div className="grid grid-rows-[minmax(0,2fr)_minmax(0,1fr)] gap-2 h-[calc(100vh-49px)] border-l border-white/10">
 					<Circuit />
 					<div className="grid grid-cols-2 border-t border-white/10">
 						<ControlMessages />
