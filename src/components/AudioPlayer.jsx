@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 
-export default function AudioPlayer({ driver, src, playing, setPlaying }) {
+export default function AudioPlayer({ src, playing, setPlaying }) {
     const [isPlaying, setIsPlaying] = useState(false)
     const [duration, setDuration] = useState(null)
     const [currentTime, setCurrentTime] = useState(0)
