@@ -6,6 +6,9 @@ Welcome to the F1 Dashboard project! This application aims to provide real-time 
 
 - **Real-time Updates**: Get the latest data on driver performance, including current speed (mph), sector times, and track positions, plus more.
 - **Circuit Map**: Visual representation of the track with real-time driver positions.
+- **Team Radios**: Listen to live team radio communications between drivers and their teams.
+- **Race Control Messages**: View important updates and announcements from race control in real-time.
+
 
 ## Current Progress
 
@@ -15,12 +18,11 @@ Welcome to the F1 Dashboard project! This application aims to provide real-time 
 ## Future Plans
 
 ### Short Term
-- Finish circuit component
 
 ### Long Term
-- Build out front end
 - Optimizations for both front and back ends
 - Implement user customization options for the dashboard.
+- Apply more typing for TS
 
 Stay tuned for more updates!
 
