@@ -1,9 +1,5 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-
-interface ILapCount {
-    CurrentLap: number,
-    TotalLaps: number,
-}
+import { ILapCount } from "@/types/ILapCount.type"
 
 export default function LapCount() {
     const lapCount: ILapCount = useWebSocketStore(state => state.lapCount)
