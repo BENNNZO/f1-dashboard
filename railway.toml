@@ -2,12 +2,19 @@
 builder = "nixpacks"
 buildCommand = "npm run build"
 
-[deploy]
+[variables]
+NODE_ENV = "production"
+
+[[services]]
+name = "web"
 startCommand = "npm run start"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 2
 
-[variables]
-NODE_ENV = "production"
+[[services]]
+name = "worker"
+startCommand = "npm run server"
+port = 3001
+

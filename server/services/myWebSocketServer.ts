@@ -5,7 +5,10 @@ import { currentData } from '../utils/updateDataStore';
 export default async function startServer(port: number): Promise<WebSocketServer> {
     return new Promise((res, rej) => {
         try {
-            const wss = new WebSocketServer({ port })
+            const wss = new WebSocketServer({ 
+                port,
+                host: '0.0.0.0'
+            });
 
             wss.on("connection", (event) => {
                 console.log("[SERVER] Client Connected")
