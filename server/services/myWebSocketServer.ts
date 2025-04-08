@@ -1,12 +1,11 @@
 import { WebSocketServer} from 'ws';
 
-import { SERVER_CONSTANTS } from '../config/constants';
 import { currentData } from '../utils/updateDataStore';
 
-export default async function startServer(): Promise<WebSocketServer> {
+export default async function startServer(port: number): Promise<WebSocketServer> {
     return new Promise((res, rej) => {
         try {
-            const wss = new WebSocketServer({ port: SERVER_CONSTANTS.PORT })
+            const wss = new WebSocketServer({ port })
 
             wss.on("connection", (event) => {
                 console.log("[SERVER] Client Connected")

@@ -1,14 +1,16 @@
 import f1WebSocketServer from './services/f1WebSocketServer'
 import myWebSocketServer from './services/myWebSocketServer'
 import broadcastData from './utils/broadcastData'
-import { updateDataStore, currentData } from "./utils/updateDataStore"
+import { updateDataStore } from "./utils/updateDataStore"
+
+const PORT = process.env.PORT || 3001;
 
 async function startServer() {
     try {
         console.log("[Dashboard Server] Starting Server...")
 
         const f1Socket = await f1WebSocketServer()
-        const wss = await myWebSocketServer()
+        const wss = await myWebSocketServer(Number(PORT))
 
         f1Socket.on("message", (data: any) => {
             const message = JSON.parse(data)
