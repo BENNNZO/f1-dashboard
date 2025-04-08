@@ -1,5 +1,10 @@
-import { useWebSocketStore } from "@/store/webSocketStore"
 import Image from "next/image"
+
+import { useWebSocketStore } from "@/store/webSocketStore"
+
+import { IDriverList } from "@/types/IDriverList.type" 
+import { ITimingAppData } from "@/types/ITimingAppData.type"
+import { ITimingData, ISegment, ISector, ITimingDataLine } from "@/types/ITimingData.type"
 
 const STATUS_COLORS = {
     "0": "#ffffff40",   // grey
@@ -9,28 +14,16 @@ const STATUS_COLORS = {
     "2064": "red"       // idk what this number is for
 }
 
-interface ISector {
-    Stopped: boolean,
-    Value: string,
-    Status: number,
-    OverallFastest: boolean,
-    PersonalFastest: boolean,
-    Segments: Record<string, ISegment>,
-    PreviousValue: string
-}
-
-interface ISegment {
-    Status: number
-}
-
 export default function DriverList() {
-    const timingAppData = useWebSocketStore(state => state.timingAppData)
-    const driverList = useWebSocketStore(state => state.driverList)
-    const timingData = useWebSocketStore(state => state.timingData)
+    const timingAppData: ITimingAppData | null = useWebSocketStore(state => state.timingAppData)
+    const driverList: IDriverList | null = useWebSocketStore(state => state.driverList)
+    const timingData: ITimingData | null = useWebSocketStore(state => state.timingData)
 
     if (!timingAppData || !driverList || !timingData) return null
 
-    const sortedTimingData = Object.entries(timingData.Lines).sort((a: any, b: any) => a[1].Position - b[1].Position)
+    console.log(timingData)
+
+    const sortedTimingData: [string, ITimingDataLine][] = Object.entries(timingData.Lines).sort((a: any, b: any) => a[1].Position - b[1].Position)
 
     sortedTimingData.unshift(sortedTimingData[0])
 
@@ -38,7 +31,7 @@ export default function DriverList() {
         <div className="p-2 top-2 shrink-0 relative">
             {sortedTimingData.map((data, index) => {
                 const driverNumber: string = data[0]
-                const stats: any = data[1]
+                const stats: ITimingDataLine = data[1]
 
                 return (
                     <div
@@ -52,7 +45,7 @@ export default function DriverList() {
                         }}
                     >
                         <div className="flex gap-2 items-center px-2 rounded-md h-8 border-2 border-black/30" style={{ background: `#${driverList[driverNumber].TeamColour}ff` }}>
-                            <p className="text-2xl font-bold">{stats.Position < 10 ? "0" + stats.Position : stats.Position}</p>
+                            <p className="text-2xl font-bold">{Number(stats.Position) < 10 ? "0" + stats.Position : stats.Position}</p>
                             <p className="text-2xl font-bold">{driverList[driverNumber].Tla}</p>
                         </div>
                         <Image className="outline-2 outline-white/20 rounded-full" src={`icons/tires/${timingAppData.Lines[driverNumber].Stints[0].Compound.toLowerCase()}.svg`} width={32} height={32} alt="tire-picture" />
@@ -69,11 +62,11 @@ export default function DriverList() {
                             <p className={`font-semibold leading-none text-sm text-white/50`}>{stats.BestLapTime.Value === "" ? "-:--.---" : stats.BestLapTime.Value}</p>
                         </div>
                         <div className="flex gap-2">
-                            {Object.entries(stats.Sectors as Record<string, ISector>).map(([sectorNumber, sector]) => (
-                                <div key={sectorNumber} className="flex flex-col justify-between">
+                            {stats.Sectors.map((sector: ISector, index: number) => (
+                                <div key={index} className="flex flex-col justify-between">
                                     <div className="flex gap-0.5">
-                                        {Object.entries(sector.Segments as Record<string, ISegment>).map(([segmentNumber, segment]) => (
-                                            <div key={segmentNumber} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-4 h-1.5 rounded-full duration-150"></div>
+                                        {sector.Segments.map((segment: ISegment, index: number) => (
+                                            <div key={index} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-4 h-1.5 rounded-full duration-150"></div>
                                         ))}
                                     </div>
                                     <div className="flex gap-1 items-end">
