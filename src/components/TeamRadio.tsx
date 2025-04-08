@@ -17,7 +17,7 @@ export default function TeamRadio() {
 
     if (teamRadio && sessionInfo && driverList) return (
         <div className="flex flex-col gap-2 overflow-y-scroll overflow-x-hidden p-2 border-l border-white/10">
-            {teamRadio.Captures.slice().reverse().map((capture: ICapture, index: number) => {
+            {Object.values(teamRadio.Captures).slice().reverse().map((capture: ICapture, index: number) => {
                 const driver = driverList[capture.RacingNumber]
 
                 return (

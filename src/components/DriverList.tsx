@@ -55,10 +55,10 @@ export default function DriverList() {
                             <p className={`font-semibold leading-none text-sm text-white/50`}>{stats.BestLapTime.Value === "" ? "-:--.---" : stats.BestLapTime.Value}</p>
                         </div>
                         <div className="flex gap-2">
-                            {stats.Sectors.map((sector: ISector, index: number) => (
+                            {Object.values(stats.Sectors).map((sector: ISector, index: number) => (
                                 <div key={index} className="flex flex-col justify-between">
                                     <div className="flex gap-0.5">
-                                        {sector.Segments.map((segment: ISegment, index: number) => (
+                                        {Object.values(sector.Segments).map((segment: ISegment, index: number) => (
                                             <div key={index} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-4 h-1.5 rounded-full duration-150"></div>
                                         ))}
                                     </div>
