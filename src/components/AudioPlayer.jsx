@@ -62,10 +62,8 @@ export default function AudioPlayer({ driver, src, playing, setPlaying }) {
     }
 
     return (
-        <div className={`flex flex-row gap-1 p-2 pr-6 ${isPlaying ? "bg-zinc-800" : "bg-zinc-900"} duration-300 border border-white/5 rounded-xl`}>
+        <div className="flex flex-row gap-1 w-full">
             <audio ref={audioRef} src={src} preload="metadata" onLoadedMetadata={() => updateData()} onEnded={() => resetData()}></audio>
-
-            <p className="px-1 rounded-md mr-2" style={{ background: `#${driver.TeamColour}` }}>{driver.Tla}</p>
 
             <div className="flex flex-row pr-2 items-center justify-center">
                 <button onClick={() => togglePlayState()} className="cursor-pointer">
@@ -76,14 +74,11 @@ export default function AudioPlayer({ driver, src, playing, setPlaying }) {
                     )}
                 </button>
             </div>
-
             <div className="flex flex-row items-center gap-4 w-full">
                 <p>{formatTime(currentTime)}</p>
-
                 <div className="relative w-full bg-zinc-800 rounded-full overflow-hidden">
                     <div className="h-2 bg-white pointer-events-none" style={{ width: `${0.35 + (currentTime / duration * 100)}%` }}></div>
                 </div>
-
                 <p>{formatTime(duration)}</p>
             </div>
         </div>

@@ -19,9 +19,16 @@ export default function TeamRadio() {
 
     if (teamRadio) return (
         <div className="flex flex-col gap-2 overflow-y-scroll overflow-x-hidden p-2 border-l border-white/10">
-            {teamRadio.Captures.reverse().map((capture: ICapture, index: number) => (
-                <AudioPlayer key={index} driver={driverList[capture.RacingNumber]} playing={playing} setPlaying={setPlaying} src={`https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}`} />
-            ))}
+            {teamRadio.Captures.reverse().map((capture: ICapture, index: number) => {
+                const driver = driverList[capture.RacingNumber]
+
+                return (
+                    <div key={index} className={`flex flex-row items-center gap-3 p-2 pr-6 ${playing === `https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}` ? "bg-zinc-800" : "bg-zinc-900"} duration-300 border border-white/5 rounded-xl`}>
+                        <p className="text-sm leading-none text-white px-1 font-bold py-1 rounded-md" style={{ background: `#${driver.TeamColour}` }}>{driver.Tla}</p>
+                        <AudioPlayer driver={driverList[capture.RacingNumber]} playing={playing} setPlaying={setPlaying} src={`https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}`} />
+                    </div>
+                )
+            })}
         </div>
     )
 }
