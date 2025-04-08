@@ -23,7 +23,7 @@ export default function TeamRadio() {
                 return (
                     <div key={index} className={`flex flex-row items-center gap-3 p-2 pr-6 duration-300 border border-white/5 rounded-xl bg-zinc-900`}>
                         <p className="text-sm leading-none text-white px-1 font-bold py-1 rounded-md" style={{ background: `#${driver.TeamColour}` }}>{driver.Tla}</p>
-                        <AudioPlayer playing={playing} setPlaying={setPlaying} src={`https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}`} />
+                        <AudioPlayer playing={playing ?? ""} setPlaying={setPlaying} src={`https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}`} />
                     </div>
                 )
             })}

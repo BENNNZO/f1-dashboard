@@ -3,18 +3,18 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 
-export default function AudioPlayer({ src, playing, setPlaying }) {
-    const [isPlaying, setIsPlaying] = useState(false)
-    const [duration, setDuration] = useState(null)
-    const [currentTime, setCurrentTime] = useState(0)
+export default function AudioPlayer({ src, playing, setPlaying }: { src: string, playing: string, setPlaying: (src: string) => void }) {
+    const [isPlaying, setIsPlaying] = useState<boolean>(false)
+    const [duration, setDuration] = useState<number | null>(null)
+    const [currentTime, setCurrentTime] = useState<number>(0)
 
-    const audioRef = useRef()
-    const animationRef = useRef()
-    const sliderRef = useRef()
+    const audioRef = useRef<HTMLAudioElement | null>(null)
+    const animationRef = useRef<number>(0)
+    const sliderRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         if (playing !== src) {
-            audioRef.current.pause()
+            audioRef.current?.pause()
             cancelAnimationFrame(animationRef.current)
             setIsPlaying(false)
         }
@@ -25,7 +25,7 @@ export default function AudioPlayer({ src, playing, setPlaying }) {
     }, [isPlaying])
 
     function updateData() {
-        setDuration(audioRef.current.duration);
+        setDuration(audioRef.current?.duration ?? null);
     }
 
     function resetData() {
@@ -36,10 +36,10 @@ export default function AudioPlayer({ src, playing, setPlaying }) {
     function togglePlayState() {
         setIsPlaying(state => {
             if (state) {
-                audioRef.current.pause()
+                audioRef.current?.pause()
                 cancelAnimationFrame(animationRef.current)
             } else {
-                audioRef.current.play()
+                audioRef.current?.play()
                 animationRef.current = requestAnimationFrame(animationFrameWhilePlaying)
             }
 
@@ -48,31 +48,31 @@ export default function AudioPlayer({ src, playing, setPlaying }) {
     }
 
     function animationFrameWhilePlaying() {
-        setCurrentTime(audioRef.current.currentTime)
+        setCurrentTime(audioRef.current?.currentTime ?? 0)
         animationRef.current = requestAnimationFrame(animationFrameWhilePlaying)
     }
 
-    function formatTime(duration) {
-        const seconds = Math.round(duration % 60)
-        const returnedSeconds = seconds < 10 ? `0${seconds}` : seconds
+    function formatTime(duration: number): string {
+        const seconds: number = Math.round(duration % 60)
+        const returnedSeconds: string = seconds < 10 ? `0${seconds}` : String(seconds)
 
-        const minutes = Math.floor(duration / 60)
-        const returnedMinutes = minutes < 10 ? `0${minutes}` : minutes
+        const minutes: number = Math.floor(duration / 60)
+        const returnedMinutes: string = minutes < 10 ? `0${minutes}` : String(minutes)
 
         return `${returnedMinutes}:${returnedSeconds}`
     }
 
-    function sliderClickHandler(e) {
+    function sliderClickHandler(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
         e.preventDefault()
 
-        const minX = sliderRef.current.offsetLeft
-        const maxX = minX + sliderRef.current.offsetWidth
-        const clickX = e.pageX
+        const minX: number = sliderRef.current?.offsetLeft ?? 0
+        const maxX: number = minX + (sliderRef.current?.offsetWidth ?? 0)
+        const clickX: number = e.pageX
 
-        const percentage = (clickX - minX) / (maxX - minX)
-        const time = duration * percentage
+        const percentage: number = (clickX - minX) / (maxX - minX)
+        const time: number = (duration ?? 0) * percentage
 
-        audioRef.current.currentTime = time
+        if (audioRef.current) audioRef.current.currentTime = time
         setCurrentTime(time)
     }
 
@@ -92,9 +92,9 @@ export default function AudioPlayer({ src, playing, setPlaying }) {
             <div className="flex flex-row items-center gap-4 w-full">
                 <p>{formatTime(currentTime)}</p>
                 <div ref={sliderRef} onClick={(e) => sliderClickHandler(e)} className="relative w-full bg-zinc-800 rounded-full overflow-hidden group cursor-pointer">
-                    <div className="h-2 group-hover:h-4 bg-white pointer-events-none" style={{ width: `${currentTime / duration * 100}%`, transition: "height 0.25s ease-out" }}></div>
+                    <div className="h-2 group-hover:h-4 bg-white pointer-events-none" style={{ width: `${currentTime / (duration ?? 1) * 100}%`, transition: "height 0.1s ease-out" }}></div>
                 </div>
-                <p>{formatTime(duration)}</p>
+                <p>{formatTime((duration ?? 0))}</p>
             </div>
         </div>
     )
