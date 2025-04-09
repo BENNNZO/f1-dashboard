@@ -25,7 +25,7 @@ export default function DriverList() {
     sortedTimingData.unshift(sortedTimingData[0])
 
     return (
-        <div className="p-2 top-2 shrink-0 relative">
+        <div className="p-2 shrink-0 relative overflow-x-scroll h-full">
             {sortedTimingData.map((data, index) => {
                 const driverNumber: string = data[0]
                 const stats: ITimingDataLine = data[1]
@@ -36,7 +36,7 @@ export default function DriverList() {
                         className={`flex gap-3 border border-white/5 bg-zinc-900 rounded-xl p-2 duration-500 ${stats.InPit && !stats.Retired ? "scale-x-95" : "scale-100"}`}
                         style={{
                             opacity: `${index === 0 ? "0" : stats.Retired ? "0.1" : stats.InPit ? "0.5" : "1"}`,
-                            transform: `translateY(${(index - 2) * 58}px)`,
+                            transform: `translateY(${(index - 2) * 58 + 8}px)`,
                             transition: "transform 0.5s ease-out, opacity 0.5s ease-out",
                             position: `${index === 0 ? "static" : "absolute"}`
                         }}
@@ -59,7 +59,7 @@ export default function DriverList() {
                                 <div key={index} className="flex flex-col justify-between">
                                     <div className="flex gap-0.5">
                                         {Object.values(sector.Segments).map((segment: ISegment, index: number) => (
-                                            <div key={index} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-4 h-1.5 rounded-full duration-150"></div>
+                                            <div key={index} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-3 2xl:w-4 h-1.5 rounded-full duration-150"></div>
                                         ))}
                                     </div>
                                     <div className="flex gap-1 items-end">
