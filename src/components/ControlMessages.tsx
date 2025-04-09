@@ -13,8 +13,6 @@ const flagTypes = {
 export default function ControlMessages() {
     const raceControlMessages: IRaceControlMessages | null = useWebSocketStore(state => state.raceControlMessages)
 
-    console.log(raceControlMessages)
-
     if (raceControlMessages) return (
         <div className="flex flex-col gap-2 p-2 h-full overflow-y-scroll overflow-x-hidden">
             {Object.values(raceControlMessages.Messages).slice().reverse().map((message: (IMessageOther | IMessageFlag | IMessageDrs), index: number) => {

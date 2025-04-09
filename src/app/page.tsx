@@ -60,7 +60,8 @@ export default function Home() {
 				updateTeamRadio(data as Record<string, unknown>)
 				break
 			default:
-				console.log(`Unused type found: ${type}`)
+				break
+				// console.log(`Unused type found: ${type}`)
 		}
 	}
 
