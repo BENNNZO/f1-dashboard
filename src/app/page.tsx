@@ -86,7 +86,7 @@ export default function Home() {
 	return (
 		<div className="max-h-screen h-screen md:overflow-hidden">
 			<StatusBar />
-			<div className="flex h-[calc(100vh-49px)] border-t border-white/10">
+			<div className="flex md:flex-row flex-col h-[calc(100vh-49px)] border-t border-white/10">
 				<DriverList />
 				<div className="grid duration-150 grid-rows-[minmax(0,1fr)_minmax(0,2fr)] 2xl:grid-rows-[minmax(0,2fr)_minmax(0,1fr)] xl:grid-rows-[minmax(0,1fr)_minmax(0,1fr)] gap-2 border-l border-white/10">
 					<Circuit />

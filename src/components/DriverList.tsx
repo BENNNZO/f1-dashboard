@@ -33,7 +33,7 @@ export default function DriverList() {
                 return (
                     <div
                         key={`${index === 0 ? "index" : driverNumber}`}
-                        className={`flex flex-col gap-2 xl:flex-row xl:gap-3 border border-white/5 bg-zinc-900 rounded-xl p-2 duration-500 ${stats.InPit && !stats.Retired ? "scale-x-95" : "scale-100"}`}
+                        className={`flex flex-col min-[600px]:flex-row min-[600px]:justify-between md:justify-normal gap-3 md:flex-col md:gap-2 xl:flex-row xl:gap-3 border border-white/5 bg-zinc-900 rounded-xl p-2 duration-500 ${stats.InPit && !stats.Retired ? "scale-x-95" : "scale-100"}`}
                         style={{
                             // opacity: `${index === 0 ? "0" : stats.Retired ? "0.1" : stats.InPit ? "0.5" : "1"}`,
                             // transform: `translateY(${(index - 2) * 58 + 8}px)`,
@@ -57,13 +57,13 @@ export default function DriverList() {
                                 <p className={`font-semibold leading-none text-sm text-white/50`}>{stats.BestLapTime.Value === "" ? "-:--.---" : stats.BestLapTime.Value}</p>
                             </div>
                         </div>
-                        <div className="bg-white/10 h-px w-full xl:hidden"></div>
+                        <div className="bg-white/10 h-px w-full block min-[600px]:hidden md:block xl:hidden"></div>
                         <div className="flex gap-2">
                             {Object.values(stats.Sectors).map((sector: ISector, index: number) => (
                                 <div key={index} className="flex flex-col gap-2 justify-between">
                                     <div className="flex gap-0.5">
                                         {Object.values(sector.Segments).map((segment: ISegment, index: number) => (
-                                            <div key={index} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-3 2xl:w-4 h-1.5 rounded-full duration-150"></div>
+                                            <div key={index} style={{ background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}` }} className="w-2.5 min-[600]:w-1.5 min-[650px]:w-2 min-[700px]:w-2.5 md:w-3 2xl:w-4 h-1.5 rounded-full duration-150"></div>
                                         ))}
                                     </div>
                                     <div className="flex gap-1 items-end">
