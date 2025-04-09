@@ -84,13 +84,13 @@ export default function Home() {
 	}, [updateData])
 
 	return (
-		<div className="max-h-screen h-screen overflow-hidden">
+		<div className="max-h-screen h-screen md:overflow-hidden">
 			<StatusBar />
-			<div className="flex h-[calc(100vh-49px)]">
+			<div className="flex h-[calc(100vh-49px)] border-t border-white/10">
 				<DriverList />
 				<div className="grid duration-150 grid-rows-[minmax(0,1fr)_minmax(0,2fr)] 2xl:grid-rows-[minmax(0,2fr)_minmax(0,1fr)] xl:grid-rows-[minmax(0,1fr)_minmax(0,1fr)] gap-2 border-l border-white/10">
 					<Circuit />
-					<div className="grid grid-cols-2 border-t border-white/10">
+					<div className="grid grid-rows-2 lg:grid-rows-none lg:grid-cols-2">
 						<ControlMessages />
 						<TeamRadio />
 					</div>
