@@ -12,6 +12,8 @@ import { ISessionInfo } from "@/types/ISessionInfo.type";
 import { IPositionData, IPositionDataObject, IPositionEntry } from "@/types/IPositionData.type";
 import { IDriverList } from "@/types/IDriverList.type";
 
+import Skeleton from "./Skeleton";
+
 interface IPoint {
     x: number,
     y: number
@@ -89,5 +91,9 @@ export default function Circuit() {
                 </svg>
             </div>
         )
-    }
+    } else return (
+        <div className="w-full p-2">
+            <Skeleton delay={null} width={null} height={null} />
+        </div>
+    )
 }

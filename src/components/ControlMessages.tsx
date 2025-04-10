@@ -48,7 +48,7 @@ export default function ControlMessages() {
     } else return (
         <div className="flex flex-col gap-2 p-2 h-full overflow-y-scroll overflow-x-hidden border-t border-white/10">
             {[...Array(10)].map((e, i) => (
-                <Skeleton delay={i * 100} width={null} height={Math.random() > 0.5 ? 86 : 62} />
+                <Skeleton key={i} delay={i * 100} width={null} height={Math.random() > 0.5 ? 86 : 62} />
             ))}
         </div>
     )
