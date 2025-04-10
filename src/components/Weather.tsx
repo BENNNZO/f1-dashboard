@@ -19,9 +19,9 @@ export default function Weather() {
     } else {
         return (
             <div className="flex gap-2">
-                <Skeleton delay={null} width={101} height={32} rounded />
-                <Skeleton delay={null} width={101} height={32} rounded />
-                <Skeleton delay={null} width={82} height={32} rounded />
+                <Skeleton width={101} height={32} rounded />
+                <Skeleton width={101} height={32} rounded />
+                <Skeleton width={82} height={32} rounded />
             </div>
         )
     } 

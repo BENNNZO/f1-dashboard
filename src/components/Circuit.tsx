@@ -93,7 +93,7 @@ export default function Circuit() {
         )
     } else return (
         <div className="w-full p-2">
-            <Skeleton delay={null} width={null} height={null} />
+            <Skeleton />
         </div>
     )
 }

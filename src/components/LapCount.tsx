@@ -12,7 +12,7 @@ export default function LapCount() {
         )
     } else {
         return (
-            <Skeleton delay={null} width={101} height={32} rounded />
+            <Skeleton width={101} height={32} rounded />
         )
     } 
 }

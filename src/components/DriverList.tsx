@@ -82,7 +82,7 @@ export default function DriverList() {
     } else return (
         <div className="w-full flex flex-col gap-2 p-2">
             {[...Array(20)].map((e, i) => (
-                <Skeleton key={i} delay={i * 100} width={null} height={58} />
+                <Skeleton key={i} delay={i * 100} height={58} />
             ))}
         </div>
     )

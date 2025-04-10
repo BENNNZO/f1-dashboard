@@ -35,7 +35,7 @@ export default function TeamRadio() {
     } else return (
         <div className="flex flex-col gap-2 overflow-y-scroll overflow-x-hidden p-2 lg:border-l border-t border-white/10">
             {[...Array(20)].map((e, i) => (
-                <Skeleton key={i} delay={i * 100} width={null} height={42} />
+                <Skeleton key={i} delay={i * 100} height={42} />
             ))}
         </div>
     ) 

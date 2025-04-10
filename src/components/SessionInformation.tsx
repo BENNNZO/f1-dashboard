@@ -16,8 +16,8 @@ export default function SessionInformation() {
     } else {
         return (
             <div className="flex gap-2">
-                <Skeleton delay={null} width={73} height={32} rounded />
-                <Skeleton delay={null} width={216} height={32} rounded />
+                <Skeleton width={73} height={32} rounded />
+                <Skeleton width={216} height={32} rounded />
             </div>
         )
     } 

@@ -16,7 +16,7 @@ export default function TrackStatus() {
         )
     } else {
         return (
-            <Skeleton delay={null} width={110} height={32} rounded />
+            <Skeleton width={110} height={32} rounded />
         )
     }
 }

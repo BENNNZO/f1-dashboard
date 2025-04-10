@@ -1,4 +1,6 @@
-export default function Skeleton({ width, height, delay, rounded }: { width: number | null, height: number | null, delay: number | null, rounded?: boolean }) {
+"use client"
+
+export default function Skeleton({ width, height, delay, rounded }: { width?: number, height?: number, delay?: number, rounded?: boolean }) {
     return (
         <div 
             className="bg-white/20 animate-pulse shrink-0"
