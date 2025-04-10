@@ -1,7 +1,15 @@
 "use client"
 
+import { useEffect, useState } from "react"
+
 export default function Skeleton({ width, height, delay, rounded }: { width?: number, height?: number, delay?: number, rounded?: boolean }) {
-    return (
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (isClient) return (
         <div 
             className="bg-white/20 animate-pulse shrink-0"
             style={{
