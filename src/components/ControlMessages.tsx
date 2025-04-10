@@ -17,7 +17,7 @@ export default function ControlMessages() {
 
     if (raceControlMessages) {
         return (
-            <div className="flex flex-col gap-2 p-2 h-full overflow-y-scroll overflow-x-hidden border-t border-white/10">
+            <div className="flex flex-col gap-2 p-2 w-full h-full overflow-y-scroll overflow-x-hidden border-t border-white/10">
                 {Object.values(raceControlMessages.Messages).slice().reverse().map((message: (IMessageOther | IMessageFlag | IMessageDrs), index: number) => {
                     const { Message, Category, Utc } = message
     
