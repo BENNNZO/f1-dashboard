@@ -9,20 +9,13 @@ Welcome to the F1 Dashboard project! This application aims to provide real-time 
 - **Team Radios**: Listen to live team radio communications between drivers and their teams.
 - **Race Control Messages**: View important updates and announcements from race control in real-time.
 
-
-## Current Progress
-
-- Successfully getting data from backend to frontend without causing major page refeshes.
-- Next steps include displaying the data in an intuitive and user-friendly manner.
-
 ## Future Plans
 
 ### Short Term
 
 ### Long Term
-- Optimizations for both front and back ends
+- Minor optimizations for both front and back ends
 - Implement user customization options for the dashboard.
-- Apply more typing for TS
 
 Stay tuned for more updates!
 
