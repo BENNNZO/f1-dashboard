@@ -48,7 +48,7 @@ export default function DriverList() {
                                     <p className="text-2xl font-bold">{Number(stats.Position) < 10 ? "0" + stats.Position : stats.Position}</p>
                                     <p className="text-2xl font-bold">{driverList[driverNumber].Tla}</p>
                                 </div>
-                                <Image className="outline outline-white/20 rounded-full" src={`icons/tires/${timingAppData.Lines[driverNumber].Stints[0].Compound.toLowerCase()}.svg`} width={32} height={32} alt="tire-picture" />
+                                <Image className="outline outline-white/20 rounded-full" src={`icons/tires/${timingAppData?.Lines[driverNumber]?.Stints?.[0]?.Compound?.toLowerCase() || "unknown"}.svg`} width={32} height={32} alt="tire-picture" />
                                 <div className="flex flex-col w-22">
                                     <p className={`font-semibold leading-none duration-300 ${stats?.IntervalToPositionAhead?.Catching ? "text-green-300" : "text-white"}`}>{stats?.IntervalToPositionAhead?.Value === "" ? "---.---" : stats?.IntervalToPositionAhead?.Value}</p>
                                     <p className="font-semibold leading-none text-sm text-white/50">{stats.GapToLeader === "" ? "---.---" : stats.GapToLeader}</p>
