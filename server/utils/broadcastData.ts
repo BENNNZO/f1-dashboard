@@ -1,4 +1,4 @@
-import { WebSocketServer } from "ws"
+import { WebSocketServer, WebSocket } from "ws"
 
 export default function broadcastData(wss: WebSocketServer, data: any) {
     console.log(`[BROADCAST] Broadcasting data to clients...`)
