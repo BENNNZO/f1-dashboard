@@ -61,7 +61,7 @@ export default function Home() {
 				break
 			default:
 				break
-				// console.log(`Unused type found: ${type}`)
+			// console.log(`Unused type found: ${type}`)
 		}
 	}
 
@@ -84,18 +84,34 @@ export default function Home() {
 	}, [updateData])
 
 	return (
-		<div className="max-h-screen h-screen md:overflow-hidden">
-			<StatusBar />
-			<div className="flex md:flex-row flex-col h-[calc(100vh-49px)] border-t border-white/10">
+		<>
+			<div className="hidden md:block h-screen max-h-screen">
+				<StatusBar />
+				<div className="flex flex-row border-white/10 border-t h-[calc(100vh-49px)]">
+					<DriverList />
+					<div className="grid grid-rows-[minmax(0,1fr)_minmax(0,2fr)] 2xl:grid-rows-[minmax(0,2fr)_minmax(0,1fr)] xl:grid-rows-[minmax(0,1fr)_minmax(0,1fr)] border-white/10 border-l w-full min-w-1/2 duration-150">
+						<Circuit />
+						<div className="grid lg:grid-cols-2 grid-rows-2 lg:grid-rows-none">
+							<ControlMessages />
+							<TeamRadio />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="md:hidden block">
+				<StatusBar />
+				<Circuit />
 				<DriverList />
-				<div className="grid w-full duration-150 grid-rows-[minmax(0,1fr)_minmax(0,2fr)] 2xl:grid-rows-[minmax(0,2fr)_minmax(0,1fr)] xl:grid-rows-[minmax(0,1fr)_minmax(0,1fr)] min-w-1/2 border-l border-white/10">
-					<Circuit />
-					<div className="grid grid-rows-2 lg:grid-rows-none lg:grid-cols-2">
+				<div className="flex flex-col">
+					<div className="h-96">
 						<ControlMessages />
+					</div>
+					<div className="h-96">
 						<TeamRadio />
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
