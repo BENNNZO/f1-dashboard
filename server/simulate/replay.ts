@@ -48,7 +48,7 @@ async function startReplay() {
                 message["M"]?.forEach((item: IMessageItem) => {
                     const type = item["A"][0]
                     const data = item["A"][1]
-                    
+
                     updateDataStore({ [type]: data })
                     broadcastData(wss, { type, data })
                 })

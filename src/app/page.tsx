@@ -8,7 +8,7 @@ import decodeZippedBase64 from "@/utils/decodeZipClient";
 import Circuit from "@/components/Circuit";
 import StatusBar from "@/components/StatusBar";
 import ControlMessages from "@/components/ControlMessages";
-import DriverList from "@/components/DriverList"
+import DriverList from "@/components/Drivers/DriverList"
 import TeamRadio from "@/components/TeamRadio";
 
 export default function Home() {
