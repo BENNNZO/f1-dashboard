@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 
 import { IDriverList } from "@/types/IDriverList.type"
 import { ITimingAppData } from "@/types/ITimingAppData.type"
-import { ITimingData, ISegment, ISector, ITimingDataLine } from "@/types/ITimingData.type"
+import { ITimingData, ITimingDataLine } from "@/types/ITimingData.type"
 
 import Driver from "./Driver"
 import Skeleton from "../Skeleton"
@@ -21,7 +21,7 @@ export default function DriverList() {
             <motion.div
                 className="relative flex flex-col gap-2 p-2 overflow-y-scroll font-mono shrink-0"
             >
-                {sortedTimingData.map((data, index) => {
+                {sortedTimingData.map(data => {
                     const driverNumber: string = data[0]
                     const timingData: ITimingDataLine = data[1]
 

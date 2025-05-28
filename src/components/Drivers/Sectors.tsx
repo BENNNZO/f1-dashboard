@@ -1,7 +1,5 @@
 import { ISector, ISegment } from "@/types/ITimingData.type"
 
-import Skeleton from "../Skeleton"
-
 const STATUS_COLORS = {
     "0": "#ffffff40",           // grey
     "2048": "#fcf41b",          // yellow

@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 import { ITimingDataLine } from "@/types/ITimingData.type"
 import { IDriver } from "@/types/IDriverList.type"
 
@@ -7,7 +5,7 @@ import DriverMetadata from "./DriverMetadata"
 import Sectors from "./Sectors"
 
 export default function Driver({ timingData, tireCompound, driver }: { timingData: ITimingDataLine, tireCompound: string, driver: IDriver }) {
-        
+
     return (
         <div
             className={`flex flex-col min-[600px]:flex-row min-[600px]:justify-between md:justify-normal gap-3 md:flex-col md:gap-2 xl:flex-row xl:gap-3 border border-white/5 bg-zinc-900 rounded-xl p-2 duration-500 ${timingData.InPit && !timingData.Retired ? "scale-x-95" : "scale-100"}`}
@@ -20,7 +18,7 @@ export default function Driver({ timingData, tireCompound, driver }: { timingDat
             }}
         >
             <DriverMetadata timingData={timingData} tireCompound={tireCompound} driver={driver} />
-            <div className="bg-white/10 h-px w-full block min-[600px]:hidden md:block xl:hidden"></div>
+            <div className="min-[600px]:hidden xl:hidden block md:block bg-white/10 w-full h-px"></div>
             <Sectors sectorData={timingData.Sectors} />
         </div>
     )
