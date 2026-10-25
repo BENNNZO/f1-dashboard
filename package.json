@@ -15,7 +15,6 @@
     },
     "dependencies": {
         "axios": "^1.8.3",
-        "express": "^4.21.2",
         "framer-motion": "^12.15.0",
         "next": "15.2.2",
         "pako": "^2.1.0",
@@ -23,13 +22,11 @@
         "react-dom": "^19.0.0",
         "tailwind-merge": "^3.7.0",
         "ws": "^8.18.1",
-        "zlib": "^1.0.5",
         "zustand": "^5.0.3"
     },
     "devDependencies": {
         "@biomejs/biome": "2.4.16",
         "@tailwindcss/postcss": "^4",
-        "@types/express": "^5.0.0",
         "@types/node": "^20",
         "@types/pako": "^2.0.3",
         "@types/react": "^19",
