@@ -69,20 +69,24 @@ export default async function f1WebSocketServer(onMessage: (message: F1Message) 
             for (const frame of data.toString().split(RECORD_SEPARATOR)) {
                 if (!frame) continue
 
-                const message: SignalRMessage = JSON.parse(frame)
+                try {
+                    const message: SignalRMessage = JSON.parse(frame)
 
-                if (message.error) {
-                    console.error(`[F1 WebSocket] Error: ${message.error}`)
-                }
+                    if (message.error) {
+                        console.error(`[F1 WebSocket] Error: ${message.error}`)
+                    }
 
-                const f1Message = toF1Message(message)
-                const isHandshakeReply = message.type === undefined
-                const isPing = message.type === MESSAGE_TYPE.PING
+                    const f1Message = toF1Message(message)
+                    const isHandshakeReply = message.type === undefined
+                    const isPing = message.type === MESSAGE_TYPE.PING
 
-                if (f1Message) {
-                    onMessage(f1Message)
-                } else if (!(isHandshakeReply || isPing)) {
-                    console.warn(`[F1 WebSocket] Unknown message: ${frame}`)
+                    if (f1Message) {
+                        onMessage(f1Message)
+                    } else if (!(isHandshakeReply || isPing)) {
+                        console.warn(`[F1 WebSocket] Unknown message: ${frame}`)
+                    }
+                } catch (err) {
+                    console.error(`[F1 WebSocket] Bad message: ${(err as Error).message} ${frame}`)
                 }
             }
         })

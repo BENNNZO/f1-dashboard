@@ -28,14 +28,18 @@ async function replayLog(wss: WebSocketServer) {
     let previousTimestamp: number = 0
 
     for await (const line of rl) {
-        const { timestamp, message }: LogLine = JSON.parse(line)
+        try {
+            const { timestamp, message }: LogLine = JSON.parse(line)
 
-        if (previousTimestamp > 0) await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
+            if (previousTimestamp > 0) await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
 
-        storeF1Message(message)
-        broadcastData(wss, message)
+            storeF1Message(message)
+            broadcastData(wss, message)
 
-        previousTimestamp = timestamp
+            previousTimestamp = timestamp
+        } catch (err) {
+            console.error(`[REPLAY] Bad line: ${(err as Error).message} ${line}`)
+        }
     }
 
     console.log("[REPLAY] Replay Finished")
