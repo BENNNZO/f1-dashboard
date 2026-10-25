@@ -41,11 +41,7 @@ async function startRecording() {
 
     console.log(`[RECORD] Recording data to ${logFileName}`)
 
-    try {
-        await f1WebSocketServer(writeLogLine)
-    } catch (err) {
-        throw new Error(`[RECORD] Could not connect to the F1 feed: ${(err as Error).message}`)
-    }
+    f1WebSocketServer(writeLogLine)
 }
 
 void startRecording()
