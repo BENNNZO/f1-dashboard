@@ -61,7 +61,7 @@ export default function Home() {
                     break
                 default:
                     break
-                    // console.log(`Unused type found: ${type}`)
+                // console.log(`Unused type found: ${type}`)
             }
         }
 

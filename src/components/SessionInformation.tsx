@@ -1,10 +1,10 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { ISessionInfo } from "@/types/ISessionInfo.type"
+import type { SessionInfo } from "@/types/SessionInfo.type"
 
 import Skeleton from "./Skeleton"
 
 export default function SessionInformation() {
-    const sessionInfo: ISessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
+    const sessionInfo: SessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
 
     if (sessionInfo) {
         return (

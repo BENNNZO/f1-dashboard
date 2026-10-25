@@ -1,4 +1,4 @@
-export type ICircuitData = {
+export type CircuitData = {
     corners: Array<{
         angle: number
         length: number

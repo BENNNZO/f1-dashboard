@@ -3,9 +3,9 @@
 import { useState } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { IDriverList } from "@/types/IDriverList.type"
-import type { ISessionInfo } from "@/types/ISessionInfo.type"
-import type { ICapture, ITeamRadio } from "@/types/ITeamRadio.type"
+import type { DriverListData } from "@/types/DriverListData.type"
+import type { SessionInfo } from "@/types/SessionInfo.type"
+import type { Capture, TeamRadioData } from "@/types/TeamRadioData.type"
 
 import AudioPlayer from "./AudioPlayer"
 import Skeleton from "./Skeleton"
@@ -13,9 +13,9 @@ import Skeleton from "./Skeleton"
 export default function TeamRadio() {
     const [playing, setPlaying] = useState<string | null>(null)
 
-    const teamRadio: ITeamRadio | null = useWebSocketStore((state) => state.teamRadio)
-    const sessionInfo: ISessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
-    const driverList: IDriverList | null = useWebSocketStore((state) => state.driverList)
+    const teamRadio: TeamRadioData | null = useWebSocketStore((state) => state.teamRadio)
+    const sessionInfo: SessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
+    const driverList: DriverListData | null = useWebSocketStore((state) => state.driverList)
 
     if (teamRadio && sessionInfo && driverList) {
         return (
@@ -23,7 +23,7 @@ export default function TeamRadio() {
                 {Object.values(teamRadio.Captures)
                     .slice()
                     .reverse()
-                    .map((capture: ICapture) => {
+                    .map((capture: Capture) => {
                         const driver = driverList[capture.RacingNumber]
 
                         return (

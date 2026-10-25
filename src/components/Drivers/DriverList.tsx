@@ -2,19 +2,19 @@ import { motion } from "framer-motion"
 
 import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { IDriverList } from "@/types/IDriverList.type"
-import type { ITimingAppData } from "@/types/ITimingAppData.type"
-import type { ITimingData, ITimingDataLine } from "@/types/ITimingData.type"
+import type { DriverListData } from "@/types/DriverListData.type"
+import type { TimingAppData } from "@/types/TimingAppData.type"
+import type { TimingData, TimingDataLine } from "@/types/TimingData.type"
 
 import Driver from "./Driver"
 
 export default function DriverList() {
-    const timingAppData: ITimingAppData | null = useWebSocketStore((state) => state.timingAppData)
-    const driverList: IDriverList | null = useWebSocketStore((state) => state.driverList)
-    const timingData: ITimingData | null = useWebSocketStore((state) => state.timingData)
+    const timingAppData: TimingAppData | null = useWebSocketStore((state) => state.timingAppData)
+    const driverList: DriverListData | null = useWebSocketStore((state) => state.driverList)
+    const timingData: TimingData | null = useWebSocketStore((state) => state.timingData)
 
     if (timingAppData && driverList && timingData) {
-        const sortedTimingData: [string, ITimingDataLine][] = Object.entries(timingData.Lines).sort(
+        const sortedTimingData: [string, TimingDataLine][] = Object.entries(timingData.Lines).sort(
             (a, b) => Number(a[1].Position) - Number(b[1].Position),
         )
         // sortedTimingData.unshift(sortedTimingData[0])
@@ -23,7 +23,7 @@ export default function DriverList() {
             <motion.div className="relative flex shrink-0 flex-col gap-2 overflow-y-scroll p-2 font-mono">
                 {sortedTimingData.map((data) => {
                     const driverNumber: string = data[0]
-                    const timingData: ITimingDataLine = data[1]
+                    const timingData: TimingDataLine = data[1]
 
                     return (
                         <motion.div

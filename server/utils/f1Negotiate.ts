@@ -2,13 +2,13 @@ import axios from "axios"
 
 import { F1_CONSTANTS } from "../config/constants"
 
-interface INegotiationResponse {
+type NegotiationResponse = {
     encodedToken: string
     cookie: string[]
 }
 
 // axios get f1 negotiation url and return encoded token and cookie
-export default async function negotiate(): Promise<INegotiationResponse> {
+export default async function negotiate(): Promise<NegotiationResponse> {
     const { CLIENT_PROTOCOL, CONNECTION_DATA, BASE_URL } = F1_CONSTANTS
 
     try {

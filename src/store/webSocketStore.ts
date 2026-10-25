@@ -1,34 +1,34 @@
 import { create } from "zustand"
 
-import type { ICircuitData } from "@/types/ICircuitData.type"
-import type { IDriverList } from "@/types/IDriverList.type"
-import type { ILapCount } from "@/types/ILapCount.type"
-import type { IPositionData } from "@/types/IPositionData.type"
-import type { IRaceControlMessages } from "@/types/IRaceControlMessages.type"
-import type { ISessionInfo } from "@/types/ISessionInfo.type"
-import type { ITeamRadio } from "@/types/ITeamRadio.type"
-import type { ITimingAppData } from "@/types/ITimingAppData.type"
-import type { ITimingData } from "@/types/ITimingData.type"
-import type { ITrackStatus } from "@/types/ITrackStatus.type"
-import type { IWeatherData } from "@/types/IWeatherData.type"
+import type { CircuitData } from "@/types/CircuitData.type"
+import type { DriverListData } from "@/types/DriverListData.type"
+import type { LapCountData } from "@/types/LapCountData.type"
+import type { PositionData } from "@/types/PositionData.type"
+import type { RaceControlMessages } from "@/types/RaceControlMessages.type"
+import type { SessionInfo } from "@/types/SessionInfo.type"
+import type { TeamRadioData } from "@/types/TeamRadioData.type"
+import type { TimingAppData } from "@/types/TimingAppData.type"
+import type { TimingData } from "@/types/TimingData.type"
+import type { TrackStatusData } from "@/types/TrackStatusData.type"
+import type { WeatherData } from "@/types/WeatherData.type"
 import deepMerge from "@/utils/deepMerge"
 
-interface IStoreState {
+type StoreState = {
     carData: string | null
-    positionData: IPositionData | null
-    circuitData: ICircuitData | null
-    timingAppData: ITimingAppData | null
-    weatherData: IWeatherData | null
-    trackStatus: ITrackStatus | null
-    driverList: IDriverList | null
-    raceControlMessages: IRaceControlMessages | null
-    sessionInfo: ISessionInfo | null
-    lapCount: ILapCount | null
-    timingData: ITimingData | null
-    teamRadio: ITeamRadio | null
+    positionData: PositionData | null
+    circuitData: CircuitData | null
+    timingAppData: TimingAppData | null
+    weatherData: WeatherData | null
+    trackStatus: TrackStatusData | null
+    driverList: DriverListData | null
+    raceControlMessages: RaceControlMessages | null
+    sessionInfo: SessionInfo | null
+    lapCount: LapCountData | null
+    timingData: TimingData | null
+    teamRadio: TeamRadioData | null
     updateCarData: (newData: string) => void
-    updatePositionData: (newData: { Position: IPositionData }) => void
-    updateCircuitData: (newData: ICircuitData) => void
+    updatePositionData: (newData: { Position: PositionData }) => void
+    updateCircuitData: (newData: CircuitData) => void
     updateTimingAppData: (newData: Record<string, unknown>) => void
     updateWeatherData: (newData: Record<string, unknown>) => void
     updateTrackStatus: (newData: Record<string, unknown>) => void
@@ -40,7 +40,7 @@ interface IStoreState {
     updateTeamRadio: (newData: Record<string, unknown>) => void
 }
 
-export const useWebSocketStore = create<IStoreState>((set) => ({
+export const useWebSocketStore = create<StoreState>((set) => ({
     carData: null,
     positionData: null,
     circuitData: null,
@@ -57,21 +57,20 @@ export const useWebSocketStore = create<IStoreState>((set) => ({
     updatePositionData: (newData) => set(() => ({ positionData: newData.Position })),
     updateCircuitData: (newData) => set(() => ({ circuitData: newData })),
     updateTimingAppData: (newData) =>
-        set((state) => ({ timingAppData: deepMerge(state.timingAppData, newData) as ITimingAppData })),
+        set((state) => ({ timingAppData: deepMerge(state.timingAppData, newData) as TimingAppData })),
     updateWeatherData: (newData) =>
-        set((state) => ({ weatherData: deepMerge(state.weatherData, newData) as IWeatherData })),
+        set((state) => ({ weatherData: deepMerge(state.weatherData, newData) as WeatherData })),
     updateTrackStatus: (newData) =>
-        set((state) => ({ trackStatus: deepMerge(state.trackStatus, newData) as ITrackStatus })),
+        set((state) => ({ trackStatus: deepMerge(state.trackStatus, newData) as TrackStatusData })),
     updateDriverList: (newData) =>
-        set((state) => ({ driverList: deepMerge(state.driverList, newData) as IDriverList })),
+        set((state) => ({ driverList: deepMerge(state.driverList, newData) as DriverListData })),
     updateRaceControlMessages: (newData) =>
         set((state) => ({
-            raceControlMessages: deepMerge(state.raceControlMessages, newData) as IRaceControlMessages,
+            raceControlMessages: deepMerge(state.raceControlMessages, newData) as RaceControlMessages,
         })),
     updateSessionInfo: (newData) =>
-        set((state) => ({ sessionInfo: deepMerge(state.sessionInfo, newData) as ISessionInfo })),
-    updateLapCount: (newData) => set((state) => ({ lapCount: deepMerge(state.lapCount, newData) as ILapCount })),
-    updateTimingData: (newData) =>
-        set((state) => ({ timingData: deepMerge(state.timingData, newData) as ITimingData })),
-    updateTeamRadio: (newData) => set((state) => ({ teamRadio: deepMerge(state.teamRadio, newData) as ITeamRadio })),
+        set((state) => ({ sessionInfo: deepMerge(state.sessionInfo, newData) as SessionInfo })),
+    updateLapCount: (newData) => set((state) => ({ lapCount: deepMerge(state.lapCount, newData) as LapCountData })),
+    updateTimingData: (newData) => set((state) => ({ timingData: deepMerge(state.timingData, newData) as TimingData })),
+    updateTeamRadio: (newData) => set((state) => ({ teamRadio: deepMerge(state.teamRadio, newData) as TeamRadioData })),
 }))

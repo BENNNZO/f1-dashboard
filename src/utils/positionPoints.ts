@@ -1,9 +1,9 @@
-interface point {
+type point = {
     x: number
     y: number
 }
 
-interface ITransformedPointsData {
+type TransformedPointsData = {
     transformedPoints: point[]
     minX: number
     minY: number
@@ -35,7 +35,7 @@ export function paddPoint(point: point, padding: number): point {
     return { x: point.x + padding, y: point.y + padding }
 }
 
-export function transformPoints(points: point[], rotation: number, padding: number): ITransformedPointsData {
+export function transformPoints(points: point[], rotation: number, padding: number): TransformedPointsData {
     // ALL of this has a specific order so that the values are positioned correctly
     // ant other order will result in wrongly positioned points
     // pget center > rotate points > get min max width and height > add padding
