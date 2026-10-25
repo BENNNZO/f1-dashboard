@@ -51,13 +51,14 @@ async function startReplay() {
 
         console.log(`[REPLAY] Server Started on PORT: ${SERVER_CONSTANTS.PORT}`)
 
-        wss.on("connection", async () => {
+        wss.on("connection", async (client) => {
             console.log("[REPLAY] Client Connected")
-            await replayLog(wss)
-        })
 
-        wss.on("close", () => {
-            console.log("[REPLAY] Client Disconnected")
+            client.on("close", () => {
+                console.log("[REPLAY] Client Disconnected")
+            })
+
+            await replayLog(wss)
         })
     } catch (err) {
         throw new Error(
