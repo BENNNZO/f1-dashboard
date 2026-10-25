@@ -1,6 +1,7 @@
 import fs from "node:fs"
 
 import f1WebSocketServer from "../services/f1WebSocketServer"
+import type { LogLine } from "./types"
 
 const logFilePath = `${__dirname}/logs/`
 const logFileName = `${new Date().toISOString().replaceAll(":", "-")}.txt`
@@ -9,15 +10,14 @@ async function startRecording() {
     console.log(`[RECORD] Recording data to ${logFileName}`)
 
     try {
-        const f1Socket = await f1WebSocketServer()
         let messageCount = 0
 
-        f1Socket.on("message", (data) => {
-            const timestamp = Date.now()
+        await f1WebSocketServer((message) => {
+            const logLine: LogLine = { timestamp: Date.now(), message }
 
             fs.appendFile(
                 logFilePath + logFileName,
-                `{"timestamp": ${timestamp}, "message": ${data.toString()}}\n`,
+                `${JSON.stringify(logLine)}\n`,
                 (err) => {
                     if (err) return console.error(err)
 
