@@ -4,13 +4,8 @@ import { WebSocketServer } from "ws"
 
 import { SERVER_CONSTANTS } from "../config/constants"
 import broadcastData from "../utils/broadcastData"
-import { updateDataStore } from "../utils/updateDataStore"
-
-type MessageItem = {
-    H: string
-    M: string
-    A: [string, object, string]
-}
+import { storeF1Message } from "../utils/updateDataStore"
+import type { LogLine } from "./types"
 
 if (!process.argv[2]) throw new Error("Missing log file name argument (pnpm replay *log file name*)")
 if (!fs.existsSync(`${__dirname}/logs/${process.argv[2]}.txt`))
@@ -31,23 +26,13 @@ async function startReplay() {
             let previousTimestamp: number = 0
 
             for await (const line of rl) {
-                const { timestamp, message } = JSON.parse(line)
+                const { timestamp, message }: LogLine = JSON.parse(line)
 
                 if (previousTimestamp > 0)
                     await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
 
-                if (message.R) {
-                    updateDataStore(message.R)
-                    broadcastData(wss, { type: "init", data: message.R })
-                }
-
-                message.M?.forEach((item: MessageItem) => {
-                    const type = item.A[0]
-                    const data = item.A[1]
-
-                    updateDataStore({ [type]: data })
-                    broadcastData(wss, { type, data })
-                })
+                storeF1Message(message)
+                broadcastData(wss, message)
 
                 previousTimestamp = timestamp
             }
