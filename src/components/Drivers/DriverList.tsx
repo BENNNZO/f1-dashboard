@@ -17,7 +17,6 @@ export default function DriverList() {
         const sortedTimingData: [string, TimingDataLine][] = Object.entries(timingData.Lines).sort(
             (a, b) => Number(a[1].Position) - Number(b[1].Position),
         )
-        // sortedTimingData.unshift(sortedTimingData[0])
 
         return (
             <motion.div className="relative flex shrink-0 flex-col gap-2 overflow-y-scroll p-2 font-mono">
