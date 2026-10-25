@@ -19,4 +19,5 @@
 next-env.d.ts
 
 # other
+/dist
 /server/simulate/logs/*
