@@ -1,0 +1,141 @@
+{
+    "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    },
+    "files": {
+        "ignoreUnknown": true
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 120,
+        "lineEnding": "lf"
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "correctness": {
+                "noUnusedVariables": "error",
+                "noUnusedImports": "error",
+                "noUnreachable": "error",
+                "noSelfAssign": "error",
+                "noVoidTypeReturn": "error",
+                "noUndeclaredDependencies": "error"
+            },
+            "suspicious": {
+                "noConsole": { "level": "error", "options": { "allow": ["error", "warn"] } },
+                "noExplicitAny": "error",
+                "noDoubleEquals": "error",
+                "noVar": "error",
+                "useIsArray": "error",
+                "noArrayIndexKey": "error"
+            },
+            "style": {
+                "useConst": "error",
+                "useTemplate": "error",
+                "noNegationElse": "error",
+                "noNestedTernary": "error",
+                "useForOf": "error",
+                "noParameterAssign": "error",
+                "noUselessElse": "error",
+                "noNonNullAssertion": "error",
+                "noHeadElement": "error",
+                "noRestrictedImports": {
+                    "level": "error",
+                    "options": {
+                        "patterns": [
+                            {
+                                "group": ["../**"],
+                                "message": "Use ./ for the same folder, or @/ for anything else."
+                            }
+                        ]
+                    }
+                }
+            },
+            "complexity": {
+                "useFlatMap": "error",
+                "noExcessiveNestedTestSuites": "error",
+                "useSimplifiedLogicExpression": "error"
+            },
+            "performance": {
+                "noBarrelFile": "error",
+                "noDelete": "error",
+                "noImgElement": "error"
+            },
+            "security": {
+                "noGlobalEval": "error",
+                "noSecrets": "warn"
+            },
+            "a11y": {
+                "noAutofocus": "off"
+            },
+            "nursery": {
+                "useSortedClasses": "error",
+                "noFloatingPromises": "error",
+                "useNullishCoalescing": "error"
+            }
+        },
+        "domains": {
+            "next": "recommended",
+            "react": "recommended"
+        }
+    },
+    "assist": {
+        "enabled": true,
+        "actions": {
+            "source": {
+                "organizeImports": {
+                    "level": "on",
+                    "options": {
+                        "groups": [
+                            [":PACKAGE:", ":PACKAGE_WITH_PROTOCOL:", ":URL:"],
+                            ":BLANK_LINE:",
+                            ":ALIAS:",
+                            ":BLANK_LINE:",
+                            ":PATH:"
+                        ],
+                        "identifierOrder": "natural"
+                    }
+                }
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "double",
+            "jsxQuoteStyle": "double",
+            "semicolons": "asNeeded",
+            "trailingCommas": "all",
+            "bracketSameLine": false,
+            "bracketSpacing": true,
+            "arrowParentheses": "always",
+            "attributePosition": "multiline",
+            "quoteProperties": "asNeeded"
+        }
+    },
+    "css": {
+        "parser": {
+            "tailwindDirectives": true
+        }
+    },
+    "overrides": [
+        {
+            "includes": ["server/**"],
+            "linter": {
+                "rules": {
+                    "suspicious": {
+                        "noConsole": "off"
+                    },
+                    "style": {
+                        "noRestrictedImports": "off"
+                    }
+                }
+            }
+        }
+    ]
+}
