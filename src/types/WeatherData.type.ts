@@ -1,4 +1,4 @@
-export type IWeatherData = {
+export type WeatherData = {
     AirTemp: string
     Humidity: string
     Pressure: string

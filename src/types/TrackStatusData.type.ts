@@ -1,4 +1,4 @@
-export type ITrackStatus = {
+export type TrackStatusData = {
     Status: string
     Message: string
 }

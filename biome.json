@@ -45,6 +45,7 @@
                 "noUselessElse": "error",
                 "noNonNullAssertion": "error",
                 "noHeadElement": "error",
+                "useConsistentTypeDefinitions": { "level": "error", "options": { "style": "type" } },
                 "noRestrictedImports": {
                     "level": "error",
                     "options": {

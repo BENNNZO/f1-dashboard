@@ -1,10 +1,10 @@
-import type { IDriver } from "@/types/IDriverList.type"
-import type { ITimingDataLine } from "@/types/ITimingData.type"
+import type { DriverData } from "@/types/DriverListData.type"
+import type { TimingDataLine } from "@/types/TimingData.type"
 
 import DriverMetadata from "./DriverMetadata"
 import Sectors from "./Sectors"
 
-function opacity(timingData: ITimingDataLine) {
+function opacity(timingData: TimingDataLine) {
     if (timingData?.Retired) return "0.1"
     if (timingData?.InPit) return "0.5"
     return "1"
@@ -15,9 +15,9 @@ export default function Driver({
     tireCompound,
     driver,
 }: {
-    timingData: ITimingDataLine
+    timingData: TimingDataLine
     tireCompound: string
-    driver: IDriver
+    driver: DriverData
 }) {
     return (
         <div

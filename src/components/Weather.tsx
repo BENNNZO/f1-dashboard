@@ -1,11 +1,11 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { IWeatherData } from "@/types/IWeatherData.type"
+import type { WeatherData } from "@/types/WeatherData.type"
 import { CtoF } from "@/utils/convertTemp"
 
 import Skeleton from "./Skeleton"
 
 export default function Weather() {
-    const weatherData: IWeatherData | null = useWebSocketStore((state) => state.weatherData)
+    const weatherData: WeatherData | null = useWebSocketStore((state) => state.weatherData)
 
     if (weatherData) {
         return (

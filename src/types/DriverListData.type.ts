@@ -1,6 +1,6 @@
-export type IDriverList = Record<string, IDriver>
+export type DriverListData = Record<string, DriverData>
 
-export type IDriver = {
+export type DriverData = {
     RacingNumber: string
     BroadcastName: string
     FullName: string

@@ -6,7 +6,7 @@ import { SERVER_CONSTANTS } from "../config/constants"
 import broadcastData from "../utils/broadcastData"
 import { updateDataStore } from "../utils/updateDataStore"
 
-interface IMessageItem {
+type MessageItem = {
     H: string
     M: string
     A: [string, object, string]
@@ -43,7 +43,7 @@ async function startReplay() {
                     broadcastData(wss, { type: "init", data: message.R })
                 }
 
-                message.M?.forEach((item: IMessageItem) => {
+                message.M?.forEach((item: MessageItem) => {
                     const type = item.A[0]
                     const data = item.A[1]
 

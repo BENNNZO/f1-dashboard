@@ -1,4 +1,4 @@
-export type ISessionInfo = {
+export type SessionInfo = {
     Meeting: {
         Key: number
         Name: string

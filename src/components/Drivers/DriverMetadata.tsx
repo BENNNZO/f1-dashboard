@@ -1,7 +1,7 @@
 import Image from "next/image"
 
-import type { IDriver } from "@/types/IDriverList.type"
-import type { ITimingDataLine } from "@/types/ITimingData.type"
+import type { DriverData } from "@/types/DriverListData.type"
+import type { TimingDataLine } from "@/types/TimingData.type"
 import timeColor from "@/utils/timeColor"
 
 export default function DriverMetadata({
@@ -9,9 +9,9 @@ export default function DriverMetadata({
     tireCompound,
     driver,
 }: {
-    timingData: ITimingDataLine
+    timingData: TimingDataLine
     tireCompound: string
-    driver: IDriver
+    driver: DriverData
 }) {
     return (
         <div className="flex gap-3">

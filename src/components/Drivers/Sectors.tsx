@@ -1,4 +1,4 @@
-import type { ISector, ISegment } from "@/types/ITimingData.type"
+import type { Sector, Segment } from "@/types/TimingData.type"
 import timeColor from "@/utils/timeColor"
 
 const STATUS_COLORS = {
@@ -9,11 +9,11 @@ const STATUS_COLORS = {
     "2064": "deepskyblue", // idk what this number is for
 }
 
-export default function Sectors({ sectorData }: { sectorData: ISector[] }) {
+export default function Sectors({ sectorData }: { sectorData: Sector[] }) {
     return (
         <div className="flex min-w-32 gap-2">
             {sectorData &&
-                Object.values(sectorData).map((sector: ISector, index: number) => {
+                Object.values(sectorData).map((sector: Sector, index: number) => {
                     if (sector.Segments) {
                         return (
                             <div
@@ -23,7 +23,7 @@ export default function Sectors({ sectorData }: { sectorData: ISector[] }) {
                             >
                                 <div className="flex gap-0.5">
                                     {sector.Segments &&
-                                        Object.values(sector.Segments).map((segment: ISegment, index: number) => (
+                                        Object.values(sector.Segments).map((segment: Segment, index: number) => (
                                             <div
                                                 // biome-ignore lint/suspicious/noArrayIndexKey: segments are a fixed list that never reorders
                                                 key={index}

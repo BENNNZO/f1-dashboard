@@ -1,9 +1,9 @@
-export type ITimingData = {
-    Lines: Record<string, ITimingDataLine>
+export type TimingData = {
+    Lines: Record<string, TimingDataLine>
     Withheld: boolean
 }
 
-export type ITimingDataLine = {
+export type TimingDataLine = {
     GapToLeader: string
     IntervalToPositionAhead: {
         Value: string
@@ -19,40 +19,40 @@ export type ITimingDataLine = {
     Stopped: boolean
     Status: number
     NumberOfLaps: number
-    Sectors: ISector[]
-    Speeds: Record<string, ISpeed>
-    BestLapTime: IBestLapTime
-    LastLapTime: ILastLapTime
+    Sectors: Sector[]
+    Speeds: Record<string, Speed>
+    BestLapTime: BestLapTime
+    LastLapTime: LastLapTime
     NumberOfPitStops: number
 }
 
-export type ISector = {
+export type Sector = {
     Stopped: boolean
     PreviousValue: string
-    Segments: ISegment[]
+    Segments: Segment[]
     Value: string
     Status: number
     OverallFastest: boolean
     PersonalFastest: boolean
 }
 
-export type ISegment = {
+export type Segment = {
     Status: number
 }
 
-export type IBestLapTime = {
+export type BestLapTime = {
     Value: string
     Lap: number
 }
 
-export type ILastLapTime = {
+export type LastLapTime = {
     Value: string
     Status: number
     OverallFastest: boolean
     PersonalFastest: boolean
 }
 
-export type ISpeed = {
+export type Speed = {
     Value: string
     Status: number
     OverallFastest: boolean

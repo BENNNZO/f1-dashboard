@@ -1,5 +1,5 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { IMessageDrs, IMessageFlag, IMessageOther, IRaceControlMessages } from "@/types/IRaceControlMessages.type"
+import type { MessageDrs, MessageFlag, MessageOther, RaceControlMessages } from "@/types/RaceControlMessages.type"
 
 import Skeleton from "./Skeleton"
 
@@ -12,7 +12,7 @@ const flagTypes = {
 }
 
 export default function ControlMessages() {
-    const raceControlMessages: IRaceControlMessages | null = useWebSocketStore((state) => state.raceControlMessages)
+    const raceControlMessages: RaceControlMessages | null = useWebSocketStore((state) => state.raceControlMessages)
 
     if (raceControlMessages) {
         return (
@@ -20,7 +20,7 @@ export default function ControlMessages() {
                 {Object.values(raceControlMessages.Messages)
                     .slice()
                     .reverse()
-                    .map((message: IMessageOther | IMessageFlag | IMessageDrs) => {
+                    .map((message: MessageOther | MessageFlag | MessageDrs) => {
                         const { Message, Category, Utc } = message
 
                         const hour =

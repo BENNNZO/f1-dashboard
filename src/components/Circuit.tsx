@@ -5,15 +5,15 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { ICircuitData } from "@/types/ICircuitData.type"
-import type { IDriverList } from "@/types/IDriverList.type"
-import type { IPositionData, IPositionDataObject, IPositionEntry } from "@/types/IPositionData.type"
-import type { ISessionInfo } from "@/types/ISessionInfo.type"
+import type { CircuitData } from "@/types/CircuitData.type"
+import type { DriverListData } from "@/types/DriverListData.type"
+import type { PositionData, PositionDataObject, PositionEntry } from "@/types/PositionData.type"
+import type { SessionInfo } from "@/types/SessionInfo.type"
 import { paddPoint, rotatePoint, transformPoints } from "@/utils/positionPoints"
 
 import Skeleton from "./Skeleton"
 
-interface IPoint {
+type Point = {
     x: number
     y: number
 }
@@ -21,13 +21,13 @@ interface IPoint {
 export default function Circuit() {
     // get data from store
     const updateCircuitData = useWebSocketStore((state) => state.updateCircuitData)
-    const sessionInfo: ISessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
-    const circuitData: ICircuitData | null = useWebSocketStore((state) => state.circuitData)
-    const positionData: IPositionData | null = useWebSocketStore((state) => state.positionData)
-    const driverList: IDriverList | null = useWebSocketStore((state) => state.driverList)
+    const sessionInfo: SessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
+    const circuitData: CircuitData | null = useWebSocketStore((state) => state.circuitData)
+    const positionData: PositionData | null = useWebSocketStore((state) => state.positionData)
+    const driverList: DriverListData | null = useWebSocketStore((state) => state.driverList)
 
     // states for timing logic
-    const [currentPosition, setCurrentPosition] = useState<{ Entries: Record<string, IPositionEntry> } | null>(null)
+    const [currentPosition, setCurrentPosition] = useState<{ Entries: Record<string, PositionEntry> } | null>(null)
     const [prevPosition, setPrevPosition] = useState<{ Timestamp: string } | null>(null)
 
     // get circuit data
@@ -48,7 +48,7 @@ export default function Circuit() {
 
         const startTime: string = positionData[0].Timestamp
 
-        positionData.forEach((position: IPositionDataObject, index: number) => {
+        positionData.forEach((position: PositionDataObject, index: number) => {
             let delayTime = 0
 
             if (index === 0) {
@@ -109,11 +109,11 @@ export default function Circuit() {
                         fill="none"
                     />
 
-                    {Object.entries(currentPosition.Entries).map((entry: [string, IPositionEntry]) => {
+                    {Object.entries(currentPosition.Entries).map((entry: [string, PositionEntry]) => {
                         const driverNumber: string = entry[0]
                         const { X, Y }: { X: number; Y: number } = entry[1]
 
-                        const point: IPoint = paddPoint(
+                        const point: Point = paddPoint(
                             rotatePoint({ x: -X, y: Y }, center, -circuitData.rotation + 180),
                             1000,
                         )

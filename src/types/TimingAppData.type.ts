@@ -1,15 +1,15 @@
-export type ITimingAppData = {
-    Lines: Record<string, ILine>
+export type TimingAppData = {
+    Lines: Record<string, Line>
 }
 
-export type ILine = {
+export type Line = {
     GridPos: string
     Line: number
     RacingNumber: string
-    Stints: IStint[]
+    Stints: Stint[]
 }
 
-export type IStint = {
+export type Stint = {
     LapTime: string
     LapNumber: number
     LapFlags: number

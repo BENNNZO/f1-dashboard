@@ -1,15 +1,15 @@
-export type IRaceControlMessages = {
-    Messages: (IMessageOther | IMessageFlag | IMessageDrs)[]
+export type RaceControlMessages = {
+    Messages: (MessageOther | MessageFlag | MessageDrs)[]
 }
 
-export type IMessageOther = {
+export type MessageOther = {
     Category: string
     Message: string
     Lap: number
     Utc: string
 }
 
-export type IMessageFlag = {
+export type MessageFlag = {
     Category: string
     Message: string
     Lap: number
@@ -18,7 +18,7 @@ export type IMessageFlag = {
     Scope: string
 }
 
-export type IMessageDrs = {
+export type MessageDrs = {
     Category: string
     Message: string
     Lap: number
