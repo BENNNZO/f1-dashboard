@@ -38,21 +38,55 @@ function toF1Message(message: SignalRMessage): F1Message | undefined {
     }
 }
 
-export default async function f1WebSocketServer(onMessage: (message: F1Message) => void): Promise<ws> {
-    const { BASE_URL, PING_INTERVAL, SUBSCRIPTION_TOPICS } = F1_CONSTANTS
-    const { encodedToken, cookie } = await negotiate()
+export default function f1WebSocketServer(onMessage: (message: F1Message) => void) {
+    // biome-ignore format: one name per line
+    const {
+        BASE_URL,
+        PING_INTERVAL,
+        RETRY_DELAY_MIN,
+        RETRY_DELAY_MAX,
+        WATCHDOG_TIMEOUT,
+        SUBSCRIPTION_TOPICS,
+    } = F1_CONSTANTS
+    let retryDelay = RETRY_DELAY_MIN
 
-    const socketURL = `wss://${BASE_URL}?id=${encodedToken}`
-
-    const headers = {
-        "User-Agent": "BestHTTP",
-        "Accept-Encoding": "gzip,identity",
-        Cookie: cookie,
+    function reconnect() {
+        console.log(`[F1 WebSocket] Reconnecting in ${retryDelay / 1000}s`)
+        setTimeout(start, retryDelay)
+        retryDelay = Math.min(retryDelay * 2, RETRY_DELAY_MAX)
     }
 
-    return new Promise((res, rej) => {
+    function start() {
+        connect().catch((err) => {
+            console.error(`[F1 WebSocket] Connect failed: ${(err as Error).message}`)
+            reconnect()
+        })
+    }
+
+    async function connect() {
+        const { encodedToken, cookie } = await negotiate()
+
+        const socketURL = `wss://${BASE_URL}?id=${encodedToken}`
+
+        const headers = {
+            "User-Agent": "BestHTTP",
+            "Accept-Encoding": "gzip,identity",
+            Cookie: cookie,
+        }
+
         const socket = new ws(socketURL, { headers })
         let pingTimer: NodeJS.Timeout
+        let watchdogTimer: NodeJS.Timeout
+
+        function resetWatchdog() {
+            clearTimeout(watchdogTimer)
+            watchdogTimer = setTimeout(() => {
+                console.warn("[F1 WebSocket] No message for 2 min")
+                socket.terminate()
+            }, WATCHDOG_TIMEOUT)
+        }
+
+        resetWatchdog()
 
         socket.on("open", () => {
             console.log("[F1 WebSocket] Connected to F1 WebSocket")
@@ -67,10 +101,12 @@ export default async function f1WebSocketServer(onMessage: (message: F1Message) 
 
             pingTimer = setInterval(() => send(socket, { type: MESSAGE_TYPE.PING }), PING_INTERVAL)
 
-            res(socket)
+            retryDelay = RETRY_DELAY_MIN
         })
 
         socket.on("message", (data) => {
+            resetWatchdog()
+
             for (const frame of data.toString().split(RECORD_SEPARATOR)) {
                 if (!frame) continue
 
@@ -97,12 +133,16 @@ export default async function f1WebSocketServer(onMessage: (message: F1Message) 
         })
 
         socket.on("error", (err) => {
-            rej(new Error(`[F1 WebSocket] Error: ${(err as Error).message}`))
+            console.error(`[F1 WebSocket] Error: ${err.message}`)
         })
 
         socket.on("close", (code, reason) => {
             clearInterval(pingTimer)
+            clearTimeout(watchdogTimer)
             console.log(`[F1 WebSocket] Closed: ${code} - ${reason}`)
+            reconnect()
         })
-    })
+    }
+
+    start()
 }

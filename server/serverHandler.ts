@@ -11,7 +11,7 @@ async function startServer() {
 
         const wss = await myWebSocketServer(Number(PORT))
 
-        await f1WebSocketServer((message) => {
+        f1WebSocketServer((message) => {
             storeF1Message(message)
             broadcastData(wss, message)
         })
