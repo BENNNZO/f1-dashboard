@@ -33,7 +33,7 @@ function toF1Message(message: SignalRMessage): F1Message | undefined {
         return { type: "init", data: message.result }
     }
 
-    if (message.type === MESSAGE_TYPE.INVOCATION && message.target === "feed" && message.arguments){
+    if (message.type === MESSAGE_TYPE.INVOCATION && message.target === "feed" && message.arguments) {
         return { type: message.arguments[0], data: message.arguments[1] }
     }
 }
@@ -58,7 +58,12 @@ export default async function f1WebSocketServer(onMessage: (message: F1Message) 
             console.log("[F1 WebSocket] Connected to F1 WebSocket")
 
             send(socket, { protocol: "json", version: 1 })
-            send(socket, { type: MESSAGE_TYPE.INVOCATION, target: "Subscribe", arguments: [SUBSCRIPTION_TOPICS], invocationId: "1" })
+            send(socket, {
+                type: MESSAGE_TYPE.INVOCATION,
+                target: "Subscribe",
+                arguments: [SUBSCRIPTION_TOPICS],
+                invocationId: "1",
+            })
 
             pingTimer = setInterval(() => send(socket, { type: MESSAGE_TYPE.PING }), PING_INTERVAL)
 
