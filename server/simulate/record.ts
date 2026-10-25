@@ -1,7 +1,7 @@
 import fs from "node:fs"
 import readline from "node:readline/promises"
 
-import f1WebSocketServer, { type F1Message } from "../f1/connection"
+import connectToF1, { type F1Message } from "../f1/connection"
 import log from "../log"
 import type { LogLine } from "./types"
 
@@ -42,7 +42,7 @@ async function startRecording() {
 
     log("RECORD", `Recording data to ${logFileName}`)
 
-    f1WebSocketServer(writeLogLine)
+    connectToF1(writeLogLine)
 }
 
 void startRecording()

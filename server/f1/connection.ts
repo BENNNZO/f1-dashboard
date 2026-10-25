@@ -39,7 +39,7 @@ function toF1Message(message: SignalRMessage): F1Message | undefined {
     }
 }
 
-export default function f1WebSocketServer(onMessage: (message: F1Message) => void) {
+export default function connectToF1(onMessage: (message: F1Message) => void) {
     // biome-ignore format: one name per line
     const {
         BASE_URL,
