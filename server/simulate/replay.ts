@@ -12,7 +12,7 @@ const logFileName = process.argv[2]?.replace(".jsonl", "")
 const logFile = `${logFolder}${logFileName}.jsonl`
 
 if (!logFileName) {
-    console.error('[REPLAY] Missing log name.\nUsage: pnpm replay <log name>')
+    console.error("[REPLAY] Missing log name.\nUsage: pnpm replay <log name>")
     process.exit(1)
 }
 
