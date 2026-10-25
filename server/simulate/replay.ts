@@ -7,9 +7,39 @@ import broadcastData from "../utils/broadcastData"
 import { storeF1Message } from "../utils/updateDataStore"
 import type { LogLine } from "./types"
 
-if (!process.argv[2]) throw new Error("Missing log file name argument (pnpm replay *log file name*)")
-if (!fs.existsSync(`${__dirname}/logs/${process.argv[2]}.txt`))
-    throw new Error(`Log file ${process.argv[2]}.txt does not exist`)
+const logFolder = `${__dirname}/logs/`
+const logFileName = process.argv[2]
+const logFile = `${logFolder}${logFileName}.txt`
+
+if (!logFileName) {
+    console.error('[REPLAY] Missing log name.\nUsage: pnpm replay <log name>   (no ".txt")')
+    process.exit(1)
+}
+
+if (!fs.existsSync(logFile)) {
+    console.error(`[REPLAY] Log not found: ${logFile}`)
+    process.exit(1)
+}
+
+async function replayLog(wss: WebSocketServer) {
+    const fileStream = fs.createReadStream(logFile)
+    const rl = readline.createInterface({ input: fileStream, crlfDelay: Infinity })
+
+    let previousTimestamp: number = 0
+
+    for await (const line of rl) {
+        const { timestamp, message }: LogLine = JSON.parse(line)
+
+        if (previousTimestamp > 0) await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
+
+        storeF1Message(message)
+        broadcastData(wss, message)
+
+        previousTimestamp = timestamp
+    }
+
+    console.log("[REPLAY] Replay Finished")
+}
 
 async function startReplay() {
     try {
@@ -19,32 +49,16 @@ async function startReplay() {
 
         wss.on("connection", async () => {
             console.log("[REPLAY] Client Connected")
-
-            const fileStream = fs.createReadStream(`${__dirname}/logs/${process.argv[2]}.txt`)
-            const rl = readline.createInterface({ input: fileStream, crlfDelay: Infinity })
-
-            let previousTimestamp: number = 0
-
-            for await (const line of rl) {
-                const { timestamp, message }: LogLine = JSON.parse(line)
-
-                if (previousTimestamp > 0)
-                    await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
-
-                storeF1Message(message)
-                broadcastData(wss, message)
-
-                previousTimestamp = timestamp
-            }
-
-            console.log("[REPLAY] Replay Finished")
+            await replayLog(wss)
         })
 
         wss.on("close", () => {
             console.log("[REPLAY] Client Disconnected")
         })
     } catch (err) {
-        throw new Error(`Failed to initialize the server: ${(err as Error).message}`)
+        throw new Error(
+            `[REPLAY] Could not start the replay server on port ${SERVER_CONSTANTS.PORT}: ${(err as Error).message}`,
+        )
     }
 }
 
