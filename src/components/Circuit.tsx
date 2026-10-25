@@ -19,18 +19,15 @@ type Point = {
 }
 
 export default function Circuit() {
-    // get data from store
     const updateCircuitData = useWebSocketStore((state) => state.updateCircuitData)
     const sessionInfo: SessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
     const circuitData: CircuitData | null = useWebSocketStore((state) => state.circuitData)
     const positionData: PositionData | null = useWebSocketStore((state) => state.positionData)
     const driverList: DriverListData | null = useWebSocketStore((state) => state.driverList)
 
-    // states for timing logic
     const [currentPosition, setCurrentPosition] = useState<{ Entries: Record<string, PositionEntry> } | null>(null)
     const [prevPosition, setPrevPosition] = useState<{ Timestamp: string } | null>(null)
 
-    // get circuit data
     useEffect(() => {
         if (!sessionInfo) return
 
@@ -42,7 +39,6 @@ export default function Circuit() {
             .catch((err) => console.error(err))
     }, [sessionInfo, updateCircuitData])
 
-    // handles timing logic
     useEffect(() => {
         if (!positionData) return
 
@@ -64,7 +60,6 @@ export default function Circuit() {
     }, [positionData, prevPosition?.Timestamp])
 
     if (circuitData && positionData && currentPosition && driverList) {
-        // formatt and transform circuit path coords
         const circuitPoints = circuitData.x.map((x, index) => ({ x: -x, y: circuitData.y[index] }))
         const { transformedPoints, minX, minY, width, height, centerX, centerY } = transformPoints(
             circuitPoints,

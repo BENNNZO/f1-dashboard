@@ -25,9 +25,6 @@ export default function Driver({ timingData, tireCompound, driver }: DriverProps
                 timingData.InPit && !timingData.Retired ? "scale-x-95" : "scale-100",
             )}
             style={{
-                // opacity: `${index === 0 ? "0" : timingData.Retired ? "0.1" : timingData.InPit ? "0.5" : "1"}`,
-                // transform: `translateY(${(index - 2) * 58 + 8}px)`,
-                // position: `${index === 0 ? "static" : "absolute"}`
                 opacity: opacity(timingData),
                 transition: "transform 0.5s ease-out, opacity 0.5s ease-out",
             }}

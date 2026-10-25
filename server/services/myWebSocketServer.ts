@@ -13,7 +13,6 @@ export default async function startServer(port: number): Promise<WebSocketServer
             wss.on("connection", (event) => {
                 console.log("[SERVER] Client Connected")
                 event.send(JSON.stringify({ type: "init", data: currentData }))
-                // broadcastData(wss, { type: "test", data: currentData })
             })
 
             wss.on("close", () => {

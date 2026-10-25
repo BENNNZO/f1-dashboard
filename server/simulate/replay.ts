@@ -12,7 +12,6 @@ type MessageItem = {
     A: [string, object, string]
 }
 
-// test for arguments and if the file exists
 if (!process.argv[2]) throw new Error("Missing log file name argument (npm run simulate *log file name*)")
 if (!fs.existsSync(`${__dirname}/logs/${process.argv[2]}.txt`))
     throw new Error(`Log file ${process.argv[2]}.txt does not exist`)
@@ -34,7 +33,6 @@ async function startReplay() {
             for await (const line of rl) {
                 const { timestamp, message } = JSON.parse(line)
 
-                // delay between this and previous message
                 if (previousTimestamp > 0)
                     await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
 
