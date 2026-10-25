@@ -4,21 +4,22 @@ import { F1_CONSTANTS } from "../config/constants"
 
 type NegotiationResponse = {
     encodedToken: string
-    cookie: string[]
+    cookie: string
 }
 
 export default async function negotiate(): Promise<NegotiationResponse> {
-    const { CLIENT_PROTOCOL, CONNECTION_DATA, BASE_URL } = F1_CONSTANTS
+    const { BASE_URL } = F1_CONSTANTS
 
     try {
-        const res = await axios.get(
-            `https://${BASE_URL}/negotiate?clientProtocol=${CLIENT_PROTOCOL}&connectionData=${CONNECTION_DATA}`,
-        )
+        const res = await axios.post(`https://${BASE_URL}/negotiate?negotiateVersion=1`)
 
-        const encodedToken = encodeURIComponent(res.data.ConnectionToken)
-        const cookie = res.headers["set-cookie"]
+        const connectionToken = res.data.connectionToken
+        const setCookie = res.headers["set-cookie"]
 
-        if (!(encodedToken && cookie)) throw new Error("Missing encodedToken or cookie")
+        if (!(connectionToken && setCookie)) throw new Error("Missing connectionToken or cookie")
+
+        const encodedToken = encodeURIComponent(connectionToken)
+        const cookie = setCookie.map((value) => value.split(";")[0]).join("; ")
 
         return { encodedToken, cookie }
     } catch (err) {
