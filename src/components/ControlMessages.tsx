@@ -41,12 +41,14 @@ export default function ControlMessages() {
                                     <p className="text-sm text-zinc-400">
                                         {hour}:{minute} - {Category}
                                     </p>
+
                                     <p className="">
                                         {flagTypes[Flag]} {Message}
                                     </p>
                                 </div>
                             )
                         }
+
                         return (
                             <div
                                 key={`${Utc}${Message}`}
@@ -55,6 +57,7 @@ export default function ControlMessages() {
                                 <p className="text-sm text-zinc-400">
                                     {hour}:{minute} - {Category}
                                 </p>
+
                                 <p className="">{Message}</p>
                             </div>
                         )
@@ -62,6 +65,7 @@ export default function ControlMessages() {
             </div>
         )
     }
+
     return (
         <div className="flex h-full flex-col gap-2 overflow-x-hidden overflow-y-scroll border-white/10 border-t p-2">
             {[...Array(10)].map((_, i) => (

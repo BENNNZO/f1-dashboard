@@ -44,6 +44,7 @@ export default function DriverList() {
             </motion.div>
         )
     }
+
     return (
         <div className="relative flex w-1/2 shrink-0 flex-col gap-2 overflow-y-scroll p-2">
             {[...Array(20)].map((_, i) => (

@@ -11,15 +11,13 @@ function opacity(timingData: TimingDataLine) {
     return "1"
 }
 
-export default function Driver({
-    timingData,
-    tireCompound,
-    driver,
-}: {
+type DriverProps = {
     timingData: TimingDataLine
     tireCompound: string
     driver: DriverData
-}) {
+}
+
+export default function Driver({ timingData, tireCompound, driver }: DriverProps) {
     return (
         <div
             className={mergeClasses(
@@ -39,7 +37,8 @@ export default function Driver({
                 tireCompound={tireCompound}
                 driver={driver}
             />
-            <div className="block h-px w-full bg-white/10 md:block xl:hidden min-[600px]:hidden"></div>
+
+            <div className="block h-px w-full bg-white/10 md:block xl:hidden min-[600px]:hidden" />
             <Sectors sectorData={timingData.Sectors} />
         </div>
     )

@@ -37,6 +37,7 @@ export default function TeamRadio() {
                                 >
                                     {driver.Tla}
                                 </p>
+
                                 <AudioPlayer
                                     playing={playing ?? ""}
                                     setPlaying={setPlaying}
@@ -48,6 +49,7 @@ export default function TeamRadio() {
             </div>
         )
     }
+
     return (
         <div className="flex flex-col gap-2 overflow-x-hidden overflow-y-scroll border-white/10 border-t p-2 lg:border-l">
             {[...Array(20)].map((_, i) => (
