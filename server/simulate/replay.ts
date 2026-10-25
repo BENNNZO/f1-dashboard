@@ -3,7 +3,7 @@ import readline from "node:readline"
 import type { WebSocketServer } from "ws"
 
 import broadcastData from "../browser/broadcast"
-import myWebSocketServer from "../browser/server"
+import startBrowserServer from "../browser/server"
 import { SERVER_CONSTANTS } from "../config/constants"
 import { storeF1Message } from "../dataStore"
 import log from "../log"
@@ -49,7 +49,7 @@ async function replayLog(wss: WebSocketServer) {
 
 async function startReplay() {
     try {
-        const wss = await myWebSocketServer(SERVER_CONSTANTS.PORT)
+        const wss = await startBrowserServer(SERVER_CONSTANTS.PORT)
 
         log("REPLAY", `Server Started on PORT: ${SERVER_CONSTANTS.PORT}`)
 

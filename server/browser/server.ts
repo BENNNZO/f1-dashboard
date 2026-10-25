@@ -3,7 +3,7 @@ import { WebSocketServer } from "ws"
 import { currentData } from "../dataStore"
 import log from "../log"
 
-export default async function myWebSocketServer(port: number): Promise<WebSocketServer> {
+export default async function startBrowserServer(port: number): Promise<WebSocketServer> {
     return new Promise((res, rej) => {
         try {
             const wss = new WebSocketServer({
@@ -11,11 +11,11 @@ export default async function myWebSocketServer(port: number): Promise<WebSocket
                 host: "0.0.0.0",
             })
 
-            wss.on("connection", (event) => {
+            wss.on("connection", (client) => {
                 log("SERVER", "Client Connected")
-                event.send(JSON.stringify({ type: "init", data: currentData }))
+                client.send(JSON.stringify({ type: "init", data: currentData }))
 
-                event.on("close", () => {
+                client.on("close", () => {
                     log("SERVER", "Client Disconnected")
                 })
             })
