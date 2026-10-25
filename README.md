@@ -1,48 +1,80 @@
 # F1 Dashboard
 
-Welcome to the F1 Dashboard project! This application aims to provide real-time updates and detailed information about Formula 1 races, including driver data, sector times, and track positions.
+A live dashboard for Formula 1 sessions. It shows timing, tires, sector times, weather, track status, race control messages, and team radio.
 
 ## Features
 
-- **Real-time Updates**: Get the latest data on driver performance, including current speed (mph), sector times, and track positions, plus more.
-- **Circuit Map**: Visual representation of the track with real-time driver positions.
-- **Team Radios**: Listen to live team radio communications between drivers and their teams.
-- **Race Control Messages**: View important updates and announcements from race control in real-time.
+- **Live timing**: positions, lap times, gaps, and sector times for each driver.
+- **Tires**: the tire compound for each driver.
+- **Race control messages**: flags, penalties, and other messages from race control.
+- **Team radio**: play team radio clips.
+- **Weather and track status**: air and track temperature, rain, and the current flag.
 
-## Future Plans
+The circuit map and car speed do not work now. The F1 feed sends car position and car data only with an F1 TV token.
 
-### Short Term
+## How it works
 
-### Long Term
-- Minor optimizations for both front and back ends
-- Implement user customization options for the dashboard.
+- `server/` connects to the F1 live timing feed (`livetiming.formula1.com/signalrcore`). It keeps the latest data and sends it to browsers over a WebSocket on port 3001.
+- `src/` is the Next.js app. It connects to the server and shows the data.
 
-Stay tuned for more updates!
+The F1 feed sends data only during a live session.
 
-## Getting Started
+## Getting started
 
-To get started with the project, clone the repository and follow the setup instructions.
+You need Node 22.12 or newer and pnpm.
 
 ```bash
 git clone https://github.com/bennnnzo/f1-dashboard.git
 cd f1-dashboard
 pnpm i
+```
+
+Create `.env.local` with the server address:
+
+```bash
+NEXT_PUBLIC_WS_URL=ws://localhost:3001
+```
+
+Start the server and the app in two terminals:
+
+```bash
+pnpm server
 pnpm dev
 ```
 
-### Simulator
+Open http://localhost:3000.
 
-make sure there is a folder named "logs" inside the "simulate" folder or else it will error when trying to record
+## Record and replay
 
-#### Before Race Starts
+Record a live session to a log file:
+
 ```bash
 pnpm record
 ```
 
-#### Run Log File (do not include ".txt" at the end of file name)
+The log goes to `server/simulate/logs/<start time>.jsonl`. If the `logs` folder does not exist, the tool asks to create it. Start it before the session starts.
+
+Replay a log:
+
 ```bash
-pnpm replay [File Name]
+pnpm replay <log name>
 ```
+
+The replay server uses port 3001, so stop `pnpm server` first. The replay starts when a browser connects, and it plays at 4x speed.
+
+## Scripts
+
+| Script | What it does |
+| --- | --- |
+| `pnpm dev` | Start the Next.js app in dev mode. |
+| `pnpm server` | Start the server. |
+| `pnpm record` | Record the F1 feed to a log file. |
+| `pnpm replay <log name>` | Replay a log file. |
+| `pnpm build` | Build the app and compile the server to `dist/`. |
+| `pnpm start` | Start the built app. |
+| `pnpm start:server` | Start the compiled server. |
+| `pnpm lint` | Check the code with Biome. |
+| `pnpm format` | Fix the code with Biome. |
 
 ## License
 
