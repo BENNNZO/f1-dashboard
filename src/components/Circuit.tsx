@@ -126,7 +126,7 @@ export default function Circuit() {
                                 style={{ transform: `translate(${point.x}px, ${point.y}px)` }}
                             >
                                 <text
-                                    className={`absolute font-bold text-[300px] opacity-50`}
+                                    className="absolute font-bold text-[300px] opacity-50"
                                     style={{ transform: `translate(175px, 100px)` }}
                                     fill={`#${teamColor}`}
                                 >
