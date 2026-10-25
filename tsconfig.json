@@ -26,10 +26,7 @@
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
-        ".next/types/**/*.ts",
-        "src/utils/websocket.js",
-        "src/utils/WebSocketProvider.js",
-        "src/components/AudioPlayer.tsx"
+        ".next/types/**/*.ts"
     ],
     "exclude": ["node_modules"]
 }
