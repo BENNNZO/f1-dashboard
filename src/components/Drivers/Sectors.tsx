@@ -1,4 +1,5 @@
 import type { Sector, Segment } from "@/types/TimingData.type"
+import { mergeClasses } from "@/utils/mergeClasses"
 import timeColor from "@/utils/timeColor"
 
 const STATUS_COLORS = {
@@ -35,7 +36,7 @@ export default function Sectors({ sectorData }: { sectorData: Sector[] }) {
                                         ))}
                                 </div>
                                 <div className="flex items-end gap-1">
-                                    <p className={`font-semibold leading-none ${timeColor(sector)}`}>
+                                    <p className={mergeClasses("font-semibold leading-none", timeColor(sector))}>
                                         {sector.PreviousValue ? "---" : sector.PreviousValue}
                                     </p>
                                     <p className="font-semibold text-sm text-white/50 leading-none">

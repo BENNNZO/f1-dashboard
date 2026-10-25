@@ -1,5 +1,6 @@
 import type { DriverData } from "@/types/DriverListData.type"
 import type { TimingDataLine } from "@/types/TimingData.type"
+import { mergeClasses } from "@/utils/mergeClasses"
 
 import DriverMetadata from "./DriverMetadata"
 import Sectors from "./Sectors"
@@ -21,7 +22,10 @@ export default function Driver({
 }) {
     return (
         <div
-            className={`flex flex-col gap-3 rounded-xl border border-white/5 bg-zinc-900 p-2 duration-500 md:flex-col md:justify-normal md:gap-2 xl:flex-row xl:gap-3 min-[600px]:flex-row min-[600px]:justify-between ${timingData.InPit && !timingData.Retired ? "scale-x-95" : "scale-100"}`}
+            className={mergeClasses(
+                "flex flex-col gap-3 rounded-xl border border-white/5 bg-zinc-900 p-2 duration-500 md:flex-col md:justify-normal md:gap-2 xl:flex-row xl:gap-3 min-[600px]:flex-row min-[600px]:justify-between",
+                timingData.InPit && !timingData.Retired ? "scale-x-95" : "scale-100",
+            )}
             style={{
                 // opacity: `${index === 0 ? "0" : timingData.Retired ? "0.1" : timingData.InPit ? "0.5" : "1"}`,
                 // transform: `translateY(${(index - 2) * 58 + 8}px)`,

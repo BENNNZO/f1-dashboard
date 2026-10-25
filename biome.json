@@ -76,7 +76,7 @@
                 "noAutofocus": "off"
             },
             "nursery": {
-                "useSortedClasses": "error",
+                "useSortedClasses": { "level": "error", "options": { "functions": ["mergeClasses"] } },
                 "noFloatingPromises": "error",
                 "useNullishCoalescing": "error"
             }

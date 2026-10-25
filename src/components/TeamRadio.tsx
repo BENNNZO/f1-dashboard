@@ -29,7 +29,7 @@ export default function TeamRadio() {
                         return (
                             <div
                                 key={capture.Path}
-                                className={`flex flex-row items-center gap-3 rounded-xl border border-white/5 bg-zinc-900 p-2 pr-6 duration-300`}
+                                className="flex flex-row items-center gap-3 rounded-xl border border-white/5 bg-zinc-900 p-2 pr-6 duration-300"
                             >
                                 <p
                                     className="rounded-md px-1 py-1 font-bold text-sm text-white leading-none"

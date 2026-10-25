@@ -2,6 +2,7 @@ import Image from "next/image"
 
 import type { DriverData } from "@/types/DriverListData.type"
 import type { TimingDataLine } from "@/types/TimingData.type"
+import { mergeClasses } from "@/utils/mergeClasses"
 import timeColor from "@/utils/timeColor"
 
 export default function DriverMetadata({
@@ -33,7 +34,10 @@ export default function DriverMetadata({
             />
             <div className="flex w-22 flex-col">
                 <p
-                    className={`font-semibold leading-none duration-300 ${timingData?.IntervalToPositionAhead?.Catching ? "text-green-300" : "text-white"}`}
+                    className={mergeClasses(
+                        "font-semibold text-white leading-none duration-300",
+                        timingData?.IntervalToPositionAhead?.Catching && "text-green-300",
+                    )}
                 >
                     {timingData?.IntervalToPositionAhead?.Value === ""
                         ? "---.---"
@@ -44,10 +48,15 @@ export default function DriverMetadata({
                 </p>
             </div>
             <div className="flex w-26 flex-col">
-                <p className={`font-semibold leading-none duration-500 ${timeColor(timingData?.LastLapTime)}`}>
+                <p
+                    className={mergeClasses(
+                        "font-semibold leading-none duration-500",
+                        timeColor(timingData?.LastLapTime),
+                    )}
+                >
                     {timingData?.LastLapTime?.Value === "" ? "-:--.---" : timingData?.LastLapTime?.Value}
                 </p>
-                <p className={`font-semibold text-sm text-white/50 leading-none`}>
+                <p className="font-semibold text-sm text-white/50 leading-none">
                     {timingData?.BestLapTime.Value === "" ? "-:--.---" : timingData?.BestLapTime?.Value}
                 </p>
             </div>

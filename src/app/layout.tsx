@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 
+import { mergeClasses } from "@/utils/mergeClasses"
+
 const jetBrainsMono = JetBrains_Mono({
     weight: ["300", "400", "500", "600", "700"],
     subsets: ["latin"],
@@ -20,7 +22,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${jetBrainsMono.className} bg-zinc-950 text-white antialiased`}>{children}</body>
+            <body className={mergeClasses(jetBrainsMono.className, "bg-zinc-950 text-white antialiased")}>
+                {children}
+            </body>
         </html>
     )
 }
