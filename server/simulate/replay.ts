@@ -4,6 +4,7 @@ import { WebSocketServer } from "ws"
 
 import { SERVER_CONSTANTS } from "../config/constants"
 import broadcastData from "../utils/broadcastData"
+import log from "../utils/log"
 import { storeF1Message } from "../utils/updateDataStore"
 import type { LogLine } from "./types"
 
@@ -12,12 +13,12 @@ const logFileName = process.argv[2]?.replace(".jsonl", "")
 const logFile = `${logFolder}${logFileName}.jsonl`
 
 if (!logFileName) {
-    console.error("[REPLAY] Missing log name.\nUsage: pnpm replay <log name>")
+    log("REPLAY", "Missing log name.\nUsage: pnpm replay <log name>", "error")
     process.exit(1)
 }
 
 if (!fs.existsSync(logFile)) {
-    console.error(`[REPLAY] Log not found: ${logFile}`)
+    log("REPLAY", `Log not found: ${logFile}`, "error")
     process.exit(1)
 }
 
@@ -38,24 +39,24 @@ async function replayLog(wss: WebSocketServer) {
 
             previousTimestamp = timestamp
         } catch (err) {
-            console.error(`[REPLAY] Bad line: ${(err as Error).message} ${line}`)
+            log("REPLAY", `Bad line: ${(err as Error).message} ${line}`, "error")
         }
     }
 
-    console.log("[REPLAY] Replay Finished")
+    log("REPLAY", "Replay Finished")
 }
 
 async function startReplay() {
     try {
         const wss = new WebSocketServer({ port: SERVER_CONSTANTS.PORT })
 
-        console.log(`[REPLAY] Server Started on PORT: ${SERVER_CONSTANTS.PORT}`)
+        log("REPLAY", `Server Started on PORT: ${SERVER_CONSTANTS.PORT}`)
 
         wss.on("connection", async (client) => {
-            console.log("[REPLAY] Client Connected")
+            log("REPLAY", "Client Connected")
 
             client.on("close", () => {
-                console.log("[REPLAY] Client Disconnected")
+                log("REPLAY", "Client Disconnected")
             })
 
             await replayLog(wss)

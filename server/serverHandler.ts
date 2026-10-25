@@ -2,11 +2,12 @@ import { SERVER_CONSTANTS } from "./config/constants"
 import f1WebSocketServer from "./services/f1WebSocketServer"
 import myWebSocketServer from "./services/myWebSocketServer"
 import broadcastData from "./utils/broadcastData"
+import log from "./utils/log"
 import { storeF1Message } from "./utils/updateDataStore"
 
 async function startServer() {
     try {
-        console.log("[Dashboard Server] Starting Server...")
+        log("SERVER", "Starting Server...")
 
         const wss = await myWebSocketServer(SERVER_CONSTANTS.PORT)
 
