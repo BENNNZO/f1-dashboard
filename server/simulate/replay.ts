@@ -2,11 +2,11 @@ import fs from "node:fs"
 import readline from "node:readline"
 import type { WebSocketServer } from "ws"
 
+import broadcastData from "../browser/broadcast"
+import myWebSocketServer from "../browser/server"
 import { SERVER_CONSTANTS } from "../config/constants"
-import myWebSocketServer from "../services/myWebSocketServer"
-import broadcastData from "../utils/broadcastData"
-import log from "../utils/log"
-import { storeF1Message } from "../utils/updateDataStore"
+import { storeF1Message } from "../dataStore"
+import log from "../log"
 import type { LogLine } from "./types"
 
 const logFolder = `${__dirname}/logs/`

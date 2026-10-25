@@ -10,10 +10,10 @@
         "dev": "next dev --turbopack",
         "build": "next build && tsc -p tsconfig.server.json",
         "start": "next start",
-        "start:server": "node dist/server/serverHandler.js",
+        "start:server": "node dist/server/index.js",
         "lint": "biome check",
         "format": "biome check --write --unsafe",
-        "server": "tsx --tsconfig tsconfig.server.json server/serverHandler.ts",
+        "server": "tsx --tsconfig tsconfig.server.json server/index.ts",
         "record": "tsx --tsconfig tsconfig.server.json server/simulate/record.ts",
         "replay": "tsx --tsconfig tsconfig.server.json server/simulate/replay.ts"
     },

@@ -1,9 +1,9 @@
+import broadcastData from "./browser/broadcast"
+import myWebSocketServer from "./browser/server"
 import { SERVER_CONSTANTS } from "./config/constants"
-import f1WebSocketServer from "./services/f1WebSocketServer"
-import myWebSocketServer from "./services/myWebSocketServer"
-import broadcastData from "./utils/broadcastData"
-import log from "./utils/log"
-import { storeF1Message } from "./utils/updateDataStore"
+import { storeF1Message } from "./dataStore"
+import f1WebSocketServer from "./f1/connection"
+import log from "./log"
 
 async function startServer() {
     try {

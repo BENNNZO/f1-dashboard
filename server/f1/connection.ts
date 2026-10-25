@@ -1,8 +1,8 @@
 import ws from "ws"
 
 import { F1_CONSTANTS } from "../config/constants"
-import negotiate from "../utils/f1Negotiate"
-import log from "../utils/log"
+import log from "../log"
+import negotiate from "./negotiate"
 
 export type F1Message = {
     type: string
