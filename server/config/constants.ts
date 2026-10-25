@@ -31,5 +31,5 @@ export const F1_CONSTANTS = {
 }
 
 export const SERVER_CONSTANTS = {
-    PORT: 3001,
+    PORT: Number(process.env.PORT) || 3001,
 }
