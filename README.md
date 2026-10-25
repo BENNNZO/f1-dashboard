@@ -26,8 +26,8 @@ To get started with the project, clone the repository and follow the setup instr
 ```bash
 git clone https://github.com/bennnnzo/f1-dashboard.git
 cd f1-dashboard
-npm i
-npm run dev
+pnpm i
+pnpm dev
 ```
 
 ### Simulator
@@ -36,12 +36,12 @@ make sure there is a folder named "logs" inside the "simulate" folder or else it
 
 #### Before Race Starts
 ```bash
-npm run record
+pnpm record
 ```
 
 #### Run Log File (do not include ".txt" at the end of file name)
 ```bash
-npm run replay [File Name]
+pnpm replay [File Name]
 ```
 
 ## License
