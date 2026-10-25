@@ -3,7 +3,7 @@ export let currentData: Record<string, unknown> = {}
 export function updateDataStore(data: Record<string, unknown>) {
     currentData = deepMerge(currentData, data)
 }
-// This function was made by AI lol way to indepth for my brain atm.
+// This function was made by AI lol way too in-depth for my brain atm.
 function deepMerge(target: Record<string, unknown>, source: Record<string, unknown>): Record<string, unknown> {
     const output = { ...target }
 

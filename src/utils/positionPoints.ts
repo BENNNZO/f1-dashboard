@@ -34,8 +34,8 @@ export function paddPoint(point: Point, padding: number): Point {
 
 export function transformPoints(points: Point[], rotation: number, padding: number): TransformedPointsData {
     // ALL of this has a specific order so that the values are positioned correctly
-    // ant other order will result in wrongly positioned points
-    // pget center > rotate points > get min max width and height > add padding
+    // any other order will result in wrongly positioned points
+    // get center > rotate points > get min max width and height > add padding
 
     const centerX =
         (Math.max(...points.map((p) => p.x)) - Math.min(...points.map((p) => p.x))) / 2 +
