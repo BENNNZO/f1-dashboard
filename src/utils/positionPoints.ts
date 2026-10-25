@@ -1,10 +1,10 @@
-type point = {
+type Point = {
     x: number
     y: number
 }
 
 type TransformedPointsData = {
-    transformedPoints: point[]
+    transformedPoints: Point[]
     minX: number
     minY: number
     width: number
@@ -13,7 +13,7 @@ type TransformedPointsData = {
     centerY: number
 }
 
-export function rotatePoint(point: point, center: point, deg: number): point {
+export function rotatePoint(point: Point, center: Point, deg: number): Point {
     const angleRad = deg * (Math.PI / 180)
 
     // subtract the center point so the center is now the origin (0, 0)
@@ -31,11 +31,11 @@ export function rotatePoint(point: point, center: point, deg: number): point {
     return { x: rotatedX, y: rotatedY }
 }
 
-export function paddPoint(point: point, padding: number): point {
+export function paddPoint(point: Point, padding: number): Point {
     return { x: point.x + padding, y: point.y + padding }
 }
 
-export function transformPoints(points: point[], rotation: number, padding: number): TransformedPointsData {
+export function transformPoints(points: Point[], rotation: number, padding: number): TransformedPointsData {
     // ALL of this has a specific order so that the values are positioned correctly
     // ant other order will result in wrongly positioned points
     // pget center > rotate points > get min max width and height > add padding
