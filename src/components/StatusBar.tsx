@@ -8,12 +8,13 @@ export default function StatusBar() {
         <div className="flex justify-between p-2">
             <div className="hidden gap-2 lg:flex">
                 <SessionInformation />
-                <div className="my-1 w-px bg-white/10"></div>
+                <div className="my-1 w-px bg-white/10" />
                 <Weather />
             </div>
+
             <div className="flex gap-2">
                 <LapCount />
-                <div className="my-1 w-px bg-white/10"></div>
+                <div className="my-1 w-px bg-white/10" />
                 <TrackStatus />
             </div>
         </div>

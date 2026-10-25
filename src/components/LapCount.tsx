@@ -13,6 +13,7 @@ export default function LapCount() {
             </p>
         )
     }
+
     return (
         <Skeleton
             width={101}

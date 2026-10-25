@@ -76,12 +76,13 @@ export default function Circuit() {
         return (
             <div className="relative w-full">
                 <Image
+                    className="absolute top-2 left-2 w-24 rounded-xl object-cover shadow-md"
                     src={`/flags/${sessionInfo?.Meeting.Country.Code.toLowerCase() ?? "unknown"}.svg`}
                     width={80}
                     height={80}
                     alt="country-flag"
-                    className="absolute top-2 left-2 w-24 rounded-xl object-cover shadow-md"
                 />
+
                 <svg
                     width="100%"
                     height="100%"
@@ -90,6 +91,7 @@ export default function Circuit() {
                     preserveAspectRatio="xMidYMid meet"
                 >
                     <title>Track map</title>
+
                     <polyline
                         points={
                             transformedPoints.map((item) => `${item.x},${item.y}`).join(" ") +
@@ -99,6 +101,7 @@ export default function Circuit() {
                         strokeWidth="300"
                         fill="none"
                     />
+
                     <polyline
                         points={
                             transformedPoints.map((item) => `${item.x},${item.y}`).join(" ") +
@@ -132,6 +135,7 @@ export default function Circuit() {
                                 >
                                     {driverList[driverNumber]?.Tla ?? ""}
                                 </text>
+
                                 <circle
                                     r="150"
                                     fill={`#${teamColor}`}
@@ -145,6 +149,7 @@ export default function Circuit() {
             </div>
         )
     }
+
     return (
         <div className="w-full p-2">
             <Skeleton />

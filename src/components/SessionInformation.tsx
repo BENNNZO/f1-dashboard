@@ -12,12 +12,14 @@ export default function SessionInformation() {
                 <p className="h-8 rounded-full border border-white/5 bg-zinc-900 px-4 py-1">
                     {sessionInfo?.Name ?? ""}
                 </p>
+
                 <p className="h-8 rounded-full border border-white/5 bg-zinc-900 px-4 py-1">
                     {sessionInfo?.Meeting?.Name ?? ""}
                 </p>
             </div>
         )
     }
+
     return (
         <div className="flex gap-2">
             <Skeleton
@@ -25,6 +27,7 @@ export default function SessionInformation() {
                 height={32}
                 rounded
             />
+
             <Skeleton
                 width={216}
                 height={32}

@@ -20,6 +20,7 @@ export default function TrackStatus() {
             </p>
         )
     }
+
     return (
         <Skeleton
             width={110}

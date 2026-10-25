@@ -2,17 +2,14 @@
 
 import { useEffect, useState } from "react"
 
-export default function Skeleton({
-    width,
-    height,
-    delay,
-    rounded,
-}: {
+type SkeletonProps = {
     width?: number
     height?: number
     delay?: number
     rounded?: boolean
-}) {
+}
+
+export default function Skeleton({ width, height, delay, rounded }: SkeletonProps) {
     const [isClient, setIsClient] = useState(false)
 
     useEffect(() => {
@@ -29,6 +26,6 @@ export default function Skeleton({
                     animationDelay: delay ? `${delay}ms` : "0ms",
                     borderRadius: rounded ? "1000px" : "8px",
                 }}
-            ></div>
+            />
         )
 }
