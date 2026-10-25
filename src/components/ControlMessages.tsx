@@ -1,6 +1,5 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-
-import { IRaceControlMessages, IMessageOther, IMessageFlag, IMessageDrs } from "@/types/IRaceControlMessages.type"
+import type { IMessageDrs, IMessageFlag, IMessageOther, IRaceControlMessages } from "@/types/IRaceControlMessages.type"
 
 import Skeleton from "./Skeleton"
 
@@ -17,11 +16,11 @@ export default function ControlMessages() {
 
     if (raceControlMessages) {
         return (
-            <div className="flex flex-col gap-2 p-2 w-full h-full overflow-y-scroll overflow-x-hidden border-t border-white/10">
+            <div className="flex h-full w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll border-white/10 border-t p-2">
                 {Object.values(raceControlMessages.Messages)
                     .slice()
                     .reverse()
-                    .map((message: IMessageOther | IMessageFlag | IMessageDrs, index: number) => {
+                    .map((message: IMessageOther | IMessageFlag | IMessageDrs) => {
                         const { Message, Category, Utc } = message
 
                         const hour =
@@ -31,25 +30,13 @@ export default function ControlMessages() {
                                 ? `0${new Date(Utc).getMinutes()}`
                                 : new Date(Utc).getMinutes()
 
-                        if (Category !== "Flag") {
-                            return (
-                                <div
-                                    key={index}
-                                    className="bg-zinc-900 border border-white/5 rounded-xl flex flex-col px-3 py-2"
-                                >
-                                    <p className="text-sm text-zinc-400">
-                                        {hour}:{minute} - {Category}
-                                    </p>
-                                    <p className="">{Message}</p>
-                                </div>
-                            )
-                        } else {
+                        if (Category === "Flag") {
                             const { Flag } = message as { Flag: keyof typeof flagTypes }
 
                             return (
                                 <div
-                                    key={index}
-                                    className="bg-zinc-900 border border-white/5 rounded-xl flex flex-col px-3 py-2"
+                                    key={`${Utc}${Message}`}
+                                    className="flex flex-col rounded-xl border border-white/5 bg-zinc-900 px-3 py-2"
                                 >
                                     <p className="text-sm text-zinc-400">
                                         {hour}:{minute} - {Category}
@@ -60,19 +47,31 @@ export default function ControlMessages() {
                                 </div>
                             )
                         }
+                        return (
+                            <div
+                                key={`${Utc}${Message}`}
+                                className="flex flex-col rounded-xl border border-white/5 bg-zinc-900 px-3 py-2"
+                            >
+                                <p className="text-sm text-zinc-400">
+                                    {hour}:{minute} - {Category}
+                                </p>
+                                <p className="">{Message}</p>
+                            </div>
+                        )
                     })}
             </div>
         )
-    } else
-        return (
-            <div className="flex flex-col gap-2 p-2 h-full overflow-y-scroll overflow-x-hidden border-t border-white/10">
-                {[...Array(10)].map((e, i) => (
-                    <Skeleton
-                        key={i}
-                        delay={i * 100}
-                        height={Math.random() > 0.5 ? 86 : 62}
-                    />
-                ))}
-            </div>
-        )
+    }
+    return (
+        <div className="flex h-full flex-col gap-2 overflow-x-hidden overflow-y-scroll border-white/10 border-t p-2">
+            {[...Array(10)].map((_, i) => (
+                <Skeleton
+                    // biome-ignore lint/suspicious/noArrayIndexKey: fixed placeholder list that never reorders
+                    key={i}
+                    delay={i * 100}
+                    height={Math.random() > 0.5 ? 86 : 62}
+                />
+            ))}
+        </div>
+    )
 }

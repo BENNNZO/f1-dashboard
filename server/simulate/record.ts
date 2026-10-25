@@ -1,4 +1,5 @@
-import fs from "fs"
+import fs from "node:fs"
+
 import f1WebSocketServer from "../services/f1WebSocketServer"
 
 const logFilePath = `${__dirname}/logs/`
@@ -27,4 +28,4 @@ async function startRecording() {
     }
 }
 
-startRecording()
+void startRecording()

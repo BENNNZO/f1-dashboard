@@ -22,7 +22,7 @@ export default function Skeleton({
     if (isClient)
         return (
             <div
-                className="bg-white/20 animate-pulse shrink-0"
+                className="shrink-0 animate-pulse bg-white/20"
                 style={{
                     width: width ? `${width}px` : "100%",
                     height: height ? `${height}px` : "100%",

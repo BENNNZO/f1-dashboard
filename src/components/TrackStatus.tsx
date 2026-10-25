@@ -1,5 +1,5 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-import { ITrackStatus } from "@/types/ITrackStatus.type"
+import type { ITrackStatus } from "@/types/ITrackStatus.type"
 
 import Skeleton from "./Skeleton"
 
@@ -13,19 +13,18 @@ export default function TrackStatus() {
     if (trackStatus) {
         return (
             <p
-                className="px-4 py-1 h-8 rounded-full bg-zinc-900 border border-white/5"
+                className="h-8 rounded-full border border-white/5 bg-zinc-900 px-4 py-1"
                 style={{ background: `${statusColors[trackStatus.Status]}` }}
             >
                 {trackStatus.Message}
             </p>
         )
-    } else {
-        return (
-            <Skeleton
-                width={110}
-                height={32}
-                rounded
-            />
-        )
     }
+    return (
+        <Skeleton
+            width={110}
+            height={32}
+            rounded
+        />
+    )
 }

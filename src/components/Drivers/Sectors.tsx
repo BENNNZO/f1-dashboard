@@ -1,4 +1,5 @@
-import { ISector, ISegment } from "@/types/ITimingData.type"
+import type { ISector, ISegment } from "@/types/ITimingData.type"
+import timeColor from "@/utils/timeColor"
 
 const STATUS_COLORS = {
     "0": "#ffffff40", // grey
@@ -9,16 +10,14 @@ const STATUS_COLORS = {
 }
 
 export default function Sectors({ sectorData }: { sectorData: ISector[] }) {
-    console.log(sectorData)
-
     return (
-        <div className="flex gap-2 min-w-32">
+        <div className="flex min-w-32 gap-2">
             {sectorData &&
                 Object.values(sectorData).map((sector: ISector, index: number) => {
-                    console.log(sector)
                     if (sector.Segments) {
                         return (
                             <div
+                                // biome-ignore lint/suspicious/noArrayIndexKey: sectors are a fixed list that never reorders
                                 key={index}
                                 className="flex flex-col justify-between gap-2"
                             >
@@ -26,29 +25,27 @@ export default function Sectors({ sectorData }: { sectorData: ISector[] }) {
                                     {sector.Segments &&
                                         Object.values(sector.Segments).map((segment: ISegment, index: number) => (
                                             <div
+                                                // biome-ignore lint/suspicious/noArrayIndexKey: segments are a fixed list that never reorders
                                                 key={index}
                                                 style={{
                                                     background: `${STATUS_COLORS[String(segment.Status) as keyof typeof STATUS_COLORS]}`,
                                                 }}
-                                                className="rounded-full w-2.5 min-[600]:w-1.5 min-[650px]:w-2 min-[700px]:w-2.5 md:w-3 2xl:w-4 h-1.5 duration-150"
+                                                className="h-1.5 w-2.5 rounded-full duration-150 md:w-3 2xl:w-4 min-[600]:w-1.5 min-[650px]:w-2 min-[700px]:w-2.5"
                                             ></div>
                                         ))}
                                 </div>
                                 <div className="flex items-end gap-1">
-                                    <p
-                                        className={`font-semibold leading-none ${sector.OverallFastest ? "text-purple-400" : sector.PersonalFastest ? "text-green-300" : "text-white"}`}
-                                    >
+                                    <p className={`font-semibold leading-none ${timeColor(sector)}`}>
                                         {sector.PreviousValue ? "---" : sector.PreviousValue}
                                     </p>
-                                    <p className="font-semibold text-white/50 text-sm leading-none">
+                                    <p className="font-semibold text-sm text-white/50 leading-none">
                                         {sector.Value === "" ? "---" : sector.Value}
                                     </p>
                                 </div>
                             </div>
                         )
-                    } else {
-                        return <></>
                     }
+                    return null
                 })}
         </div>
     )

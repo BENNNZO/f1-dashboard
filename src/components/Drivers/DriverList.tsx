@@ -1,12 +1,12 @@
-import { useWebSocketStore } from "@/store/webSocketStore"
 import { motion } from "framer-motion"
 
-import { IDriverList } from "@/types/IDriverList.type"
-import { ITimingAppData } from "@/types/ITimingAppData.type"
-import { ITimingData, ITimingDataLine } from "@/types/ITimingData.type"
+import Skeleton from "@/components/Skeleton"
+import { useWebSocketStore } from "@/store/webSocketStore"
+import type { IDriverList } from "@/types/IDriverList.type"
+import type { ITimingAppData } from "@/types/ITimingAppData.type"
+import type { ITimingData, ITimingDataLine } from "@/types/ITimingData.type"
 
 import Driver from "./Driver"
-import Skeleton from "../Skeleton"
 
 export default function DriverList() {
     const timingAppData: ITimingAppData | null = useWebSocketStore((state) => state.timingAppData)
@@ -20,7 +20,7 @@ export default function DriverList() {
         // sortedTimingData.unshift(sortedTimingData[0])
 
         return (
-            <motion.div className="relative flex flex-col gap-2 p-2 overflow-y-scroll font-mono shrink-0">
+            <motion.div className="relative flex shrink-0 flex-col gap-2 overflow-y-scroll p-2 font-mono">
                 {sortedTimingData.map((data) => {
                     const driverNumber: string = data[0]
                     const timingData: ITimingDataLine = data[1]
@@ -43,16 +43,17 @@ export default function DriverList() {
                 })}
             </motion.div>
         )
-    } else
-        return (
-            <div className="relative flex flex-col gap-2 p-2 w-1/2 overflow-y-scroll shrink-0">
-                {[...Array(20)].map((e, i) => (
-                    <Skeleton
-                        key={i}
-                        delay={i * 100}
-                        height={50}
-                    />
-                ))}
-            </div>
-        )
+    }
+    return (
+        <div className="relative flex w-1/2 shrink-0 flex-col gap-2 overflow-y-scroll p-2">
+            {[...Array(20)].map((_, i) => (
+                <Skeleton
+                    // biome-ignore lint/suspicious/noArrayIndexKey: fixed placeholder list that never reorders
+                    key={i}
+                    delay={i * 100}
+                    height={50}
+                />
+            ))}
+        </div>
+    )
 }

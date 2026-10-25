@@ -1,16 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import axios from "axios"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
-import { transformPoints, rotatePoint, paddPoint } from "@/utils/positionPoints"
-
-import { ICircuitData } from "@/types/ICircuitData.type"
-import { ISessionInfo } from "@/types/ISessionInfo.type"
-import { IPositionData, IPositionDataObject, IPositionEntry } from "@/types/IPositionData.type"
-import { IDriverList } from "@/types/IDriverList.type"
+import type { ICircuitData } from "@/types/ICircuitData.type"
+import type { IDriverList } from "@/types/IDriverList.type"
+import type { IPositionData, IPositionDataObject, IPositionEntry } from "@/types/IPositionData.type"
+import type { ISessionInfo } from "@/types/ISessionInfo.type"
+import { paddPoint, rotatePoint, transformPoints } from "@/utils/positionPoints"
 
 import Skeleton from "./Skeleton"
 
@@ -40,7 +39,7 @@ export default function Circuit() {
                 `https://api.multiviewer.app/api/v1/circuits/${sessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`,
             )
             .then((res) => updateCircuitData(res.data))
-            .catch((err) => console.log(err))
+            .catch((err) => console.error(err))
     }, [sessionInfo, updateCircuitData])
 
     // handles timing logic
@@ -62,7 +61,7 @@ export default function Circuit() {
         })
 
         setPrevPosition(positionData.slice(-1)[0])
-    }, [positionData, circuitData, prevPosition?.Timestamp])
+    }, [positionData, prevPosition?.Timestamp])
 
     if (circuitData && positionData && currentPosition && driverList) {
         // formatt and transform circuit path coords
@@ -75,13 +74,13 @@ export default function Circuit() {
         const center = { x: centerX, y: centerY }
 
         return (
-            <div className="w-full relative">
+            <div className="relative w-full">
                 <Image
                     src={`/flags/${sessionInfo?.Meeting.Country.Code.toLowerCase() ?? "unknown"}.svg`}
                     width={80}
                     height={80}
                     alt="country-flag"
-                    className="w-24 rounded-xl object-cover absolute top-2 left-2 shadow-md"
+                    className="absolute top-2 left-2 w-24 rounded-xl object-cover shadow-md"
                 />
                 <svg
                     width="100%"
@@ -90,6 +89,7 @@ export default function Circuit() {
                     xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="xMidYMid meet"
                 >
+                    <title>Track map</title>
                     <polyline
                         points={
                             transformedPoints.map((item) => `${item.x},${item.y}`).join(" ") +
@@ -126,7 +126,7 @@ export default function Circuit() {
                                 style={{ transform: `translate(${point.x}px, ${point.y}px)` }}
                             >
                                 <text
-                                    className={`text-[300px] opacity-50 font-bold absolute`}
+                                    className={`absolute font-bold text-[300px] opacity-50`}
                                     style={{ transform: `translate(175px, 100px)` }}
                                     fill={`#${teamColor}`}
                                 >
@@ -144,10 +144,10 @@ export default function Circuit() {
                 </svg>
             </div>
         )
-    } else
-        return (
-            <div className="w-full p-2">
-                <Skeleton />
-            </div>
-        )
+    }
+    return (
+        <div className="w-full p-2">
+            <Skeleton />
+        </div>
+    )
 }
