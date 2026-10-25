@@ -3,4 +3,3 @@ minimumReleaseAge: 10080
 
 allowBuilds:
   sharp: true
-  unrs-resolver: false
