@@ -29,12 +29,6 @@ cd f1-dashboard
 pnpm i
 ```
 
-Create `.env.local` with the server address:
-
-```bash
-NEXT_PUBLIC_WS_URL=ws://localhost:3001
-```
-
 Start the server and the app in two terminals:
 
 ```bash
@@ -43,6 +37,8 @@ pnpm dev
 ```
 
 Open http://localhost:3000.
+
+The app connects to `ws://localhost:3001`. To use a different server, set `NEXT_PUBLIC_WS_URL` in `.env.local`.
 
 ## Record and replay
 
