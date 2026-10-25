@@ -3,7 +3,7 @@ export type ITeamRadio = {
 }
 
 export type ICapture = {
-    Path: string,
-    RacingNumber: string,
+    Path: string
+    RacingNumber: string
     Utc: string
 }

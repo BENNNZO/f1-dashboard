@@ -2,8 +2,8 @@ import { WebSocketServer, WebSocket } from "ws"
 
 export default function broadcastData(wss: WebSocketServer, data: any) {
     console.log(`[BROADCAST] Broadcasting data to clients...`)
-    
-    wss.clients.forEach(client => {
+
+    wss.clients.forEach((client) => {
         if (client.readyState === WebSocket.OPEN) {
             try {
                 client.send(JSON.parse(data))

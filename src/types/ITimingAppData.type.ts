@@ -3,20 +3,20 @@ export type ITimingAppData = {
 }
 
 export type ILine = {
-    GridPos: string,
-    Line: number,
-    RacingNumber: string,
+    GridPos: string
+    Line: number
+    RacingNumber: string
     Stints: IStint[]
 }
 
 export type IStint = {
-    LapTime: string,
-    LapNumber: number,
-    LapFlags: number,
-    Compound: string,
-    New: boolean,
-    TyresNotChanged: string,
-    TotalLaps: number,
+    LapTime: string
+    LapNumber: number
+    LapFlags: number
+    Compound: string
+    New: boolean
+    TyresNotChanged: string
+    TotalLaps: number
     StartLaps: number
 }
 

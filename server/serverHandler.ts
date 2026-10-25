@@ -1,9 +1,9 @@
-import f1WebSocketServer from './services/f1WebSocketServer'
-import myWebSocketServer from './services/myWebSocketServer'
-import broadcastData from './utils/broadcastData'
+import f1WebSocketServer from "./services/f1WebSocketServer"
+import myWebSocketServer from "./services/myWebSocketServer"
+import broadcastData from "./utils/broadcastData"
 import { updateDataStore } from "./utils/updateDataStore"
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001
 
 async function startServer() {
     try {
@@ -23,7 +23,7 @@ async function startServer() {
             message["M"]?.forEach((item: any) => {
                 const type = item["A"][0]
                 const data = item["A"][1]
-                
+
                 updateDataStore({ [type]: data })
                 broadcastData(wss, { type, data })
             })

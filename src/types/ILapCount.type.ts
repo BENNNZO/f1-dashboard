@@ -1,4 +1,4 @@
 export type ILapCount = {
-    CurrentLap: number,
+    CurrentLap: number
     TotalLaps: number
 }

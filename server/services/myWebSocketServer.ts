@@ -1,14 +1,14 @@
-import { WebSocketServer} from 'ws';
+import { WebSocketServer } from "ws"
 
-import { currentData } from '../utils/updateDataStore';
+import { currentData } from "../utils/updateDataStore"
 
 export default async function startServer(port: number): Promise<WebSocketServer> {
     return new Promise((res, rej) => {
         try {
-            const wss = new WebSocketServer({ 
+            const wss = new WebSocketServer({
                 port,
-                host: '0.0.0.0'
-            });
+                host: "0.0.0.0",
+            })
 
             wss.on("connection", (event) => {
                 console.log("[SERVER] Client Connected")
@@ -20,7 +20,7 @@ export default async function startServer(port: number): Promise<WebSocketServer
                 console.log("[SERVER] Client Disconnected")
             })
 
-            wss.on("error", err => {
+            wss.on("error", (err) => {
                 rej(new Error(`[SERVER] Failed to initialize the web socket server: ${(err as Error).message}`))
             })
 
