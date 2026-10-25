@@ -3,7 +3,15 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 
-export default function AudioPlayer({ src, playing, setPlaying }: { src: string, playing: string, setPlaying: (src: string) => void }) {
+export default function AudioPlayer({
+    src,
+    playing,
+    setPlaying,
+}: {
+    src: string
+    playing: string
+    setPlaying: (src: string) => void
+}) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
     const [duration, setDuration] = useState<number | null>(null)
     const [currentTime, setCurrentTime] = useState<number>(0)
@@ -25,7 +33,7 @@ export default function AudioPlayer({ src, playing, setPlaying }: { src: string,
     }, [isPlaying, src, setPlaying])
 
     function updateData() {
-        setDuration(audioRef.current?.duration ?? null);
+        setDuration(audioRef.current?.duration ?? null)
     }
 
     function resetData() {
@@ -34,7 +42,7 @@ export default function AudioPlayer({ src, playing, setPlaying }: { src: string,
     }
 
     function togglePlayState() {
-        setIsPlaying(state => {
+        setIsPlaying((state) => {
             if (state) {
                 audioRef.current?.pause()
                 cancelAnimationFrame(animationRef.current)
@@ -78,23 +86,54 @@ export default function AudioPlayer({ src, playing, setPlaying }: { src: string,
 
     return (
         <div className="flex flex-row gap-1 w-full">
-            <audio ref={audioRef} src={src} preload="metadata" onLoadedMetadata={() => updateData()} onEnded={() => resetData()}></audio>
+            <audio
+                ref={audioRef}
+                src={src}
+                preload="metadata"
+                onLoadedMetadata={() => updateData()}
+                onEnded={() => resetData()}
+            ></audio>
 
             <div className="flex flex-row pr-2 items-center justify-center">
-                <button onClick={() => togglePlayState()} className="cursor-pointer">
+                <button
+                    onClick={() => togglePlayState()}
+                    className="cursor-pointer"
+                >
                     {isPlaying ? (
-                        <Image src="icons/audio_player/pause.svg" width={25} height={25} alt="pause button" className="invert w-6 h-6" />
+                        <Image
+                            src="icons/audio_player/pause.svg"
+                            width={25}
+                            height={25}
+                            alt="pause button"
+                            className="invert w-6 h-6"
+                        />
                     ) : (
-                        <Image src="icons/audio_player/play.svg" width={25} height={25} alt="pause button" className="invert w-6 h-6" />
+                        <Image
+                            src="icons/audio_player/play.svg"
+                            width={25}
+                            height={25}
+                            alt="pause button"
+                            className="invert w-6 h-6"
+                        />
                     )}
                 </button>
             </div>
             <div className="flex flex-row items-center gap-4 w-full">
                 <p>{formatTime(currentTime)}</p>
-                <div ref={sliderRef} onClick={(e) => sliderClickHandler(e)} className="relative w-full bg-zinc-800 rounded-full overflow-hidden group cursor-pointer">
-                    <div className="h-2 group-hover:h-4 bg-white pointer-events-none" style={{ width: `${currentTime / (duration ?? 1) * 100}%`, transition: "height 0.1s ease-out" }}></div>
+                <div
+                    ref={sliderRef}
+                    onClick={(e) => sliderClickHandler(e)}
+                    className="relative w-full bg-zinc-800 rounded-full overflow-hidden group cursor-pointer"
+                >
+                    <div
+                        className="h-2 group-hover:h-4 bg-white pointer-events-none"
+                        style={{
+                            width: `${(currentTime / (duration ?? 1)) * 100}%`,
+                            transition: "height 0.1s ease-out",
+                        }}
+                    ></div>
                 </div>
-                <p>{formatTime((duration ?? 0))}</p>
+                <p>{formatTime(duration ?? 0)}</p>
             </div>
         </div>
     )

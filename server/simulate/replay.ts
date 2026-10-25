@@ -1,24 +1,21 @@
-import { WebSocketServer } from 'ws';
+import { WebSocketServer } from "ws"
 import fs from "fs"
 import readline from "readline"
 
-import { SERVER_CONSTANTS } from '../config/constants';
-import { updateDataStore } from '../utils/updateDataStore';
-import broadcastData from '../utils/broadcastData';
+import { SERVER_CONSTANTS } from "../config/constants"
+import { updateDataStore } from "../utils/updateDataStore"
+import broadcastData from "../utils/broadcastData"
 
 interface IMessageItem {
-    H: string,
-    M: string,
-    A: [
-        string,
-        object,
-        string
-    ]
+    H: string
+    M: string
+    A: [string, object, string]
 }
 
 // test for arguments and if the file exists
 if (!process.argv[2]) throw new Error("Missing log file name argument (npm run simulate *log file name*)")
-if (!fs.existsSync(`${__dirname}/logs/${process.argv[2]}.txt`)) throw new Error(`Log file ${process.argv[2]}.txt does not exist`)
+if (!fs.existsSync(`${__dirname}/logs/${process.argv[2]}.txt`))
+    throw new Error(`Log file ${process.argv[2]}.txt does not exist`)
 
 async function startReplay() {
     try {
@@ -38,7 +35,8 @@ async function startReplay() {
                 const { timestamp, message } = JSON.parse(line)
 
                 // delay between this and previous message
-                if (previousTimestamp > 0) await new Promise(res => setTimeout(res, (timestamp - previousTimestamp) / 4))
+                if (previousTimestamp > 0)
+                    await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
 
                 if (message["R"]) {
                     updateDataStore(message["R"])

@@ -1,4 +1,4 @@
 export type ITrackStatus = {
-    Status: string,
+    Status: string
     Message: string
 }

@@ -21,10 +21,10 @@ export const F1_CONSTANTS = {
         "TimingData",
         "TeamRadio",
         "PitLaneTimeCollection",
-        "ChampionshipPrediction"
-    ]
+        "ChampionshipPrediction",
+    ],
 }
 
 export const SERVER_CONSTANTS = {
-    PORT: 3001
+    PORT: 3001,
 }

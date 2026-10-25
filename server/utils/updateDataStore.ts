@@ -1,31 +1,29 @@
-export let currentData = {
-
-}
+export let currentData = {}
 
 export function updateDataStore(data: any) {
     currentData = deepMerge(currentData, data)
 }
 // This function was made by AI lol way to indepth for my brain atm.
 function deepMerge(target: any, source: any) {
-    const output = { ...target };
+    const output = { ...target }
 
     if (isObject(target) && isObject(source)) {
-        Object.keys(source).forEach(key => {
+        Object.keys(source).forEach((key) => {
             if (isObject(source[key])) {
                 if (!(key in target)) {
-                    Object.assign(output, { [key]: source[key] });
+                    Object.assign(output, { [key]: source[key] })
                 } else {
-                    output[key] = deepMerge(target[key], source[key]);
+                    output[key] = deepMerge(target[key], source[key])
                 }
             } else {
-                Object.assign(output, { [key]: source[key] });
+                Object.assign(output, { [key]: source[key] })
             }
-        });
+        })
     }
 
-    return output;
+    return output
 }
 
 function isObject(item: any) {
-    return (item && typeof item === 'object' && !Array.isArray(item));
+    return item && typeof item === "object" && !Array.isArray(item)
 }
