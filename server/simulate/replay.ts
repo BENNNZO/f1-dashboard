@@ -8,8 +8,8 @@ import { storeF1Message } from "../utils/updateDataStore"
 import type { LogLine } from "./types"
 
 const logFolder = `${__dirname}/logs/`
-const logFileName = process.argv[2]?.replace(".txt", "")
-const logFile = `${logFolder}${logFileName}.txt`
+const logFileName = process.argv[2]?.replace(".jsonl", "")
+const logFile = `${logFolder}${logFileName}.jsonl`
 
 if (!logFileName) {
     console.error('[REPLAY] Missing log name.\nUsage: pnpm replay <log name>')

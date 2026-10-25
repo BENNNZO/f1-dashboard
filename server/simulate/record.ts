@@ -5,7 +5,7 @@ import f1WebSocketServer, { type F1Message } from "../services/f1WebSocketServer
 import type { LogLine } from "./types"
 
 const logFilePath = `${__dirname}/logs/`
-const logFileName = `${new Date().toISOString().replaceAll(":", "-")}.txt`
+const logFileName = `${new Date().toISOString().replaceAll(":", "-")}.jsonl`
 
 let messageCount = 0
 
