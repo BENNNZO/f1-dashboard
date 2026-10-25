@@ -1,7 +1,7 @@
 import { WebSocketServer } from "ws"
 
-import log from "../utils/log"
-import { currentData } from "../utils/updateDataStore"
+import { currentData } from "../dataStore"
+import log from "../log"
 
 export default async function myWebSocketServer(port: number): Promise<WebSocketServer> {
     return new Promise((res, rej) => {

@@ -1,8 +1,8 @@
 import fs from "node:fs"
 import readline from "node:readline/promises"
 
-import f1WebSocketServer, { type F1Message } from "../services/f1WebSocketServer"
-import log from "../utils/log"
+import f1WebSocketServer, { type F1Message } from "../f1/connection"
+import log from "../log"
 import type { LogLine } from "./types"
 
 const logFilePath = `${__dirname}/logs/`
