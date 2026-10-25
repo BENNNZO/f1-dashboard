@@ -2,6 +2,7 @@ import ws from "ws"
 
 import { F1_CONSTANTS } from "../config/constants"
 import negotiate from "../utils/f1Negotiate"
+import log from "../utils/log"
 
 export type F1Message = {
     type: string
@@ -51,14 +52,14 @@ export default function f1WebSocketServer(onMessage: (message: F1Message) => voi
     let retryDelay = RETRY_DELAY_MIN
 
     function reconnect() {
-        console.log(`[F1 WebSocket] Reconnecting in ${retryDelay / 1000}s`)
+        log("F1", `Reconnecting in ${retryDelay / 1000}s`)
         setTimeout(start, retryDelay)
         retryDelay = Math.min(retryDelay * 2, RETRY_DELAY_MAX)
     }
 
     function start() {
         connect().catch((err) => {
-            console.error(`[F1 WebSocket] Connect failed: ${(err as Error).message}`)
+            log("F1", `Connect failed: ${(err as Error).message}`, "error")
             reconnect()
         })
     }
@@ -81,7 +82,7 @@ export default function f1WebSocketServer(onMessage: (message: F1Message) => voi
         function resetWatchdog() {
             clearTimeout(watchdogTimer)
             watchdogTimer = setTimeout(() => {
-                console.warn("[F1 WebSocket] No message for 2 min")
+                log("F1", "No message for 2 min", "warn")
                 socket.terminate()
             }, WATCHDOG_TIMEOUT)
         }
@@ -89,7 +90,7 @@ export default function f1WebSocketServer(onMessage: (message: F1Message) => voi
         resetWatchdog()
 
         socket.on("open", () => {
-            console.log("[F1 WebSocket] Connected to F1 WebSocket")
+            log("F1", "Connected to F1 WebSocket")
 
             send(socket, { protocol: "json", version: 1 })
             send(socket, {
@@ -114,7 +115,7 @@ export default function f1WebSocketServer(onMessage: (message: F1Message) => voi
                     const message: SignalRMessage = JSON.parse(frame)
 
                     if (message.error) {
-                        console.error(`[F1 WebSocket] Error: ${message.error}`)
+                        log("F1", `Error: ${message.error}`, "error")
                     }
 
                     const f1Message = toF1Message(message)
@@ -124,22 +125,22 @@ export default function f1WebSocketServer(onMessage: (message: F1Message) => voi
                     if (f1Message) {
                         onMessage(f1Message)
                     } else if (!(isHandshakeReply || isPing)) {
-                        console.warn(`[F1 WebSocket] Unknown message: ${frame}`)
+                        log("F1", `Unknown message: ${frame}`, "warn")
                     }
                 } catch (err) {
-                    console.error(`[F1 WebSocket] Bad message: ${(err as Error).message} ${frame}`)
+                    log("F1", `Bad message: ${(err as Error).message} ${frame}`, "error")
                 }
             }
         })
 
         socket.on("error", (err) => {
-            console.error(`[F1 WebSocket] Error: ${err.message}`)
+            log("F1", `Error: ${err.message}`, "error")
         })
 
         socket.on("close", (code, reason) => {
             clearInterval(pingTimer)
             clearTimeout(watchdogTimer)
-            console.log(`[F1 WebSocket] Closed: ${code} - ${reason}`)
+            log("F1", `Closed: ${code} - ${reason}`)
             reconnect()
         })
     }

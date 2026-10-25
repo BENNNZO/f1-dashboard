@@ -1,5 +1,6 @@
 import { WebSocketServer } from "ws"
 
+import log from "../utils/log"
 import { currentData } from "../utils/updateDataStore"
 
 export default async function startServer(port: number): Promise<WebSocketServer> {
@@ -11,11 +12,11 @@ export default async function startServer(port: number): Promise<WebSocketServer
             })
 
             wss.on("connection", (event) => {
-                console.log("[SERVER] Client Connected")
+                log("SERVER", "Client Connected")
                 event.send(JSON.stringify({ type: "init", data: currentData }))
 
                 event.on("close", () => {
-                    console.log("[SERVER] Client Disconnected")
+                    log("SERVER", "Client Disconnected")
                 })
             })
 

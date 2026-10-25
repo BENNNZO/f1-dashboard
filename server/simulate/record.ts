@@ -2,6 +2,7 @@ import fs from "node:fs"
 import readline from "node:readline/promises"
 
 import f1WebSocketServer, { type F1Message } from "../services/f1WebSocketServer"
+import log from "../utils/log"
 import type { LogLine } from "./types"
 
 const logFilePath = `${__dirname}/logs/`
@@ -17,7 +18,7 @@ async function ensureLogFolder() {
     rl.close()
 
     if (answer.trim().toLowerCase() !== "y") {
-        console.log(`[RECORD] Stopped. The log folder does not exist: ${logFilePath}`)
+        log("RECORD", `Stopped. The log folder does not exist: ${logFilePath}`)
         return false
     }
 
@@ -29,17 +30,17 @@ function writeLogLine(message: F1Message) {
     const logLine: LogLine = { timestamp: Date.now(), message }
 
     fs.appendFile(logFilePath + logFileName, `${JSON.stringify(logLine)}\n`, (err) => {
-        if (err) return console.error(err)
+        if (err) return log("RECORD", err.message, "error")
 
         messageCount++
-        if (messageCount % 100 === 0) console.log(`[RECORD] ${messageCount} messages saved to ${logFileName}`)
+        if (messageCount % 100 === 0) log("RECORD", `${messageCount} messages saved to ${logFileName}`)
     })
 }
 
 async function startRecording() {
     if (!(await ensureLogFolder())) return
 
-    console.log(`[RECORD] Recording data to ${logFileName}`)
+    log("RECORD", `Recording data to ${logFileName}`)
 
     f1WebSocketServer(writeLogLine)
 }
