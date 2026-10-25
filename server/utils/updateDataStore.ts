@@ -8,7 +8,7 @@ function updateDataStore(data: Record<string, unknown>) {
 
 export function storeF1Message(message: F1Message) {
     if (message.type === "init") {
-        updateDataStore(message.data as Record<string, unknown>)
+        currentData = message.data as Record<string, unknown>
     } else {
         updateDataStore({ [message.type]: message.data })
     }
