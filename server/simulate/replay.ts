@@ -1,8 +1,9 @@
 import fs from "node:fs"
 import readline from "node:readline"
-import { WebSocketServer } from "ws"
+import type { WebSocketServer } from "ws"
 
 import { SERVER_CONSTANTS } from "../config/constants"
+import myWebSocketServer from "../services/myWebSocketServer"
 import broadcastData from "../utils/broadcastData"
 import log from "../utils/log"
 import { storeF1Message } from "../utils/updateDataStore"
@@ -48,19 +49,11 @@ async function replayLog(wss: WebSocketServer) {
 
 async function startReplay() {
     try {
-        const wss = new WebSocketServer({ port: SERVER_CONSTANTS.PORT })
+        const wss = await myWebSocketServer(SERVER_CONSTANTS.PORT)
 
         log("REPLAY", `Server Started on PORT: ${SERVER_CONSTANTS.PORT}`)
 
-        wss.on("connection", async (client) => {
-            log("REPLAY", "Client Connected")
-
-            client.on("close", () => {
-                log("REPLAY", "Client Disconnected")
-            })
-
-            await replayLog(wss)
-        })
+        wss.once("connection", () => void replayLog(wss))
     } catch (err) {
         throw new Error(
             `[REPLAY] Could not start the replay server on port ${SERVER_CONSTANTS.PORT}: ${(err as Error).message}`,
