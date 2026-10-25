@@ -18,16 +18,22 @@ type SignalRMessage = {
 
 const RECORD_SEPARATOR = "\x1e"
 
+const MESSAGE_TYPE = {
+    INVOCATION: 1,
+    COMPLETION: 3,
+    PING: 6,
+} as const
+
 function send(socket: ws, message: object) {
     socket.send(JSON.stringify(message) + RECORD_SEPARATOR)
 }
 
 function toF1Message(message: SignalRMessage): F1Message | undefined {
-    if (message.type === 3 && message.result) {
+    if (message.type === MESSAGE_TYPE.COMPLETION && message.result) {
         return { type: "init", data: message.result }
     }
 
-    if (message.type === 1 && message.target === "feed" && message.arguments){
+    if (message.type === MESSAGE_TYPE.INVOCATION && message.target === "feed" && message.arguments){
         return { type: message.arguments[0], data: message.arguments[1] }
     }
 }
@@ -52,9 +58,9 @@ export default async function f1WebSocketServer(onMessage: (message: F1Message) 
             console.log("[F1 WebSocket] Connected to F1 WebSocket")
 
             send(socket, { protocol: "json", version: 1 })
-            send(socket, { type: 1, target: "Subscribe", arguments: [SUBSCRIPTION_TOPICS], invocationId: "1" })
+            send(socket, { type: MESSAGE_TYPE.INVOCATION, target: "Subscribe", arguments: [SUBSCRIPTION_TOPICS], invocationId: "1" })
 
-            pingTimer = setInterval(() => send(socket, { type: 6 }), PING_INTERVAL)
+            pingTimer = setInterval(() => send(socket, { type: MESSAGE_TYPE.PING }), PING_INTERVAL)
 
             res(socket)
         })
@@ -70,9 +76,13 @@ export default async function f1WebSocketServer(onMessage: (message: F1Message) 
                 }
 
                 const f1Message = toF1Message(message)
+                const isHandshakeReply = message.type === undefined
+                const isPing = message.type === MESSAGE_TYPE.PING
 
                 if (f1Message) {
                     onMessage(f1Message)
+                } else if (!(isHandshakeReply || isPing)) {
+                    console.warn(`[F1 WebSocket] Unknown message: ${frame}`)
                 }
             }
         })
