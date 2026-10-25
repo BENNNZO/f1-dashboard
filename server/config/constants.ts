@@ -2,12 +2,10 @@ export const F1_CONSTANTS = {
     BASE_URL: "livetiming.formula1.com/signalrcore",
     PING_INTERVAL: 15000,
     SUBSCRIPTION_TOPICS: [
+        // Needs an F1 TV token: "CarData.z", "Position.z",
         "Heartbeat",
-        "CarData.z",
-        "Position.z",
         "ExtrapolatedClock",
         "TopThree",
-        "RcmSeries",
         "TimingStats",
         "TimingAppData",
         "WeatherData",
@@ -20,7 +18,12 @@ export const F1_CONSTANTS = {
         "TimingData",
         "TeamRadio",
         "PitLaneTimeCollection",
-        "ChampionshipPrediction",
+        "CurrentTyres",
+        "TyreStintSeries",
+        "LapSeries",
+        "TimingDataF1",
+        "DriverTracker",
+        "TlaRcm",
     ],
 }
 
