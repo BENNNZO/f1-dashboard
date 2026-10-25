@@ -10,6 +10,7 @@ async function startRecording() {
 
     try {
         const f1Socket = await f1WebSocketServer()
+        let messageCount = 0
 
         f1Socket.on("message", (data) => {
             const timestamp = Date.now()
@@ -18,8 +19,11 @@ async function startRecording() {
                 logFilePath + logFileName,
                 `{"timestamp": ${timestamp}, "message": ${data.toString()}}\n`,
                 (err) => {
-                    if (err) console.error(err)
-                    else console.log(`${timestamp}: [RECORD] Log Updated: ${logFileName}`)
+                    if (err) return console.error(err)
+
+                    messageCount++
+                    if (messageCount % 100 === 0)
+                        console.log(`[RECORD] ${messageCount} messages saved to ${logFileName}`)
                 },
             )
         })
