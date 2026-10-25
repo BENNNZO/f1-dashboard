@@ -12,7 +12,7 @@ type MessageItem = {
     A: [string, object, string]
 }
 
-if (!process.argv[2]) throw new Error("Missing log file name argument (npm run simulate *log file name*)")
+if (!process.argv[2]) throw new Error("Missing log file name argument (pnpm replay *log file name*)")
 if (!fs.existsSync(`${__dirname}/logs/${process.argv[2]}.txt`))
     throw new Error(`Log file ${process.argv[2]}.txt does not exist`)
 
