@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
+import { useEffect, useRef, useState } from "react"
 
 export default function AudioPlayer({
     src,
@@ -85,7 +85,7 @@ export default function AudioPlayer({
     }
 
     return (
-        <div className="flex flex-row gap-1 w-full">
+        <div className="flex w-full flex-row gap-1">
             <audio
                 ref={audioRef}
                 src={src}
@@ -94,8 +94,9 @@ export default function AudioPlayer({
                 onEnded={() => resetData()}
             ></audio>
 
-            <div className="flex flex-row pr-2 items-center justify-center">
+            <div className="flex flex-row items-center justify-center pr-2">
                 <button
+                    type="button"
                     onClick={() => togglePlayState()}
                     className="cursor-pointer"
                 >
@@ -105,7 +106,7 @@ export default function AudioPlayer({
                             width={25}
                             height={25}
                             alt="pause button"
-                            className="invert w-6 h-6"
+                            className="h-6 w-6 invert"
                         />
                     ) : (
                         <Image
@@ -113,20 +114,20 @@ export default function AudioPlayer({
                             width={25}
                             height={25}
                             alt="pause button"
-                            className="invert w-6 h-6"
+                            className="h-6 w-6 invert"
                         />
                     )}
                 </button>
             </div>
-            <div className="flex flex-row items-center gap-4 w-full">
+            <div className="flex w-full flex-row items-center gap-4">
                 <p>{formatTime(currentTime)}</p>
                 <div
                     ref={sliderRef}
                     onClick={(e) => sliderClickHandler(e)}
-                    className="relative w-full bg-zinc-800 rounded-full overflow-hidden group cursor-pointer"
+                    className="group relative w-full cursor-pointer overflow-hidden rounded-full bg-zinc-800"
                 >
                     <div
-                        className="h-2 group-hover:h-4 bg-white pointer-events-none"
+                        className="pointer-events-none h-2 bg-white group-hover:h-4"
                         style={{
                             width: `${(currentTime / (duration ?? 1)) * 100}%`,
                             transition: "height 0.1s ease-out",

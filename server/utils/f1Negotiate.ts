@@ -1,4 +1,5 @@
 import axios from "axios"
+
 import { F1_CONSTANTS } from "../config/constants"
 
 interface INegotiationResponse {
@@ -15,10 +16,10 @@ export default async function negotiate(): Promise<INegotiationResponse> {
             `https://${BASE_URL}/negotiate?clientProtocol=${CLIENT_PROTOCOL}&connectionData=${CONNECTION_DATA}`,
         )
 
-        const encodedToken = encodeURIComponent(res.data["ConnectionToken"])
+        const encodedToken = encodeURIComponent(res.data.ConnectionToken)
         const cookie = res.headers["set-cookie"]
 
-        if (!encodedToken || !cookie) throw new Error("Missing encodedToken or cookie")
+        if (!(encodedToken && cookie)) throw new Error("Missing encodedToken or cookie")
 
         return { encodedToken, cookie }
     } catch (err) {

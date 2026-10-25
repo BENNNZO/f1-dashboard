@@ -1,10 +1,10 @@
+import fs from "node:fs"
+import readline from "node:readline"
 import { WebSocketServer } from "ws"
-import fs from "fs"
-import readline from "readline"
 
 import { SERVER_CONSTANTS } from "../config/constants"
-import { updateDataStore } from "../utils/updateDataStore"
 import broadcastData from "../utils/broadcastData"
+import { updateDataStore } from "../utils/updateDataStore"
 
 interface IMessageItem {
     H: string
@@ -38,14 +38,14 @@ async function startReplay() {
                 if (previousTimestamp > 0)
                     await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
 
-                if (message["R"]) {
-                    updateDataStore(message["R"])
-                    broadcastData(wss, { type: "init", data: message["R"] })
+                if (message.R) {
+                    updateDataStore(message.R)
+                    broadcastData(wss, { type: "init", data: message.R })
                 }
 
-                message["M"]?.forEach((item: IMessageItem) => {
-                    const type = item["A"][0]
-                    const data = item["A"][1]
+                message.M?.forEach((item: IMessageItem) => {
+                    const type = item.A[0]
+                    const data = item.A[1]
 
                     updateDataStore({ [type]: data })
                     broadcastData(wss, { type, data })
@@ -65,4 +65,4 @@ async function startReplay() {
     }
 }
 
-startReplay()
+void startReplay()

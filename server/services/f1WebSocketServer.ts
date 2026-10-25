@@ -1,7 +1,6 @@
 import ws from "ws"
 
 import { F1_CONSTANTS } from "../config/constants"
-
 import negotiate from "../utils/f1Negotiate"
 
 export default async function f1WebSocketServer(): Promise<ws> {

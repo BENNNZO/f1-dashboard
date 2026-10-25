@@ -49,25 +49,25 @@ export function transformPoints(points: point[], rotation: number, padding: numb
         Math.min(...points.map((p) => p.y))
 
     // apply rotation transform
-    points = points.map((point) => rotatePoint(point, { x: centerX, y: centerY }, rotation))
+    const rotatedPoints = points.map((point) => rotatePoint(point, { x: centerX, y: centerY }, rotation))
 
     // get min max width and height
-    const minX = Math.min(...points.map((point) => point.x))
-    const minY = Math.min(...points.map((point) => point.y))
+    const minX = Math.min(...rotatedPoints.map((point) => point.x))
+    const minY = Math.min(...rotatedPoints.map((point) => point.y))
 
     // max + |min| + (padding * 2) === width or height
     const width =
-        Math.max(...points.map((point) => point.x)) +
-        Math.abs(Math.min(...points.map((point) => point.x))) +
+        Math.max(...rotatedPoints.map((point) => point.x)) +
+        Math.abs(Math.min(...rotatedPoints.map((point) => point.x))) +
         padding * 2
     const height =
-        Math.max(...points.map((point) => point.y)) +
-        Math.abs(Math.min(...points.map((point) => point.y))) +
+        Math.max(...rotatedPoints.map((point) => point.y)) +
+        Math.abs(Math.min(...rotatedPoints.map((point) => point.y))) +
         padding * 2
 
     // finally apply padding transform and return
     return {
-        transformedPoints: points.map((point) => paddPoint(point, padding)),
+        transformedPoints: rotatedPoints.map((point) => paddPoint(point, padding)),
         minX,
         minY,
         width,

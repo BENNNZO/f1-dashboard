@@ -1,19 +1,22 @@
-export let currentData = {}
+export let currentData: Record<string, unknown> = {}
 
-export function updateDataStore(data: any) {
+export function updateDataStore(data: Record<string, unknown>) {
     currentData = deepMerge(currentData, data)
 }
 // This function was made by AI lol way to indepth for my brain atm.
-function deepMerge(target: any, source: any) {
+function deepMerge(target: Record<string, unknown>, source: Record<string, unknown>): Record<string, unknown> {
     const output = { ...target }
 
     if (isObject(target) && isObject(source)) {
         Object.keys(source).forEach((key) => {
             if (isObject(source[key])) {
-                if (!(key in target)) {
-                    Object.assign(output, { [key]: source[key] })
+                if (key in target) {
+                    output[key] = deepMerge(
+                        target[key] as Record<string, unknown>,
+                        source[key] as Record<string, unknown>,
+                    )
                 } else {
-                    output[key] = deepMerge(target[key], source[key])
+                    Object.assign(output, { [key]: source[key] })
                 }
             } else {
                 Object.assign(output, { [key]: source[key] })
@@ -24,6 +27,6 @@ function deepMerge(target: any, source: any) {
     return output
 }
 
-function isObject(item: any) {
+function isObject(item: unknown) {
     return item && typeof item === "object" && !Array.isArray(item)
 }

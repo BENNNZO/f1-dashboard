@@ -1,17 +1,17 @@
 export default function deepMerge(target: Record<string, unknown> | null, source: Record<string, unknown>) {
-    const newTarget = target === null ? {} : target
+    const newTarget = target ?? {}
     const output = { ...newTarget }
 
     if (isObject(newTarget) && isObject(source)) {
         Object.keys(source).forEach((key) => {
             if (isObject(source[key])) {
-                if (!(key in newTarget)) {
-                    Object.assign(output, { [key]: source[key] })
-                } else {
+                if (key in newTarget) {
                     output[key] = deepMerge(
                         newTarget[key] as Record<string, unknown>,
                         source[key] as Record<string, unknown>,
                     )
+                } else {
+                    Object.assign(output, { [key]: source[key] })
                 }
             } else {
                 Object.assign(output, { [key]: source[key] })

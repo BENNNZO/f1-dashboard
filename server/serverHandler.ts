@@ -15,14 +15,14 @@ async function startServer() {
         f1Socket.on("message", (data: string) => {
             const message = JSON.parse(data)
 
-            if (message["R"]) {
-                updateDataStore(message["R"])
-                broadcastData(wss, { type: "init", data: message["R"] })
+            if (message.R) {
+                updateDataStore(message.R)
+                broadcastData(wss, { type: "init", data: message.R })
             }
 
-            message["M"]?.forEach((item: any) => {
-                const type = item["A"][0]
-                const data = item["A"][1]
+            message.M?.forEach((item: { A: [string, unknown] }) => {
+                const type = item.A[0]
+                const data = item.A[1]
 
                 updateDataStore({ [type]: data })
                 broadcastData(wss, { type, data })
@@ -33,4 +33,4 @@ async function startServer() {
     }
 }
 
-startServer()
+void startServer()
