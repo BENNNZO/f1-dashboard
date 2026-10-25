@@ -3,7 +3,7 @@ import { WebSocketServer } from "ws"
 import log from "../utils/log"
 import { currentData } from "../utils/updateDataStore"
 
-export default async function startServer(port: number): Promise<WebSocketServer> {
+export default async function myWebSocketServer(port: number): Promise<WebSocketServer> {
     return new Promise((res, rej) => {
         try {
             const wss = new WebSocketServer({
