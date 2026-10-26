@@ -11,9 +11,9 @@ import Skeleton from "./Skeleton"
 export default function TeamRadio() {
     const [playing, setPlaying] = useState<string | null>(null)
 
-    const teamRadio = useWebSocketStore((state) => state.teamRadio)
-    const sessionInfo = useWebSocketStore((state) => state.sessionInfo)
-    const driverList = useWebSocketStore((state) => state.driverList)
+    const teamRadio = useWebSocketStore((state) => state.data.TeamRadio)
+    const sessionInfo = useWebSocketStore((state) => state.data.SessionInfo)
+    const driverList = useWebSocketStore((state) => state.data.DriverList)
 
     if (teamRadio && sessionInfo && driverList) {
         return (

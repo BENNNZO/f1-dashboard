@@ -6,42 +6,6 @@ const WS_URL = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001"
 const FIRST_RETRY_DELAY = 1000
 const MAX_RETRY_DELAY = 30000
 
-async function updateData(type: string, data: unknown) {
-    const store = useWebSocketStore.getState()
-
-    switch (type) {
-        case "TimingAppData":
-            store.updateTimingAppData(data as Record<string, unknown>)
-            break
-        case "WeatherData":
-            store.updateWeatherData(data as Record<string, unknown>)
-            break
-        case "TrackStatus":
-            store.updateTrackStatus(data as Record<string, unknown>)
-            break
-        case "DriverList":
-            store.updateDriverList(data as Record<string, unknown>)
-            break
-        case "RaceControlMessages":
-            store.updateRaceControlMessages(data as Record<string, unknown>)
-            break
-        case "SessionInfo":
-            store.updateSessionInfo(data as Record<string, unknown>)
-            break
-        case "LapCount":
-            store.updateLapCount(data as Record<string, unknown>)
-            break
-        case "TimingData":
-            store.updateTimingData(data as Record<string, unknown>)
-            break
-        case "TeamRadio":
-            store.updateTeamRadio(data as Record<string, unknown>)
-            break
-        default:
-            break
-    }
-}
-
 export default function useLiveFeed() {
     useEffect(() => {
         let ws: WebSocket
@@ -58,16 +22,7 @@ export default function useLiveFeed() {
             }
 
             ws.onmessage = (message) => {
-                const { type, data }: { type: string; data: Record<string, unknown> } = JSON.parse(message.data)
-
-                if (type === "init") {
-                    useWebSocketStore.getState().reset()
-                    Object.keys(data).forEach((key) => {
-                        void updateData(key, data[key])
-                    })
-                } else {
-                    void updateData(type, data)
-                }
+                useWebSocketStore.getState().storeF1Message(JSON.parse(message.data))
             }
 
             ws.onclose = () => {

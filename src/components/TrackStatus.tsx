@@ -7,7 +7,7 @@ const statusColors: Record<string, string> = {
 }
 
 export default function TrackStatus() {
-    const trackStatus = useWebSocketStore((state) => state.trackStatus)
+    const trackStatus = useWebSocketStore((state) => state.data.TrackStatus)
 
     if (trackStatus) {
         return (
