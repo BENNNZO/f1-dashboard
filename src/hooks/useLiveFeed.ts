@@ -55,6 +55,7 @@ export default function useLiveFeed() {
             const { type, data }: { type: string; data: Record<string, unknown> } = JSON.parse(message.data)
 
             if (type === "init") {
+                useWebSocketStore.getState().reset()
                 Object.keys(data).forEach((key) => {
                     void updateData(key, data[key])
                 })
