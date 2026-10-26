@@ -3,7 +3,7 @@ import type { F1Message } from "./f1/connection"
 export let currentData: Record<string, unknown> = {}
 
 function updateDataStore(data: Record<string, unknown>) {
-    currentData = deepMerge(currentData, data)
+    currentData = deepMerge(currentData, data) as Record<string, unknown>
 }
 
 export function storeF1Message(message: F1Message) {
@@ -14,29 +14,33 @@ export function storeF1Message(message: F1Message) {
     }
 }
 // This function was made by AI lol way too in-depth for my brain atm.
-function deepMerge(target: Record<string, unknown>, source: Record<string, unknown>): Record<string, unknown> {
-    const output = { ...target }
+function deepMerge(target: unknown, source: unknown): unknown {
+    if (!isObject(source)) return source
 
-    if (isObject(target) && isObject(source)) {
-        Object.keys(source).forEach((key) => {
-            if (isObject(source[key])) {
-                if (key in target) {
-                    output[key] = deepMerge(
-                        target[key] as Record<string, unknown>,
-                        source[key] as Record<string, unknown>,
-                    )
-                } else {
-                    Object.assign(output, { [key]: source[key] })
-                }
-            } else {
-                Object.assign(output, { [key]: source[key] })
-            }
-        })
+    if (Array.isArray(target)) {
+        const output = [...target]
+
+        for (const [key, value] of Object.entries(source)) {
+            output[Number(key)] = deepMerge(output[Number(key)], value)
+        }
+
+        return output
+    }
+
+    const deleted = Array.isArray(source._deleted) ? source._deleted : []
+    const output: Record<string, unknown> = {}
+
+    for (const [key, value] of Object.entries(isObject(target) ? target : {})) {
+        if (!deleted.includes(key)) output[key] = value
+    }
+
+    for (const [key, value] of Object.entries(source)) {
+        if (key !== "_deleted") output[key] = deepMerge(output[key], value)
     }
 
     return output
 }
 
-function isObject(item: unknown) {
-    return item && typeof item === "object" && !Array.isArray(item)
+function isObject(item: unknown): item is Record<string, unknown> {
+    return typeof item === "object" && item !== null && !Array.isArray(item)
 }
