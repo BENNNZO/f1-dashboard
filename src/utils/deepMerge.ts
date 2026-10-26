@@ -1,27 +1,30 @@
-export default function deepMerge(target: Record<string, unknown> | null, source: Record<string, unknown>) {
-    const newTarget = target ?? {}
-    const output = { ...newTarget }
+export default function deepMerge(target: unknown, source: unknown): unknown {
+    if (!isObject(source)) return source
 
-    if (isObject(newTarget) && isObject(source)) {
-        Object.keys(source).forEach((key) => {
-            if (isObject(source[key])) {
-                if (key in newTarget) {
-                    output[key] = deepMerge(
-                        newTarget[key] as Record<string, unknown>,
-                        source[key] as Record<string, unknown>,
-                    )
-                } else {
-                    Object.assign(output, { [key]: source[key] })
-                }
-            } else {
-                Object.assign(output, { [key]: source[key] })
-            }
-        })
+    if (Array.isArray(target)) {
+        const output = [...target]
+
+        for (const [key, value] of Object.entries(source)) {
+            output[Number(key)] = deepMerge(output[Number(key)], value)
+        }
+
+        return output
+    }
+
+    const deleted = Array.isArray(source._deleted) ? source._deleted : []
+    const output: Record<string, unknown> = {}
+
+    for (const [key, value] of Object.entries(isObject(target) ? target : {})) {
+        if (!deleted.includes(key)) output[key] = value
+    }
+
+    for (const [key, value] of Object.entries(source)) {
+        if (key !== "_deleted") output[key] = deepMerge(output[key], value)
     }
 
     return output
 }
 
-function isObject(item: unknown) {
-    return item && typeof item === "object" && !Array.isArray(item)
+function isObject(item: unknown): item is Record<string, unknown> {
+    return typeof item === "object" && item !== null && !Array.isArray(item)
 }
