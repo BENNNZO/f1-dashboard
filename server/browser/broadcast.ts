@@ -1,9 +1,11 @@
 import { WebSocket, type WebSocketServer } from "ws"
 
-export default function broadcastData(wss: WebSocketServer, data: { type: string; data: unknown }) {
-    const message = JSON.stringify(data)
+import type { F1Message } from "../f1/connection"
+
+export default function broadcast(wss: WebSocketServer, message: F1Message) {
+    const json = JSON.stringify(message)
 
     wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) client.send(message)
+        if (client.readyState === WebSocket.OPEN) client.send(json)
     })
 }

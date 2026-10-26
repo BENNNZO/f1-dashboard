@@ -2,7 +2,7 @@ import fs from "node:fs"
 import readline from "node:readline"
 import type { WebSocketServer } from "ws"
 
-import broadcastData from "../browser/broadcast"
+import broadcast from "../browser/broadcast"
 import startBrowserServer from "../browser/server"
 import { SERVER_CONSTANTS } from "../config/constants"
 import { storeF1Message } from "../dataStore"
@@ -36,7 +36,7 @@ async function replayLog(wss: WebSocketServer) {
             if (previousTimestamp > 0) await new Promise((res) => setTimeout(res, (timestamp - previousTimestamp) / 4))
 
             storeF1Message(message)
-            broadcastData(wss, message)
+            broadcast(wss, message)
 
             previousTimestamp = timestamp
         } catch (err) {
