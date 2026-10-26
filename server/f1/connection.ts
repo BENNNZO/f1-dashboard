@@ -39,6 +39,28 @@ function toF1Message(message: SignalRMessage): F1Message | undefined {
     }
 }
 
+function handleFrame(frame: string, onMessage: (message: F1Message) => void) {
+    try {
+        const message: SignalRMessage = JSON.parse(frame)
+
+        if (message.error) {
+            log("F1", `Error: ${message.error}`, "error")
+        }
+
+        const f1Message = toF1Message(message)
+        const isHandshakeReply = message.type === undefined
+        const isPing = message.type === MESSAGE_TYPE.PING
+
+        if (f1Message) {
+            onMessage(f1Message)
+        } else if (!(isHandshakeReply || isPing)) {
+            log("F1", `Unknown message: ${frame}`, "warn")
+        }
+    } catch (err) {
+        log("F1", `Bad message: ${(err as Error).message} ${frame}`, "error")
+    }
+}
+
 export default function connectToF1(onMessage: (message: F1Message) => void) {
     // biome-ignore format: one name per line
     const {
@@ -111,25 +133,7 @@ export default function connectToF1(onMessage: (message: F1Message) => void) {
             for (const frame of data.toString().split(RECORD_SEPARATOR)) {
                 if (!frame) continue
 
-                try {
-                    const message: SignalRMessage = JSON.parse(frame)
-
-                    if (message.error) {
-                        log("F1", `Error: ${message.error}`, "error")
-                    }
-
-                    const f1Message = toF1Message(message)
-                    const isHandshakeReply = message.type === undefined
-                    const isPing = message.type === MESSAGE_TYPE.PING
-
-                    if (f1Message) {
-                        onMessage(f1Message)
-                    } else if (!(isHandshakeReply || isPing)) {
-                        log("F1", `Unknown message: ${frame}`, "warn")
-                    }
-                } catch (err) {
-                    log("F1", `Bad message: ${(err as Error).message} ${frame}`, "error")
-                }
+                handleFrame(frame, onMessage)
             }
         })
 
