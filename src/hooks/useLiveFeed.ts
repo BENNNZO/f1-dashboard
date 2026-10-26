@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
-import decodeZippedBase64 from "@/utils/decodeZipClient"
 
 const WS_URL = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001"
 const FIRST_RETRY_DELAY = 1000
@@ -11,12 +10,6 @@ async function updateData(type: string, data: unknown) {
     const store = useWebSocketStore.getState()
 
     switch (type) {
-        case "CarData.z":
-            store.updateCarData(JSON.parse(await decodeZippedBase64(data as string)))
-            break
-        case "Position.z":
-            store.updatePositionData(JSON.parse(await decodeZippedBase64(data as string)))
-            break
         case "TimingAppData":
             store.updateTimingAppData(data as Record<string, unknown>)
             break

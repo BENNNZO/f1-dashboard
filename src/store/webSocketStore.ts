@@ -3,7 +3,6 @@ import { create } from "zustand"
 import type { CircuitData } from "@/types/CircuitData.type"
 import type { DriverListData } from "@/types/DriverListData.type"
 import type { LapCountData } from "@/types/LapCountData.type"
-import type { PositionData } from "@/types/PositionData.type"
 import type { RaceControlMessages } from "@/types/RaceControlMessages.type"
 import type { SessionInfo } from "@/types/SessionInfo.type"
 import type { TeamRadioData } from "@/types/TeamRadioData.type"
@@ -14,8 +13,6 @@ import type { WeatherData } from "@/types/WeatherData.type"
 import deepMerge from "@/utils/deepMerge"
 
 type StoreState = {
-    carData: string | null
-    positionData: PositionData | null
     circuitData: CircuitData | null
     timingAppData: TimingAppData | null
     weatherData: WeatherData | null
@@ -27,8 +24,6 @@ type StoreState = {
     timingData: TimingData | null
     teamRadio: TeamRadioData | null
     connection: "connecting" | "connected" | "reconnecting"
-    updateCarData: (newData: string) => void
-    updatePositionData: (newData: { Position: PositionData }) => void
     updateCircuitData: (newData: CircuitData) => void
     updateTimingAppData: (newData: Record<string, unknown>) => void
     updateWeatherData: (newData: Record<string, unknown>) => void
@@ -44,8 +39,6 @@ type StoreState = {
 }
 
 export const useWebSocketStore = create<StoreState>((set) => ({
-    carData: null,
-    positionData: null,
     circuitData: null,
     timingAppData: null,
     weatherData: null,
@@ -57,8 +50,6 @@ export const useWebSocketStore = create<StoreState>((set) => ({
     timingData: null,
     teamRadio: null,
     connection: "connecting",
-    updateCarData: (newData) => set(() => ({ carData: newData })),
-    updatePositionData: (newData) => set(() => ({ positionData: newData.Position })),
     updateCircuitData: (newData) => set(() => ({ circuitData: newData })),
     updateLapCount: (newData) => set((state) => ({ lapCount: deepMerge(state.lapCount, newData) as LapCountData })),
     updateTimingData: (newData) => set((state) => ({ timingData: deepMerge(state.timingData, newData) as TimingData })),
@@ -86,8 +77,6 @@ export const useWebSocketStore = create<StoreState>((set) => ({
     setConnection: (connection) => set(() => ({ connection })),
     reset: () => {
         set(() => ({
-            carData: null,
-            positionData: null,
             timingAppData: null,
             weatherData: null,
             trackStatus: null,
