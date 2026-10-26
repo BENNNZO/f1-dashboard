@@ -26,6 +26,7 @@ type StoreState = {
     lapCount: LapCountData | null
     timingData: TimingData | null
     teamRadio: TeamRadioData | null
+    connection: "connecting" | "connected" | "reconnecting"
     updateCarData: (newData: string) => void
     updatePositionData: (newData: { Position: PositionData }) => void
     updateCircuitData: (newData: CircuitData) => void
@@ -38,6 +39,7 @@ type StoreState = {
     updateLapCount: (newData: Record<string, unknown>) => void
     updateTimingData: (newData: Record<string, unknown>) => void
     updateTeamRadio: (newData: Record<string, unknown>) => void
+    setConnection: (connection: "connected" | "reconnecting") => void
     reset: () => void
 }
 
@@ -54,6 +56,7 @@ export const useWebSocketStore = create<StoreState>((set) => ({
     lapCount: null,
     timingData: null,
     teamRadio: null,
+    connection: "connecting",
     updateCarData: (newData) => set(() => ({ carData: newData })),
     updatePositionData: (newData) => set(() => ({ positionData: newData.Position })),
     updateCircuitData: (newData) => set(() => ({ circuitData: newData })),
@@ -80,6 +83,7 @@ export const useWebSocketStore = create<StoreState>((set) => ({
             raceControlMessages: deepMerge(state.raceControlMessages, newData) as RaceControlMessages,
         }))
     },
+    setConnection: (connection) => set(() => ({ connection })),
     reset: () => {
         set(() => ({
             carData: null,

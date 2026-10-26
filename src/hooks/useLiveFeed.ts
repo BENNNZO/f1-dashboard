@@ -4,6 +4,8 @@ import { useWebSocketStore } from "@/store/webSocketStore"
 import decodeZippedBase64 from "@/utils/decodeZipClient"
 
 const WS_URL = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001"
+const FIRST_RETRY_DELAY = 1000
+const MAX_RETRY_DELAY = 30000
 
 async function updateData(type: string, data: unknown) {
     const store = useWebSocketStore.getState()
@@ -49,21 +51,47 @@ async function updateData(type: string, data: unknown) {
 
 export default function useLiveFeed() {
     useEffect(() => {
-        const ws = new WebSocket(WS_URL)
+        let ws: WebSocket
+        let timer: ReturnType<typeof setTimeout> | undefined
+        let retryDelay = FIRST_RETRY_DELAY
+        let stopped = false
 
-        ws.onmessage = (message) => {
-            const { type, data }: { type: string; data: Record<string, unknown> } = JSON.parse(message.data)
+        function connect() {
+            ws = new WebSocket(WS_URL)
 
-            if (type === "init") {
-                useWebSocketStore.getState().reset()
-                Object.keys(data).forEach((key) => {
-                    void updateData(key, data[key])
-                })
-            } else {
-                void updateData(type, data)
+            ws.onopen = () => {
+                retryDelay = FIRST_RETRY_DELAY
+                useWebSocketStore.getState().setConnection("connected")
+            }
+
+            ws.onmessage = (message) => {
+                const { type, data }: { type: string; data: Record<string, unknown> } = JSON.parse(message.data)
+
+                if (type === "init") {
+                    useWebSocketStore.getState().reset()
+                    Object.keys(data).forEach((key) => {
+                        void updateData(key, data[key])
+                    })
+                } else {
+                    void updateData(type, data)
+                }
+            }
+
+            ws.onclose = () => {
+                if (stopped) return
+
+                useWebSocketStore.getState().setConnection("reconnecting")
+                timer = setTimeout(connect, retryDelay)
+                retryDelay = Math.min(retryDelay * 2, MAX_RETRY_DELAY)
             }
         }
 
-        return () => ws.close()
+        connect()
+
+        return () => {
+            stopped = true
+            clearTimeout(timer)
+            ws.close()
+        }
     }, [])
 }
