@@ -1,4 +1,4 @@
-import broadcastData from "./browser/broadcast"
+import broadcast from "./browser/broadcast"
 import startBrowserServer from "./browser/server"
 import { SERVER_CONSTANTS } from "./config/constants"
 import { storeF1Message } from "./dataStore"
@@ -13,7 +13,7 @@ async function startServer() {
 
         connectToF1((message) => {
             storeF1Message(message)
-            broadcastData(wss, message)
+            broadcast(wss, message)
         })
     } catch (err) {
         throw new Error(`Failed to initialize the servers: ${(err as Error).message}`)
