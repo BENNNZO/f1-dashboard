@@ -1,0 +1,68 @@
+import { useEffect } from "react"
+
+import { useWebSocketStore } from "@/store/webSocketStore"
+import decodeZippedBase64 from "@/utils/decodeZipClient"
+
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001"
+
+async function updateData(type: string, data: unknown) {
+    const store = useWebSocketStore.getState()
+
+    switch (type) {
+        case "CarData.z":
+            store.updateCarData(JSON.parse(await decodeZippedBase64(data as string)))
+            break
+        case "Position.z":
+            store.updatePositionData(JSON.parse(await decodeZippedBase64(data as string)))
+            break
+        case "TimingAppData":
+            store.updateTimingAppData(data as Record<string, unknown>)
+            break
+        case "WeatherData":
+            store.updateWeatherData(data as Record<string, unknown>)
+            break
+        case "TrackStatus":
+            store.updateTrackStatus(data as Record<string, unknown>)
+            break
+        case "DriverList":
+            store.updateDriverList(data as Record<string, unknown>)
+            break
+        case "RaceControlMessages":
+            store.updateRaceControlMessages(data as Record<string, unknown>)
+            break
+        case "SessionInfo":
+            store.updateSessionInfo(data as Record<string, unknown>)
+            break
+        case "LapCount":
+            store.updateLapCount(data as Record<string, unknown>)
+            break
+        case "TimingData":
+            store.updateTimingData(data as Record<string, unknown>)
+            break
+        case "TeamRadio":
+            store.updateTeamRadio(data as Record<string, unknown>)
+            break
+        default:
+            break
+    }
+}
+
+export default function useLiveFeed() {
+    useEffect(() => {
+        const ws = new WebSocket(WS_URL)
+
+        ws.onmessage = (message) => {
+            const { type, data }: { type: string; data: Record<string, unknown> } = JSON.parse(message.data)
+
+            if (type === "init") {
+                Object.keys(data).forEach((key) => {
+                    void updateData(key, data[key])
+                })
+            } else {
+                void updateData(type, data)
+            }
+        }
+
+        return () => ws.close()
+    }, [])
+}
