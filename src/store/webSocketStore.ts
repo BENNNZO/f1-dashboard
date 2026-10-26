@@ -56,21 +56,27 @@ export const useWebSocketStore = create<StoreState>((set) => ({
     updateCarData: (newData) => set(() => ({ carData: newData })),
     updatePositionData: (newData) => set(() => ({ positionData: newData.Position })),
     updateCircuitData: (newData) => set(() => ({ circuitData: newData })),
-    updateTimingAppData: (newData) =>
-        set((state) => ({ timingAppData: deepMerge(state.timingAppData, newData) as TimingAppData })),
-    updateWeatherData: (newData) =>
-        set((state) => ({ weatherData: deepMerge(state.weatherData, newData) as WeatherData })),
-    updateTrackStatus: (newData) =>
-        set((state) => ({ trackStatus: deepMerge(state.trackStatus, newData) as TrackStatusData })),
-    updateDriverList: (newData) =>
-        set((state) => ({ driverList: deepMerge(state.driverList, newData) as DriverListData })),
-    updateRaceControlMessages: (newData) =>
-        set((state) => ({
-            raceControlMessages: deepMerge(state.raceControlMessages, newData) as RaceControlMessages,
-        })),
-    updateSessionInfo: (newData) =>
-        set((state) => ({ sessionInfo: deepMerge(state.sessionInfo, newData) as SessionInfo })),
     updateLapCount: (newData) => set((state) => ({ lapCount: deepMerge(state.lapCount, newData) as LapCountData })),
     updateTimingData: (newData) => set((state) => ({ timingData: deepMerge(state.timingData, newData) as TimingData })),
     updateTeamRadio: (newData) => set((state) => ({ teamRadio: deepMerge(state.teamRadio, newData) as TeamRadioData })),
+    updateTimingAppData: (newData) => {
+        set((state) => ({ timingAppData: deepMerge(state.timingAppData, newData) as TimingAppData }))
+    },
+    updateWeatherData: (newData) => {
+        set((state) => ({ weatherData: deepMerge(state.weatherData, newData) as WeatherData }))
+    },
+    updateTrackStatus: (newData) => {
+        set((state) => ({ trackStatus: deepMerge(state.trackStatus, newData) as TrackStatusData }))
+    },
+    updateDriverList: (newData) => {
+        set((state) => ({ driverList: deepMerge(state.driverList, newData) as DriverListData }))
+    },
+    updateSessionInfo: (newData) => {
+        set((state) => ({ sessionInfo: deepMerge(state.sessionInfo, newData) as SessionInfo }))
+    },
+    updateRaceControlMessages: (newData) => {
+        set((state) => ({
+            raceControlMessages: deepMerge(state.raceControlMessages, newData) as RaceControlMessages,
+        }))
+    },
 }))
