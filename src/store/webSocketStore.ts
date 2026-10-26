@@ -38,6 +38,7 @@ type StoreState = {
     updateLapCount: (newData: Record<string, unknown>) => void
     updateTimingData: (newData: Record<string, unknown>) => void
     updateTeamRadio: (newData: Record<string, unknown>) => void
+    reset: () => void
 }
 
 export const useWebSocketStore = create<StoreState>((set) => ({
@@ -77,6 +78,21 @@ export const useWebSocketStore = create<StoreState>((set) => ({
     updateRaceControlMessages: (newData) => {
         set((state) => ({
             raceControlMessages: deepMerge(state.raceControlMessages, newData) as RaceControlMessages,
+        }))
+    },
+    reset: () => {
+        set(() => ({
+            carData: null,
+            positionData: null,
+            timingAppData: null,
+            weatherData: null,
+            trackStatus: null,
+            driverList: null,
+            raceControlMessages: null,
+            sessionInfo: null,
+            lapCount: null,
+            timingData: null,
+            teamRadio: null,
         }))
     },
 }))
