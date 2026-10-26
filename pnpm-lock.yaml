@@ -17,9 +17,6 @@ importers:
       next:
         specifier: 16.4.2
         version: 16.4.2(@types/node@20.19.43)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
-      pako:
-        specifier: ^3.0.2
-        version: 3.0.2
       react:
         specifier: ^19.3.1
         version: 19.3.1
@@ -908,9 +905,6 @@ packages:
       sass:
         optional: true
 
-  pako@3.0.2:
-    resolution: {integrity: sha512-uBv6IT2aT1A78iU6dpNEbf6+CyhlV/6g9JlJs9kpgjFGFhruIICVRysF/W0SLzXg5+hCl+KroH7e4YUyfEmgLg==}
-
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -1654,8 +1648,6 @@ snapshots:
       - '@babel/core'
       - '@types/node'
       - babel-plugin-macros
-
-  pako@3.0.2: {}
 
   picocolors@1.1.1: {}
 
