@@ -5,31 +5,31 @@ import connectToF1, { type F1Message } from "../f1/connection"
 import log from "../log"
 import type { LogLine } from "./types"
 
-const logFilePath = `${__dirname}/logs/`
+const logFolder = `${__dirname}/logs/`
 const logFileName = `${new Date().toISOString().replaceAll(":", "-")}.jsonl`
 
 let messageCount = 0
 
 async function ensureLogFolder() {
-    if (fs.existsSync(logFilePath)) return true
+    if (fs.existsSync(logFolder)) return true
 
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-    const answer = await rl.question(`[RECORD] Log folder ${logFilePath} does not exist. Create it? (y/n) `)
+    const answer = await rl.question(`[RECORD] Log folder ${logFolder} does not exist. Create it? (y/n) `)
     rl.close()
 
     if (answer.trim().toLowerCase() !== "y") {
-        log("RECORD", `Stopped. The log folder does not exist: ${logFilePath}`)
+        log("RECORD", `Stopped. The log folder does not exist: ${logFolder}`)
         return false
     }
 
-    fs.mkdirSync(logFilePath)
+    fs.mkdirSync(logFolder)
     return true
 }
 
 function writeLogLine(message: F1Message) {
     const logLine: LogLine = { timestamp: Date.now(), message }
 
-    fs.appendFile(logFilePath + logFileName, `${JSON.stringify(logLine)}\n`, (err) => {
+    fs.appendFile(logFolder + logFileName, `${JSON.stringify(logLine)}\n`, (err) => {
         if (err) return log("RECORD", err.message, "error")
 
         messageCount++
