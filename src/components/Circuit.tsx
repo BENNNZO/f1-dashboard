@@ -5,16 +5,14 @@ import Image from "next/image"
 import { useEffect } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { CircuitData } from "@/types/CircuitData.type"
-import type { SessionInfo } from "@/types/SessionInfo.type"
 import { transformPoints } from "@/utils/positionPoints"
 
 import Skeleton from "./Skeleton"
 
 export default function Circuit() {
     const updateCircuitData = useWebSocketStore((state) => state.updateCircuitData)
-    const sessionInfo: SessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
-    const circuitData: CircuitData | null = useWebSocketStore((state) => state.circuitData)
+    const sessionInfo = useWebSocketStore((state) => state.sessionInfo)
+    const circuitData = useWebSocketStore((state) => state.circuitData)
 
     useEffect(() => {
         if (!sessionInfo) return

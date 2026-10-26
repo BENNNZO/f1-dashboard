@@ -2,16 +2,14 @@ import { motion } from "motion/react"
 
 import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { DriverListData } from "@/types/DriverListData.type"
-import type { TimingAppData } from "@/types/TimingAppData.type"
-import type { TimingData, TimingDataLine } from "@/types/TimingData.type"
+import type { TimingDataLine } from "@/types/TimingData.type"
 
 import Driver from "./Driver"
 
 export default function DriverList() {
-    const timingAppData: TimingAppData | null = useWebSocketStore((state) => state.timingAppData)
-    const driverList: DriverListData | null = useWebSocketStore((state) => state.driverList)
-    const timingData: TimingData | null = useWebSocketStore((state) => state.timingData)
+    const timingAppData = useWebSocketStore((state) => state.timingAppData)
+    const driverList = useWebSocketStore((state) => state.driverList)
+    const timingData = useWebSocketStore((state) => state.timingData)
 
     if (timingAppData && driverList && timingData) {
         const sortedTimingData: [string, TimingDataLine][] = Object.entries(timingData.Lines).sort(

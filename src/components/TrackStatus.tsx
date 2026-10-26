@@ -1,5 +1,4 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { TrackStatusData } from "@/types/TrackStatusData.type"
 
 import Skeleton from "./Skeleton"
 
@@ -8,7 +7,7 @@ const statusColors: Record<string, string> = {
 }
 
 export default function TrackStatus() {
-    const trackStatus: TrackStatusData | null = useWebSocketStore((state) => state.trackStatus)
+    const trackStatus = useWebSocketStore((state) => state.trackStatus)
 
     if (trackStatus) {
         return (

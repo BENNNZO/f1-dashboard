@@ -3,9 +3,7 @@
 import { useState } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { DriverListData } from "@/types/DriverListData.type"
-import type { SessionInfo } from "@/types/SessionInfo.type"
-import type { Capture, TeamRadioData } from "@/types/TeamRadioData.type"
+import type { Capture } from "@/types/TeamRadioData.type"
 
 import AudioPlayer from "./AudioPlayer"
 import Skeleton from "./Skeleton"
@@ -13,9 +11,9 @@ import Skeleton from "./Skeleton"
 export default function TeamRadio() {
     const [playing, setPlaying] = useState<string | null>(null)
 
-    const teamRadio: TeamRadioData | null = useWebSocketStore((state) => state.teamRadio)
-    const sessionInfo: SessionInfo | null = useWebSocketStore((state) => state.sessionInfo)
-    const driverList: DriverListData | null = useWebSocketStore((state) => state.driverList)
+    const teamRadio = useWebSocketStore((state) => state.teamRadio)
+    const sessionInfo = useWebSocketStore((state) => state.sessionInfo)
+    const driverList = useWebSocketStore((state) => state.driverList)
 
     if (teamRadio && sessionInfo && driverList) {
         return (

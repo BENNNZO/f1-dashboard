@@ -1,10 +1,9 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { LapCountData } from "@/types/LapCountData.type"
 
 import Skeleton from "./Skeleton"
 
 export default function LapCount() {
-    const lapCount: LapCountData | null = useWebSocketStore((state) => state.lapCount)
+    const lapCount = useWebSocketStore((state) => state.lapCount)
 
     if (lapCount) {
         return (

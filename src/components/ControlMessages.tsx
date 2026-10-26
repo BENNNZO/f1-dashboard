@@ -1,5 +1,5 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { MessageDrs, MessageFlag, MessageOther, RaceControlMessages } from "@/types/RaceControlMessages.type"
+import type { MessageDrs, MessageFlag, MessageOther } from "@/types/RaceControlMessages.type"
 
 import Skeleton from "./Skeleton"
 
@@ -12,7 +12,7 @@ const flagTypes = {
 }
 
 export default function ControlMessages() {
-    const raceControlMessages: RaceControlMessages | null = useWebSocketStore((state) => state.raceControlMessages)
+    const raceControlMessages = useWebSocketStore((state) => state.raceControlMessages)
 
     if (raceControlMessages) {
         return (
