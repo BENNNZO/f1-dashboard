@@ -6,10 +6,7 @@ import log from "../log"
 export default async function startBrowserServer(port: number): Promise<WebSocketServer> {
     return new Promise((res, rej) => {
         try {
-            const wss = new WebSocketServer({
-                port,
-                host: "0.0.0.0",
-            })
+            const wss = new WebSocketServer({ port })
 
             wss.on("connection", (client) => {
                 log("SERVER", "Client Connected")
@@ -24,7 +21,7 @@ export default async function startBrowserServer(port: number): Promise<WebSocke
                 rej(new Error(`[SERVER] Failed to initialize the web socket server: ${(err as Error).message}`))
             })
 
-            res(wss) // Resolve here, not inside a nonexistent 'open' event
+            wss.on("listening", () => res(wss))
         } catch (err) {
             rej(new Error(`[SERVER] Failed to initialize the web socket server: ${(err as Error).message}`))
         }
