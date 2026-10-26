@@ -12,7 +12,7 @@ const flagTypes = {
 }
 
 export default function ControlMessages() {
-    const raceControlMessages = useWebSocketStore((state) => state.raceControlMessages)
+    const raceControlMessages = useWebSocketStore((state) => state.data.RaceControlMessages)
 
     if (raceControlMessages) {
         return (

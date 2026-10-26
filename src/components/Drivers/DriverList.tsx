@@ -7,9 +7,9 @@ import type { TimingDataLine } from "@/types/TimingData.type"
 import Driver from "./Driver"
 
 export default function DriverList() {
-    const timingAppData = useWebSocketStore((state) => state.timingAppData)
-    const driverList = useWebSocketStore((state) => state.driverList)
-    const timingData = useWebSocketStore((state) => state.timingData)
+    const timingAppData = useWebSocketStore((state) => state.data.TimingAppData)
+    const driverList = useWebSocketStore((state) => state.data.DriverList)
+    const timingData = useWebSocketStore((state) => state.data.TimingData)
 
     if (timingAppData && driverList && timingData) {
         const sortedTimingData: [string, TimingDataLine][] = Object.entries(timingData.Lines).sort(

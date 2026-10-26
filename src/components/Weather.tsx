@@ -4,7 +4,7 @@ import { CtoF } from "@/utils/convertTemp"
 import Skeleton from "./Skeleton"
 
 export default function Weather() {
-    const weatherData = useWebSocketStore((state) => state.weatherData)
+    const weatherData = useWebSocketStore((state) => state.data.WeatherData)
 
     if (weatherData) {
         return (

@@ -2,6 +2,7 @@ import { create } from "zustand"
 
 import type { CircuitData } from "@/types/CircuitData.type"
 import type { DriverListData } from "@/types/DriverListData.type"
+import type { F1Message } from "@/types/F1Message.type"
 import type { LapCountData } from "@/types/LapCountData.type"
 import type { RaceControlMessages } from "@/types/RaceControlMessages.type"
 import type { SessionInfo } from "@/types/SessionInfo.type"
@@ -12,80 +13,39 @@ import type { TrackStatusData } from "@/types/TrackStatusData.type"
 import type { WeatherData } from "@/types/WeatherData.type"
 import deepMerge from "@/utils/deepMerge"
 
+type F1Data = {
+    TimingAppData?: TimingAppData
+    WeatherData?: WeatherData
+    TrackStatus?: TrackStatusData
+    DriverList?: DriverListData
+    RaceControlMessages?: RaceControlMessages
+    SessionInfo?: SessionInfo
+    LapCount?: LapCountData
+    TimingData?: TimingData
+    TeamRadio?: TeamRadioData
+    [topic: string]: unknown
+}
+
 type StoreState = {
+    data: F1Data
     circuitData: CircuitData | null
-    timingAppData: TimingAppData | null
-    weatherData: WeatherData | null
-    trackStatus: TrackStatusData | null
-    driverList: DriverListData | null
-    raceControlMessages: RaceControlMessages | null
-    sessionInfo: SessionInfo | null
-    lapCount: LapCountData | null
-    timingData: TimingData | null
-    teamRadio: TeamRadioData | null
     connection: "connecting" | "connected" | "reconnecting"
+    storeF1Message: (message: F1Message) => void
     updateCircuitData: (newData: CircuitData) => void
-    updateTimingAppData: (newData: Record<string, unknown>) => void
-    updateWeatherData: (newData: Record<string, unknown>) => void
-    updateTrackStatus: (newData: Record<string, unknown>) => void
-    updateDriverList: (newData: Record<string, unknown>) => void
-    updateRaceControlMessages: (newData: Record<string, unknown>) => void
-    updateSessionInfo: (newData: Record<string, unknown>) => void
-    updateLapCount: (newData: Record<string, unknown>) => void
-    updateTimingData: (newData: Record<string, unknown>) => void
-    updateTeamRadio: (newData: Record<string, unknown>) => void
     setConnection: (connection: "connected" | "reconnecting") => void
-    reset: () => void
 }
 
 export const useWebSocketStore = create<StoreState>((set) => ({
+    data: {},
     circuitData: null,
-    timingAppData: null,
-    weatherData: null,
-    trackStatus: null,
-    driverList: null,
-    raceControlMessages: null,
-    sessionInfo: null,
-    lapCount: null,
-    timingData: null,
-    teamRadio: null,
     connection: "connecting",
+    storeF1Message: (message) => {
+        if (message.type === "init") {
+            set(() => ({ data: message.data as F1Data }))
+        } else {
+            set((state) => ({ data: deepMerge(state.data, { [message.type]: message.data }) as F1Data }))
+        }
+    },
     updateCircuitData: (newData) => set(() => ({ circuitData: newData })),
-    updateLapCount: (newData) => set((state) => ({ lapCount: deepMerge(state.lapCount, newData) as LapCountData })),
-    updateTimingData: (newData) => set((state) => ({ timingData: deepMerge(state.timingData, newData) as TimingData })),
-    updateTeamRadio: (newData) => set((state) => ({ teamRadio: deepMerge(state.teamRadio, newData) as TeamRadioData })),
-    updateTimingAppData: (newData) => {
-        set((state) => ({ timingAppData: deepMerge(state.timingAppData, newData) as TimingAppData }))
-    },
-    updateWeatherData: (newData) => {
-        set((state) => ({ weatherData: deepMerge(state.weatherData, newData) as WeatherData }))
-    },
-    updateTrackStatus: (newData) => {
-        set((state) => ({ trackStatus: deepMerge(state.trackStatus, newData) as TrackStatusData }))
-    },
-    updateDriverList: (newData) => {
-        set((state) => ({ driverList: deepMerge(state.driverList, newData) as DriverListData }))
-    },
-    updateSessionInfo: (newData) => {
-        set((state) => ({ sessionInfo: deepMerge(state.sessionInfo, newData) as SessionInfo }))
-    },
-    updateRaceControlMessages: (newData) => {
-        set((state) => ({
-            raceControlMessages: deepMerge(state.raceControlMessages, newData) as RaceControlMessages,
-        }))
-    },
     setConnection: (connection) => set(() => ({ connection })),
-    reset: () => {
-        set(() => ({
-            timingAppData: null,
-            weatherData: null,
-            trackStatus: null,
-            driverList: null,
-            raceControlMessages: null,
-            sessionInfo: null,
-            lapCount: null,
-            timingData: null,
-            teamRadio: null,
-        }))
-    },
 }))

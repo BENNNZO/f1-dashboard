@@ -11,7 +11,7 @@ import Skeleton from "./Skeleton"
 
 export default function Circuit() {
     const updateCircuitData = useWebSocketStore((state) => state.updateCircuitData)
-    const sessionInfo = useWebSocketStore((state) => state.sessionInfo)
+    const sessionInfo = useWebSocketStore((state) => state.data.SessionInfo)
     const circuitData = useWebSocketStore((state) => state.circuitData)
 
     useEffect(() => {

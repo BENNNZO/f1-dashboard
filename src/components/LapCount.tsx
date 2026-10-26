@@ -3,7 +3,7 @@ import { useWebSocketStore } from "@/store/webSocketStore"
 import Skeleton from "./Skeleton"
 
 export default function LapCount() {
-    const lapCount = useWebSocketStore((state) => state.lapCount)
+    const lapCount = useWebSocketStore((state) => state.data.LapCount)
 
     if (lapCount) {
         return (
