@@ -17,7 +17,7 @@ export default function DriverList() {
         )
 
         return (
-            <motion.div className="relative flex shrink-0 flex-col gap-2 overflow-y-scroll p-2 font-mono">
+            <motion.div className="relative flex shrink-0 flex-col gap-1 overflow-y-scroll p-1 font-mono">
                 {sortedTimingData.map((data) => {
                     const driverNumber: string = data[0]
                     const timingData: TimingDataLine = data[1]
