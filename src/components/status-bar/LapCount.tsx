@@ -1,4 +1,3 @@
-import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
 
 export default function LapCount() {
@@ -6,17 +5,9 @@ export default function LapCount() {
 
     if (lapCount) {
         return (
-            <p className="h-8 rounded-full border border-white/5 bg-zinc-900 px-4 py-1">
+            <p className="px-6">
                 {lapCount.CurrentLap} / {lapCount.TotalLaps}
             </p>
         )
     }
-
-    return (
-        <Skeleton
-            width={101}
-            height={32}
-            rounded
-        />
-    )
 }
