@@ -25,7 +25,7 @@ export default function Driver({ timingData, tireCompound, driver }: DriverProps
                 timingData.InPit && !timingData.Retired ? "scale-x-95" : "scale-100",
             )}
             style={{
-                opacity: opacity(timingData),
+                filter: `brightness(${opacity(timingData)})`,
                 transition: "transform 0.5s ease-out, opacity 0.5s ease-out",
             }}
         >
