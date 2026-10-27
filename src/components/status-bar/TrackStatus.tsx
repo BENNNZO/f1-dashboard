@@ -1,4 +1,3 @@
-import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
 
 const statusColors: Record<string, string> = {
@@ -11,19 +10,11 @@ export default function TrackStatus() {
     if (trackStatus) {
         return (
             <p
-                className="h-8 rounded-full border border-white/5 bg-zinc-900 px-4 py-1"
+                className="-my-1 px-3 py-1"
                 style={{ background: `${statusColors[trackStatus.Status]}` }}
             >
                 {trackStatus.Message}
             </p>
         )
     }
-
-    return (
-        <Skeleton
-            width={110}
-            height={32}
-            rounded
-        />
-    )
 }
