@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-body {
+/* body {
     --sb-track-color: #09090b;
     --sb-thumb-color: #27272a;
     --sb-size: 3px;
@@ -24,4 +24,4 @@ body {
     * {
         scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
     }
-}
+} */
