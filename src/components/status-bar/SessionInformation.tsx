@@ -1,6 +1,5 @@
+import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
-
-import Skeleton from "./Skeleton"
 
 export default function SessionInformation() {
     const sessionInfo = useWebSocketStore((state) => state.data.SessionInfo)

@@ -1,6 +1,5 @@
+import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
-
-import Skeleton from "./Skeleton"
 
 export default function LapCount() {
     const lapCount = useWebSocketStore((state) => state.data.LapCount)

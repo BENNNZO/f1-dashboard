@@ -1,7 +1,6 @@
+import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
 import { CtoF } from "@/utils/convertTemp"
-
-import Skeleton from "./Skeleton"
 
 export default function Weather() {
     const weatherData = useWebSocketStore((state) => state.data.WeatherData)
