@@ -1,6 +1,5 @@
+import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
-
-import Skeleton from "./Skeleton"
 
 const statusColors: Record<string, string> = {
     "1": "rgb(13, 186, 131)",
