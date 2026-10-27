@@ -1,4 +1,3 @@
-import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
 import { CtoF } from "@/utils/convertTemp"
 
@@ -7,39 +6,19 @@ export default function Weather() {
 
     if (weatherData) {
         return (
-            <div className="flex gap-2">
-                <p className="h-8 rounded-full border border-white/5 bg-zinc-900 px-4 py-1">
-                    {CtoF(Number(weatherData.AirTemp)).toFixed(1)}° F
+            <div className="flex flex-row gap-10 px-6">
+                <p>
+                    <strong className="text-sm opacity-50">Air:</strong> {CtoF(Number(weatherData.AirTemp)).toFixed(1)}°
+                    F
                 </p>
-
-                <p className="h-8 rounded-full border border-white/5 bg-zinc-900 px-4 py-1">
+                <p>
+                    <strong className="text-sm opacity-50">Track:</strong>{" "}
                     {CtoF(Number(weatherData.TrackTemp)).toFixed(1)}° F
                 </p>
-
-                <p className="h-8 rounded-full border border-white/5 bg-zinc-900 px-4 py-1">{weatherData.Humidity}%</p>
+                <p>
+                    <strong className="text-sm opacity-50">Humidity:</strong> {weatherData.Humidity}%
+                </p>
             </div>
         )
     }
-
-    return (
-        <div className="flex gap-2">
-            <Skeleton
-                width={101}
-                height={32}
-                rounded
-            />
-
-            <Skeleton
-                width={101}
-                height={32}
-                rounded
-            />
-
-            <Skeleton
-                width={82}
-                height={32}
-                rounded
-            />
-        </div>
-    )
 }
