@@ -14,10 +14,10 @@ export default function Home() {
         <div className="grid h-screen grid-rows-[auto_minmax(0,1fr)]">
             <StatusBar />
 
-            <div className="grid grid-cols-[auto_1fr] grid-rows-[minmax(0,1fr)] border-white/10 border-t">
+            <div className="grid grid-cols-[auto_1fr] grid-rows-[minmax(0,1fr)] border-zinc-800 border-t">
                 <DriverList />
 
-                <div className="grid w-full grid-rows-[minmax(0,1fr)_minmax(0,2fr)] border-white/10 border-l">
+                <div className="grid w-full grid-rows-[minmax(0,1fr)_minmax(0,1fr)] border-zinc-800 border-l">
                     <Circuit />
 
                     <div className="grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none">

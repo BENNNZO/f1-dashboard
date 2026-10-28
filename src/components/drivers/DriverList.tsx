@@ -14,12 +14,12 @@ export default function DriverList() {
         )
 
         return (
-            <ul className="flex flex-col divide-y divide-white/10 overflow-y-auto font-mono">
+            <ul className="flex flex-col overflow-y-auto font-mono">
                 {sortedTimingData.map(([driverNumber, timingData]) => (
                     <motion.li
                         layout
                         key={driverNumber}
-                        className="relative odd:bg-zinc-925 even:bg-zinc-950"
+                        className="relative -mt-px overflow-hidden border-zinc-800 border-y odd:bg-zinc-925 even:bg-zinc-950"
                         transition={{
                             ease: [0.2, 1, 0.2, 1],
                             duration: 0.5,
