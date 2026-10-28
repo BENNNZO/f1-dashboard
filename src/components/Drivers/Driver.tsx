@@ -21,7 +21,7 @@ export default function Driver({ timingData, tireCompound, driver }: DriverProps
     return (
         <div
             className={mergeClasses(
-                "flex flex-col gap-3 rounded-xl border border-white/5 bg-zinc-900 p-2 duration-500 md:flex-col md:justify-normal md:gap-2 xl:flex-row xl:gap-3 min-[600px]:flex-row min-[600px]:justify-between",
+                "flex flex-row items-center pr-2",
                 timingData.InPit && !timingData.Retired ? "scale-x-95" : "scale-100",
             )}
             style={{
@@ -35,7 +35,6 @@ export default function Driver({ timingData, tireCompound, driver }: DriverProps
                 driver={driver}
             />
 
-            <div className="block h-px w-full bg-white/10 md:block xl:hidden min-[600px]:hidden" />
             <Sectors sectorData={timingData.Sectors} />
         </div>
     )
