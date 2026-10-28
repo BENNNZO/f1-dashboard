@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "motion/react"
 import { useState } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
@@ -17,7 +18,7 @@ export default function TeamRadio() {
 
     if (teamRadio && sessionInfo && driverList) {
         return (
-            <div className="flex w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll border-white/10 border-t p-2 lg:border-l">
+            <ul className="flex flex-col divide-y divide-white/10 overflow-y-scroll border-white/10 border-t border-l bg-zinc-925">
                 {Object.values(teamRadio.Captures)
                     .slice()
                     .reverse()
@@ -25,9 +26,10 @@ export default function TeamRadio() {
                         const driver = driverList[capture.RacingNumber]
 
                         return (
-                            <div
+                            <motion.li
+                                layout
                                 key={capture.Path}
-                                className="flex flex-row items-center gap-3 rounded-xl border border-white/5 bg-zinc-900 p-2 pr-6 duration-300"
+                                className="flex flex-row items-center gap-3 p-3 pr-6 duration-300"
                             >
                                 <p
                                     className="rounded-md px-1 py-1 font-bold text-sm text-white leading-none"
@@ -41,10 +43,10 @@ export default function TeamRadio() {
                                     setPlaying={setPlaying}
                                     src={`https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}`}
                                 />
-                            </div>
+                            </motion.li>
                         )
                     })}
-            </div>
+            </ul>
         )
     }
 
