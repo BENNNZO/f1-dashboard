@@ -7,11 +7,11 @@ import type { TimingDataLine } from "@/types/TimingData.type"
 import Driver from "./Driver"
 
 export default function DriverList() {
-    const timingAppData = useWebSocketStore((state) => state.data.TimingAppData)
+    const currentTyres = useWebSocketStore((state) => state.data.CurrentTyres)
     const driverList = useWebSocketStore((state) => state.data.DriverList)
     const timingData = useWebSocketStore((state) => state.data.TimingData)
 
-    if (timingAppData && driverList && timingData) {
+    if (driverList && timingData) {
         const sortedTimingData: [string, TimingDataLine][] = Object.entries(timingData.Lines).sort(
             (a, b) => Number(a[1].Position) - Number(b[1].Position),
         )
@@ -29,10 +29,7 @@ export default function DriverList() {
                         >
                             <Driver
                                 timingData={timingData}
-                                tireCompound={
-                                    timingAppData?.Lines?.[driverNumber]?.Stints?.[0]?.Compound?.toLowerCase() ||
-                                    "unknown"
-                                }
+                                tireCompound={currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase() ?? "unknown"}
                                 driver={driverList[driverNumber]}
                             />
                         </motion.div>
