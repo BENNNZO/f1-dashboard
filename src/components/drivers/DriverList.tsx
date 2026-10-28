@@ -19,7 +19,7 @@ export default function DriverList() {
                     <motion.li
                         layout
                         key={driverNumber}
-                        className="relative odd:bg-[#101013] even:bg-zinc-950"
+                        className="relative odd:bg-zinc-925 even:bg-zinc-950"
                         transition={{
                             ease: [0.2, 1, 0.2, 1],
                             duration: 0.5,
