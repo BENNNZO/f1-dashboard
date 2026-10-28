@@ -19,7 +19,7 @@ export default function DriverRow({ timingData, timingStats, driver }: DriverRow
         <div
             data-retired={timingData?.Retired ? true : undefined}
             data-pit={timingData?.InPit ? true : undefined}
-            className="flex flex-row items-center gap-4 pr-2 transition-[scale,filter] duration-500 ease-snappy not-data-retired:data-pit:scale-x-97 data-pit:brightness-50 data-retired:brightness-50"
+            className="group/driver flex flex-row items-center gap-4 pr-2 transition-[scale,filter] duration-500 ease-snappy not-data-retired:data-pit:scale-x-97 data-pit:brightness-50 data-retired:brightness-50"
         >
             <Tag
                 driver={driver}
