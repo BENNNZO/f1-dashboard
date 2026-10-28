@@ -11,7 +11,7 @@ export default function GapTime({ timingData }: GapTimeProps) {
             <p
                 className={mergeClasses(
                     "font-semibold text-white leading-none duration-300",
-                    timingData?.IntervalToPositionAhead?.Catching && "text-green-300",
+                    timingData?.IntervalToPositionAhead?.Catching && "text-green-400",
                 )}
             >
                 {timingData?.IntervalToPositionAhead?.Value === ""
