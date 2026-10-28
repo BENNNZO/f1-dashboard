@@ -84,6 +84,7 @@ export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerPro
 
     return (
         <div className="flex w-full flex-row gap-1">
+            {/* biome-ignore lint/a11y/useMediaCaption: F1 sends no captions for team radio */}
             <audio
                 ref={audioRef}
                 src={src}
@@ -121,6 +122,7 @@ export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerPro
             <div className="flex w-full flex-row items-center gap-4">
                 <p>{formatTime(currentTime)}</p>
 
+                {/* biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: mouse-only seek bar, the play button works with the keyboard */}
                 <div
                     ref={sliderRef}
                     className="group relative w-full cursor-pointer overflow-hidden rounded-full bg-zinc-800"
