@@ -10,6 +10,7 @@ import type { SessionInfo } from "@/types/SessionInfo.type"
 import type { TeamRadioData } from "@/types/TeamRadioData.type"
 import type { TimingAppData } from "@/types/TimingAppData.type"
 import type { TimingData } from "@/types/TimingData.type"
+import type { TimingStats } from "@/types/TimingStats.type"
 import type { TrackStatusData } from "@/types/TrackStatusData.type"
 import type { WeatherData } from "@/types/WeatherData.type"
 import deepMerge from "@/utils/deepMerge"
@@ -23,6 +24,7 @@ type F1Data = {
     SessionInfo?: SessionInfo
     LapCount?: LapCountData
     TimingData?: TimingData
+    TimingStats?: TimingStats
     TeamRadio?: TeamRadioData
     CurrentTyres?: CurrentTyresData
     [topic: string]: unknown
