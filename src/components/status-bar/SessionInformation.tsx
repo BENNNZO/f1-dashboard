@@ -5,7 +5,7 @@ export default function SessionInformation() {
 
     if (sessionInfo) {
         return (
-            <p className="px-6">
+            <p>
                 {sessionInfo?.Name ? `${sessionInfo?.Name} \u2014 ` : ""}
                 {sessionInfo?.Meeting?.Name ?? ""}
             </p>
