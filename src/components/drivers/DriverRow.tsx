@@ -7,17 +7,17 @@ import Sectors from "./Sectors"
 import Tag from "./Tag"
 import TireImage from "./TireImage"
 
-type DriverProps = {
+type DriverRowProps = {
     timingData: TimingDataLine
     driver: DriverData
 }
 
-export default function Driver({ timingData, driver }: DriverProps) {
+export default function DriverRow({ timingData, driver }: DriverRowProps) {
     return (
         <div
             data-retired={timingData?.Retired ? true : undefined}
             data-pit={timingData?.InPit ? true : undefined}
-            className="flex flex-row items-center gap-4 pr-2 transition-[scale,filter] duration-500 ease-snappy not-data-retired:data-pit:scale-x-97 data-pit:brightness-50 data-retired:brightness-10"
+            className="flex flex-row items-center gap-4 pr-2 transition-[scale,filter] duration-500 ease-snappy not-data-retired:data-pit:scale-x-97 data-pit:brightness-50 data-retired:brightness-50"
         >
             <Tag
                 driver={driver}
