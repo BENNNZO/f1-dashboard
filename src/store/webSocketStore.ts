@@ -1,6 +1,7 @@
 import { create } from "zustand"
 
 import type { CircuitData } from "@/types/CircuitData.type"
+import type { CurrentTyresData } from "@/types/CurrentTyresData.type"
 import type { DriverListData } from "@/types/DriverListData.type"
 import type { F1Message } from "@/types/F1Message.type"
 import type { LapCountData } from "@/types/LapCountData.type"
@@ -23,6 +24,7 @@ type F1Data = {
     LapCount?: LapCountData
     TimingData?: TimingData
     TeamRadio?: TeamRadioData
+    CurrentTyres?: CurrentTyresData
     [topic: string]: unknown
 }
 
