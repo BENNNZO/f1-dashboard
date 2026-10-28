@@ -2,10 +2,10 @@ import { motion } from "motion/react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
 
-import Driver from "./Driver"
+import DriverRow from "./DriverRow"
 
 export default function DriverList() {
-    const currentTyres = useWebSocketStore((state) => state.data.CurrentTyres)
+    const _currentTyres = useWebSocketStore((state) => state.data.CurrentTyres)
     const driverList = useWebSocketStore((state) => state.data.DriverList)
     const timingData = useWebSocketStore((state) => state.data.TimingData)
 
@@ -22,10 +22,9 @@ export default function DriverList() {
                         key={driverNumber}
                         className="odd:bg-zinc-900/50 even:bg-zinc-950"
                     >
-                        <Driver
+                        <DriverRow
                             timingData={timingData}
                             driver={driverList[driverNumber]}
-                            tireCompound={currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase() ?? "unknown"}
                         />
                     </motion.li>
                 ))}
