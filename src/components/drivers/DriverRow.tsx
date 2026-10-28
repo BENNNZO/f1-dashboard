@@ -1,6 +1,5 @@
 import type { DriverData } from "@/types/DriverListData.type"
 import type { TimingDataLine } from "@/types/TimingData.type"
-import { mergeClasses } from "@/utils/mergeClasses"
 
 import GapTime from "./GapTime"
 import LapTime from "./LapTime"
@@ -18,7 +17,7 @@ export default function Driver({ timingData, driver }: DriverProps) {
         <div
             data-retired={timingData?.Retired ? true : undefined}
             data-pit={timingData?.InPit ? true : undefined}
-            className="flex flex-row items-center gap-4 pr-2 transition-[scale,filter] ease-snappy duration-500 not-data-retired:data-pit:scale-x-97 data-pit:brightness-50 data-retired:brightness-10"
+            className="flex flex-row items-center gap-4 pr-2 transition-[scale,filter] duration-500 ease-snappy not-data-retired:data-pit:scale-x-97 data-pit:brightness-50 data-retired:brightness-10"
         >
             <Tag
                 driver={driver}
