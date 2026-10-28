@@ -7,8 +7,9 @@ import DriverRow from "./DriverRow"
 export default function DriverList() {
     const driverList = useWebSocketStore((state) => state.data.DriverList)
     const timingData = useWebSocketStore((state) => state.data.TimingData)
+    const timingStats = useWebSocketStore((state) => state.data.TimingStats)
 
-    if (driverList && timingData) {
+    if (driverList && timingData && timingStats) {
         const sortedTimingData = Object.entries(timingData.Lines).sort(
             (a, b) => Number(a[1].Position) - Number(b[1].Position),
         )
@@ -27,6 +28,7 @@ export default function DriverList() {
                     >
                         <DriverRow
                             timingData={timingData}
+                            timingStats={timingStats.Lines[driverNumber]}
                             driver={driverList[driverNumber]}
                         />
                     </motion.li>

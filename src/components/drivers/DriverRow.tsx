@@ -1,5 +1,6 @@
 import type { DriverData } from "@/types/DriverListData.type"
 import type { TimingDataLine } from "@/types/TimingData.type"
+import type { TimingStatsLine } from "@/types/TimingStats.type"
 
 import GapTime from "./GapTime"
 import LapTime from "./LapTime"
@@ -9,10 +10,11 @@ import TireImage from "./TireImage"
 
 type DriverRowProps = {
     timingData: TimingDataLine
+    timingStats: TimingStatsLine
     driver: DriverData
 }
 
-export default function DriverRow({ timingData, driver }: DriverRowProps) {
+export default function DriverRow({ timingData, timingStats, driver }: DriverRowProps) {
     return (
         <div
             data-retired={timingData?.Retired ? true : undefined}
@@ -26,7 +28,12 @@ export default function DriverRow({ timingData, driver }: DriverRowProps) {
 
             <TireImage driverNumber={Number(driver.RacingNumber)} />
             <GapTime timingData={timingData} />
-            <LapTime timingData={timingData} />
+
+            <LapTime
+                timingData={timingData}
+                timingStats={timingStats}
+            />
+
             <Sectors sectorData={timingData.Sectors} />
         </div>
     )
