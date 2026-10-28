@@ -29,7 +29,10 @@ export default function TeamRadio() {
                             <motion.li
                                 layout
                                 key={capture.Path}
-                                className="flex flex-row items-center gap-3 p-3 pr-6 duration-300"
+                                className="flex flex-row items-center gap-3 p-3 pr-6"
+                                initial={{ scaleY: 0, y: -25 }}
+                                animate={{ scaleY: 1, y: 0 }}
+                                transition={{ ease: [0.2, 1, 0.2, 1], duration: 1 }}
                             >
                                 <p
                                     className="rounded-md px-1 py-1 font-bold text-sm text-white leading-none"
