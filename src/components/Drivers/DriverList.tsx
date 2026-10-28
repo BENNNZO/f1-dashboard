@@ -1,8 +1,6 @@
 import { motion } from "motion/react"
 
-import Skeleton from "@/components/Skeleton"
 import { useWebSocketStore } from "@/store/webSocketStore"
-import type { TimingDataLine } from "@/types/TimingData.type"
 
 import Driver from "./Driver"
 
@@ -12,43 +10,26 @@ export default function DriverList() {
     const timingData = useWebSocketStore((state) => state.data.TimingData)
 
     if (driverList && timingData) {
-        const sortedTimingData: [string, TimingDataLine][] = Object.entries(timingData.Lines).sort(
+        const sortedTimingData = Object.entries(timingData.Lines).sort(
             (a, b) => Number(a[1].Position) - Number(b[1].Position),
         )
 
         return (
-            <motion.div className="relative flex shrink-0 flex-col gap-1 overflow-y-scroll p-1 font-mono">
-                {sortedTimingData.map((data) => {
-                    const driverNumber: string = data[0]
-                    const timingData: TimingDataLine = data[1]
-
-                    return (
-                        <motion.div
-                            layout
-                            key={driverNumber}
-                        >
-                            <Driver
-                                timingData={timingData}
-                                tireCompound={currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase() ?? "unknown"}
-                                driver={driverList[driverNumber]}
-                            />
-                        </motion.div>
-                    )
-                })}
-            </motion.div>
+            <motion.ul className="flex flex-col divide-y divide-white/10 overflow-y-auto font-mono">
+                {sortedTimingData.map(([driverNumber, timingData]) => (
+                    <motion.li
+                        layout
+                        key={driverNumber}
+                        className="odd:bg-zinc-900/50 even:bg-zinc-950"
+                    >
+                        <Driver
+                            timingData={timingData}
+                            driver={driverList[driverNumber]}
+                            tireCompound={currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase() ?? "unknown"}
+                        />
+                    </motion.li>
+                ))}
+            </motion.ul>
         )
     }
-
-    return (
-        <div className="relative flex w-1/2 shrink-0 flex-col gap-2 overflow-y-scroll p-2">
-            {[...Array(20)].map((_, i) => (
-                <Skeleton
-                    // biome-ignore lint/suspicious/noArrayIndexKey: fixed placeholder list that never reorders
-                    key={i}
-                    delay={i * 100}
-                    height={50}
-                />
-            ))}
-        </div>
-    )
 }
