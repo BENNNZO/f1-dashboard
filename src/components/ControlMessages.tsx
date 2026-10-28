@@ -1,3 +1,5 @@
+import { motion } from "motion/react"
+
 import { useWebSocketStore } from "@/store/webSocketStore"
 import type { MessageDrs, MessageFlag, MessageOther } from "@/types/RaceControlMessages.type"
 
@@ -34,9 +36,13 @@ export default function ControlMessages() {
                             const { Flag } = message as { Flag: keyof typeof flagTypes }
 
                             return (
-                                <li
+                                <motion.li
+                                    layout
                                     key={`${Utc}${Message}`}
                                     className="flex flex-col px-3 py-2"
+                                    initial={{ scaleY: 0, y: -35 }}
+                                    animate={{ scaleY: 1, y: 0 }}
+                                    transition={{ ease: [0.2, 1, 0.2, 1], duration: 1 }}
                                 >
                                     <p className="text-sm text-zinc-400">
                                         {hour}:{minute} - {Category}
@@ -45,21 +51,25 @@ export default function ControlMessages() {
                                     <p className="">
                                         {flagTypes[Flag]} {Message}
                                     </p>
-                                </li>
+                                </motion.li>
                             )
                         }
 
                         return (
-                            <li
+                            <motion.li
+                                layout
                                 key={`${Utc}${Message}`}
                                 className="flex flex-col px-3 py-2"
+                                initial={{ scaleY: 0, y: -35 }}
+                                animate={{ scaleY: 1, y: 0 }}
+                                transition={{ ease: [0.2, 1, 0.2, 1], duration: 1 }}
                             >
                                 <p className="text-sm text-zinc-400">
                                     {hour}:{minute} - {Category}
                                 </p>
 
                                 <p className="">{Message}</p>
-                            </li>
+                            </motion.li>
                         )
                     })}
             </ul>
