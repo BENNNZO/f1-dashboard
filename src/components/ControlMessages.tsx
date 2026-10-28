@@ -18,7 +18,7 @@ export default function ControlMessages() {
 
     if (raceControlMessages) {
         return (
-            <ul className="flex h-full w-full flex-col divide-y divide-white/10 overflow-x-hidden overflow-y-scroll border-white/10 border-t bg-zinc-925">
+            <ul className="flex h-full w-full flex-col divide-y divide-white/10 overflow-x-hidden overflow-y-scroll border-zinc-800 border-t bg-zinc-925">
                 {Object.values(raceControlMessages.Messages)
                     .slice()
                     .reverse()
@@ -77,7 +77,7 @@ export default function ControlMessages() {
     }
 
     return (
-        <div className="flex h-full flex-col gap-2 overflow-x-hidden overflow-y-scroll border-white/10 border-t p-2">
+        <div className="flex h-full flex-col gap-2 overflow-x-hidden overflow-y-scroll border-zinc-800 border-t p-2">
             {[...Array(10)].map((_, i) => (
                 <Skeleton
                     // biome-ignore lint/suspicious/noArrayIndexKey: fixed placeholder list that never reorders

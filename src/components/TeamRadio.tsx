@@ -18,7 +18,7 @@ export default function TeamRadio() {
 
     if (teamRadio && sessionInfo && driverList) {
         return (
-            <ul className="flex flex-col divide-y divide-white/10 overflow-y-scroll border-white/10 border-t border-l bg-zinc-925">
+            <ul className="flex flex-col divide-y divide-white/10 overflow-y-scroll border-zinc-800 border-t border-l bg-zinc-925">
                 {Object.values(teamRadio.Captures)
                     .slice()
                     .reverse()
@@ -54,7 +54,7 @@ export default function TeamRadio() {
     }
 
     return (
-        <div className="flex flex-col gap-2 overflow-x-hidden overflow-y-scroll border-white/10 border-t p-2 lg:border-l">
+        <div className="flex flex-col gap-2 overflow-x-hidden overflow-y-scroll border-zinc-800 border-t p-2 lg:border-l">
             {[...Array(20)].map((_, i) => (
                 <Skeleton
                     // biome-ignore lint/suspicious/noArrayIndexKey: fixed placeholder list that never reorders
