@@ -2,7 +2,7 @@
 
 import Circuit from "@/components/Circuit"
 import ControlMessages from "@/components/ControlMessages"
-import DriverList from "@/components/Drivers/DriverList"
+import DriverList from "@/components/drivers/DriverList"
 import StatusBar from "@/components/status-bar/StatusBar"
 import TeamRadio from "@/components/TeamRadio"
 import useLiveFeed from "@/hooks/useLiveFeed"
