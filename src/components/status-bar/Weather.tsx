@@ -6,7 +6,7 @@ export default function Weather() {
 
     if (weatherData) {
         return (
-            <div className="flex flex-row gap-10 px-6">
+            <div className="flex flex-row gap-6">
                 <p>
                     <strong className="text-sm opacity-50">Air: </strong>
                     {CtoF(Number(weatherData.AirTemp)).toFixed(1)}° F
