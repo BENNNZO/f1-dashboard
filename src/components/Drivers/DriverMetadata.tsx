@@ -13,7 +13,7 @@ type DriverMetadataProps = {
 
 export default function DriverMetadata({ timingData, tireCompound, driver }: DriverMetadataProps) {
     return (
-        <div className="flex flex-rowYeah. items-center gap-3">
+        <div className="flex flex-row items-center gap-3">
             <div
                 className="flex flex-row gap-2 px-3 py-1 font-bold text-2xl"
                 style={{ background: `#${driver.TeamColour}ff` }}
