@@ -16,7 +16,7 @@ export default function ControlMessages() {
 
     if (raceControlMessages) {
         return (
-            <div className="flex h-full w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll border-white/10 border-t p-2">
+            <ul className="flex h-full w-full flex-col divide-y divide-white/10 overflow-x-hidden overflow-y-scroll border-white/10 border-t bg-zinc-925">
                 {Object.values(raceControlMessages.Messages)
                     .slice()
                     .reverse()
@@ -34,9 +34,9 @@ export default function ControlMessages() {
                             const { Flag } = message as { Flag: keyof typeof flagTypes }
 
                             return (
-                                <div
+                                <li
                                     key={`${Utc}${Message}`}
-                                    className="flex flex-col rounded-xl border border-white/5 bg-zinc-900 px-3 py-2"
+                                    className="flex flex-col px-3 py-2"
                                 >
                                     <p className="text-sm text-zinc-400">
                                         {hour}:{minute} - {Category}
@@ -45,24 +45,24 @@ export default function ControlMessages() {
                                     <p className="">
                                         {flagTypes[Flag]} {Message}
                                     </p>
-                                </div>
+                                </li>
                             )
                         }
 
                         return (
-                            <div
+                            <li
                                 key={`${Utc}${Message}`}
-                                className="flex flex-col rounded-xl border border-white/5 bg-zinc-900 px-3 py-2"
+                                className="flex flex-col px-3 py-2"
                             >
                                 <p className="text-sm text-zinc-400">
                                     {hour}:{minute} - {Category}
                                 </p>
 
                                 <p className="">{Message}</p>
-                            </div>
+                            </li>
                         )
                     })}
-            </div>
+            </ul>
         )
     }
 
