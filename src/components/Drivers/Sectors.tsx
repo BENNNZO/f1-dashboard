@@ -16,7 +16,7 @@ type SectorsProps = {
 
 export default function Sectors({ sectorData }: SectorsProps) {
     return (
-        <div className="flex min-w-32 gap-2">
+        <div className="flex flex-row gap-2">
             {sectorData &&
                 Object.values(sectorData).map((sector: Sector, index: number) => {
                     if (sector.Segments) {
@@ -24,7 +24,7 @@ export default function Sectors({ sectorData }: SectorsProps) {
                             <div
                                 // biome-ignore lint/suspicious/noArrayIndexKey: sectors are a fixed list that never reorders
                                 key={index}
-                                className="flex flex-col justify-between gap-2"
+                                className="flex flex-col gap-1"
                             >
                                 <div className="flex gap-0.5">
                                     {sector.Segments &&
