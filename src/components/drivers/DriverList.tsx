@@ -2,7 +2,7 @@ import { motion } from "motion/react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
 
-import { DriverContext } from "./DriverContext"
+import { DriverProvider } from "./DriverContext"
 import DriverRow from "./DriverRow"
 
 export default function DriverList() {
@@ -17,7 +17,7 @@ export default function DriverList() {
 
         return (
             <ul className="flex flex-col overflow-y-auto font-mono">
-                {sortedTimingData.map(([driverNumber, timingData]) => (
+                {sortedTimingData.map(([driverNumber]) => (
                     <motion.li
                         layout
                         key={driverNumber}
@@ -27,15 +27,9 @@ export default function DriverList() {
                             duration: 0.5,
                         }}
                     >
-                        <DriverContext
-                            value={{
-                                timingData,
-                                timingStats: timingStats.Lines[driverNumber],
-                                driver: driverList[driverNumber],
-                            }}
-                        >
+                        <DriverProvider driverNumber={Number(driverNumber)}>
                             <DriverRow />
-                        </DriverContext>
+                        </DriverProvider>
                     </motion.li>
                 ))}
             </ul>
