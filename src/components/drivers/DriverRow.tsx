@@ -3,8 +3,11 @@ import type { CSSProperties } from "react"
 import { useDriver } from "./DriverContext"
 import GapTime from "./GapTime"
 import LapTime from "./LapTime"
+import PitCount from "./PitCount"
+import PositionChange from "./PositionChange"
 import Sectors from "./Sectors"
 import Tag from "./Tag"
+import TireData from "./TireData"
 import TireImage from "./TireImage"
 
 export default function DriverRow() {
@@ -23,6 +26,9 @@ export default function DriverRow() {
             <div className="relative z-10 flex flex-row items-center gap-4">
                 <Tag />
                 <TireImage />
+                <TireData />
+                <PitCount />
+                <PositionChange />
                 <GapTime />
                 <LapTime />
                 <Sectors />
