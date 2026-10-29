@@ -21,10 +21,10 @@ export default function DriverList() {
                     <motion.li
                         layout
                         key={driverNumber}
-                        className="relative -mt-px overflow-hidden border-zinc-800 border-y odd:bg-zinc-925 even:bg-zinc-950"
+                        className="relative -mt-px overflow-hidden border-zinc-800 border-y transition-[background] duration-500 odd:bg-zinc-925 even:bg-zinc-950"
                         transition={{
                             ease: [0.2, 1, 0.2, 1],
-                            duration: 0.5,
+                            duration: 0.75,
                         }}
                     >
                         <DriverProvider driverNumber={Number(driverNumber)}>
