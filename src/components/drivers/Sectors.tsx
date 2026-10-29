@@ -25,7 +25,7 @@ export default function Sectors() {
                 >
                     <div
                         className={mergeClasses(
-                            "h-1.25 w-[13ch] rounded-full opacity-100 group-hover/driver:opacity-0",
+                            "h-1.25 w-[13ch] rounded-full opacity-100 transition-[background] duration-500 group-hover/driver:opacity-0",
                             sectorColor(sector),
                         )}
                     />
