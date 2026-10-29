@@ -1,22 +1,15 @@
 import type { CSSProperties } from "react"
 
-import type { DriverData } from "@/types/DriverListData.type"
-import type { TimingDataLine } from "@/types/TimingData.type"
-import type { TimingStatsLine } from "@/types/TimingStats.type"
-
+import { useDriver } from "./DriverContext"
 import GapTime from "./GapTime"
 import LapTime from "./LapTime"
 import Sectors from "./Sectors"
 import Tag from "./Tag"
 import TireImage from "./TireImage"
 
-type DriverRowProps = {
-    timingData: TimingDataLine
-    timingStats: TimingStatsLine
-    driver: DriverData
-}
+export default function DriverRow() {
+    const { timingData, driver } = useDriver()
 
-export default function DriverRow({ timingData, timingStats, driver }: DriverRowProps) {
     return (
         <div
             data-retired={timingData?.Retired ? true : undefined}
@@ -28,20 +21,11 @@ export default function DriverRow({ timingData, timingStats, driver }: DriverRow
             <div className="absolute top-0 left-0 h-full w-1.5 bg-(--team-color)" />
 
             <div className="relative z-10 flex flex-row items-center gap-4">
-                <Tag
-                    driver={driver}
-                    timingData={timingData}
-                />
-
-                <TireImage driverNumber={Number(driver.RacingNumber)} />
-                <GapTime timingData={timingData} />
-
-                <LapTime
-                    timingData={timingData}
-                    timingStats={timingStats}
-                />
-
-                <Sectors sectorData={timingData.Sectors} />
+                <Tag />
+                <TireImage />
+                <GapTime />
+                <LapTime />
+                <Sectors />
             </div>
         </div>
     )

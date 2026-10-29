@@ -3,11 +3,12 @@ import Image from "next/image"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
 
-type TireImageProps = {
-    driverNumber: number
-}
+import { useDriver } from "./DriverContext"
 
-export default function TireImage({ driverNumber }: TireImageProps) {
+export default function TireImage() {
+    const { driver } = useDriver()
+
+    const driverNumber = Number(driver.RacingNumber)
     const currentTyres = useWebSocketStore((state) => state.data.CurrentTyres)
     const currentTire = currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase() ?? "unknown"
 
