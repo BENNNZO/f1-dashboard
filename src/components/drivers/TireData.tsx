@@ -6,7 +6,7 @@ export default function TireData() {
 
     return (
         <p className="font-semibold text-xl text-zinc-500 leading-none">
-            {(currentStint?.TotalLaps ?? 0) < 10 ? `\u00A0${currentStint?.TotalLaps}` : currentStint?.TotalLaps}
+            {(currentStint?.TotalLaps ?? 0) < 10 ? `\u00A0${currentStint?.TotalLaps ?? "-"}` : currentStint?.TotalLaps}
         </p>
     )
 }
