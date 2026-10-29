@@ -48,7 +48,7 @@ export default function Sectors() {
                             {sector.Value === "" ? "--.---" : sector.Value.slice(0, 6)}
                         </p>
 
-                        <p className="font-semibold text-sm text-white/50 leading-none">
+                        <p className="font-semibold text-sm text-zinc-500 leading-none">
                             {sector.PreviousValue === "" ? "--.--" : sector.PreviousValue.slice(0, 5)}
                         </p>
                     </div>
