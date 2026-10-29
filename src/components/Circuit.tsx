@@ -36,7 +36,7 @@ export default function Circuit() {
         return (
             <div className="relative w-full">
                 <Image
-                    className="absolute top-2 left-2 w-24 rounded-xl object-cover shadow-md"
+                    className="absolute top-1 left-1 w-24 rounded-md object-cover shadow-md"
                     src={`/flags/${sessionInfo?.Meeting.Country.Code.toLowerCase() ?? "unknown"}.svg`}
                     width={80}
                     height={80}
