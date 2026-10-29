@@ -1,12 +1,8 @@
-import type { DriverData } from "@/types/DriverListData.type"
-import type { TimingDataLine } from "@/types/TimingData.type"
+import { useDriver } from "./DriverContext"
 
-type TagProps = {
-    timingData: TimingDataLine
-    driver: DriverData
-}
+export default function Tag() {
+    const { timingData, driver } = useDriver()
 
-export default function Tag({ driver, timingData }: TagProps) {
     return (
         <div className="flex flex-row gap-2 py-1 pl-3 font-bold text-2xl">
             <p className="text-zinc-400">

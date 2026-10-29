@@ -1,11 +1,10 @@
-import type { TimingDataLine } from "@/types/TimingData.type"
 import { mergeClasses } from "@/utils/mergeClasses"
 
-type GapTimeProps = {
-    timingData: TimingDataLine
-}
+import { useDriver } from "./DriverContext"
 
-export default function GapTime({ timingData }: GapTimeProps) {
+export default function GapTime() {
+    const { timingData } = useDriver()
+
     const isCatching = timingData?.IntervalToPositionAhead?.Catching
     const gapToNext = timingData?.IntervalToPositionAhead?.Value
     const gapToLead = timingData?.GapToLeader

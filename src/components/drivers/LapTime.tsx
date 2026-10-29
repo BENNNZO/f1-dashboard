@@ -1,14 +1,10 @@
-import type { TimingDataLine } from "@/types/TimingData.type"
-import type { TimingStatsLine } from "@/types/TimingStats.type"
 import { mergeClasses } from "@/utils/mergeClasses"
 import timeColor from "@/utils/timeColor"
 
-type LapTimesProps = {
-    timingData: TimingDataLine
-    timingStats: TimingStatsLine
-}
+import { useDriver } from "./DriverContext"
 
-export default function LapTimes({ timingData, timingStats }: LapTimesProps) {
+export default function LapTimes() {
+    const { timingData, timingStats } = useDriver()
     const lastLap = timingData?.LastLapTime.Value
     const bestLap = timingData?.BestLapTime.Value
     const isFastestLap = timingStats?.PersonalBestLapTime?.Position === 1

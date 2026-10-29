@@ -2,6 +2,8 @@ import type { Sector, Segment } from "@/types/TimingData.type"
 import { mergeClasses } from "@/utils/mergeClasses"
 import timeColor, { sectorColor } from "@/utils/timeColor"
 
+import { useDriver } from "./DriverContext"
+
 const STATUS_COLORS = {
     "0": "bg-zinc-700",
     "2048": "bg-yellow-300",
@@ -10,11 +12,10 @@ const STATUS_COLORS = {
     "2064": "bg-blue-400",
 }
 
-type SectorsProps = {
-    sectorData: Sector[]
-}
+export default function Sectors() {
+    const { timingData } = useDriver()
+    const sectorData = timingData.Sectors
 
-export default function Sectors({ sectorData }: SectorsProps) {
     return (
         <div className="flex flex-row gap-2">
             {sectorData &&
