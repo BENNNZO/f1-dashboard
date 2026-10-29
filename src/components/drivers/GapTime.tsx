@@ -20,7 +20,7 @@ export default function GapTime() {
                 {gapToNext === "" ? "---.--" : gapToNext.slice(0, 6)}
             </p>
 
-            <p className="font-semibold text-sm text-white/50 leading-none">
+            <p className="font-semibold text-sm text-zinc-500 leading-none">
                 {gapToLead === "" ? "---.---" : gapToLead.slice(0, 7)}
             </p>
         </div>

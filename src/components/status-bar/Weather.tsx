@@ -8,17 +8,17 @@ export default function Weather() {
         return (
             <div className="flex flex-row gap-6">
                 <p>
-                    <strong className="text-sm opacity-50">Air: </strong>
+                    <strong className="text-sm text-zinc-500">Air: </strong>
                     {CtoF(Number(weatherData.AirTemp)).toFixed(1)}° F
                 </p>
 
                 <p>
-                    <strong className="text-sm opacity-50">Track: </strong>
+                    <strong className="text-sm text-zinc-500">Track: </strong>
                     {CtoF(Number(weatherData.TrackTemp)).toFixed(1)}° F
                 </p>
 
                 <p>
-                    <strong className="text-sm opacity-50">Humidity: </strong>
+                    <strong className="text-sm text-zinc-500">Humidity: </strong>
                     {weatherData.Humidity}%
                 </p>
             </div>
