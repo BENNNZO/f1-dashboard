@@ -10,7 +10,7 @@ export default function TireImage() {
 
     const driverNumber = Number(driver.RacingNumber)
     const currentTyres = useWebSocketStore((state) => state.data.CurrentTyres)
-    const currentTire = currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase() ?? "unknown"
+    const currentTire = currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase()
 
     return (
         <AnimatePresence mode="popLayout">
@@ -23,7 +23,7 @@ export default function TireImage() {
             >
                 <Image
                     alt="tire-picture"
-                    src={`icons/tires/${currentTire}.svg`}
+                    src={`icons/tires/${currentTire ?? "unknown"}.svg`}
                     className="rounded-full outline outline-white/20"
                     width={32}
                     height={32}
