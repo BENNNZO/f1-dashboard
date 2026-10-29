@@ -1,8 +1,8 @@
 export type TimingAppData = {
-    Lines: Record<string, Line>
+    Lines: Record<string, TimingAppDataLine>
 }
 
-export type Line = {
+export type TimingAppDataLine = {
     GridPos: string
     Line: number
     RacingNumber: string
