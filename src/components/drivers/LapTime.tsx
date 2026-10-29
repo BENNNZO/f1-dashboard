@@ -22,7 +22,12 @@ export default function LapTimes() {
                 {lastLap === "" ? "-:--.--" : lastLap.slice(0, 7)}
             </p>
 
-            <p className="font-semibold text-sm text-white/50 leading-none">
+            <p
+                className={mergeClasses(
+                    "font-semibold text-sm text-zinc-500 leading-none",
+                    isFastestLap && "text-purple-400",
+                )}
+            >
                 {bestLap === "" ? "-:--.---" : bestLap.slice(0, 8)}
             </p>
         </div>
