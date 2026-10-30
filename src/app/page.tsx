@@ -20,8 +20,9 @@ export default function Home() {
                 <div className="grid w-full grid-rows-[minmax(0,1fr)_minmax(0,1fr)] border-zinc-800 border-l">
                     <Circuit />
 
-                    <div className="grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none">
+                    <div className="grid grid-cols-[1fr_1px_1fr] gap-x-px border-t border-t-zinc-800 bg-zinc-925">
                         <ControlMessages />
+                        <div className="bg-zinc-800" />
                         <TeamRadio />
                     </div>
                 </div>

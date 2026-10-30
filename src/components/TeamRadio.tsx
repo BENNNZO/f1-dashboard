@@ -7,7 +7,6 @@ import { useWebSocketStore } from "@/store/webSocketStore"
 import type { Capture } from "@/types/TeamRadioData.type"
 
 import AudioPlayer from "./AudioPlayer"
-import Skeleton from "./Skeleton"
 
 export default function TeamRadio() {
     const [playing, setPlaying] = useState<string | null>(null)
@@ -18,7 +17,7 @@ export default function TeamRadio() {
 
     if (teamRadio && sessionInfo && driverList) {
         return (
-            <ul className="flex flex-col divide-y divide-white/10 overflow-y-scroll border-zinc-800 border-t border-l bg-zinc-925">
+            <ul className="mask-y-from-[calc(100%-1rem)] scrollbar-none flex flex-col divide-y divide-zinc-800 overflow-y-auto bg-zinc-925">
                 {Object.values(teamRadio.Captures)
                     .slice()
                     .reverse()
@@ -52,17 +51,4 @@ export default function TeamRadio() {
             </ul>
         )
     }
-
-    return (
-        <div className="flex flex-col gap-2 overflow-x-hidden overflow-y-scroll border-zinc-800 border-t p-2 lg:border-l">
-            {[...Array(20)].map((_, i) => (
-                <Skeleton
-                    // biome-ignore lint/suspicious/noArrayIndexKey: fixed placeholder list that never reorders
-                    key={i}
-                    delay={i * 100}
-                    height={42}
-                />
-            ))}
-        </div>
-    )
 }
