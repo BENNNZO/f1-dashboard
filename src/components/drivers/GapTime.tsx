@@ -14,7 +14,7 @@ export default function GapTime() {
             <p
                 className={mergeClasses(
                     "font-semibold text-white leading-none duration-300",
-                    isCatching && "text-green-400",
+                    isCatching && "text-emerald-400",
                 )}
             >
                 {gapToNext === "" ? "---.--" : gapToNext.slice(0, 6)}

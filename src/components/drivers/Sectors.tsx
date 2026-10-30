@@ -6,7 +6,7 @@ import { useDriver } from "./DriverContext"
 const STATUS_COLORS = {
     "0": "bg-zinc-700",
     "2048": "bg-yellow-300",
-    "2049": "bg-green-400",
+    "2049": "bg-emerald-400",
     "2051": "bg-purple-400",
     "2064": "bg-blue-400",
 }
