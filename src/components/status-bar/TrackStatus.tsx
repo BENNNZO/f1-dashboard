@@ -1,7 +1,8 @@
 import { useWebSocketStore } from "@/store/webSocketStore"
+import { mergeClasses } from "@/utils/mergeClasses"
 
 const statusColors: Record<string, string> = {
-    "1": "rgb(13, 186, 131)",
+    "1": "bg-emerald-500",
 }
 
 export default function TrackStatus() {
@@ -9,12 +10,7 @@ export default function TrackStatus() {
 
     if (trackStatus) {
         return (
-            <p
-                className="-my-1 px-3 py-1"
-                style={{ background: `${statusColors[trackStatus.Status]}` }}
-            >
-                {trackStatus.Message}
-            </p>
+            <p className={mergeClasses("-my-1 px-3 py-1", statusColors[trackStatus.Status])}>{trackStatus.Message}</p>
         )
     }
 }
