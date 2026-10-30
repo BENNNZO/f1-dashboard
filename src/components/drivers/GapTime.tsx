@@ -6,8 +6,8 @@ export default function GapTime() {
     const { timingData } = useDriver()
 
     const isCatching = timingData?.IntervalToPositionAhead?.Catching
-    const gapToNext = timingData?.IntervalToPositionAhead?.Value
-    const gapToLead = timingData?.GapToLeader
+    const gapToNext = timingData?.IntervalToPositionAhead?.Value ?? timingData?.TimeDiffToPositionAhead ?? ""
+    const gapToLead = timingData?.GapToLeader ?? timingData?.TimeDiffToFastest ?? ""
 
     return (
         <div className="flex flex-col">

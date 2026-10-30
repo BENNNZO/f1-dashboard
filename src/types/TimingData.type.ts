@@ -4,11 +4,13 @@ export type TimingData = {
 }
 
 export type TimingDataLine = {
-    GapToLeader: string
-    IntervalToPositionAhead: {
+    GapToLeader?: string
+    IntervalToPositionAhead?: {
         Value: string
         Catching: boolean
     }
+    TimeDiffToFastest?: string
+    TimeDiffToPositionAhead?: string
     Line: number
     Position: string
     ShowPosition: boolean
