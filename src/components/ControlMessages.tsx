@@ -41,7 +41,7 @@ export default function ControlMessages() {
                                 layout
                                 key={`${Utc}${Message}`}
                                 className="flex flex-col px-3 py-2"
-                                initial={{ scaleY: 0, y: -35 }}
+                                initial={{ scaleY: 0, y: "-50%" }}
                                 animate={{ scaleY: 1, y: 0 }}
                                 transition={{ ease: [0.2, 1, 0.2, 1], duration: 1 }}
                             >
