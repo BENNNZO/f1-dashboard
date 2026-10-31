@@ -17,7 +17,7 @@ export default function Sectors() {
     const sectors = timingData.Sectors
 
     return (
-        <div className="col-start-2 row-span-3 row-start-1 flex min-w-0 flex-1 flex-row gap-1.5 md:flex-col lg:flex-row lg:gap-2">
+        <div className="flex min-w-0 flex-1 flex-row gap-1.5 md:flex-col lg:flex-row lg:gap-2">
             {Object.values(sectors).map((sector, index) => (
                 <div
                     // biome-ignore lint/suspicious/noArrayIndexKey: sectors are a fixed list that never reorders
