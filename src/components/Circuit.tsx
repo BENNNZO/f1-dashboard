@@ -1,12 +1,12 @@
 "use client"
 
 import axios from "axios"
-import Image from "next/image"
 import { useEffect } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
 import { transformPoints } from "@/utils/positionPoints"
 
+import Flag from "./Flag"
 import Skeleton from "./Skeleton"
 
 export default function Circuit() {
@@ -34,14 +34,8 @@ export default function Circuit() {
         )
 
         return (
-            <div className="relative w-full">
-                <Image
-                    className="absolute top-1 left-1 w-24 rounded-md object-cover shadow-md"
-                    src={`/flags/${sessionInfo?.Meeting.Country.Code.toLowerCase() ?? "unknown"}.svg`}
-                    width={80}
-                    height={80}
-                    alt="country-flag"
-                />
+            <div className="relative w-full overflow-hidden">
+                <Flag countryCode={sessionInfo?.Meeting.Country.Code.toLowerCase()} />
 
                 <svg
                     width="100%"
