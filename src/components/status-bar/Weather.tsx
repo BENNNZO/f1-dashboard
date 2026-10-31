@@ -5,22 +5,20 @@ export default function Weather() {
     const weatherData = useWebSocketStore((state) => state.data.WeatherData)
 
     if (weatherData) {
+        const readings = [
+            { label: "Air", value: `${CtoF(Number(weatherData.AirTemp)).toFixed(1)}° F` },
+            { label: "Track", value: `${CtoF(Number(weatherData.TrackTemp)).toFixed(1)}° F` },
+            { label: "Humidity", value: `${weatherData.Humidity}%` },
+        ]
+
         return (
             <div className="flex flex-row gap-6">
-                <p>
-                    <strong className="text-sm text-subtle">Air: </strong>
-                    {CtoF(Number(weatherData.AirTemp)).toFixed(1)}° F
-                </p>
-
-                <p>
-                    <strong className="text-sm text-subtle">Track: </strong>
-                    {CtoF(Number(weatherData.TrackTemp)).toFixed(1)}° F
-                </p>
-
-                <p>
-                    <strong className="text-sm text-subtle">Humidity: </strong>
-                    {weatherData.Humidity}%
-                </p>
+                {readings.map(({ label, value }) => (
+                    <p key={label}>
+                        <strong className="text-sm text-subtle">{label}: </strong>
+                        {value}
+                    </p>
+                ))}
             </div>
         )
     }
