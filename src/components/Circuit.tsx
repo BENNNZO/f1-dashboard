@@ -1,6 +1,5 @@
 "use client"
 
-import axios from "axios"
 import { useEffect } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
@@ -16,11 +15,13 @@ export default function Circuit() {
     useEffect(() => {
         if (!sessionInfo) return
 
-        axios
-            .get(
-                `https://api.multiviewer.app/api/v1/circuits/${sessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`,
-            )
-            .then((res) => updateCircuitData(res.data))
+        const url = `https://api.multiviewer.app/api/v1/circuits/${sessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`
+        fetch(url)
+            .then((res) => {
+                if (!res.ok) throw new Error(`Circuit request failed: ${res.status}`)
+                return res.json()
+            })
+            .then((data) => updateCircuitData(data))
             .catch((err) => console.error(err))
     }, [sessionInfo, updateCircuitData])
 
