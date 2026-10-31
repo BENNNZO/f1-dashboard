@@ -46,6 +46,8 @@ export const useWebSocketStore = create<StoreState>((set) => ({
     storeF1Message: (message) => {
         if (message.type === "init") {
             set(() => ({ data: message.data as F1Data }))
+        } else if ((message.data as { _kf?: boolean } | null)?._kf) {
+            set((state) => ({ data: { ...state.data, [message.type]: message.data } }))
         } else {
             set((state) => ({ data: deepMerge(state.data, { [message.type]: message.data }) as F1Data }))
         }
