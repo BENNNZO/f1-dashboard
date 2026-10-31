@@ -2,20 +2,35 @@ import { CameraControls, Grid } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import { useMemo, useRef } from "react"
 
-import { fitPoints, type Point } from "@/utils/positionPoints"
+import type { CircuitData } from "@/types/CircuitData.type"
+import { fitPoints, rotatePoints } from "@/utils/positionPoints"
 
 import TrackMesh from "./TrackMesh"
 
 type Circuit3DProps = {
-    circuitPoints: Point[]
+    circuitData: CircuitData
 }
 
 const RESET_DELAY = 5000
 
-export default function Circuit3D({ circuitPoints }: Circuit3DProps) {
+const ROTATION_OFFSETS: Record<number, number> = {
+    65: 28.3,
+}
+
+export default function Circuit3D({ circuitData }: Circuit3DProps) {
+    const fittedPoints = useMemo(() => {
+        const rotation = -circuitData.rotation + 180 + (ROTATION_OFFSETS[circuitData.circuitKey] ?? 0)
+
+        const trackPoints = rotatePoints(
+            circuitData.x.map((x, index) => ({ x: -x, y: circuitData.y[index] })),
+            rotation,
+        )
+
+        return fitPoints(trackPoints, -1, -1, 1, 1)
+    }, [circuitData])
+
     const controls = useRef<CameraControls>(null)
     const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
-    const fittedPoints = useMemo(() => fitPoints(circuitPoints, -1, -1, 1, 1), [circuitPoints])
 
     function scheduleReset() {
         clearTimeout(resetTimer.current)
