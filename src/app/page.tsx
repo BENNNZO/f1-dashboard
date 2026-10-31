@@ -14,7 +14,7 @@ export default function Home() {
 
     return (
         <MotionConfig transition={{ ease: [0.2, 1, 0.2, 1], duration: 0.75 }}>
-            <div className="grid h-screen grid-rows-[auto_minmax(0,1fr)]">
+            <div className="grid h-screen grid-cols-[minmax(0,1fr)] grid-rows-[auto_minmax(0,1fr)]">
                 <StatusBar />
 
                 <div className="grid grid-cols-[minmax(0,1fr)] border-border border-t md:grid-cols-[auto_1fr] md:grid-rows-[minmax(0,1fr)]">
