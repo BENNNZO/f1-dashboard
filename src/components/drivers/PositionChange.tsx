@@ -16,7 +16,7 @@ export default function PositionChange() {
             data-gained={status === "gained" ? true : undefined}
             data-lost={status === "lost" ? true : undefined}
             className="flex flex-row items-center font-semibold text-xl text-zinc-500 leading-none data-gained:text-emerald-500 data-lost:text-red-500"
-            value={positionDelta}
+            value={positionDelta && positionDelta < -9 ? Math.abs(positionDelta) : positionDelta}
             length={2}
         />
     )
