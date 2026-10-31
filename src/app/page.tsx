@@ -20,7 +20,7 @@ export default function Home() {
                 <div className="grid grid-cols-[auto_1fr] grid-rows-[minmax(0,1fr)] border-border border-t">
                     <DriverList />
 
-                    <div className="grid w-full grid-rows-[minmax(0,1fr)_minmax(0,1fr)] border-border border-l">
+                    <div className="grid w-full grid-rows-[auto_minmax(0,1fr)] border-border border-l">
                         <CircuitSection />
 
                         <div className="grid grid-cols-[1fr_1px_1fr] gap-x-px border-t border-t-border bg-card">
