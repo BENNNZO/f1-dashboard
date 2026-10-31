@@ -1,13 +1,14 @@
 import { createContext, type ReactNode, useContext, useMemo } from "react"
+import type { CatmullRomCurve3 } from "three"
 
 import useCircuitData from "@/hooks/useCircuitData"
 import { useWebSocketStore } from "@/store/webSocketStore"
-import buildCircuitPoints from "@/utils/buildCircuitPoints"
-import type { Point } from "@/utils/positionPoints"
+import buildCircuit, { type Segment } from "@/utils/buildCircuit"
 
 type CircuitContextData = {
     countryCode: string
-    circuitPoints: Point[]
+    circuitCurve: CatmullRomCurve3
+    circuitSegments: Segment[]
 }
 
 export const CircuitContext = createContext<CircuitContextData | null>(null)
@@ -23,15 +24,16 @@ export default function CircuitProvider({ children }: { children: ReactNode }) {
     const circuitData = useCircuitData(sessionInfo?.Meeting.Circuit.Key)
 
     const countryCode = sessionInfo?.Meeting.Country.Code.toLowerCase()
-    const circuitPoints = useMemo(() => buildCircuitPoints(circuitData), [circuitData])
+    const circuit = useMemo(() => buildCircuit(circuitData), [circuitData])
 
-    if (!(countryCode && circuitPoints)) return null
+    if (!(countryCode && circuit)) return null
 
     return (
         <CircuitContext
             value={{
                 countryCode,
-                circuitPoints,
+                circuitCurve: circuit.curve,
+                circuitSegments: circuit.segments,
             }}
         >
             {children}
