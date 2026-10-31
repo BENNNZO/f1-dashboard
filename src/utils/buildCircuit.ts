@@ -44,7 +44,7 @@ function buildCircuitCurve(circuitPoints: Point[], closed: boolean) {
     const points: THREE.Vector3[] = []
 
     circuitPoints.forEach(({ x, y }, index) => {
-        const point = new THREE.Vector3(x, -y, 0.09)
+        const point = new THREE.Vector3(x, -y, 0.1)
         const isLast = index === circuitPoints.length - 1
 
         if (!points.length || point.distanceTo(points[points.length - 1]) >= MIN_POINT_DISTANCE) points.push(point)

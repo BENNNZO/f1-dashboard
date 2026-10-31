@@ -40,12 +40,12 @@ export default function Track() {
             })}
 
             <mesh>
-                <tubeGeometry args={[circuitCurve, 1000, 0.08, 16, true]} />
+                <tubeGeometry args={[circuitCurve, 1000, 0.1, 16, true]} />
                 <meshBasicMaterial
                     color="#fff"
                     side={THREE.BackSide}
                     transparent
-                    opacity={0.3}
+                    opacity={0.2}
                     depthWrite={false}
                 />
             </mesh>
