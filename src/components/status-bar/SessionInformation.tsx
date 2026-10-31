@@ -6,8 +6,8 @@ export default function SessionInformation() {
     if (sessionInfo) {
         return (
             <p>
-                {sessionInfo?.Name ? `${sessionInfo?.Name} \u2014 ` : ""}
-                {sessionInfo?.Meeting?.Name ?? ""}
+                {sessionInfo.Name ? `${sessionInfo.Name} \u2014 ` : ""}
+                {sessionInfo.Meeting?.Name ?? ""}
             </p>
         )
     }

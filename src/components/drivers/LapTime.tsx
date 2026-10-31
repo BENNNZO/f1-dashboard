@@ -6,9 +6,9 @@ import { useDriver } from "./DriverContext"
 
 export default function LapTimes() {
     const { timingData, timingStats } = useDriver()
-    const lastLap = timingData?.LastLapTime.Value
-    const bestLap = timingData?.BestLapTime.Value
-    const isFastestLap = timingStats?.PersonalBestLapTime?.Position === 1
+    const lastLap = timingData.LastLapTime.Value
+    const bestLap = timingData.BestLapTime.Value
+    const isFastestLap = timingStats.PersonalBestLapTime?.Position === 1
 
     return (
         <div className="relative flex flex-col py-1.25">
@@ -19,7 +19,7 @@ export default function LapTimes() {
                 </>
             )}
 
-            <p className={mergeClasses("font-semibold leading-none duration-500", timeColor(timingData?.LastLapTime))}>
+            <p className={mergeClasses("font-semibold leading-none duration-500", timeColor(timingData.LastLapTime))}>
                 {sanitizeText(lastLap, { length: 7, fallback: "-:--.--", suffix: "\u00A0" })}
             </p>
 

@@ -17,8 +17,8 @@ export default function DriverRow() {
     return (
         <motion.li
             layout
-            data-retired={timingData?.Retired ? true : undefined}
-            data-pit={timingData?.InPit ? true : undefined}
+            data-retired={timingData.Retired ? true : undefined}
+            data-pit={timingData.InPit ? true : undefined}
             className="group relative z-(--driver-z) -mt-px shrink-0 overflow-hidden border-border border-y"
             style={
                 {
