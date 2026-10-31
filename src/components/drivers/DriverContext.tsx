@@ -22,7 +22,7 @@ export const DriverContext = createContext<DriverContextData | null>(null)
 
 export function useDriver(): DriverContextData {
     const context = useContext(DriverContext)
-    if (!context) throw new Error("useDriver() must be used inside DriverContext")
+    if (!context) throw new Error("useDriver() must be used inside DriverProvider")
     return context
 }
 
