@@ -1,10 +1,10 @@
 import Image from "next/image"
 
-type FlagProps = {
-    countryCode?: string
-}
+import { useCircuit } from "./CircuitContext"
 
-export default function Flag({ countryCode }: FlagProps) {
+export default function Flag() {
+    const { countryCode } = useCircuit()
+
     return (
         <div className="absolute top-1 left-1 z-10 aspect-4/3 w-24">
             <Image

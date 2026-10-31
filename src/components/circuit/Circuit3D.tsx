@@ -1,36 +1,16 @@
 import { CameraControls, Grid } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
-import { useMemo, useRef } from "react"
+import { useRef } from "react"
 
-import type { CircuitData } from "@/types/CircuitData.type"
-import { fitPoints, rotatePoints } from "@/utils/positionPoints"
-
+import { useCircuit } from "./CircuitContext"
 import TrackMesh from "./TrackMesh"
-
-type Circuit3DProps = {
-    circuitData: CircuitData
-}
 
 const RESET_DELAY = 5000
 const CAMERA_POSITION: [number, number, number] = [0, -1, 3]
 const MAX_CAMERA_TILT = (80 * Math.PI) / 180
 
-const ROTATION_OFFSETS: Record<number, number> = {
-    65: 28.3,
-}
-
-export default function Circuit3D({ circuitData }: Circuit3DProps) {
-    const fittedPoints = useMemo(() => {
-        const rotation = -circuitData.rotation + 180 + (ROTATION_OFFSETS[circuitData.circuitKey] ?? 0)
-
-        const trackPoints = rotatePoints(
-            circuitData.x.map((x, index) => ({ x: -x, y: circuitData.y[index] })),
-            rotation,
-        )
-
-        return fitPoints(trackPoints, -1, -1, 1, 1)
-    }, [circuitData])
-
+export default function Circuit3D() {
+    const { circuitPoints } = useCircuit()
     const controls = useRef<CameraControls>(null)
     const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
 
@@ -58,7 +38,7 @@ export default function Circuit3D({ circuitData }: Circuit3DProps) {
                 />
 
                 <TrackMesh
-                    circuitPoints={fittedPoints}
+                    circuitPoints={circuitPoints}
                     width={0.02}
                     height={0.04}
                     color="#fff"
