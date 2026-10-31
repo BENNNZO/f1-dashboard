@@ -14,8 +14,8 @@ export default function LapTimes() {
         <div className="relative flex flex-col py-1.25">
             {isFastestLap && (
                 <>
-                    <div className="absolute inset-x-0 top-0 h-1 -translate-y-1/2 rounded-full bg-purple-500" />
-                    <div className="absolute inset-x-0 top-full h-1 -translate-y-1/2 rounded-full bg-purple-500" />
+                    <div className="absolute inset-x-0 top-0 h-1 -translate-y-1/2 rounded-full bg-fastest" />
+                    <div className="absolute inset-x-0 top-full h-1 -translate-y-1/2 rounded-full bg-fastest" />
                 </>
             )}
 
@@ -25,8 +25,8 @@ export default function LapTimes() {
 
             <p
                 className={mergeClasses(
-                    "font-semibold text-sm text-zinc-500 leading-none",
-                    isFastestLap && "text-purple-400",
+                    "font-semibold text-sm text-subtle leading-none",
+                    isFastestLap && "text-fastest",
                 )}
             >
                 {sanitizeText(bestLap, { length: 8, fallback: "-:--.---", suffix: "\u00A0" })}

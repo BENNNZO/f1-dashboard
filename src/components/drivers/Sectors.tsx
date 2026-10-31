@@ -5,10 +5,10 @@ import timeColor, { sectorColor } from "@/utils/timeColor"
 import { useDriver } from "./DriverContext"
 
 const STATUS_COLORS = {
-    "0": "bg-zinc-700",
-    "2048": "bg-yellow-300",
-    "2049": "bg-emerald-400",
-    "2051": "bg-purple-400",
+    "0": "bg-empty",
+    "2048": "bg-sector",
+    "2049": "bg-personal-best",
+    "2051": "bg-fastest",
     "2064": "bg-blue-400",
 }
 
@@ -49,7 +49,7 @@ export default function Sectors() {
                             {sanitizeText(sector.Value, { length: 6, fallback: "--.---", suffix: "\u00A0" })}
                         </p>
 
-                        <p className="font-semibold text-sm text-zinc-500 leading-none">
+                        <p className="font-semibold text-sm text-subtle leading-none">
                             {sanitizeText(sector.PreviousValue, { length: 6, fallback: "--.---", suffix: "\u00A0" })}
                         </p>
                     </div>

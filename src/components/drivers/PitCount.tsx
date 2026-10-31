@@ -7,7 +7,7 @@ export default function PitCount() {
 
     return (
         <DisplayValue
-            className="text-zinc-400"
+            className="text-muted"
             value={pitCount}
             length={1}
         />

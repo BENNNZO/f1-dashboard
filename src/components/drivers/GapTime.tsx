@@ -14,14 +14,14 @@ export default function GapTime() {
         <div className="flex flex-col">
             <p
                 className={mergeClasses(
-                    "font-semibold text-white leading-none duration-300",
+                    "font-semibold text-foreground leading-none duration-300",
                     isCatching && "text-emerald-400",
                 )}
             >
                 {sanitizeText(gapToNext, { length: 6, fallback: "---.--", suffix: "\u00A0" })}
             </p>
 
-            <p className="font-semibold text-sm text-zinc-500 leading-none">
+            <p className="font-semibold text-sm text-subtle leading-none">
                 {sanitizeText(gapToLead, { length: 7, fallback: "---.---", suffix: "\u00A0" })}
             </p>
         </div>

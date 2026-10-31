@@ -1,5 +1,21 @@
 @theme {
-    --color-zinc-925: #101013;
+    --color-background: var(--color-zinc-950);
+    --color-card: #101013;
+    --color-border: var(--color-zinc-800);
+    --color-empty: var(--color-zinc-700);
+
+    --color-foreground: var(--color-white);
+    --color-muted: var(--color-zinc-400);
+    --color-subtle: var(--color-zinc-500);
+    --color-faint: var(--color-zinc-800);
+
+    --color-fastest: var(--color-purple-400);
+    --color-personal-best: var(--color-emerald-400);
+    --color-sector: var(--color-yellow-300);
+
+    --color-flag-green: var(--color-emerald-500);
+    --color-flag-yellow: var(--color-amber-400);
+    --color-flag-red: var(--color-red-500);
 
     --ease-snappy: cubic-bezier(0.2, 1, 0.2, 1);
 }

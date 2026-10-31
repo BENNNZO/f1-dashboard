@@ -125,11 +125,11 @@ export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerPro
                 {/* biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: mouse-only seek bar, the play button works with the keyboard */}
                 <div
                     ref={sliderRef}
-                    className="group relative w-full cursor-pointer overflow-hidden rounded-full bg-zinc-800"
+                    className="group relative w-full cursor-pointer overflow-hidden rounded-full bg-border"
                     onClick={(e) => sliderClickHandler(e)}
                 >
                     <div
-                        className="pointer-events-none h-2 bg-white group-hover:h-4"
+                        className="pointer-events-none h-2 bg-foreground group-hover:h-4"
                         style={{
                             width: `${(currentTime / (duration ?? 1)) * 100}%`,
                             transition: "height 0.1s ease-out",

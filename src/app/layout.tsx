@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={mergeClasses(jetBrainsMono.className, "bg-zinc-950 text-white antialiased")}>
+            <body className={mergeClasses(jetBrainsMono.className, "bg-background text-foreground antialiased")}>
                 {children}
             </body>
         </html>

@@ -8,7 +8,7 @@ export default function StatusBar() {
         <div className="flex items-center justify-between py-1 pl-3">
             <div className="flex flex-row gap-4">
                 <SessionInformation />
-                <div className="w-px bg-white/10" />
+                <div className="w-px bg-border" />
                 <Weather />
             </div>
 

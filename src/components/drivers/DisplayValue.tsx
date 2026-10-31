@@ -21,7 +21,7 @@ export default function DisplayValue({ value, length, ...props }: DisplayValuePr
             {value ? (
                 sanitizedValue
             ) : (
-                <MinusIcon className="absolute top-1/2 right-0 size-4 -translate-y-1/2 stroke-3 text-zinc-800" />
+                <MinusIcon className="absolute top-1/2 right-0 size-4 -translate-y-1/2 stroke-3 text-faint" />
             )}
         </p>
     )
