@@ -32,7 +32,7 @@ export default function Sectors() {
                     />
 
                     <div className="absolute flex w-full gap-0.5 opacity-0 group-hover:opacity-100">
-                        {Object.values(sector.Segments).map((segment, index) => (
+                        {Object.values(sector.Segments ?? {}).map((segment, index) => (
                             <div
                                 // biome-ignore lint/suspicious/noArrayIndexKey: segments are a fixed list that never reorders
                                 key={index}

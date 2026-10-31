@@ -31,7 +31,7 @@ export type TimingDataLine = {
 export type Sector = {
     Stopped: boolean
     PreviousValue: string
-    Segments: Segment[]
+    Segments?: Segment[]
     Value: string
     Status: number
     OverallFastest: boolean
