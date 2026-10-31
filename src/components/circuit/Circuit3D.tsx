@@ -10,7 +10,7 @@ export default function Circuit3D() {
         <div className="size-full">
             <Canvas
                 camera={{
-                    position: [0, -2, 3],
+                    position: [0, -10, 10],
                     up: [0, 0, 1],
                     fov: 20,
                 }}

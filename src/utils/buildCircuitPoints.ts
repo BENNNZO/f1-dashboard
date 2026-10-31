@@ -15,5 +15,5 @@ export default function buildCircuitPoints(circuitData: CircuitData | null | und
         rotation,
     )
 
-    return fitPoints(trackPoints, -1, -1, 1, 1)
+    return fitPoints(trackPoints, -4, -4, 4, 4)
 }
