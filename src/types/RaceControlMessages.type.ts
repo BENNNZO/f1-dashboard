@@ -16,6 +16,7 @@ export type MessageFlag = {
     Utc: string
     Flag: string
     Scope: string
+    Sector?: number
 }
 
 export type MessageDrs = {
