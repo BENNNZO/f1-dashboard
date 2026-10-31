@@ -8,6 +8,7 @@ export default function Circuit3D() {
     return (
         <div className="size-full">
             <Canvas
+                flat
                 camera={{
                     position: [0, -10, 10],
                     up: [0, 0, 1],
