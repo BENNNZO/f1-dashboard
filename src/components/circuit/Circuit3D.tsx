@@ -1,15 +1,15 @@
-import { CameraControls, Grid } from "@react-three/drei"
+import { CameraControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import { useRef } from "react"
 
-import { useCircuit } from "./CircuitContext"
-import TrackMesh from "./TrackMesh"
+import GridFloor from "./GridFloor"
+import Lighting from "./Lighting"
+import Track from "./Track"
 
 const RESET_DELAY = 5000
 const MAX_CAMERA_TILT = (80 * Math.PI) / 180
 
 export default function Circuit3D() {
-    const { circuitPoints } = useCircuit()
     const controls = useRef<CameraControls>(null)
     const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
 
@@ -38,34 +38,14 @@ export default function Circuit3D() {
                     onEnd={scheduleCameraReset}
                 />
 
-                <ambientLight intensity={0.5} />
-                <directionalLight
-                    position={[2, -2, 5]}
-                    intensity={1.5}
-                />
-
-                <TrackMesh
-                    circuitPoints={circuitPoints}
-                    width={0.02}
-                    height={0.03}
-                    color="#ffffff"
-                />
-
-                <Grid
-                    args={[10, 10]}
-                    rotation={[Math.PI / 2, 0, 0]}
-                    cellSize={0.1}
-                    sectionSize={0.5}
-                    cellColor="#222222"
-                    sectionColor="#444444"
-                    fadeDistance={2.5}
-                    cellThickness={2}
-                />
-
                 <color
                     attach="background"
                     args={["#09090b"]}
                 />
+
+                <Lighting />
+                <Track />
+                <GridFloor />
             </Canvas>
         </div>
     )
