@@ -2,7 +2,6 @@ import { Canvas } from "@react-three/fiber"
 
 import CameraRig from "./CameraRig"
 import GridFloor from "./GridFloor"
-import Lighting from "./Lighting"
 import Track from "./Track"
 
 export default function Circuit3D() {
@@ -21,7 +20,6 @@ export default function Circuit3D() {
                 />
 
                 <CameraRig />
-                <Lighting />
                 <GridFloor />
                 <Track />
             </Canvas>
