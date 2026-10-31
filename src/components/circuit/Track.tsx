@@ -1,4 +1,4 @@
-import { Fragment } from "react/jsx-runtime"
+import { Fragment } from "react"
 import * as THREE from "three"
 
 import { useCircuit } from "./CircuitContext"
