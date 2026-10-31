@@ -33,9 +33,12 @@ export default function DriverRow() {
             <div className="flex flex-row flex-wrap items-center gap-x-4 gap-y-1 pr-1.5 pb-1 pl-4.5 transition-[filter,background] duration-500 ease-snappy group-odd:bg-card group-even:bg-background group-data-pit:brightness-25 group-data-retired:brightness-25 group-data-retired:grayscale sm:pb-0">
                 <Tag />
                 <TireImage />
-                <TireData />
-                <PitCount />
-                <PositionChange />
+
+                <div className="flex flex-row items-center gap-4">
+                    <TireData />
+                    <PitCount />
+                    <PositionChange />
+                </div>
 
                 <div className="flex flex-row items-center gap-4">
                     <GapTime />
