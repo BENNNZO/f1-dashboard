@@ -10,12 +10,12 @@ type AudioPlayerProps = {
 }
 
 export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerProps) {
-    const [isPlaying, setIsPlaying] = useState<boolean>(false)
+    const [isPlaying, setIsPlaying] = useState(false)
     const [duration, setDuration] = useState<number | null>(null)
-    const [currentTime, setCurrentTime] = useState<number>(0)
+    const [currentTime, setCurrentTime] = useState(0)
 
     const audioRef = useRef<HTMLAudioElement | null>(null)
-    const animationRef = useRef<number>(0)
+    const animationRef = useRef(0)
     const sliderRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
@@ -58,22 +58,22 @@ export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerPro
         animationRef.current = requestAnimationFrame(animationFrameWhilePlaying)
     }
 
-    function formatTime(duration: number): string {
-        const seconds: number = Math.round(duration % 60)
-        const minutes: number = Math.floor(duration / 60)
+    function formatTime(duration: number) {
+        const seconds = Math.round(duration % 60)
+        const minutes = Math.floor(duration / 60)
 
         return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
     }
 
-    function sliderClickHandler(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+    function sliderClickHandler(e: React.MouseEvent<HTMLDivElement>) {
         e.preventDefault()
 
-        const minX: number = sliderRef.current?.offsetLeft ?? 0
-        const maxX: number = minX + (sliderRef.current?.offsetWidth ?? 0)
-        const clickX: number = e.pageX
+        const minX = sliderRef.current?.offsetLeft ?? 0
+        const maxX = minX + (sliderRef.current?.offsetWidth ?? 0)
+        const clickX = e.pageX
 
-        const percentage: number = (clickX - minX) / (maxX - minX)
-        const time: number = (duration ?? 0) * percentage
+        const percentage = (clickX - minX) / (maxX - minX)
+        const time = (duration ?? 0) * percentage
 
         if (audioRef.current) audioRef.current.currentTime = time
         setCurrentTime(time)
@@ -86,15 +86,15 @@ export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerPro
                 ref={audioRef}
                 src={src}
                 preload="metadata"
-                onLoadedMetadata={() => updateData()}
-                onEnded={() => resetData()}
+                onLoadedMetadata={updateData}
+                onEnded={resetData}
             />
 
             <div className="flex flex-row items-center justify-center pr-2">
                 <button
                     className="cursor-pointer"
                     type="button"
-                    onClick={() => togglePlayState()}
+                    onClick={togglePlayState}
                 >
                     <Image
                         className="h-6 w-6 invert"
@@ -113,7 +113,7 @@ export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerPro
                 <div
                     ref={sliderRef}
                     className="group relative w-full cursor-pointer overflow-hidden rounded-full bg-border"
-                    onClick={(e) => sliderClickHandler(e)}
+                    onClick={sliderClickHandler}
                 >
                     <div
                         className="pointer-events-none h-2 bg-foreground group-hover:h-4"
