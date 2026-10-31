@@ -3,8 +3,9 @@
 import { useEffect } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
-import { getViewBox, rotatePoints } from "@/utils/positionPoints"
+import { rotatePoints } from "@/utils/positionPoints"
 
+import Circuit3D from "./Circuit3D"
 import Flag from "./Flag"
 
 const ROTATION_OFFSETS: Record<number, number> = {
@@ -39,8 +40,9 @@ export default function Circuit() {
         return (
             <div className="relative w-full overflow-hidden">
                 <Flag countryCode={sessionInfo?.Meeting.Country.Code.toLowerCase()} />
+                <Circuit3D circuitPoints={circuitPoints} />
 
-                <svg
+                {/* <svg
                     width="100%"
                     height="100%"
                     viewBox={getViewBox(circuitPoints, 1000)}
@@ -68,7 +70,7 @@ export default function Circuit() {
                         strokeWidth="100"
                         fill="none"
                     />
-                </svg>
+                </svg> */}
             </div>
         )
     }
