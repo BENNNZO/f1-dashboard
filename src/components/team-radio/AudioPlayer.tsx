@@ -96,23 +96,13 @@ export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerPro
                     type="button"
                     onClick={() => togglePlayState()}
                 >
-                    {isPlaying ? (
-                        <Image
-                            className="h-6 w-6 invert"
-                            src="icons/audio_player/pause.svg"
-                            width={25}
-                            height={25}
-                            alt="pause button"
-                        />
-                    ) : (
-                        <Image
-                            className="h-6 w-6 invert"
-                            src="icons/audio_player/play.svg"
-                            width={25}
-                            height={25}
-                            alt="pause button"
-                        />
-                    )}
+                    <Image
+                        className="h-6 w-6 invert"
+                        src={`icons/audio_player/${isPlaying ? "pause" : "play"}.svg`}
+                        width={25}
+                        height={25}
+                        alt={isPlaying ? "pause button" : "play button"}
+                    />
                 </button>
             </div>
 
