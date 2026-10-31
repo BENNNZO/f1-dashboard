@@ -12,6 +12,7 @@ type Circuit3DProps = {
 }
 
 const RESET_DELAY = 5000
+const MAX_CAMERA_TILT = (80 * Math.PI) / 180
 
 const ROTATION_OFFSETS: Record<number, number> = {
     65: 28.3,
@@ -45,6 +46,7 @@ export default function Circuit3D({ circuitData }: Circuit3DProps) {
             <Canvas
                 camera={{
                     position: [0, -2.5, 2.2],
+                    up: [0, 0, 1],
                     fov: 20,
                 }}
             >
@@ -73,6 +75,8 @@ export default function Circuit3D({ circuitData }: Circuit3DProps) {
 
                 <CameraControls
                     ref={controls}
+                    minPolarAngle={0}
+                    maxPolarAngle={MAX_CAMERA_TILT}
                     onStart={() => clearTimeout(resetTimer.current)}
                     onEnd={scheduleReset}
                 />
