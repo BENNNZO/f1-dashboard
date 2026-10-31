@@ -7,8 +7,8 @@ export default function GridFloor() {
             rotation={[Math.PI / 2, 0, 0]}
             cellSize={0.5}
             sectionSize={2}
-            cellColor="#171717"
-            sectionColor="#444444"
+            cellColor="#141414"
+            sectionColor="#27272a"
             fadeDistance={15}
             cellThickness={2}
         />
