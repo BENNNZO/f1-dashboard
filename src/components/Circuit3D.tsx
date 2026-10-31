@@ -12,6 +12,7 @@ type Circuit3DProps = {
 }
 
 const RESET_DELAY = 5000
+const CAMERA_POSITION: [number, number, number] = [0, -1, 3]
 const MAX_CAMERA_TILT = (80 * Math.PI) / 180
 
 const ROTATION_OFFSETS: Record<number, number> = {
@@ -33,21 +34,21 @@ export default function Circuit3D({ circuitData }: Circuit3DProps) {
     const controls = useRef<CameraControls>(null)
     const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
 
-    function scheduleReset() {
+    function scheduleCameraReset() {
         clearTimeout(resetTimer.current)
         resetTimer.current = setTimeout(() => controls.current?.reset(true), RESET_DELAY)
     }
 
     return (
         <div
-            className="h-full w-full"
-            onWheel={scheduleReset}
+            className="size-full"
+            onWheel={scheduleCameraReset}
         >
             <Canvas
                 camera={{
-                    position: [0, -2.5, 2.2],
+                    position: CAMERA_POSITION,
                     up: [0, 0, 1],
-                    fov: 20,
+                    fov: 30,
                 }}
             >
                 <ambientLight intensity={0.5} />
@@ -59,18 +60,19 @@ export default function Circuit3D({ circuitData }: Circuit3DProps) {
                 <TrackMesh
                     circuitPoints={fittedPoints}
                     width={0.02}
-                    height={0.03}
-                    color="#ffffff"
+                    height={0.04}
+                    color="#fff"
                 />
 
                 <Grid
-                    args={[4, 4]}
+                    args={[10, 10]}
                     rotation={[Math.PI / 2, 0, 0]}
                     cellSize={0.1}
                     sectionSize={0.5}
                     cellColor="#222222"
                     sectionColor="#444444"
-                    fadeDistance={4}
+                    fadeDistance={2.5}
+                    cellThickness={2}
                 />
 
                 <CameraControls
@@ -78,7 +80,7 @@ export default function Circuit3D({ circuitData }: Circuit3DProps) {
                     minPolarAngle={0}
                     maxPolarAngle={MAX_CAMERA_TILT}
                     onStart={() => clearTimeout(resetTimer.current)}
-                    onEnd={scheduleReset}
+                    onEnd={scheduleCameraReset}
                 />
             </Canvas>
         </div>
