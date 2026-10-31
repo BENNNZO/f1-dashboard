@@ -8,7 +8,7 @@ export default function sanitizeText(
     { length, fallback, suffix, prefix }: SanitizeTextOptions,
 ) {
     if (fallback) {
-        if (fallback.trim().length !== length) throw new Error("Fallback's length must match lenth argument.")
+        if (fallback.trim().length !== length) throw new Error("Fallback's length must match length argument.")
         if (!text || text === "") return fallback
     }
 
