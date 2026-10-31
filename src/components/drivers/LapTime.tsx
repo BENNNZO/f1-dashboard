@@ -14,8 +14,8 @@ export default function LapTimes() {
         <div className="relative flex flex-col py-1.25">
             {isFastestLap && (
                 <>
-                    <div className="absolute inset-x-0 top-0 h-1 -translate-y-1/2 rounded-full bg-fastest" />
-                    <div className="absolute inset-x-0 top-full h-1 -translate-y-1/2 rounded-full bg-fastest" />
+                    <div className="absolute inset-x-0 top-0 hidden h-1 -translate-y-1/2 rounded-full bg-fastest sm:block" />
+                    <div className="absolute inset-x-0 top-full hidden h-1 -translate-y-1/2 rounded-full bg-fastest sm:block" />
                 </>
             )}
 
