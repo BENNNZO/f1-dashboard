@@ -1,6 +1,6 @@
 "use client"
 
-import Circuit from "@/components/Circuit"
+import CircuitSection from "@/components/circuit/CircuitSection"
 import ControlMessages from "@/components/control-messages/ControlMessages"
 import DriverList from "@/components/drivers/DriverList"
 import StatusBar from "@/components/status-bar/StatusBar"
@@ -18,7 +18,7 @@ export default function Home() {
                 <DriverList />
 
                 <div className="grid w-full grid-rows-[minmax(0,1fr)_minmax(0,1fr)] border-zinc-800 border-l">
-                    <Circuit />
+                    <CircuitSection />
 
                     <div className="grid grid-cols-[1fr_1px_1fr] gap-x-px border-t border-t-zinc-800 bg-zinc-925">
                         <ControlMessages />

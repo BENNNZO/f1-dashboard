@@ -7,7 +7,7 @@ import { useWebSocketStore } from "@/store/webSocketStore"
 import Circuit3D from "./Circuit3D"
 import Flag from "./Flag"
 
-export default function Circuit() {
+export default function CircuitSection() {
     const updateCircuitData = useWebSocketStore((state) => state.updateCircuitData)
     const sessionInfo = useWebSocketStore((state) => state.data.SessionInfo)
     const circuitData = useWebSocketStore((state) => state.circuitData)
