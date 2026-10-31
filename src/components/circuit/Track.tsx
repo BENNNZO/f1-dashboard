@@ -1,3 +1,4 @@
+import { Fragment } from "react/jsx-runtime"
 import * as THREE from "three"
 
 import { useCircuit } from "./CircuitContext"
@@ -19,10 +20,22 @@ export default function Track() {
                 const segmentSize = segmentColor === BASE_COLOR ? 0.03 : 0.05
 
                 return (
-                    <mesh key={segment.number}>
-                        <tubeGeometry args={[segment.curve, 100, segmentSize, 16, false]} />
-                        <meshBasicMaterial color={segmentColor} />
-                    </mesh>
+                    <Fragment key={segment.number}>
+                        <mesh>
+                            <tubeGeometry args={[segment.curve, 100, segmentSize, 16, false]} />
+                            <meshBasicMaterial color={segmentColor} />
+                        </mesh>
+
+                        {[0, 1].map((t) => (
+                            <mesh
+                                key={t}
+                                position={segment.curve.getPoint(t)}
+                            >
+                                <sphereGeometry args={[segmentSize, 16, 8]} />
+                                <meshBasicMaterial color={segmentColor} />
+                            </mesh>
+                        ))}
+                    </Fragment>
                 )
             })}
 
