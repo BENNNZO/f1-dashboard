@@ -6,7 +6,6 @@ import { useCircuit } from "./CircuitContext"
 import TrackMesh from "./TrackMesh"
 
 const RESET_DELAY = 5000
-const CAMERA_POSITION: [number, number, number] = [0, -1, 3]
 const MAX_CAMERA_TILT = (80 * Math.PI) / 180
 
 export default function Circuit3D() {
@@ -26,11 +25,19 @@ export default function Circuit3D() {
         >
             <Canvas
                 camera={{
-                    position: CAMERA_POSITION,
+                    position: [0, -2, 3],
                     up: [0, 0, 1],
-                    fov: 30,
+                    fov: 20,
                 }}
             >
+                <CameraControls
+                    ref={controls}
+                    minPolarAngle={0}
+                    maxPolarAngle={MAX_CAMERA_TILT}
+                    onStart={() => clearTimeout(resetTimer.current)}
+                    onEnd={scheduleCameraReset}
+                />
+
                 <ambientLight intensity={0.5} />
                 <directionalLight
                     position={[2, -2, 5]}
@@ -40,8 +47,8 @@ export default function Circuit3D() {
                 <TrackMesh
                     circuitPoints={circuitPoints}
                     width={0.02}
-                    height={0.04}
-                    color="#fff"
+                    height={0.03}
+                    color="#ffffff"
                 />
 
                 <Grid
@@ -55,12 +62,9 @@ export default function Circuit3D() {
                     cellThickness={2}
                 />
 
-                <CameraControls
-                    ref={controls}
-                    minPolarAngle={0}
-                    maxPolarAngle={MAX_CAMERA_TILT}
-                    onStart={() => clearTimeout(resetTimer.current)}
-                    onEnd={scheduleCameraReset}
+                <color
+                    attach="background"
+                    args={["#09090b"]}
                 />
             </Canvas>
         </div>
