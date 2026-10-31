@@ -60,12 +60,9 @@ export default function AudioPlayer({ src, playing, setPlaying }: AudioPlayerPro
 
     function formatTime(duration: number): string {
         const seconds: number = Math.round(duration % 60)
-        const returnedSeconds: string = seconds < 10 ? `0${seconds}` : String(seconds)
-
         const minutes: number = Math.floor(duration / 60)
-        const returnedMinutes: string = minutes < 10 ? `0${minutes}` : String(minutes)
 
-        return `${returnedMinutes}:${returnedSeconds}`
+        return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
     }
 
     function sliderClickHandler(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
