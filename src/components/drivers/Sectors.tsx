@@ -17,21 +17,21 @@ export default function Sectors() {
     const sectors = timingData.Sectors
 
     return (
-        <div className="flex flex-row gap-2">
+        <div className="col-start-2 row-span-3 row-start-1 flex min-w-0 flex-1 flex-row gap-1.5 md:flex-col lg:flex-row lg:gap-2">
             {Object.values(sectors).map((sector, index) => (
                 <div
                     // biome-ignore lint/suspicious/noArrayIndexKey: sectors are a fixed list that never reorders
                     key={index}
-                    className="relative flex flex-col gap-1.5"
+                    className="relative flex w-full flex-col gap-1.5 md:w-auto"
                 >
                     <div
                         className={mergeClasses(
-                            "h-1.25 w-[8ch] rounded-full opacity-100 transition-[background] duration-500 group-hover:opacity-0 xl:w-[13ch]",
+                            "h-1.25 rounded-full opacity-100 transition-[background] duration-500 group-hover:opacity-0 md:w-[1ch] lg:w-[8ch] xl:w-[13ch]",
                             sectorColor(sector),
                         )}
                     />
 
-                    <div className="absolute flex w-full gap-0.5 opacity-0 group-hover:opacity-100">
+                    <div className="absolute hidden w-full gap-0.5 opacity-0 group-hover:opacity-100 lg:flex">
                         {Object.values(sector.Segments ?? {}).map((segment, index) => (
                             <div
                                 // biome-ignore lint/suspicious/noArrayIndexKey: segments are a fixed list that never reorders
@@ -44,7 +44,7 @@ export default function Sectors() {
                         ))}
                     </div>
 
-                    <div className="flex items-end gap-1">
+                    <div className="flex items-end gap-1 md:hidden lg:flex">
                         <p className={mergeClasses("font-semibold leading-none", timeColor(sector))}>
                             {sanitizeText(sector.Value, { length: 6, fallback: "--.---", suffix: "\u00A0" })}
                         </p>
