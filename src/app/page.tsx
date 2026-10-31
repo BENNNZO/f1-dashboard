@@ -1,7 +1,7 @@
 "use client"
 
 import Circuit from "@/components/Circuit"
-import ControlMessages from "@/components/ControlMessages"
+import ControlMessages from "@/components/control-messages/ControlMessages"
 import DriverList from "@/components/drivers/DriverList"
 import StatusBar from "@/components/status-bar/StatusBar"
 import TeamRadio from "@/components/TeamRadio"
