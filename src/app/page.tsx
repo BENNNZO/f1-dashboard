@@ -4,7 +4,7 @@ import Circuit from "@/components/Circuit"
 import ControlMessages from "@/components/control-messages/ControlMessages"
 import DriverList from "@/components/drivers/DriverList"
 import StatusBar from "@/components/status-bar/StatusBar"
-import TeamRadio from "@/components/TeamRadio"
+import TeamRadio from "@/components/team-radio/TeamRadio"
 import useLiveFeed from "@/hooks/useLiveFeed"
 
 export default function Home() {
