@@ -24,12 +24,3 @@ export function fitPoints(points: Point[], minX: number, minY: number, maxX: num
 
     return points.map(({ x, y }) => ({ x: (x - trackMinX) * scale + offsetX, y: (y - trackMinY) * scale + offsetY }))
 }
-
-export function getViewBox(points: Point[], padding: number) {
-    const xs = points.map((point) => point.x)
-    const ys = points.map((point) => point.y)
-    const minX = Math.min(...xs) - padding
-    const minY = Math.min(...ys) - padding
-
-    return `${minX} ${minY} ${Math.max(...xs) + padding - minX} ${Math.max(...ys) + padding - minY}`
-}
