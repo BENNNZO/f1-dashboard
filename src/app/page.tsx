@@ -17,13 +17,15 @@ export default function Home() {
             <div className="grid h-screen grid-rows-[auto_minmax(0,1fr)]">
                 <StatusBar />
 
-                <div className="grid grid-cols-[auto_1fr] grid-rows-[minmax(0,1fr)] border-border border-t">
-                    <DriverList />
+                <div className="grid grid-cols-[minmax(0,1fr)] border-border border-t md:grid-cols-[auto_1fr] md:grid-rows-[minmax(0,1fr)]">
+                    <div className="flex min-h-0 flex-col border-border border-t md:contents">
+                        <DriverList />
+                    </div>
 
-                    <div className="grid w-full grid-rows-[auto_minmax(0,1fr)] border-border border-l">
+                    <div className="order-first grid w-full grid-rows-[auto_minmax(0,1fr)] border-border border-l md:order-0">
                         <CircuitSection />
 
-                        <div className="grid grid-rows-[1fr_1px_1fr] border-t border-t-border bg-card 2xl:grid-cols-[1fr_1px_1fr] 2xl:grid-rows-1">
+                        <div className="hidden grid-rows-[1fr_1px_1fr] border-t border-t-border bg-card md:grid 2xl:grid-cols-[1fr_1px_1fr] 2xl:grid-rows-1">
                             <ControlMessages />
                             <div className="bg-border" />
                             <TeamRadio />
