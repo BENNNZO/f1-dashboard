@@ -1,5 +1,3 @@
-import { motion } from "motion/react"
-
 import { useWebSocketStore } from "@/store/webSocketStore"
 
 import { DriverProvider } from "./DriverContext"
@@ -18,19 +16,12 @@ export default function DriverList() {
         return (
             <ul className="scrollbar-none mask-b-from-[calc(100%-1rem)] flex flex-col overflow-y-auto font-mono">
                 {sortedTimingData.map(([driverNumber]) => (
-                    <motion.li
-                        layout
+                    <DriverProvider
                         key={driverNumber}
-                        className="relative -mt-px shrink-0 overflow-hidden border-zinc-800 border-y transition-[background] duration-500 odd:bg-zinc-925 even:bg-zinc-950"
-                        transition={{
-                            ease: [0.2, 1, 0.2, 1],
-                            duration: 0.75,
-                        }}
+                        driverNumber={Number(driverNumber)}
                     >
-                        <DriverProvider driverNumber={Number(driverNumber)}>
-                            <DriverRow />
-                        </DriverProvider>
-                    </motion.li>
+                        <DriverRow />
+                    </DriverProvider>
                 ))}
             </ul>
         )

@@ -26,12 +26,12 @@ export default function Sectors() {
                 >
                     <div
                         className={mergeClasses(
-                            "h-1.25 w-[13ch] rounded-full opacity-100 transition-[background] duration-500 group-hover/driver:opacity-0",
+                            "h-1.25 w-[13ch] rounded-full opacity-100 transition-[background] duration-500 group-hover:opacity-0",
                             sectorColor(sector),
                         )}
                     />
 
-                    <div className="absolute flex w-full gap-0.5 opacity-0 group-hover/driver:opacity-100">
+                    <div className="absolute flex w-full gap-0.5 opacity-0 group-hover:opacity-100">
                         {Object.values(sector.Segments).map((segment, index) => (
                             <div
                                 // biome-ignore lint/suspicious/noArrayIndexKey: segments are a fixed list that never reorders
