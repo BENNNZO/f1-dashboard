@@ -6,15 +6,14 @@ import Weather from "./Weather"
 export default function StatusBar() {
     return (
         <div className="flex items-center justify-between py-1 pl-3">
-            <div className="flex flex-row">
+            <div className="flex flex-row gap-4">
                 <SessionInformation />
-                <div className="mx-4 w-px bg-white/10" />
+                <div className="w-px bg-white/10" />
                 <Weather />
             </div>
 
-            <div className="flex flex-row">
+            <div className="flex flex-row gap-6">
                 <LapCount />
-                <div className="w-px bg-white/10" />
                 <TrackStatus />
             </div>
         </div>
