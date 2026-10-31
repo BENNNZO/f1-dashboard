@@ -22,8 +22,8 @@ export default function Circuit3D() {
 
                 <CameraRig />
                 <Lighting />
-                <Track />
                 <GridFloor />
+                <Track />
             </Canvas>
         </div>
     )
