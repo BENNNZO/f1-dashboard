@@ -17,7 +17,7 @@ export default function TeamRadio() {
 
     if (teamRadio && sessionInfo && driverList) {
         return (
-            <ul className="mask-y-from-[calc(100%-1rem)] scrollbar-none flex flex-col divide-y divide-zinc-800 overflow-y-auto bg-zinc-925">
+            <ul className="mask-y-from-[calc(100%-1rem)] scrollbar-none flex flex-col overflow-y-auto bg-zinc-925">
                 {Object.values(teamRadio.Captures)
                     .slice()
                     .reverse()
@@ -28,7 +28,7 @@ export default function TeamRadio() {
                             <motion.li
                                 layout
                                 key={capture.Path}
-                                className="flex flex-row items-center gap-3 p-3 pr-6"
+                                className="flex flex-row items-center gap-3 border-zinc-800 border-b p-3 pr-6"
                                 initial={{ scaleY: 0, y: -25 }}
                                 animate={{ scaleY: 1, y: 0 }}
                                 transition={{ ease: [0.2, 1, 0.2, 1], duration: 1 }}
