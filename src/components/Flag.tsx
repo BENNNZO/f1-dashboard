@@ -6,7 +6,7 @@ type FlagProps = {
 
 export default function Flag({ countryCode }: FlagProps) {
     return (
-        <div className="absolute top-1 left-1 aspect-4/3 w-24">
+        <div className="absolute top-1 left-1 z-10 aspect-4/3 w-24">
             <Image
                 className="absolute inset-0 size-full opacity-25 blur-xl"
                 src={`/flags/${countryCode ?? "unknown"}.svg`}
