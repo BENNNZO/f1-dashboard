@@ -1,4 +1,5 @@
 import { mergeClasses } from "@/utils/mergeClasses"
+import sanitizeText from "@/utils/sanitizeText"
 
 import { useDriver } from "./DriverContext"
 
@@ -17,11 +18,11 @@ export default function GapTime() {
                     isCatching && "text-emerald-400",
                 )}
             >
-                {gapToNext === "" ? "---.--" : gapToNext.slice(0, 6)}
+                {sanitizeText(gapToNext, { length: 6, fallback: "---.--", suffix: "\u00A0" })}
             </p>
 
             <p className="font-semibold text-sm text-zinc-500 leading-none">
-                {gapToLead === "" ? "---.---" : gapToLead.slice(0, 7)}
+                {sanitizeText(gapToLead, { length: 7, fallback: "---.---", suffix: "\u00A0" })}
             </p>
         </div>
     )

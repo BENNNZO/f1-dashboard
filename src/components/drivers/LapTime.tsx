@@ -1,4 +1,5 @@
 import { mergeClasses } from "@/utils/mergeClasses"
+import sanitizeText from "@/utils/sanitizeText"
 import timeColor from "@/utils/timeColor"
 
 import { useDriver } from "./DriverContext"
@@ -19,7 +20,7 @@ export default function LapTimes() {
             )}
 
             <p className={mergeClasses("font-semibold leading-none duration-500", timeColor(timingData?.LastLapTime))}>
-                {lastLap === "" ? "-:--.--" : lastLap.slice(0, 7)}
+                {sanitizeText(lastLap, { length: 7, fallback: "-:--.--", suffix: "\u00A0" })}
             </p>
 
             <p
@@ -28,7 +29,7 @@ export default function LapTimes() {
                     isFastestLap && "text-purple-400",
                 )}
             >
-                {bestLap === "" ? "-:--.---" : bestLap.slice(0, 8)}
+                {sanitizeText(bestLap, { length: 8, fallback: "-:--.---", suffix: "\u00A0" })}
             </p>
         </div>
     )

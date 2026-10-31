@@ -1,4 +1,5 @@
 import { mergeClasses } from "@/utils/mergeClasses"
+import sanitizeText from "@/utils/sanitizeText"
 import timeColor, { sectorColor } from "@/utils/timeColor"
 
 import { useDriver } from "./DriverContext"
@@ -45,11 +46,11 @@ export default function Sectors() {
 
                     <div className="flex items-end gap-1">
                         <p className={mergeClasses("font-semibold leading-none", timeColor(sector))}>
-                            {sector.Value === "" ? "--.---" : sector.Value.slice(0, 6)}
+                            {sanitizeText(sector.Value, { length: 6, fallback: "--.---", suffix: "\u00A0" })}
                         </p>
 
                         <p className="font-semibold text-sm text-zinc-500 leading-none">
-                            {sector.PreviousValue === "" ? "--.--" : sector.PreviousValue.slice(0, 5)}
+                            {sanitizeText(sector.PreviousValue, { length: 6, fallback: "--.---", suffix: "\u00A0" })}
                         </p>
                     </div>
                 </div>
