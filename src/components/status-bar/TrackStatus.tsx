@@ -35,7 +35,15 @@ export default function TrackStatus() {
                 className="relative"
             >
                 <p className={mergeClasses("absolute inset-0 blur-xl", transitionClasses, color)}>{label}</p>
-                <p className={mergeClasses("relative -my-1 px-3 py-1", transitionClasses, color)}>{label}</p>
+                <p
+                    className={mergeClasses(
+                        "relative -my-1 rounded-bl-lg px-3 py-1 lg:rounded-none",
+                        transitionClasses,
+                        color,
+                    )}
+                >
+                    {label}
+                </p>
             </motion.div>
         )
     }

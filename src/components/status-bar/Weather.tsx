@@ -12,10 +12,13 @@ export default function Weather() {
         ]
 
         return (
-            <div className="flex flex-row gap-6">
+            <div className="flex flex-row gap-8 sm:gap-4 lg:gap-6">
                 {readings.map(({ label, value }) => (
-                    <p key={label}>
-                        <strong className="text-sm text-subtle">{label}: </strong>
+                    <p
+                        key={label}
+                        className="flex flex-col text-center sm:flex-row sm:items-baseline sm:gap-1 sm:text-left"
+                    >
+                        <strong className="not-md:font-medium text-sm text-subtle">{label}: </strong>
                         {value}
                     </p>
                 ))}
