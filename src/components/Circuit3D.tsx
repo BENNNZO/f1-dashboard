@@ -46,6 +46,7 @@ const RESET_DELAY = 5000
 export default function Circuit3D({ circuitPoints }: Circuit3DProps) {
     const controls = useRef<CameraControls>(null)
     const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
+    const fittedPoints = useMemo(() => fitPoints(circuitPoints, -1, -1, 1, 1), [circuitPoints])
 
     function scheduleReset() {
         clearTimeout(resetTimer.current)
@@ -70,7 +71,7 @@ export default function Circuit3D({ circuitPoints }: Circuit3DProps) {
                 />
 
                 <TrackMesh
-                    circuitPoints={fitPoints(circuitPoints, -1, -1, 1, 1)}
+                    circuitPoints={fittedPoints}
                     width={0.02}
                     height={0.03}
                     color="#ffffff"

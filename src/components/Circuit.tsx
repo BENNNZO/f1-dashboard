@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
 import { rotatePoints } from "@/utils/positionPoints"
@@ -31,12 +31,16 @@ export default function Circuit() {
             .catch((err) => console.error(err))
     }, [circuitKey, updateCircuitData])
 
-    if (circuitData) {
-        const circuitPoints = rotatePoints(
+    const circuitPoints = useMemo(() => {
+        if (!circuitData) return null
+
+        return rotatePoints(
             circuitData.x.map((x, index) => ({ x: -x, y: circuitData.y[index] })),
             -circuitData.rotation + 180 + (ROTATION_OFFSETS[circuitData.circuitKey] ?? 0),
         )
+    }, [circuitData])
 
+    if (circuitPoints) {
         return (
             <div className="relative w-full overflow-hidden">
                 <Flag countryCode={sessionInfo?.Meeting.Country.Code.toLowerCase()} />
