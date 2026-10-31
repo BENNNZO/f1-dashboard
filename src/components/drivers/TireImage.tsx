@@ -24,7 +24,7 @@ export default function TireImage() {
                 <Image
                     alt="tire-picture"
                     src={`icons/tires/${currentTire ?? "unknown"}.svg`}
-                    className="rounded-full outline outline-white/20"
+                    className="rounded-full outline outline-zinc-700"
                     width={32}
                     height={32}
                 />
