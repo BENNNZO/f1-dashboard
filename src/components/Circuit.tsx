@@ -4,10 +4,9 @@ import axios from "axios"
 import { useEffect } from "react"
 
 import { useWebSocketStore } from "@/store/webSocketStore"
-import { transformPoints } from "@/utils/positionPoints"
+import { getViewBox, rotatePoints } from "@/utils/positionPoints"
 
 import Flag from "./Flag"
-import Skeleton from "./Skeleton"
 
 export default function Circuit() {
     const updateCircuitData = useWebSocketStore((state) => state.updateCircuitData)
@@ -26,11 +25,9 @@ export default function Circuit() {
     }, [sessionInfo, updateCircuitData])
 
     if (circuitData) {
-        const circuitPoints = circuitData.x.map((x, index) => ({ x: -x, y: circuitData.y[index] }))
-        const { transformedPoints, minX, minY, width, height } = transformPoints(
-            circuitPoints,
+        const circuitPoints = rotatePoints(
+            circuitData.x.map((x, index) => ({ x: -x, y: circuitData.y[index] })),
             -circuitData.rotation + 180,
-            1000,
         )
 
         return (
@@ -40,7 +37,7 @@ export default function Circuit() {
                 <svg
                     width="100%"
                     height="100%"
-                    viewBox={`${minX} ${minY} ${width} ${height}`}
+                    viewBox={getViewBox(circuitPoints, 1000)}
                     xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="xMidYMid meet"
                 >
@@ -48,8 +45,8 @@ export default function Circuit() {
 
                     <polyline
                         points={
-                            transformedPoints.map((item) => `${item.x},${item.y}`).join(" ") +
-                            ` ${transformedPoints[0].x},${transformedPoints[0].y}`
+                            circuitPoints.map((item) => `${item.x},${item.y}`).join(" ") +
+                            ` ${circuitPoints[0].x},${circuitPoints[0].y}`
                         }
                         stroke="#ffffff40"
                         strokeWidth="300"
@@ -58,8 +55,8 @@ export default function Circuit() {
 
                     <polyline
                         points={
-                            transformedPoints.map((item) => `${item.x},${item.y}`).join(" ") +
-                            ` ${transformedPoints[0].x},${transformedPoints[0].y}`
+                            circuitPoints.map((item) => `${item.x},${item.y}`).join(" ") +
+                            ` ${circuitPoints[0].x},${circuitPoints[0].y}`
                         }
                         stroke="#ffffff"
                         strokeWidth="100"
@@ -69,10 +66,4 @@ export default function Circuit() {
             </div>
         )
     }
-
-    return (
-        <div className="w-full p-2">
-            <Skeleton />
-        </div>
-    )
 }
