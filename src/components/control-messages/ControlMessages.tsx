@@ -23,8 +23,9 @@ export default function ControlMessages() {
                     .map((message: MessageOther | MessageFlag | MessageDrs) => {
                         const { Message, Category, Utc } = message
 
-                        const hour = String(new Date(Utc).getHours()).padStart(2, "0")
-                        const minute = String(new Date(Utc).getMinutes()).padStart(2, "0")
+                        const date = new Date(Utc)
+                        const hour = String(date.getHours()).padStart(2, "0")
+                        const minute = String(date.getMinutes()).padStart(2, "0")
 
                         const flag =
                             Category === "Flag"
