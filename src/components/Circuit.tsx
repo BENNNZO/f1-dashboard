@@ -11,11 +11,12 @@ export default function Circuit() {
     const updateCircuitData = useWebSocketStore((state) => state.updateCircuitData)
     const sessionInfo = useWebSocketStore((state) => state.data.SessionInfo)
     const circuitData = useWebSocketStore((state) => state.circuitData)
+    const circuitKey = sessionInfo?.Meeting.Circuit.Key
 
     useEffect(() => {
-        if (!sessionInfo) return
+        if (!circuitKey) return
 
-        const url = `https://api.multiviewer.app/api/v1/circuits/${sessionInfo.Meeting.Circuit.Key}/${new Date().getFullYear()}`
+        const url = `https://api.multiviewer.app/api/v1/circuits/${circuitKey}/${new Date().getFullYear()}`
         fetch(url)
             .then((res) => {
                 if (!res.ok) throw new Error(`Circuit request failed: ${res.status}`)
@@ -23,7 +24,7 @@ export default function Circuit() {
             })
             .then((data) => updateCircuitData(data))
             .catch((err) => console.error(err))
-    }, [sessionInfo, updateCircuitData])
+    }, [circuitKey, updateCircuitData])
 
     if (circuitData) {
         const circuitPoints = rotatePoints(
