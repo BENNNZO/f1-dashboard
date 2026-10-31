@@ -23,7 +23,7 @@ export default function Home() {
                     <div className="grid w-full grid-rows-[auto_minmax(0,1fr)] border-border border-l">
                         <CircuitSection />
 
-                        <div className="grid grid-cols-[1fr_1px_1fr] gap-x-px border-t border-t-border bg-card">
+                        <div className="grid grid-rows-[1fr_1px_1fr] border-t border-t-border bg-card 2xl:grid-cols-[1fr_1px_1fr] 2xl:grid-rows-1">
                             <ControlMessages />
                             <div className="bg-border" />
                             <TeamRadio />

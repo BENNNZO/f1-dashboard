@@ -26,7 +26,7 @@ export default function Sectors() {
                 >
                     <div
                         className={mergeClasses(
-                            "h-1.25 w-[13ch] rounded-full opacity-100 transition-[background] duration-500 group-hover:opacity-0",
+                            "h-1.25 w-[8ch] rounded-full opacity-100 transition-[background] duration-500 group-hover:opacity-0 xl:w-[13ch]",
                             sectorColor(sector),
                         )}
                     />
@@ -49,7 +49,7 @@ export default function Sectors() {
                             {sanitizeText(sector.Value, { length: 6, fallback: "--.---", suffix: "\u00A0" })}
                         </p>
 
-                        <p className="font-semibold text-sm text-subtle leading-none">
+                        <p className="hidden font-semibold text-sm text-subtle leading-none xl:block">
                             {sanitizeText(sector.PreviousValue, { length: 6, fallback: "--.---", suffix: "\u00A0" })}
                         </p>
                     </div>
