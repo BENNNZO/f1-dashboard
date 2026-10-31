@@ -14,10 +14,8 @@ export default function sanitizeText(
 
     const string = String(text == null || Number.isNaN(text) ? "" : text).trim()
     const slicedString = string.slice(0, length)
-    const lengthOffset = length - slicedString.length
 
-    if (lengthOffset === 0) return slicedString
-    if (suffix) return [slicedString, ...Array(lengthOffset).fill(suffix)].join("")
-    if (prefix) return [...Array(lengthOffset).fill(prefix), slicedString].join("")
+    if (suffix) return slicedString.padEnd(length, suffix)
+    if (prefix) return slicedString.padStart(length, prefix)
     return slicedString
 }
