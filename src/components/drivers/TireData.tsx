@@ -8,6 +8,7 @@ export default function TireData() {
 
     return (
         <DisplayValue
+            className="text-zinc-500"
             value={totalLaps}
             length={2}
         />
