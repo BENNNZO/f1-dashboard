@@ -7,6 +7,10 @@ import { getViewBox, rotatePoints } from "@/utils/positionPoints"
 
 import Flag from "./Flag"
 
+const ROTATION_OFFSETS: Record<number, number> = {
+    65: 28.3,
+}
+
 export default function Circuit() {
     const updateCircuitData = useWebSocketStore((state) => state.updateCircuitData)
     const sessionInfo = useWebSocketStore((state) => state.data.SessionInfo)
@@ -29,7 +33,7 @@ export default function Circuit() {
     if (circuitData) {
         const circuitPoints = rotatePoints(
             circuitData.x.map((x, index) => ({ x: -x, y: circuitData.y[index] })),
-            -circuitData.rotation + 180,
+            -circuitData.rotation + 180 + (ROTATION_OFFSETS[circuitData.circuitKey] ?? 0),
         )
 
         return (
