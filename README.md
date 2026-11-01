@@ -82,24 +82,24 @@ F1 only sends data during a live session. Car positions and car telemetry need a
 
 ## Getting started
 
-You need Node 22.12 or newer and pnpm.
+You need **Node 22.12 or newer** and **pnpm**.
 
 ```bash
-git clone https://github.com/bennnnzo/f1-dashboard.git
+git clone https://github.com/BENNNZO/f1-dashboard.git
 cd f1-dashboard
-pnpm i
+pnpm install
 ```
 
 Start the server and the app in two terminals:
 
 ```bash
-pnpm server
-pnpm dev
+pnpm server   # F1 feed → WebSocket on :3001
+pnpm dev      # Next.js app on :3000
 ```
 
-Open http://localhost:3000.
+Open http://localhost:3000. Outside a live session the dashboard stays empty: open http://localhost:3000/demo, or replay a recording (see below).
 
-The app connects to `ws://localhost:3001`. To use a different server, set `NEXT_PUBLIC_WS_URL` in `.env.local`.
+To use another server, set `NEXT_PUBLIC_WS_URL` in `.env.local` (default `ws://localhost:3001`). The server port comes from `PORT` (default `3001`).
 
 ## Record and replay
 
