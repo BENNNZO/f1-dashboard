@@ -42,7 +42,11 @@ export default function TeamRadio() {
                                 <AudioPlayer
                                     playing={playing ?? ""}
                                     setPlaying={setPlaying}
-                                    src={`https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}`}
+                                    src={
+                                        capture.Path.startsWith("/")
+                                            ? capture.Path
+                                            : `https://livetiming.formula1.com/static/${sessionInfo.Path}${capture.Path}`
+                                    }
                                 />
                             </motion.li>
                         )
