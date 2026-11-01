@@ -1,6 +1,21 @@
-# F1 Dashboard
+<div align="center">
 
-A live dashboard for Formula 1 sessions. It shows timing, tires, sector times, weather, track status, race control messages, and team radio.
+# Live F1
+
+**A real-time Formula 1 dashboard: live timing, a 3D track map with flag sectors, race control and team radio.**
+
+[![Live](https://img.shields.io/badge/live-live--f1.com-e10600?style=for-the-badge)](https://live-f1.com)
+[![Demo](https://img.shields.io/badge/demo-try_it_now-ffc43a?style=for-the-badge&labelColor=27272a)](https://live-f1.com/demo)
+
+![Next.js](https://img.shields.io/badge/Next.js_16-000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React_19-20232a?logo=react&logoColor=61dafb)
+![Three.js](https://img.shields.io/badge/Three.js-000?logo=threedotjs&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_4-0f172a?logo=tailwindcss&logoColor=38bdf8)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=white)
+
+<img src=".github/readme/hero.png" alt="Live F1 dashboard during a virtual safety car" width="100%">
+
+</div>
 
 ## Features
 
