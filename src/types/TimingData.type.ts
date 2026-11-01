@@ -1,6 +1,10 @@
 export type TimingData = {
     Lines: Record<string, TimingDataLine>
     Withheld: boolean
+    SessionPart?: number
+    NoEntries?: number[]
+    CutOffTime?: string
+    CutOffPercentage?: string
 }
 
 export type TimingDataLine = {
@@ -26,6 +30,15 @@ export type TimingDataLine = {
     BestLapTime: BestLapTime
     LastLapTime: LastLapTime
     NumberOfPitStops: number
+    KnockedOut?: boolean
+    Cutoff?: boolean
+    Stats?: QualifyingStats[]
+    BestLapTimes?: BestLapTime[]
+}
+
+export type QualifyingStats = {
+    TimeDiffToFastest?: string
+    TimeDifftoPositionAhead?: string
 }
 
 export type Sector = {
