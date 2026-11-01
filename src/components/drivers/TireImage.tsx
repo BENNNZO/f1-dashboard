@@ -1,21 +1,15 @@
 import { AnimatePresence, motion } from "motion/react"
 import Image from "next/image"
 
-import { useWebSocketStore } from "@/store/webSocketStore"
-
 import { useDriver } from "./DriverContext"
 
 export default function TireImage() {
-    const { driver } = useDriver()
-
-    const driverNumber = Number(driver.RacingNumber)
-    const currentTyres = useWebSocketStore((state) => state.data.CurrentTyres)
-    const currentTire = currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase()
+    const { currentTyre } = useDriver()
 
     return (
         <AnimatePresence mode="popLayout">
             <motion.div
-                key={currentTire}
+                key={currentTyre}
                 initial={{ rotate: -180, opacity: 0, scale: 0.5 }}
                 animate={{ rotate: 0, opacity: 1, scale: 1 }}
                 exit={{ rotate: 180, opacity: 0, scale: 0.5 }}
@@ -23,7 +17,7 @@ export default function TireImage() {
             >
                 <Image
                     alt="tire-picture"
-                    src={`icons/tires/${currentTire ?? "unknown"}.svg`}
+                    src={`icons/tires/${currentTyre ?? "unknown"}.svg`}
                     className="rounded-full outline outline-zinc-700"
                     width={32}
                     height={32}

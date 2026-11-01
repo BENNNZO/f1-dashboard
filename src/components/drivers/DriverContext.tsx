@@ -17,6 +17,7 @@ type DriverContextData = {
     timingStats: TimingStatsLine
     driver: DriverData
     qualifying?: { part: number; inDropZone: boolean; atCutoff: boolean }
+    currentTyre?: string
 }
 
 function getDriverQualifyPart(position: number, noEntries: number[]) {
@@ -40,9 +41,11 @@ export function DriverProvider({ driverNumber, children }: DriverProviderProps) 
     const timingStats = useWebSocketStore((state) => state.data.TimingStats?.Lines[driverNumber])
     const sessionPart = useWebSocketStore((state) => state.data.TimingData?.SessionPart)
     const noEntries = useWebSocketStore((state) => state.data.TimingData?.NoEntries)
+    const currentTyres = useWebSocketStore((state) => state.data.CurrentTyres)
 
     if (!(timingData && timingAppData && timingStats && driver)) return null
 
+    const currentTyre = currentTyres?.Tyres[driverNumber]?.Compound.toLowerCase()
     const position = Number(timingData.Position)
     const qualifying =
         sessionPart && noEntries
@@ -64,6 +67,7 @@ export function DriverProvider({ driverNumber, children }: DriverProviderProps) 
                 timingStats,
                 driver,
                 qualifying,
+                currentTyre,
             }}
         >
             {children}
