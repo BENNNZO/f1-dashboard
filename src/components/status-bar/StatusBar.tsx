@@ -5,7 +5,7 @@ import Weather from "./Weather"
 
 export default function StatusBar() {
     return (
-        <div className="flex flex-row flex-wrap items-center gap-0.5 py-1 pb-1.5 pl-3 sm:pb-0 lg:gap-4">
+        <div className="flex flex-row flex-wrap items-center gap-0.5 py-1 pb-1.5 pl-3 sm:pb-1 lg:gap-4">
             <SessionInformation />
 
             <div className="hidden w-px self-stretch bg-border lg:block" />
