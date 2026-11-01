@@ -22,7 +22,7 @@ export default function Home() {
                         <DriverList />
                     </div>
 
-                    <div className="order-first grid w-full grid-rows-[auto_minmax(0,1fr)] border-border border-l md:order-0">
+                    <div className="order-first grid w-full grid-rows-[auto_minmax(0,1fr)] border-border md:order-0 md:border-l">
                         <CircuitSection />
 
                         <div className="hidden grid-rows-[1fr_1px_1fr] border-t border-t-border bg-card md:grid 2xl:grid-cols-[1fr_1px_1fr] 2xl:grid-rows-1">
