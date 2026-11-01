@@ -4,6 +4,7 @@ import { useWebSocketStore } from "@/store/webSocketStore"
 import type { F1Message } from "@/types/F1Message.type"
 
 const DEMO_URL = "/demo/session.jsonl"
+const CIRCUIT_URL = "/demo/circuit.json"
 const LOOP_DELAY = 3000
 const SPEED = 4
 
@@ -18,14 +19,15 @@ export default function useDemoFeed() {
         let stopped = false
 
         async function start() {
-            const response = await fetch(DEMO_URL)
-            const lines: LogLine[] = (await response.text())
+            const [session, circuit] = await Promise.all([fetch(DEMO_URL), fetch(CIRCUIT_URL)])
+            const lines: LogLine[] = (await session.text())
                 .split("\n")
                 .filter((line) => line.trim() !== "")
                 .map((line) => JSON.parse(line))
 
             if (stopped || lines.length === 0) return
 
+            useWebSocketStore.getState().updateCircuitData(await circuit.json())
             useWebSocketStore.getState().setConnection("connected")
 
             function play(index: number) {
