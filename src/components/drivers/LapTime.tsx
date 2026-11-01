@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { mergeClasses } from "@/utils/mergeClasses"
 import sanitizeText from "@/utils/sanitizeText"
 import timeColor from "@/utils/timeColor"
@@ -10,6 +12,10 @@ export default function LapTimes() {
     const bestLap = timingData.BestLapTime.Value
     const isFastestLap = timingStats.PersonalBestLapTime?.Position === 1
 
+    const [outLapNumber, setOutLapNumber] = useState<number>()
+    if (timingData.PitOut && outLapNumber !== timingData.NumberOfLaps) setOutLapNumber(timingData.NumberOfLaps)
+    const isOutLap = !timingData.InPit && outLapNumber === timingData.NumberOfLaps
+
     return (
         <div className="relative flex flex-col py-1.25">
             {isFastestLap && (
@@ -20,7 +26,7 @@ export default function LapTimes() {
             )}
 
             <p className={mergeClasses("font-semibold leading-none duration-500", timeColor(timingData.LastLapTime))}>
-                {sanitizeText(lastLap, { length: 7, fallback: "-:--.--", suffix: "\u00A0" })}
+                {isOutLap ? "Out Lap" : sanitizeText(lastLap, { length: 7, fallback: "-:--.--", suffix: "\u00A0" })}
             </p>
 
             <p
