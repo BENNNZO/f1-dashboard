@@ -5,6 +5,7 @@ import type { F1Message } from "@/types/F1Message.type"
 
 const DEMO_URL = "/demo/session.jsonl"
 const LOOP_DELAY = 3000
+const SPEED = 4
 
 type LogLine = {
     timestamp: number
@@ -33,7 +34,7 @@ export default function useDemoFeed() {
 
                 useWebSocketStore.getState().storeF1Message(line.message)
 
-                if (next) timer = setTimeout(() => play(index + 1), next.timestamp - line.timestamp)
+                if (next) timer = setTimeout(() => play(index + 1), (next.timestamp - line.timestamp) / SPEED)
                 else timer = setTimeout(() => play(0), LOOP_DELAY)
             }
 
