@@ -10,6 +10,7 @@ const jetBrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://live-f1.com"),
     title: "Live F1 | Realtime F1 Data",
     description:
         "Real-time Formula 1 dashboard providing live race updates, driver stats, and track positions. Get instant access to F1 data and insights.",
