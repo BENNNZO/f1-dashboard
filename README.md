@@ -19,13 +19,35 @@
 
 ## Features
 
-- **Live timing**: positions, lap times, gaps, and sector times for each driver.
-- **Tires**: the tire compound for each driver.
-- **Race control messages**: flags, penalties, and other messages from race control.
-- **Team radio**: play team radio clips.
-- **Weather and track status**: air and track temperature, rain, and the current flag.
+<table>
+<tr>
+<td width="72%"><img src=".github/readme/demo.gif" alt="Demo: a virtual safety car and a pit stop"></td>
+<td width="28%"><img src=".github/readme/mobile.png" alt="Phone layout"></td>
+</tr>
+</table>
 
-The circuit map and car speed do not work now. The F1 feed sends car position and car data only with an F1 TV token.
+### Timing
+- Positions, gaps, intervals, last and best laps, and all three sectors with their mini sectors.
+- Purple for the overall fastest, green for a personal best.
+- Tyre compound, tyre age, pit stops and places gained or lost since the start.
+- Rows slide to their new place when positions change. Cars in the pit lane and retired cars dim.
+
+### Qualifying
+- Gaps and intervals for the part each driver last ran in: Q1, Q2 or Q3.
+- The drop zone and the cutoff line are marked while a part runs.
+- "Out Lap" shows from pit exit until the lap ends.
+
+### 3D track map
+- The circuit in 3D with orbit controls. The camera returns to its start position after 5 seconds.
+- Each marshal sector turns yellow or red when race control shows a flag there.
+
+### Race control and team radio
+- Race control messages with their flags, newest first.
+- Team radio clips with a player and a seek bar.
+
+### Session
+- Track status (green, yellow, safety car, VSC, red), lap count and weather.
+- One layout for desktop, tablet and phone.
 
 ## How it works
 
