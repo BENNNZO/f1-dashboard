@@ -1,3 +1,5 @@
+import { useWebSocketStore } from "@/store/webSocketStore"
+
 import DisplayValue from "./DisplayValue"
 import { useDriver } from "./DriverContext"
 
@@ -8,8 +10,11 @@ function getStatus(positionDelta: number) {
 
 export default function PositionChange() {
     const { timingData, timingAppData } = useDriver()
+    const isRace = useWebSocketStore((state) => state.data.SessionInfo?.Type === "Race")
     const positionDelta = Number(timingAppData.GridPos) - Number(timingData.Position) || undefined
     const status = getStatus(positionDelta ?? 0)
+
+    if (!isRace) return null
 
     return (
         <DisplayValue
