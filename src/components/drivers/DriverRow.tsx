@@ -30,11 +30,10 @@ export default function DriverRow() {
             <div className="-translate-1/2 absolute top-1/2 left-0 z-10 h-3 w-20 rounded-[100%] bg-(--team-color) blur-xl" />
             <div className="absolute top-0 left-0 z-10 h-full w-1.5 bg-(--team-color) transition-[width] duration-500 ease-snappy group-data-pit:w-2.5" />
 
-            <div className="flex flex-row flex-wrap items-center gap-x-4 gap-y-1 pr-1.5 pb-1 pl-4.5 transition-[filter,background] duration-500 ease-snappy group-odd:bg-card group-even:bg-background group-data-pit:brightness-25 group-data-retired:brightness-25 group-data-retired:grayscale sm:pb-0">
-                <Tag />
-                <TireImage />
-
+            <div className="flex flex-row flex-wrap items-center justify-between gap-x-4 gap-y-1 pr-1.5 pb-1 pl-4.5 transition-[filter,background] duration-500 ease-snappy group-odd:bg-card group-even:bg-background group-data-pit:brightness-25 group-data-retired:brightness-25 group-data-retired:grayscale sm:pb-0">
                 <div className="flex flex-row items-center gap-4">
+                    <Tag />
+                    <TireImage />
                     <TireData />
                     <PitCount />
                     <PositionChange />
