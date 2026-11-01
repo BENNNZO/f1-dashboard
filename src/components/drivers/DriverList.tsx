@@ -14,7 +14,7 @@ export default function DriverList() {
         )
 
         return (
-            <ul className="scrollbar-none mask-b-from-[calc(100%-1rem)] flex flex-col overflow-y-auto font-mono">
+            <ul className="scrollbar-none mask-b-from-[calc(100%-1rem)] flex flex-col overflow-y-auto">
                 {sortedTimingData.map(([driverNumber]) => (
                     <DriverProvider
                         key={driverNumber}
