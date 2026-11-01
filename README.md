@@ -13,7 +13,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_4-0f172a?logo=tailwindcss&logoColor=38bdf8)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=white)
 
-<img src=".github/readme/hero.png" alt="Live F1 dashboard during a virtual safety car" width="100%">
+<img src=".github/readme/demo.gif" alt="Live F1 dashboard during a virtual safety car and a pit stop" width="100%">
 
 </div>
 
@@ -21,7 +21,7 @@
 
 <table>
 <tr>
-<td width="72%"><img src=".github/readme/demo.gif" alt="Demo: a virtual safety car and a pit stop"></td>
+<td width="72%"><img src=".github/readme/hero.png" alt="Desktop layout during a virtual safety car"></td>
 <td width="28%"><img src=".github/readme/mobile.png" alt="Phone layout"></td>
 </tr>
 </table>
