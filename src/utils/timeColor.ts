@@ -3,7 +3,6 @@ import type { Sector } from "@/types/TimingData.type"
 export default function timeColor(time: { OverallFastest?: boolean; PersonalFastest?: boolean } | undefined) {
     if (time?.OverallFastest) return "text-fastest"
     if (time?.PersonalFastest) return "text-personal-best"
-    return "text-foreground"
 }
 
 export function sectorColor(sector: Sector) {
