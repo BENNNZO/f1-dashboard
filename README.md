@@ -19,7 +19,45 @@
 
 ## Features
 
-<img src=".github/readme/layouts.png" alt="Desktop and phone layouts during a virtual safety car" width="100%">
+<table>
+<tr>
+<td width="33%" valign="top">
+<img src=".github/readme/cards/timing.png" alt="Timing rows with an out lap and a personal best"><br>
+<b>Live timing</b><br>
+<sub>Gaps, laps and mini sectors. Purple for the fastest, green for a personal best.</sub>
+</td>
+<td width="33%" valign="top">
+<img src=".github/readme/cards/map.png" alt="3D track map with a yellow sector"><br>
+<b>3D track map</b><br>
+<sub>Each marshal sector turns yellow or red with the race control flags.</sub>
+</td>
+<td width="33%" valign="top">
+<img src=".github/readme/cards/track-status.png" alt="VSC Deployed badge"><br>
+<b>Track status</b><br>
+<sub>Green, yellow, safety car, VSC and red, with the lap count.</sub>
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
+<img src=".github/readme/cards/qualifying.png" alt="Qualifying drop zone in Q2"><br>
+<b>Qualifying</b><br>
+<sub>Gaps for each part, the drop zone and the cutoff line.</sub>
+</td>
+<td width="33%" valign="top">
+<img src=".github/readme/cards/race-control.png" alt="Race control messages"><br>
+<b>Race control</b><br>
+<sub>Flags, VSC, penalties and stewards' notes, newest first.</sub>
+</td>
+<td width="33%" valign="top">
+<img src=".github/readme/cards/team-radio.png" alt="Team radio player"><br>
+<b>Team radio</b><br>
+<sub>Every clip from the session, with a player and a seek bar.</sub>
+</td>
+</tr>
+</table>
+
+<details>
+<summary><b>All features</b></summary>
 
 ### Timing
 - Positions, gaps, intervals, last and best laps, and all three sectors with their mini sectors.
@@ -43,6 +81,12 @@
 ### Session
 - Track status (green, yellow, safety car, VSC, red), lap count and weather.
 - One layout for desktop, tablet and phone.
+
+</details>
+
+## Responsive
+
+<img src=".github/readme/layouts.png" alt="Desktop and phone layouts during a virtual safety car" width="100%">
 
 ## How it works
 
