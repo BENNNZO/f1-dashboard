@@ -34,7 +34,7 @@ export default function DriverRow() {
             <div className="absolute top-0 left-0 z-10 h-[calc(100%-1px)] w-1.5 bg-(--team-color) transition-[width,opacity,filter] duration-500 ease-snappy group-data-pit:opacity-25 group-data-retired:opacity-25 group-data-retired:grayscale group-data-pit:group-not-data-retired:w-2.5" />
 
             <div className="flex flex-row flex-wrap items-center justify-between gap-x-4 gap-y-1 border-border border-y-[0.5px] pr-2 pb-2 pl-3.5 transition-[filter,background] duration-500 ease-snappy group-first:border-t-0 group-odd:bg-card group-even:bg-background group-data-drop-zone:border-[#260d0f] group-data-cutoff:border-b-[#260d0f]! group-data-drop-zone:bg-[#15090b]! group-data-retired:opacity-50 group-data-pit:brightness-25 group-data-retired:brightness-25 group-data-retired:grayscale sm:pb-0 lg:pr-1.5 lg:pl-4.5">
-                <div className="flex flex-row items-center gap-4">
+                <div className="flex flex-row items-center gap-2">
                     <Tag />
                     <TireImage />
                     <TireData />
