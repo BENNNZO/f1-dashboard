@@ -17,7 +17,7 @@ export default function DriverRow() {
     return (
         <motion.li
             layout
-            data-retired={timingData.Retired ? true : undefined}
+            data-retired={timingData.Retired || timingData.Stopped ? true : undefined}
             data-pit={timingData.InPit ? true : undefined}
             data-drop-zone={qualifying?.inDropZone ? true : undefined}
             data-cutoff={qualifying?.atCutoff ? true : undefined}
@@ -29,11 +29,11 @@ export default function DriverRow() {
                 } as CSSProperties
             }
         >
-            <div className="-translate-1/2 absolute top-1/2 left-0 z-10 h-3 w-20 rounded-[100%] bg-(--team-color) blur-xl transition-[width,opacity] duration-1000 ease-snappy group-data-pit:opacity-50" />
-            <div className="-translate-1/2 absolute top-1/2 left-0 z-10 h-8 w-3 rounded-[100%] bg-(--team-color)/25 blur-sm transition-[width,opacity] duration-500 ease-snappy group-data-pit:opacity-25" />
-            <div className="absolute top-0 left-0 z-10 h-[calc(100%-1px)] w-1.5 bg-(--team-color) transition-[width,opacity] duration-500 ease-snappy group-data-pit:w-2.5 group-data-pit:opacity-25" />
+            <div className="-translate-1/2 absolute top-1/2 left-0 z-10 h-3 w-20 rounded-[100%] bg-(--team-color) blur-xl transition-[width,opacity,filter] duration-1000 ease-snappy group-data-pit:opacity-50 group-data-retired:opacity-25 group-data-retired:grayscale" />
+            <div className="-translate-1/2 absolute top-1/2 left-0 z-10 h-8 w-3 rounded-[100%] bg-(--team-color)/25 blur-sm transition-[width,opacity,filter] duration-500 ease-snappy group-data-pit:opacity-25 group-data-retired:opacity-25 group-data-retired:grayscale" />
+            <div className="absolute top-0 left-0 z-10 h-[calc(100%-1px)] w-1.5 bg-(--team-color) transition-[width,opacity,filter] duration-500 ease-snappy group-data-pit:opacity-25 group-data-retired:opacity-25 group-data-retired:grayscale group-data-pit:group-not-data-retired:w-2.5" />
 
-            <div className="flex flex-row flex-wrap items-center justify-between gap-x-4 gap-y-1 border-border border-y-[0.5px] pr-2 pb-2 pl-3.5 transition-[filter,background] duration-500 ease-snappy group-odd:bg-card group-even:bg-background group-data-drop-zone:border-[#260d0f] group-data-cutoff:border-b-[#260d0f]! group-data-drop-zone:bg-[#15090b]! group-data-pit:brightness-25 group-data-retired:brightness-25 group-data-retired:grayscale sm:pb-0 lg:pr-1.5 lg:pl-4.5">
+            <div className="flex flex-row flex-wrap items-center justify-between gap-x-4 gap-y-1 border-border border-y-[0.5px] pr-2 pb-2 pl-3.5 transition-[filter,background] duration-500 ease-snappy group-odd:bg-card group-even:bg-background group-data-drop-zone:border-[#260d0f] group-data-cutoff:border-b-[#260d0f]! group-data-drop-zone:bg-[#15090b]! group-data-retired:opacity-50 group-data-pit:brightness-25 group-data-retired:brightness-25 group-data-retired:grayscale sm:pb-0 lg:pr-1.5 lg:pl-4.5">
                 <div className="flex flex-row items-center gap-4">
                     <Tag />
                     <TireImage />
