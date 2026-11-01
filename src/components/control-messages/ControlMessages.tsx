@@ -44,7 +44,7 @@ export default function ControlMessages() {
                                     {hour}:{minute} - {Category}
                                 </p>
 
-                                <p>
+                                <p className="whitespace-normal">
                                     {flag && `${flag} `}
                                     {Message}
                                 </p>
