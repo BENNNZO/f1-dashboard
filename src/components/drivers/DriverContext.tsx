@@ -16,6 +16,13 @@ type DriverContextData = {
     timingAppData: TimingAppDataLine
     timingStats: TimingStatsLine
     driver: DriverData
+    qualifying?: { part: number; inDropZone: boolean; atCutoff: boolean }
+}
+
+function getDriverQualifyPart(position: number, noEntries: number[]) {
+    if (position > noEntries[1]) return 1
+    if (position > noEntries[2]) return 2
+    return 3
 }
 
 export const DriverContext = createContext<DriverContextData | null>(null)
@@ -31,8 +38,23 @@ export function DriverProvider({ driverNumber, children }: DriverProviderProps) 
     const timingData = useWebSocketStore((state) => state.data.TimingData?.Lines[driverNumber])
     const timingAppData = useWebSocketStore((state) => state.data.TimingAppData?.Lines[driverNumber])
     const timingStats = useWebSocketStore((state) => state.data.TimingStats?.Lines[driverNumber])
+    const sessionPart = useWebSocketStore((state) => state.data.TimingData?.SessionPart)
+    const noEntries = useWebSocketStore((state) => state.data.TimingData?.NoEntries)
 
     if (!(timingData && timingAppData && timingStats && driver)) return null
+
+    const position = Number(timingData.Position)
+    const qualifying =
+        sessionPart && noEntries
+            ? {
+                  part: Math.min(sessionPart, getDriverQualifyPart(position, noEntries)),
+                  inDropZone:
+                      !timingData.KnockedOut &&
+                      noEntries[sessionPart] !== undefined &&
+                      position > noEntries[sessionPart],
+                  atCutoff: position === noEntries[sessionPart],
+              }
+            : undefined
 
     return (
         <DriverContext
@@ -41,6 +63,7 @@ export function DriverProvider({ driverNumber, children }: DriverProviderProps) 
                 timingAppData,
                 timingStats,
                 driver,
+                qualifying,
             }}
         >
             {children}
