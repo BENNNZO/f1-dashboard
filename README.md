@@ -19,12 +19,7 @@
 
 ## Features
 
-<table>
-<tr>
-<td width="72%"><img src=".github/readme/hero.png" alt="Desktop layout during a virtual safety car"></td>
-<td width="28%"><img src=".github/readme/mobile.png" alt="Phone layout"></td>
-</tr>
-</table>
+<img src=".github/readme/layouts.png" alt="Desktop and phone layouts during a virtual safety car" width="100%">
 
 ### Timing
 - Positions, gaps, intervals, last and best laps, and all three sectors with their mini sectors.
