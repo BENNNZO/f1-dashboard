@@ -145,10 +145,19 @@ Everything it needs is in `public/demo/`:
 | `pnpm lint` | Check the code with Biome. |
 | `pnpm format` | Fix the code with Biome. |
 
+## Credits
+
+- Live data: [Formula 1 live timing](https://livetiming.formula1.com).
+- Circuit layouts: the [MultiViewer](https://multiviewer.app) API.
+
+This project is not affiliated with, endorsed by, or connected to Formula 1, the FIA, or any team. F1, Formula 1 and related marks are trademarks of Formula One Licensing B.V.
+
 ## License
 
-This project is licensed under the MIT License.
+© 2026 Ben Phillips. All rights reserved.
+
+The source is public so you can read it. You may not copy, change, distribute or deploy it without written permission.
 
 ## Contact
 
-For any questions or suggestions, please open an issue or contact me at [bp08262004@gmail.com].
+Questions or ideas? [Open an issue](https://github.com/BENNNZO/f1-dashboard/issues).
