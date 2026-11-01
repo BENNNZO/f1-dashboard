@@ -6,7 +6,7 @@ import Flag from "./Flag"
 
 export default function CircuitSection() {
     return (
-        <div className="relative aspect-video max-h-[50vh] w-full overflow-hidden">
+        <div className="relative aspect-video max-h-[50dvh] w-full overflow-hidden">
             <CircuitProvider>
                 <Flag />
                 <Circuit3D />
