@@ -103,21 +103,33 @@ To use another server, set `NEXT_PUBLIC_WS_URL` in `.env.local` (default `ws://l
 
 ## Record and replay
 
-Record a live session to a log file:
+Record a live session to a log file. Start it before the session begins:
 
 ```bash
 pnpm record
 ```
 
-The log goes to `server/simulate/logs/<start time>.jsonl`. If the `logs` folder does not exist, the tool asks to create it. Start it before the session starts.
+The log goes to `server/simulate/logs/<start time>.jsonl`. If the `logs` folder does not exist, the recorder asks to create it.
 
-Replay a log:
+Replay a log as if it were live:
 
 ```bash
-pnpm replay <log name>
+pnpm replay <log name>   # file name without .jsonl
 ```
 
-The replay server uses port 3001, so stop `pnpm server` first. The replay starts when a browser connects, and it plays at 4x speed.
+The replay server also uses port 3001, so stop `pnpm server` first. Playback starts when a browser connects and runs at 4× speed.
+
+### The demo
+
+[`/demo`](https://live-f1.com/demo) plays a clip in the browser, with no server: laps 51–53 of the 2026 United States Grand Prix, with two yellow flags and a virtual safety car, looped at 4× speed.
+
+Everything it needs is in `public/demo/`:
+
+| File | Content |
+| --- | --- |
+| `session.jsonl` | The clip. The first line is the full session state at the start of the clip. |
+| `circuit.json` | The circuit layout, so the map needs no API call. |
+| `radio/` | The team radio clips, so they keep working if F1 removes them. |
 
 ## Scripts
 
