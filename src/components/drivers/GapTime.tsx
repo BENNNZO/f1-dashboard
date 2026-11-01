@@ -11,7 +11,8 @@ function getDriverQualifyPart(position: number, NoEntries: number[]) {
 }
 
 export default function GapTime() {
-    const { SessionPart, NoEntries } = useWebSocketStore((state) => state.data.TimingData) ?? {}
+    const SessionPart = useWebSocketStore((state) => state.data.TimingData?.SessionPart)
+    const NoEntries = useWebSocketStore((state) => state.data.TimingData?.NoEntries)
     const { timingData } = useDriver()
 
     let driverQualifyPart = SessionPart ?? 1
