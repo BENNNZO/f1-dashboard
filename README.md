@@ -51,10 +51,34 @@
 
 ## How it works
 
-- `server/` connects to the F1 live timing feed (`livetiming.formula1.com/signalrcore`). It keeps the latest data and sends it to browsers over a WebSocket on port 3001.
-- `src/` is the Next.js app. It connects to the server and shows the data.
+```mermaid
+flowchart LR
+    F1[F1 live timing<br/>SignalR] --> Server
 
-The F1 feed sends data only during a live session.
+    subgraph Server [server/]
+        Store[(Data store)]
+        Recorder[Recorder]
+    end
+
+    Server -- WebSocket :3001 --> App
+    Recorder --> Log[.jsonl log]
+    Log --> Replay[Replay server] -- WebSocket :3001 --> App
+    Log -. cut into a clip .-> Demo[public/demo]
+    Demo --> App
+
+    subgraph App [Next.js app]
+        Zustand[(Zustand store)] --> UI[Dashboard]
+    end
+
+    MV[MultiViewer API] -- circuit layout --> App
+```
+
+- **The server** (`server/`) connects to F1's live timing feed over SignalR. It keeps the full session state and sends it to each browser over a WebSocket: first the whole state, then every change.
+- **The app** (`src/`) merges each message into a Zustand store, and the dashboard renders from there.
+- **The track map** comes from the MultiViewer API. It is split into marshal sectors and coloured by race control flags.
+- **Recordings** save every message with a timestamp. The replay server plays them back like a live session. `/demo` plays a short clip straight in the browser, with no server.
+
+F1 only sends data during a live session. Car positions and car telemetry need an F1 TV token, so the app does not show them.
 
 ## Getting started
 
