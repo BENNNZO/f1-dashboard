@@ -7,14 +7,14 @@ import timeColor from "@/utils/timeColor"
 import { useDriver } from "./DriverContext"
 
 export default function LapTimes() {
-    const { timingData, timingStats } = useDriver()
+    const { timingData, timingStats, qualifying } = useDriver()
     const lastLap = timingData.LastLapTime.Value
     const bestLap = timingData.BestLapTime.Value
     const isFastestLap = timingStats.PersonalBestLapTime?.Position === 1
 
     const [outLapNumber, setOutLapNumber] = useState<number>()
     if (timingData.PitOut && outLapNumber !== timingData.NumberOfLaps) setOutLapNumber(timingData.NumberOfLaps)
-    const isOutLap = !timingData.InPit && outLapNumber === timingData.NumberOfLaps
+    const isOutLap = qualifying && !timingData.InPit && outLapNumber === timingData.NumberOfLaps
 
     return (
         <div className="relative flex flex-col py-1.25">
