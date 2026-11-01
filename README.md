@@ -24,34 +24,34 @@
 <td width="33%" valign="top">
 <img src=".github/readme/cards/timing.png" alt="Timing rows with an out lap and a personal best"><br>
 <b>Live timing</b><br>
-<sub>Gaps, laps and mini sectors. Purple for the fastest, green for a personal best.</sub>
+<sub>Gaps, laps and mini sectors. Purple for the fastest, green for a personal best.</sub><br><br>
 </td>
 <td width="33%" valign="top">
 <img src=".github/readme/cards/map.png" alt="3D track map with a yellow sector"><br>
 <b>3D track map</b><br>
-<sub>Each marshal sector turns yellow or red with the race control flags.</sub>
+<sub>Each marshal sector turns yellow or red with the race control flags.</sub><br><br>
 </td>
 <td width="33%" valign="top">
 <img src=".github/readme/cards/track-status.png" alt="VSC Deployed badge"><br>
 <b>Track status</b><br>
-<sub>Green, yellow, safety car, VSC and red, with the lap count.</sub>
+<sub>Green, yellow, safety car, VSC and red, with the lap count.</sub><br><br>
 </td>
 </tr>
 <tr>
 <td width="33%" valign="top">
 <img src=".github/readme/cards/qualifying.png" alt="Qualifying drop zone in Q2"><br>
 <b>Qualifying</b><br>
-<sub>Gaps for each part, the drop zone and the cutoff line.</sub>
+<sub>Gaps for each part, the drop zone and the cutoff line.</sub><br><br>
 </td>
 <td width="33%" valign="top">
 <img src=".github/readme/cards/race-control.png" alt="Race control messages"><br>
 <b>Race control</b><br>
-<sub>Flags, VSC, penalties and stewards' notes, newest first.</sub>
+<sub>Flags, VSC, penalties and stewards' notes, newest first.</sub><br><br>
 </td>
 <td width="33%" valign="top">
 <img src=".github/readme/cards/team-radio.png" alt="Team radio player"><br>
 <b>Team radio</b><br>
-<sub>Every clip from the session, with a player and a seek bar.</sub>
+<sub>Every clip from the session, with a player and a seek bar.</sub><br><br>
 </td>
 </tr>
 </table>
