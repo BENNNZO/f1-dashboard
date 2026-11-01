@@ -17,13 +17,12 @@ export default function LapTimes() {
     const isOutLap = qualifying && !timingData.InPit && outLapNumber === timingData.NumberOfLaps
 
     return (
-        <div className="relative flex flex-col py-1.25">
-            {isFastestLap && (
-                <>
-                    <div className="absolute inset-x-0 top-0 hidden h-1 -translate-y-1/2 rounded-full bg-fastest sm:block" />
-                    <div className="absolute inset-x-0 top-full hidden h-1 -translate-y-1/2 rounded-full bg-fastest sm:block" />
-                </>
-            )}
+        <div
+            data-fastest-lap={isFastestLap ? true : undefined}
+            className="relative flex flex-col py-1.25"
+        >
+            <div className="absolute inset-x-0 -top-0.75 in-data-fastest-lap:top-0 hidden h-1 -translate-y-1/2 rounded-full bg-purple-500 transition-[opacity,top] duration-1000 ease-snappy sm:block" />
+            <div className="absolute inset-x-0 in-data-fastest-lap:top-full top-[calc(100%+(--spacing(0.75)))] hidden h-1 -translate-y-1/2 rounded-full bg-purple-500 transition-[opacity,top] duration-1000 ease-snappy sm:block" />
 
             <p className={mergeClasses("font-semibold leading-none duration-500", timeColor(timingData.LastLapTime))}>
                 {isOutLap ? "Out Lap" : sanitizeText(lastLap, { length: 7, fallback: "-:--.--", suffix: "\u00A0" })}
