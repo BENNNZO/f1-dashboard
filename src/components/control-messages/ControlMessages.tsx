@@ -23,9 +23,11 @@ export default function ControlMessages() {
                     .map((message: MessageOther | MessageFlag | MessageDrs) => {
                         const { Message, Category, Utc } = message
 
-                        const date = new Date(Utc)
-                        const hour = String(date.getHours()).padStart(2, "0")
-                        const minute = String(date.getMinutes()).padStart(2, "0")
+                        const time = new Date(Utc.endsWith("Z") ? Utc : `${Utc}Z`).toLocaleTimeString([], {
+                            hour: "numeric",
+                            minute: "2-digit",
+                            hour12: true,
+                        })
 
                         const flag =
                             Category === "Flag"
@@ -41,7 +43,7 @@ export default function ControlMessages() {
                                 animate={{ scaleY: 1, y: 0 }}
                             >
                                 <p className="text-muted text-sm">
-                                    {hour}:{minute} - {Category}
+                                    {time} - {Category}
                                 </p>
 
                                 <p className="whitespace-normal">
