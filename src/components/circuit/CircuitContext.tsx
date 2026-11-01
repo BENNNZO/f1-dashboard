@@ -23,7 +23,8 @@ export function useCircuit(): CircuitContextData {
 
 export default function CircuitProvider({ children }: { children: ReactNode }) {
     const sessionInfo = useWebSocketStore((state) => state.data.SessionInfo)
-    const circuitData = useCircuitData(sessionInfo?.Meeting.Circuit.Key)
+    const sessionYear = sessionInfo && new Date(sessionInfo.StartDate).getFullYear()
+    const circuitData = useCircuitData(sessionInfo?.Meeting.Circuit.Key, sessionYear)
 
     const segmentNumbers = useMemo(() => circuitData?.marshalSectors.map(({ number }) => number) ?? [], [circuitData])
     const segmentFlags = useSegmentFlags(segmentNumbers)
