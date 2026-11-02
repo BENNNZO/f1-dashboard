@@ -11,11 +11,18 @@
 
     --color-fastest: var(--color-purple-400);
     --color-personal-best: var(--color-emerald-400);
-    --color-sector: #fbcc1c;
+    --color-sector: var(--color-tire-medium);
 
     --color-flag-green: var(--color-emerald-500);
-    --color-flag-yellow: var(--color-amber-400);
-    --color-flag-red: var(--color-red-500);
+    --color-flag-yellow: var(--color-tire-medium);
+    --color-flag-red: var(--color-tire-soft);
+
+    --color-tire-soft: #f12f32;
+    --color-tire-medium: #fbcc1c;
+    --color-tire-hard: var(--color-zinc-300);
+    --color-tire-intermediate: #128330;
+    --color-tire-wet: #1f6da1;
+    --color-tire-unknown: var(--color-zinc-600);
 
     --ease-snappy: cubic-bezier(0.2, 1, 0.2, 1);
 }

@@ -4,12 +4,12 @@ import DisplayValue from "./DisplayValue"
 import { useDriver } from "./DriverContext"
 
 const TIRE_COLOR: Record<string, string> = {
-    hard: "text-zinc-300",
-    intermediate: "text-[#128330]",
-    medium: "text-[#fbcc1c]",
-    soft: "text-[#f12f32]",
-    unknown: "text-zinc-600",
-    wet: "text-[#1f6da1]",
+    hard: "text-tire-hard",
+    intermediate: "text-tire-intermediate",
+    medium: "text-tire-medium",
+    soft: "text-tire-soft",
+    unknown: "text-tire-unknown",
+    wet: "text-tire-wet",
 }
 
 export default function TireData() {

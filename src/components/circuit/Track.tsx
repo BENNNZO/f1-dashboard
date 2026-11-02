@@ -5,9 +5,9 @@ import { useCircuit } from "./CircuitContext"
 
 const BASE_COLOR = "#fff"
 const STATUS_COLOR: Record<string, string> = {
-    "DOUBLE YELLOW": "#ffc43a",
-    YELLOW: "#ffc43a",
-    RED: "#ff3e3e",
+    "DOUBLE YELLOW": "#fbcc1c",
+    YELLOW: "#fbcc1c",
+    RED: "#f12f32",
 }
 
 export default function Track() {
