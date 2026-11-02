@@ -5,11 +5,11 @@ import { useDriver } from "./DriverContext"
 
 const TIRE_COLOR: Record<string, string> = {
     hard: "text-zinc-300",
-    intermediate: "text-green-400",
-    medium: "text-amber-400",
-    soft: "text-red-500",
+    intermediate: "text-[#128330]",
+    medium: "text-[#fbcc1c]",
+    soft: "text-[#f12f32]",
     unknown: "text-zinc-600",
-    wet: "text-blue-400",
+    wet: "text-[#1f6da1]",
 }
 
 export default function TireData() {
