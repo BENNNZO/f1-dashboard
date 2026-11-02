@@ -26,10 +26,12 @@ export default function TireData() {
         >
             <DisplayValue
                 className="text-2xl"
-                value={currentTyre?.slice(0, 1).toUpperCase()}
+                value={currentTyre === "unknown" ? undefined : currentTyre?.slice(0, 1).toUpperCase()}
                 length={1}
             />
+
             <span className="h-5 w-px bg-border" />
+
             <DisplayValue
                 className="text-zinc-600"
                 value={totalLaps}
