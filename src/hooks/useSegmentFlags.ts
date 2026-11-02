@@ -5,8 +5,11 @@ import type { MessageFlag } from "@/types/RaceControlMessages.type"
 
 export default function useSegmentFlags(sectorNumbers: number[]) {
     const messages = useWebSocketStore((state) => state.data.RaceControlMessages?.Messages)
+    const isRedFlag = useWebSocketStore((state) => state.data.TrackStatus?.Status === "5")
 
     return useMemo(() => {
+        if (isRedFlag) return Object.fromEntries(sectorNumbers.map((sector) => [sector, "RED"]))
+
         const flags: Record<number, string> = Object.fromEntries(sectorNumbers.map((sector) => [sector, "CLEAR"]))
 
         for (const message of Object.values(messages ?? {})) {
@@ -19,5 +22,5 @@ export default function useSegmentFlags(sectorNumbers: number[]) {
         }
 
         return flags
-    }, [messages, sectorNumbers])
+    }, [messages, sectorNumbers, isRedFlag])
 }
