@@ -4,25 +4,32 @@ import type { ComponentPropsWithoutRef, CSSProperties } from "react"
 import { mergeClasses } from "@/utils/mergeClasses"
 import sanitizeText from "@/utils/sanitizeText"
 
-type DisplayValueProps = ComponentPropsWithoutRef<"p"> & {
+type DisplayValueProps = ComponentPropsWithoutRef<"span"> & {
     value: string | number | undefined
     length: number
+    align?: "left" | "right"
 }
 
-export default function DisplayValue({ value, length, ...props }: DisplayValueProps) {
+export default function DisplayValue({ value, length, align = "left", ...props }: DisplayValueProps) {
     const sanitizedValue = sanitizeText(value, { length: length })
 
     return (
-        <p
+        <span
             {...props}
             style={{ "--length": `${length}ch` } as CSSProperties}
-            className={mergeClasses("relative w-(--length) text-right font-semibold text-xl", props.className)}
+            className={mergeClasses(
+                "flex w-(--length) shrink-0 items-center font-semibold text-xl",
+                align === "right" && "justify-end",
+                props.className,
+            )}
         >
             {value ? (
                 sanitizedValue
             ) : (
-                <MinusIcon className="absolute top-1/2 right-0 size-4 -translate-y-1/2 stroke-3 text-faint" />
+                <span className="flex w-[1ch] justify-center">
+                    <MinusIcon className="size-4 shrink-0 stroke-3 text-faint" />
+                </span>
             )}
-        </p>
+        </span>
     )
 }
