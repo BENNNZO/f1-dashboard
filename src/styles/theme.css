@@ -11,7 +11,7 @@
 
     --color-fastest: var(--color-purple-400);
     --color-personal-best: var(--color-emerald-400);
-    --color-sector: var(--color-yellow-300);
+    --color-sector: #fbcc1c;
 
     --color-flag-green: var(--color-emerald-500);
     --color-flag-yellow: var(--color-amber-400);
