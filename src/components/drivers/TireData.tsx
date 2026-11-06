@@ -14,7 +14,7 @@ const TIRE_COLOR: Record<string, string> = {
 
 export default function TireData() {
     const { timingAppData, currentTyre } = useDriver()
-    const currentStint = timingAppData.Stints.at(-1)
+    const currentStint = timingAppData.Stints?.at(-1)
     const totalLaps = currentStint?.TotalLaps
 
     return (

@@ -6,7 +6,7 @@ export type TimingAppDataLine = {
     GridPos: string
     Line: number
     RacingNumber: string
-    Stints: Stint[]
+    Stints?: Stint[]
 }
 
 export type Stint = {
