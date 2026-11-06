@@ -18,12 +18,7 @@ export default function TireData() {
     const totalLaps = currentStint?.TotalLaps
 
     return (
-        <p
-            className={mergeClasses(
-                "flex flex-row items-center gap-1 font-semibold text-lg",
-                TIRE_COLOR[currentTyre ?? "unknown"],
-            )}
-        >
+        <p className={mergeClasses("flex flex-row items-center gap-1", TIRE_COLOR[currentTyre ?? "unknown"])}>
             <DisplayValue
                 className="text-2xl"
                 value={currentTyre === "unknown" ? undefined : currentTyre?.slice(0, 1).toUpperCase()}

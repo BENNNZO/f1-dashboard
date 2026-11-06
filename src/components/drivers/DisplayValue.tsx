@@ -18,7 +18,7 @@ export default function DisplayValue({ value, length, align = "left", ...props }
             {...props}
             style={{ "--length": `${length}ch` } as CSSProperties}
             className={mergeClasses(
-                "flex w-(--length) shrink-0 items-center font-semibold text-xl",
+                "flex w-(--length) shrink-0 items-center font-semibold text-lg",
                 align === "right" && "justify-end",
                 props.className,
             )}

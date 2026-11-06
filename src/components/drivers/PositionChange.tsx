@@ -20,7 +20,7 @@ export default function PositionChange() {
         <DisplayValue
             data-gained={status === "gained" ? true : undefined}
             data-lost={status === "lost" ? true : undefined}
-            className="text-subtle text-xl leading-none data-gained:text-emerald-500 data-lost:text-tire-soft"
+            className="text-subtle leading-none data-gained:text-emerald-500 data-lost:text-tire-soft"
             value={positionDelta && positionDelta < -9 ? Math.abs(positionDelta) : positionDelta}
             length={2}
             align="right"
